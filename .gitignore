@@ -1,0 +1,60 @@
+# 依赖目录
+node_modules
+
+# 构建输出
+dist
+*.tsbuildinfo
+
+# 环境变量文件
+.env
+.env.local
+.env.*.local
+
+# IDE 配置文件
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea
+*.swp
+*.swo
+*~
+
+# 操作系统文件
+.DS_Store
+Thumbs.db
+
+# 日志文件
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# 测试覆盖率报告
+coverage
+
+# 本地临时文件
+tmp/
+task_plan.md
+findings.md
+progress.md
+docs/superpowers/
+
+# tokenizer 原始源文件（仓库里只保留压缩快照）
+vendor/tokenizers/*.json
+!vendor/tokenizers/*.json.br
+vendor/tokenizers/*tokenizer_config.json
+
+# 调试脚本（不提交）
+debug-*.mjs
+debug-*.js
+check-*.mjs
+check-*.js
+test-*.mjs
+
+# 调试测试文件（不提交到 git）
+src/compare.test.ts
+src/debug-*.test.ts
+src/decoder.test.ts
+
+# 不需要提交这个
+AGENTS.md
