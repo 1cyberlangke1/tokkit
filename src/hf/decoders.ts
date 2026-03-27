@@ -6,6 +6,12 @@
 
 import { decodeByteLevelToText } from "../core/bytes.js"
 
+/** 复用 ByteFallback UTF-8 解码器，避免热路径重复创建对象。 */
+const BYTE_FALLBACK_TEXT_DECODER = new TextDecoder("utf-8", {
+  fatal: false,
+  ignoreBOM: true,
+})
+
 /** 统一的解码器接口。 */
 export interface Decoder {
   decode(tokens: string[]): string
@@ -62,14 +68,14 @@ class ByteLevelDecoder extends BaseDecoder {
    */
   decodeChain(tokens: string[]): string[] {
     const result: string[] = []
-    let current: string[] = []
+    let current = ""
 
     const flush = () => {
       if (current.length === 0) {
         return
       }
-      result.push(decodeByteLevelToText(current.join("")))
-      current = []
+      result.push(decodeByteLevelToText(current))
+      current = ""
     }
 
     for (const token of tokens) {
@@ -78,7 +84,7 @@ class ByteLevelDecoder extends BaseDecoder {
         result.push(token)
         continue
       }
-      current.push(token)
+      current += token
     }
 
     flush()
@@ -100,7 +106,7 @@ class ByteFallbackDecoder extends BaseDecoder {
       if (buffer.length === 0) {
         return
       }
-      result.push(new TextDecoder("utf-8", { fatal: false }).decode(new Uint8Array(buffer)))
+      result.push(BYTE_FALLBACK_TEXT_DECODER.decode(new Uint8Array(buffer)))
       buffer = []
     }
 
