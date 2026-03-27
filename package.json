@@ -1,6 +1,6 @@
 {
   "name": "tokkit",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A tokenizer library for counting tokens.",
   "type": "module",
   "homepage": "https://github.com/1cyberlangke1/tokkit#readme",
