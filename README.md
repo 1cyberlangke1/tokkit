@@ -1,10 +1,6 @@
 # tokkit
 
-`tokkit` 是一个类似 `tiktoken` 的轻量 `BPE tokenizer` 库，面向 Hugging Face 开源模型。
-
-- 只做 `BPE` 分词和反分词
-- 按 tokenizer family 懒加载
-- 同系列共享 tokenizer 时，支持直接用 family 名或模型名调用
+`tokkit` 就是用来分词、计 token 数的库。
 
 ## 支持的模型
 

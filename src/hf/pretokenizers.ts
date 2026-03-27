@@ -93,8 +93,20 @@ class ByteLevelPretokenizer implements Pretokenizer {
       value = ` ${value}`
     }
 
-    const tokens = this.useRegex ? (value.match(this.pattern) ?? []) : [value]
-    return tokens.map((token) => encodeTextToByteLevel(token))
+    if (!this.useRegex) {
+      return [encodeTextToByteLevel(value)]
+    }
+
+    const tokens = value.match(this.pattern)
+    if (!tokens) {
+      return []
+    }
+
+    for (let index = 0; index < tokens.length; index += 1) {
+      tokens[index] = encodeTextToByteLevel(tokens[index])
+    }
+
+    return tokens
   }
 }
 
@@ -163,9 +175,17 @@ class SequencePretokenizer implements Pretokenizer {
 
     for (const pretokenizer of this.pretokenizers) {
       const nextSections: string[] = []
-      sections.forEach((section, index) => {
-        nextSections.push(...pretokenizer.preTokenize(section, { sectionIndex: index }))
-      })
+
+      for (let index = 0; index < sections.length; index += 1) {
+        const childSections = pretokenizer.preTokenize(sections[index], {
+          sectionIndex: index,
+        })
+
+        for (let childIndex = 0; childIndex < childSections.length; childIndex += 1) {
+          nextSections.push(childSections[childIndex])
+        }
+      }
+
       sections = nextSections
     }
 

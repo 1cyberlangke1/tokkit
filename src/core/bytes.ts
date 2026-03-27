@@ -46,17 +46,67 @@ export const UNICODE_TO_BYTE = new Map<string, number>(
   BYTE_TO_UNICODE.map((char, index) => [char, index])
 )
 
+/** ByteLevel 字符都处于 BMP 范围内，可直接按 UTF-16 code unit 建反查表。 */
+const MAX_BYTELEVEL_CHAR_CODE = BYTE_TO_UNICODE.reduce((max, char) => {
+  const code = char.charCodeAt(0)
+  return code > max ? code : max
+}, 0)
+
+/** 基于 code unit 的 byte 反查表，避免热路径使用 Map 查找。 */
+const UNICODE_CODE_UNIT_TO_BYTE = (() => {
+  const table = new Int16Array(MAX_BYTELEVEL_CHAR_CODE + 1)
+  table.fill(-1)
+
+  for (let index = 0; index < BYTE_TO_UNICODE.length; index += 1) {
+    table[BYTE_TO_UNICODE[index].charCodeAt(0)] = index
+  }
+
+  return table
+})()
+
+/** 预生成 256 个 ByteFallback token，避免热路径重复格式化字符串。 */
+const BYTE_FALLBACK_TOKENS = Array.from({ length: 256 }, (_, byte) => {
+  return `<0x${byte.toString(16).toUpperCase().padStart(2, "0")}>`
+})
+
 /**
  * 把普通文本映射成 ByteLevel 可见字符序列。
  * 输入：任意 UTF-8 文本。
  * 输出：ByteLevel BPE 可直接消费的字符串。
  */
 export function encodeTextToByteLevel(text: string): string {
+  let asciiOnly = true
+  let asciiNeedsMapping = false
+
+  for (let index = 0; index < text.length; index += 1) {
+    const code = text.charCodeAt(index)
+    if (code > 0x7f) {
+      asciiOnly = false
+      break
+    }
+
+    if (code < 33 || code > 126) {
+      asciiNeedsMapping = true
+    }
+  }
+
+  if (asciiOnly) {
+    if (!asciiNeedsMapping) {
+      return text
+    }
+
+    let mapped = ""
+    for (let index = 0; index < text.length; index += 1) {
+      mapped += BYTE_TO_UNICODE[text.charCodeAt(index)]
+    }
+    return mapped
+  }
+
   const bytes = TEXT_ENCODER.encode(text)
   let mapped = ""
 
-  for (const byte of bytes) {
-    mapped += BYTE_TO_UNICODE[byte]
+  for (let index = 0; index < bytes.length; index += 1) {
+    mapped += BYTE_TO_UNICODE[bytes[index]]
   }
 
   return mapped
@@ -68,7 +118,14 @@ export function encodeTextToByteLevel(text: string): string {
  * 输出：UTF-8 解码后的文本。
  */
 export function decodeByteLevelToText(text: string): string {
-  const bytes = new Uint8Array(Array.from(text, (char) => UNICODE_TO_BYTE.get(char) ?? 0))
+  const bytes = new Uint8Array(text.length)
+
+  for (let index = 0; index < text.length; index += 1) {
+    const code = text.charCodeAt(index)
+    const byte = code <= MAX_BYTELEVEL_CHAR_CODE ? UNICODE_CODE_UNIT_TO_BYTE[code] : -1
+    bytes[index] = byte >= 0 ? byte : 0
+  }
+
   return TEXT_DECODER.decode(bytes)
 }
 
@@ -87,5 +144,5 @@ export function encodeTextToBytes(text: string): Uint8Array {
  * 输出：`<0xXX>` 格式的 token 字符串。
  */
 export function formatByteFallbackToken(byte: number): string {
-  return `<0x${byte.toString(16).toUpperCase().padStart(2, "0")}>`
+  return BYTE_FALLBACK_TOKENS[byte]
 }
