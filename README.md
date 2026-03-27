@@ -14,7 +14,7 @@
 - [`zai-org/GLM-5`](https://huggingface.co/zai-org/GLM-5) `glm-5`
 - [`stepfun-ai/Step-3.5-Flash`](https://huggingface.co/stepfun-ai/Step-3.5-Flash) `step-3.5-flash`
 
-## 简单的使用方法
+## 使用方法
 
 ```bash
 npm install tokkit
