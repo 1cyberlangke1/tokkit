@@ -39,6 +39,12 @@
   - `ministral-8b`
   - `devstral-small-2`
   - `mistral-small-3.1`
+- `@cyberlangke/tokkit-huggingface-tb`
+  - `smollm`
+  - `smollm-1.7b`
+  - `smollm2-16k`
+  - `smollm3`
+  - `smollm3-base`
 - `@cyberlangke/tokkit-allenai`
   - `olmo-1`
   - `olmo-2`
@@ -52,6 +58,11 @@
   - `granite-4`
   - `granite-4-tiny-base-preview`
   - `granite-4-tiny-preview`
+- `@cyberlangke/tokkit-bytedance-seed`
+  - `academic-ds`
+  - `seed-oss`
+  - `seed-coder`
+  - `stable-diffcoder`
 - `@cyberlangke/tokkit-openbmb`
   - `minicpm-s-1b`
   - `minicpm-sala`

@@ -1,0 +1,10 @@
+Copyright (c) 2026 cyberlangke
+
+This package bundles tokenizer assets derived from official Hugging Face repositories under the HuggingFaceTB organization:
+- HuggingFaceTB/SmolLM-135M tokenizer.json
+- HuggingFaceTB/SmolLM-1.7B tokenizer.json
+- HuggingFaceTB/SmolLM2-1.7B-Instruct-16k tokenizer.json
+- HuggingFaceTB/SmolLM3-3B tokenizer.json
+- HuggingFaceTB/SmolLM3-3B-Base tokenizer.json
+
+See LICENSE for the full license text that applies to this package and its bundled assets.

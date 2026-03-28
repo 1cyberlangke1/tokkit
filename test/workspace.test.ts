@@ -28,11 +28,21 @@ const EXPECTED_PACKAGES = [
   { directory: "xiaomi-mimo", packageName: "@cyberlangke/tokkit-xiaomi-mimo", license: "MIT" },
   { directory: "microsoft", packageName: "@cyberlangke/tokkit-microsoft", license: "MIT" },
   { directory: "mistral", packageName: "@cyberlangke/tokkit-mistral", license: "Apache-2.0" },
+  {
+    directory: "huggingface-tb",
+    packageName: "@cyberlangke/tokkit-huggingface-tb",
+    license: "Apache-2.0",
+  },
   { directory: "allenai", packageName: "@cyberlangke/tokkit-allenai", license: "Apache-2.0" },
   {
     directory: "ibm-granite",
     packageName: "@cyberlangke/tokkit-ibm-granite",
     license: "Apache-2.0",
+  },
+  {
+    directory: "bytedance-seed",
+    packageName: "@cyberlangke/tokkit-bytedance-seed",
+    license: "SEE LICENSE IN LICENSE",
   },
   { directory: "openbmb", packageName: "@cyberlangke/tokkit-openbmb", license: "Apache-2.0" },
   { directory: "qwen", packageName: "@cyberlangke/tokkit-qwen", license: "Apache-2.0" },

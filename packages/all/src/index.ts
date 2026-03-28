@@ -11,8 +11,10 @@ import { registerBuiltins as registerLongCatBuiltins } from "@cyberlangke/tokkit
 import { registerBuiltins as registerMiMoBuiltins } from "@cyberlangke/tokkit-xiaomi-mimo"
 import { registerBuiltins as registerMicrosoftBuiltins } from "@cyberlangke/tokkit-microsoft"
 import { registerBuiltins as registerMistralBuiltins } from "@cyberlangke/tokkit-mistral"
+import { registerBuiltins as registerHuggingFaceTBBuiltins } from "@cyberlangke/tokkit-huggingface-tb"
 import { registerBuiltins as registerAllenAIBuiltins } from "@cyberlangke/tokkit-allenai"
 import { registerBuiltins as registerGraniteBuiltins } from "@cyberlangke/tokkit-ibm-granite"
+import { registerBuiltins as registerByteDanceSeedBuiltins } from "@cyberlangke/tokkit-bytedance-seed"
 import { registerBuiltins as registerOpenBMBBuiltins } from "@cyberlangke/tokkit-openbmb"
 import { registerBuiltins as registerGlmBuiltins } from "@cyberlangke/tokkit-glm"
 import { registerBuiltins as registerQwenBuiltins } from "@cyberlangke/tokkit-qwen"
@@ -32,8 +34,10 @@ export function registerBuiltins(): void {
   registerMiMoBuiltins()
   registerMicrosoftBuiltins()
   registerMistralBuiltins()
+  registerHuggingFaceTBBuiltins()
   registerAllenAIBuiltins()
   registerGraniteBuiltins()
+  registerByteDanceSeedBuiltins()
   registerOpenBMBBuiltins()
   registerQwenBuiltins()
   registerDeepseekBuiltins()

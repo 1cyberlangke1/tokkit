@@ -372,6 +372,7 @@ describe("builtin tokenizer families", () => {
           "granite-4",
           "granite-4-tiny-base-preview",
           "granite-4-tiny-preview",
+          "academic-ds",
           "longcat-flash-chat",
           "longcat-flash-lite",
           "longcat-flash-thinking",
@@ -387,6 +388,14 @@ describe("builtin tokenizer families", () => {
           "mistral-7b-v0.3",
           "mistral-small-3.1",
           "mixtral-8x7b",
+          "seed-coder",
+          "seed-oss",
+          "smollm",
+          "smollm-1.7b",
+          "smollm2-16k",
+          "smollm3",
+          "smollm3-base",
+          "stable-diffcoder",
           "olmo-1",
           "olmo-2",
           "olmo-3-instruct",
@@ -451,6 +460,11 @@ describe("builtin tokenizer families", () => {
           "mistralai/Ministral-8B-Instruct-2410",
           "mistralai/Devstral-Small-2-24B-Instruct-2512",
           "mistralai/Mistral-Small-3.1-24B-Instruct-2503",
+          "HuggingFaceTB/SmolLM-135M",
+          "HuggingFaceTB/SmolLM2-1.7B",
+          "HuggingFaceTB/SmolLM2-1.7B-Instruct-16k",
+          "HuggingFaceTB/SmolLM3-3B",
+          "HuggingFaceTB/SmolLM3-3B-Base",
           "allenai/OLMo-1B-hf",
           "allenai/OLMo-2-0425-1B",
           "allenai/OLMo-2-1124-13B",
@@ -462,6 +476,11 @@ describe("builtin tokenizer families", () => {
           "ibm-granite/granite-3.3-8b-instruct",
           "ibm-granite/granite-4.0-350m-base",
           "ibm-granite/granite-4.0-tiny-preview",
+          "ByteDance-Seed/academic-ds-9B",
+          "ByteDance-Seed/Seed-OSS-36B-Base",
+          "ByteDance-Seed/Seed-Coder-8B-Base",
+          "ByteDance-Seed/Seed-Coder-8B-Reasoning",
+          "ByteDance-Seed/Stable-DiffCoder-8B-Instruct",
           "openbmb/MiniCPM-S-1B-sft",
           "openbmb/MiniCPM-SALA",
           "openbmb/MiniCPM3-4B",
@@ -507,6 +526,13 @@ describe("builtin tokenizer families", () => {
 
       const deepseek32 = await getEncoding("deepseek-v3.2")
       expect(await getEncoding("deepseek-ai/DeepSeek-V3.2")).toBe(deepseek32)
+
+      const smollm = await getEncoding("smollm")
+      expect(await getEncoding("smollm2")).toBe(smollm)
+      expect(await getEncoding("HuggingFaceTB/SmolLM2-1.7B")).toBe(smollm)
+
+      const academicDs = await getEncoding("academic-ds")
+      expect(await getEncoding("ByteDance-Seed/academic-ds-9B")).toBe(academicDs)
     },
     60000
   )

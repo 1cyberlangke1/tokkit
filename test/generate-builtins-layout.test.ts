@@ -52,6 +52,11 @@ describe("generate:builtins layout", () => {
         expect.objectContaining({ family: "mistral-7b-v0.3", packageName: "mistral" }),
         expect.objectContaining({ family: "mistral-small-3.1", packageName: "mistral" }),
         expect.objectContaining({ family: "mixtral-8x7b", packageName: "mistral" }),
+        expect.objectContaining({ family: "smollm", packageName: "huggingface-tb" }),
+        expect.objectContaining({ family: "smollm-1.7b", packageName: "huggingface-tb" }),
+        expect.objectContaining({ family: "smollm2-16k", packageName: "huggingface-tb" }),
+        expect.objectContaining({ family: "smollm3", packageName: "huggingface-tb" }),
+        expect.objectContaining({ family: "smollm3-base", packageName: "huggingface-tb" }),
         expect.objectContaining({ family: "olmo-1", packageName: "allenai" }),
         expect.objectContaining({ family: "olmo-2", packageName: "allenai" }),
         expect.objectContaining({ family: "olmo-3-instruct", packageName: "allenai" }),
@@ -78,6 +83,22 @@ describe("generate:builtins layout", () => {
           family: "granite-4-tiny-preview",
           packageName: "ibm-granite",
         }),
+        expect.objectContaining({
+          family: "academic-ds",
+          packageName: "bytedance-seed",
+        }),
+        expect.objectContaining({
+          family: "seed-oss",
+          packageName: "bytedance-seed",
+        }),
+        expect.objectContaining({
+          family: "seed-coder",
+          packageName: "bytedance-seed",
+        }),
+        expect.objectContaining({
+          family: "stable-diffcoder",
+          packageName: "bytedance-seed",
+        }),
         expect.objectContaining({ family: "minicpm-s-1b", packageName: "openbmb" }),
         expect.objectContaining({ family: "minicpm-sala", packageName: "openbmb" }),
         expect.objectContaining({ family: "minicpm3", packageName: "openbmb" }),
@@ -98,6 +119,9 @@ describe("generate:builtins layout", () => {
     expect(module.resolveOutputModulePath("microsoft", "phi_4_mini_reasoning")).toBe(
       "packages/microsoft/src/generated/phi_4_mini_reasoning.ts"
     )
+    expect(module.resolveOutputModulePath("huggingface-tb", "smollm3")).toBe(
+      "packages/huggingface-tb/src/generated/smollm3.ts"
+    )
     expect(module.resolveOutputModulePath("mistral", "mistral_small_3_2")).toBe(
       "packages/mistral/src/generated/mistral_small_3_2.ts"
     )
@@ -106,6 +130,9 @@ describe("generate:builtins layout", () => {
     )
     expect(module.resolveOutputModulePath("ibm-granite", "granite_4")).toBe(
       "packages/ibm-granite/src/generated/granite_4.ts"
+    )
+    expect(module.resolveOutputModulePath("bytedance-seed", "seed_oss")).toBe(
+      "packages/bytedance-seed/src/generated/seed_oss.ts"
     )
     expect(module.resolveOutputModulePath("openbmb", "minicpm4")).toBe(
       "packages/openbmb/src/generated/minicpm4.ts"
