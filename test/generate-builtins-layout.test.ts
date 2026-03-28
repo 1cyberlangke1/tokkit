@@ -13,6 +13,10 @@ describe("generate:builtins layout", () => {
 
     expect(module.FAMILY_SPECS).toEqual(
       expect.arrayContaining([
+        expect.objectContaining({ family: "yi", packageName: "01-ai" }),
+        expect.objectContaining({ family: "yi-1.5-9b-chat", packageName: "01-ai" }),
+        expect.objectContaining({ family: "yi-coder", packageName: "01-ai" }),
+        expect.objectContaining({ family: "yi-coder-chat", packageName: "01-ai" }),
         expect.objectContaining({ family: "falcon-rw-1b", packageName: "tiiuae" }),
         expect.objectContaining({ family: "falcon-7b", packageName: "tiiuae" }),
         expect.objectContaining({ family: "polyglot-ko", packageName: "eleutherai" }),
@@ -113,6 +117,9 @@ describe("generate:builtins layout", () => {
       ])
     )
 
+    expect(module.resolveOutputModulePath("01-ai", "yi_coder_chat")).toBe(
+      "packages/01-ai/src/generated/yi_coder_chat.ts"
+    )
     expect(module.resolveOutputModulePath("tiiuae", "falcon_rw_1b")).toBe(
       "packages/tiiuae/src/generated/falcon_rw_1b.ts"
     )

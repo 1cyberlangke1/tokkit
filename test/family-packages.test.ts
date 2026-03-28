@@ -18,6 +18,34 @@ const REPO_ROOT = resolve(CURRENT_DIR, "..")
 /** 各厂商包当前应覆盖的 family 与模型别名。 */
 const VENDOR_PACKAGE_CASES = [
   {
+    relativePath: "packages/01-ai/src/index.ts",
+    expectedFamilies: ["yi", "yi-1.5-9b-chat", "yi-coder", "yi-coder-chat"],
+    expectedModels: [
+      "01-ai/Yi-6B",
+      "01-ai/Yi-6B-Chat",
+      "01-ai/Yi-9B",
+      "01-ai/Yi-34B",
+      "01-ai/Yi-34B-Chat",
+      "01-ai/Yi-6B-200K",
+      "01-ai/Yi-9B-200K",
+      "01-ai/Yi-34B-200K",
+      "01-ai/Yi-1.5-6B",
+      "01-ai/Yi-1.5-6B-Chat",
+      "01-ai/Yi-1.5-9B",
+      "01-ai/Yi-1.5-9B-Chat",
+      "01-ai/Yi-1.5-9B-Chat-16K",
+      "01-ai/Yi-1.5-9B-32K",
+      "01-ai/Yi-1.5-34B",
+      "01-ai/Yi-1.5-34B-Chat",
+      "01-ai/Yi-1.5-34B-32K",
+      "01-ai/Yi-1.5-34B-Chat-16K",
+      "01-ai/Yi-Coder-9B",
+      "01-ai/Yi-Coder-9B-Chat",
+      "01-ai/Yi-Coder-1.5B",
+      "01-ai/Yi-Coder-1.5B-Chat",
+    ],
+  },
+  {
     relativePath: "packages/tiiuae/src/index.ts",
     expectedFamilies: ["falcon-rw-1b", "falcon-7b"],
     expectedModels: [
@@ -218,6 +246,10 @@ const VENDOR_PACKAGE_CASES = [
 
 /** 全家桶包当前应聚合的 family。 */
 const EXPECTED_ALL_FAMILIES = [
+  "yi",
+  "yi-1.5-9b-chat",
+  "yi-coder",
+  "yi-coder-chat",
   "devstral-small-2",
   "deepseek-v3.1",
   "deepseek-v3.2",

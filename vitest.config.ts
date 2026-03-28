@@ -12,6 +12,9 @@ export default defineConfig({
       "@cyberlangke/tokkit-core": fileURLToPath(
         new URL("./packages/core/src/index.ts", import.meta.url)
       ),
+      "@cyberlangke/tokkit-01-ai": fileURLToPath(
+        new URL("./packages/01-ai/src/index.ts", import.meta.url)
+      ),
       "@cyberlangke/tokkit-tiiuae": fileURLToPath(
         new URL("./packages/tiiuae/src/index.ts", import.meta.url)
       ),

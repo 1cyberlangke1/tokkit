@@ -25,6 +25,30 @@ import { fileURLToPath } from "node:url"
  */
 export const FAMILY_SPECS = [
   {
+    family: "yi",
+    packageName: "01-ai",
+    moduleName: "yi",
+    source: "vendor/tokenizers/01-ai__Yi-6B__tokenizer.json.br",
+  },
+  {
+    family: "yi-1.5-9b-chat",
+    packageName: "01-ai",
+    moduleName: "yi_1_5_9b_chat",
+    source: "vendor/tokenizers/01-ai__Yi-1.5-9B-Chat__tokenizer.json.br",
+  },
+  {
+    family: "yi-coder",
+    packageName: "01-ai",
+    moduleName: "yi_coder",
+    source: "vendor/tokenizers/01-ai__Yi-Coder-9B__tokenizer.json.br",
+  },
+  {
+    family: "yi-coder-chat",
+    packageName: "01-ai",
+    moduleName: "yi_coder_chat",
+    source: "vendor/tokenizers/01-ai__Yi-Coder-9B-Chat__tokenizer.json.br",
+  },
+  {
     family: "falcon-rw-1b",
     packageName: "tiiuae",
     moduleName: "falcon_rw_1b",

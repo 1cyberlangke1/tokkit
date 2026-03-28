@@ -1,0 +1,9 @@
+Copyright (c) 2026 cyberlangke
+
+This package bundles tokenizer assets derived from official Hugging Face repositories under the 01-ai organization:
+- 01-ai/Yi-6B tokenizer.json
+- 01-ai/Yi-1.5-9B-Chat tokenizer.json
+- 01-ai/Yi-Coder-9B tokenizer.json
+- 01-ai/Yi-Coder-9B-Chat tokenizer configuration derived from tokenizer_config.json and special_tokens_map.json
+
+See LICENSE for the full license text that applies to this package and its bundled assets.
