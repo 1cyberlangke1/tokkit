@@ -579,7 +579,7 @@ describe("builtin tokenizer families", () => {
   )
 
   it("内置 family 的编码行为和 Hugging Face 真值一致", async () => {
-    const cases = await loadBuiltinReferenceCases()
+    const cases = await loadBuiltinReferenceCases(listSupportedFamilies())
 
     for (const { family, reference } of cases) {
       for (const input of BUILTIN_REFERENCE_SAMPLES) {
@@ -1309,14 +1309,17 @@ function createCharVocab(tokens: string[]): Record<string, number> {
 
 /**
  * 读取内置 family 对应的 HF 参考 tokenizer。
- * 输入：无。
+ * 输入：可选的 family 过滤列表。
  * 输出：从仓库内 `.json.br` 快照解压得到的参考 tokenizer 列表。
  */
-async function loadBuiltinReferenceCases() {
+async function loadBuiltinReferenceCases(familyFilter?: Iterable<string>) {
   // @ts-expect-error 这里直接导入构建脚本模块，测试只关心其运行时导出形状。
   const { FAMILY_SPECS } = await import("../../../scripts/generate-builtins.mjs")
+  const allowedFamilies = familyFilter ? new Set(familyFilter) : null
 
-  return FAMILY_SPECS.map((spec: { family: string; source: string }) => {
+  return FAMILY_SPECS.filter((spec: { family: string }) =>
+    allowedFamilies ? allowedFamilies.has(spec.family) : true
+  ).map((spec: { family: string; source: string }) => {
     const sourcePath = resolve(REPO_ROOT, spec.source)
     const compressed = readFileSync(sourcePath)
     const rawJson = brotliDecompressSync(compressed).toString("utf8")

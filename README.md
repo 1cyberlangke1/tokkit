@@ -6,6 +6,11 @@
 
 - `@cyberlangke/tokkit`
   - 全量包，聚合当前所有 MIT / Apache-2.0 兼容的内置厂商 family
+- `@cyberlangke/tokkit-minimax`
+  - 独立特殊协议包，不包含在 `@cyberlangke/tokkit` 总包内
+  - `minimax-m1`
+  - `minimax-m2`
+  - `minimax-text-01`
 - `@cyberlangke/tokkit-01-ai`
   - `yi`
   - `yi-1.5-9b-chat`

@@ -1,7 +1,7 @@
 {
-  "name": "@cyberlangke/tokkit-01-ai",
+  "name": "@cyberlangke/tokkit-minimax",
   "version": "1.4.0",
-  "description": "01.AI tokenizer families for tokkit.",
+  "description": "MiniMaxAI tokenizer families for tokkit.",
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
@@ -15,7 +15,9 @@
   },
   "files": [
     "dist",
-    "COPYRIGHT"
+    "COPYRIGHT",
+    "LICENSE",
+    "NOTICE"
   ],
   "scripts": {
     "build": "tsup",
@@ -36,5 +38,5 @@
     "url": "https://github.com/1cyberlangke1/tokkit/issues"
   },
   "author": "cyberlangke",
-  "license": "Apache-2.0"
+  "license": "SEE LICENSE IN LICENSE"
 }

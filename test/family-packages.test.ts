@@ -18,6 +18,21 @@ const REPO_ROOT = resolve(CURRENT_DIR, "..")
 /** 各厂商包当前应覆盖的 family 与模型别名。 */
 const VENDOR_PACKAGE_CASES = [
   {
+    relativePath: "packages/minimax/src/index.ts",
+    expectedFamilies: ["minimax-m1", "minimax-m2", "minimax-text-01"],
+    expectedModels: [
+      "MiniMaxAI/MiniMax-M2",
+      "MiniMaxAI/MiniMax-M2.1",
+      "MiniMaxAI/MiniMax-M2.5",
+      "MiniMaxAI/MiniMax-M1-40k",
+      "MiniMaxAI/MiniMax-M1-80k",
+      "MiniMaxAI/MiniMax-M1-40k-hf",
+      "MiniMaxAI/MiniMax-M1-80k-hf",
+      "MiniMaxAI/MiniMax-Text-01",
+      "MiniMaxAI/MiniMax-Text-01-hf",
+    ],
+  },
+  {
     relativePath: "packages/01-ai/src/index.ts",
     expectedFamilies: ["yi", "yi-1.5-9b-chat", "yi-coder", "yi-coder-chat"],
     expectedModels: [

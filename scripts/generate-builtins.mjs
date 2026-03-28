@@ -25,6 +25,24 @@ import { fileURLToPath } from "node:url"
  */
 export const FAMILY_SPECS = [
   {
+    family: "minimax-m1",
+    packageName: "minimax",
+    moduleName: "minimax_m1",
+    source: "vendor/tokenizers/MiniMaxAI__MiniMax-M1-40k__tokenizer.json.br",
+  },
+  {
+    family: "minimax-m2",
+    packageName: "minimax",
+    moduleName: "minimax_m2",
+    source: "vendor/tokenizers/MiniMaxAI__MiniMax-M2__tokenizer.json.br",
+  },
+  {
+    family: "minimax-text-01",
+    packageName: "minimax",
+    moduleName: "minimax_text_01",
+    source: "vendor/tokenizers/MiniMaxAI__MiniMax-Text-01-hf__tokenizer.json.br",
+  },
+  {
     family: "yi",
     packageName: "01-ai",
     moduleName: "yi",
