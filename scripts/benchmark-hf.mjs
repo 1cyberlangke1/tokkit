@@ -56,6 +56,26 @@ const BENCHMARK_CASES = [
     packageDir: "microsoft",
     source: "vendor/tokenizers/microsoft__phi-4__tokenizer.json.br",
   },
+  {
+    family: "smollm3",
+    packageDir: "huggingface-tb",
+    source: "vendor/tokenizers/HuggingFaceTB__SmolLM3-3B__tokenizer.json.br",
+  },
+  {
+    family: "academic-ds",
+    packageDir: "bytedance-seed",
+    source: "vendor/tokenizers/ByteDance-Seed__academic-ds-9B__tokenizer.json.br",
+  },
+  {
+    family: "seed-oss",
+    packageDir: "bytedance-seed",
+    source: "vendor/tokenizers/ByteDance-Seed__Seed-OSS-36B-Base__tokenizer.json.br",
+  },
+  {
+    family: "seed-coder",
+    packageDir: "bytedance-seed",
+    source: "vendor/tokenizers/ByteDance-Seed__Seed-Coder-8B-Base__tokenizer.json.br",
+  },
 ]
 
 /**

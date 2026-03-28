@@ -1,6 +1,6 @@
 {
   "name": "@cyberlangke/tokkit",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "A tokenizer library for counting tokens.",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -22,22 +22,22 @@
     "dev": "tsup --watch"
   },
   "dependencies": {
-    "@cyberlangke/tokkit-allenai": "1.2.1",
-    "@cyberlangke/tokkit-core": "1.2.1",
-    "@cyberlangke/tokkit-deepseek": "1.2.1",
-    "@cyberlangke/tokkit-eleutherai": "1.2.1",
-    "@cyberlangke/tokkit-glm": "1.2.1",
-    "@cyberlangke/tokkit-huggingface-tb": "1.2.1",
-    "@cyberlangke/tokkit-ibm-granite": "1.2.1",
-    "@cyberlangke/tokkit-bytedance-seed": "1.2.1",
-    "@cyberlangke/tokkit-meituan-longcat": "1.2.1",
-    "@cyberlangke/tokkit-microsoft": "1.2.1",
-    "@cyberlangke/tokkit-mistral": "1.2.1",
-    "@cyberlangke/tokkit-openbmb": "1.2.1",
-    "@cyberlangke/tokkit-qwen": "1.2.1",
-    "@cyberlangke/tokkit-step": "1.2.1",
-    "@cyberlangke/tokkit-tiiuae": "1.2.1",
-    "@cyberlangke/tokkit-xiaomi-mimo": "1.2.1"
+    "@cyberlangke/tokkit-allenai": "1.2.2",
+    "@cyberlangke/tokkit-core": "1.2.2",
+    "@cyberlangke/tokkit-deepseek": "1.2.2",
+    "@cyberlangke/tokkit-eleutherai": "1.2.2",
+    "@cyberlangke/tokkit-glm": "1.2.2",
+    "@cyberlangke/tokkit-huggingface-tb": "1.2.2",
+    "@cyberlangke/tokkit-ibm-granite": "1.2.2",
+    "@cyberlangke/tokkit-bytedance-seed": "1.2.2",
+    "@cyberlangke/tokkit-meituan-longcat": "1.2.2",
+    "@cyberlangke/tokkit-microsoft": "1.2.2",
+    "@cyberlangke/tokkit-mistral": "1.2.2",
+    "@cyberlangke/tokkit-openbmb": "1.2.2",
+    "@cyberlangke/tokkit-qwen": "1.2.2",
+    "@cyberlangke/tokkit-step": "1.2.2",
+    "@cyberlangke/tokkit-tiiuae": "1.2.2",
+    "@cyberlangke/tokkit-xiaomi-mimo": "1.2.2"
   },
   "publishConfig": {
     "access": "public"
