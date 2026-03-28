@@ -1,0 +1,8 @@
+Copyright (c) 2026 cyberlangke
+
+This package bundles tokenizer assets derived from official Hugging Face repositories under the EleutherAI organization:
+- EleutherAI/pythia-6.9b tokenizer.json
+- EleutherAI/polyglot-ko-1.3b tokenizer.json
+- EleutherAI/polyglot-ko-12.8b tokenizer.json
+
+See LICENSE for the full license text that applies to this package and its bundled assets.

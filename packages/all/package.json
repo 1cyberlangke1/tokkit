@@ -14,18 +14,28 @@
     }
   },
   "files": [
-    "dist"
+    "dist",
+    "COPYRIGHT"
   ],
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch"
   },
   "dependencies": {
+    "@cyberlangke/tokkit-allenai": "1.1.0",
     "@cyberlangke/tokkit-core": "1.1.0",
     "@cyberlangke/tokkit-deepseek": "1.1.0",
+    "@cyberlangke/tokkit-eleutherai": "1.1.0",
     "@cyberlangke/tokkit-glm": "1.1.0",
+    "@cyberlangke/tokkit-ibm-granite": "1.1.0",
+    "@cyberlangke/tokkit-meituan-longcat": "1.1.0",
+    "@cyberlangke/tokkit-microsoft": "1.1.0",
+    "@cyberlangke/tokkit-mistral": "1.1.0",
+    "@cyberlangke/tokkit-openbmb": "1.1.0",
     "@cyberlangke/tokkit-qwen": "1.1.0",
-    "@cyberlangke/tokkit-step": "1.1.0"
+    "@cyberlangke/tokkit-step": "1.1.0",
+    "@cyberlangke/tokkit-tiiuae": "1.1.0",
+    "@cyberlangke/tokkit-xiaomi-mimo": "1.1.0"
   },
   "publishConfig": {
     "access": "public"

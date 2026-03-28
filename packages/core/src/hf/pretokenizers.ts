@@ -6,6 +6,9 @@
 
 import { encodeTextToByteLevel } from "../core/bytes.js"
 
+/** Unicode 标点判定正则。 */
+const UNICODE_PUNCTUATION_PATTERN = /^\p{P}$/u
+
 /** 预分词调用时携带的上下文。 */
 interface PretokenizerContext {
   sectionIndex?: number
@@ -110,6 +113,54 @@ class ByteLevelPretokenizer implements Pretokenizer {
   }
 }
 
+/** Hugging Face Punctuation 预分词器。 */
+class PunctuationPretokenizer implements Pretokenizer {
+  private readonly behavior: string
+
+  /**
+   * 构造 Punctuation 预分词器。
+   * 输入：Punctuation 配置。
+   * 输出：可复用的标点切分实例。
+   */
+  constructor(config: Record<string, unknown>) {
+    this.behavior = String(config.behavior ?? "Isolated")
+  }
+
+  /**
+   * 输入：原始文本。
+   * 输出：按标点边界切分后的片段数组。
+   */
+  preTokenize(text: string): string[] {
+    return splitByCharPredicate(text, isPunctuationCharacter, this.behavior)
+  }
+}
+
+/** Hugging Face Digits 预分词器。 */
+class DigitsPretokenizer implements Pretokenizer {
+  private readonly individualDigits: boolean
+
+  /**
+   * 构造 Digits 预分词器。
+   * 输入：Digits 配置。
+   * 输出：可复用的数字切分实例。
+   */
+  constructor(config: Record<string, unknown>) {
+    this.individualDigits = Boolean(config.individual_digits)
+  }
+
+  /**
+   * 输入：原始文本。
+   * 输出：按数字块或单个数字切分后的片段数组。
+   */
+  preTokenize(text: string): string[] {
+    return splitByCharPredicate(
+      text,
+      isDigitCharacter,
+      this.individualDigits ? "Isolated" : "Contiguous"
+    )
+  }
+}
+
 /** Hugging Face Metaspace 预分词器。 */
 class MetaspacePretokenizer implements Pretokenizer {
   private readonly replacement: string
@@ -136,11 +187,12 @@ class MetaspacePretokenizer implements Pretokenizer {
   preTokenize(text: string, context: PretokenizerContext = {}): string[] {
     let normalized = text.replaceAll(" ", this.strRep)
     const sectionIndex = context.sectionIndex
+    const isFirstSection = sectionIndex === undefined || sectionIndex === 0
 
     if (
       !normalized.startsWith(this.replacement) &&
       (this.prependScheme === "always" ||
-        (this.prependScheme === "first" && sectionIndex === 0))
+        (this.prependScheme === "first" && isFirstSection))
     ) {
       normalized = this.strRep + normalized
     }
@@ -208,6 +260,10 @@ export function createPretokenizer(
   switch (config.type) {
     case "Split":
       return new SplitPretokenizer(config)
+    case "Punctuation":
+      return new PunctuationPretokenizer(config)
+    case "Digits":
+      return new DigitsPretokenizer(config)
     case "ByteLevel":
       return new ByteLevelPretokenizer(config)
     case "Metaspace":
@@ -317,4 +373,98 @@ function splitMetaspace(text: string, replacement: string): string[] {
  */
 function escapeRegExp(value: string): string {
   return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
+}
+
+/**
+ * 判断字符是否属于 Unicode 标点。
+ * 输入：单个字符。
+ * 输出：标点返回 true，否则返回 false。
+ */
+function isPunctuationCharacter(character: string): boolean {
+  return UNICODE_PUNCTUATION_PATTERN.test(character)
+}
+
+/**
+ * 判断字符是否是数字。
+ * 输入：单个字符。
+ * 输出：Unicode 数字返回 true，否则返回 false。
+ */
+function isDigitCharacter(character: string): boolean {
+  return /^\p{N}$/u.test(character)
+}
+
+/**
+ * 按字符谓词与 HF split behavior 切分文本。
+ * 输入：原始文本、字符匹配函数和行为配置。
+ * 输出：与 Hugging Face Digits / Punctuation 兼容的片段数组。
+ */
+function splitByCharPredicate(
+  text: string,
+  predicate: (character: string) => boolean,
+  behavior: string
+): string[] {
+  if (text.length === 0) {
+    return []
+  }
+
+  const normalizedBehavior = behavior.toLowerCase()
+  const result: string[] = []
+  let current = ""
+  let currentMatches = predicate(text[0] ?? "")
+
+  for (const character of text) {
+    const matches = predicate(character)
+    if (current.length === 0) {
+      current = character
+      currentMatches = matches
+      continue
+    }
+
+    if (
+      matches === currentMatches &&
+      (!matches || normalizedBehavior === "contiguous")
+    ) {
+      current += character
+      continue
+    }
+
+    pushPredicateSplit(result, current, currentMatches, normalizedBehavior)
+    current = character
+    currentMatches = matches
+  }
+
+  pushPredicateSplit(result, current, currentMatches, normalizedBehavior)
+  return result
+}
+
+/**
+ * 把当前分段按 behavior 写入结果数组。
+ * 输入：结果数组、当前分段、是否命中谓词和 behavior。
+ * 输出：结果数组被原地更新。
+ */
+function pushPredicateSplit(
+  target: string[],
+  value: string,
+  matches: boolean,
+  behavior: string
+): void {
+  if (value.length === 0) {
+    return
+  }
+
+  if (!matches || behavior === "contiguous") {
+    target.push(value)
+    return
+  }
+
+  if (behavior === "removed") {
+    if (!matches) {
+      target.push(value)
+    }
+    return
+  }
+
+  for (const character of value) {
+    target.push(character)
+  }
 }

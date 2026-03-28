@@ -14,7 +14,8 @@
     }
   },
   "files": [
-    "dist"
+    "dist",
+    "COPYRIGHT"
   ],
   "scripts": {
     "build": "tsup",
@@ -35,5 +36,5 @@
     "url": "https://github.com/1cyberlangke1/tokkit/issues"
   },
   "author": "cyberlangke",
-  "license": "MIT"
+  "license": "Apache-2.0"
 }

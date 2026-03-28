@@ -1,0 +1,6 @@
+Copyright (c) 2026 cyberlangke
+
+This package contains only the tokkit core runtime code.
+It does not bundle tokenizer assets from upstream model repositories.
+
+See LICENSE for the full license text for this package.

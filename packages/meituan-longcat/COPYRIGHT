@@ -1,0 +1,8 @@
+Copyright (c) 2026 cyberlangke
+
+This package bundles tokenizer assets derived from official Hugging Face repositories under the meituan-longcat organization:
+- meituan-longcat/LongCat-Flash-Chat tokenizer.json
+- meituan-longcat/LongCat-Flash-Lite tokenizer.json
+- meituan-longcat/LongCat-Flash-Thinking-2601 tokenizer.json
+
+See LICENSE for the full license text that applies to this package and its bundled assets.

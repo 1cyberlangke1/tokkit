@@ -2,23 +2,72 @@
 
 `tokkit` 就是用来分词和计 token 数的库。
 
-## 支持的模型
+## 支持的包
 
-- `@cyberlangke/tokkit-qwen`
-  - [`Qwen/Qwen3.5-0.8B`](https://huggingface.co/Qwen/Qwen3.5-0.8B)
-  - [`Qwen/Qwen3.5-27B`](https://huggingface.co/Qwen/Qwen3.5-27B)
-  - [`Qwen/Qwen3.5-397B-A17B`](https://huggingface.co/Qwen/Qwen3.5-397B-A17B)
-  - [`Qwen/Qwen3-Coder-Next`](https://huggingface.co/Qwen/Qwen3-Coder-Next)
-- `@cyberlangke/tokkit-deepseek`
-  - [`deepseek-ai/DeepSeek-V3.1`](https://huggingface.co/deepseek-ai/DeepSeek-V3.1)
-  - [`deepseek-ai/DeepSeek-V3.2`](https://huggingface.co/deepseek-ai/DeepSeek-V3.2)
-- `@cyberlangke/tokkit-glm`
-  - [`zai-org/GLM-4.7`](https://huggingface.co/zai-org/GLM-4.7)
-  - [`zai-org/GLM-5`](https://huggingface.co/zai-org/GLM-5)
-- `@cyberlangke/tokkit-step`
-  - [`stepfun-ai/Step-3.5-Flash`](https://huggingface.co/stepfun-ai/Step-3.5-Flash)
 - `@cyberlangke/tokkit`
-  - 全量包，聚合以上全部 family
+  - 全量包，聚合当前所有 MIT / Apache-2.0 兼容的内置厂商 family
+- `@cyberlangke/tokkit-tiiuae`
+  - `falcon-rw-1b`
+  - `falcon-7b`
+- `@cyberlangke/tokkit-eleutherai`
+  - `pythia`
+  - `polyglot-ko`
+  - `polyglot-ko-12.8`
+- `@cyberlangke/tokkit-meituan-longcat`
+  - `longcat-flash-chat`
+  - `longcat-flash-lite`
+  - `longcat-flash-thinking`
+- `@cyberlangke/tokkit-xiaomi-mimo`
+  - `mimo`
+  - `mimo-7b-rl-0530`
+  - `mimo-v2-flash`
+- `@cyberlangke/tokkit-microsoft`
+  - `phi-1`
+  - `phi-3-mini`
+  - `phi-3-medium`
+  - `phi-3.5`
+  - `phi-4`
+  - `phi-4-mini`
+  - `phi-4-mini-flash`
+  - `phi-4-mini-reasoning`
+  - `phi-4-reasoning`
+  - `phi-moe`
+- `@cyberlangke/tokkit-mistral`
+  - `mistral-7b-v0.1`
+  - `mistral-7b-v0.3`
+  - `mixtral-8x7b`
+  - `ministral-8b`
+  - `devstral-small-2`
+  - `mistral-small-3.1`
+- `@cyberlangke/tokkit-allenai`
+  - `olmo-1`
+  - `olmo-2`
+  - `olmo-3-instruct`
+  - `olmo-hybrid`
+  - `olmoe`
+- `@cyberlangke/tokkit-ibm-granite`
+  - `granite-3-instruct`
+  - `granite-3.3-base`
+  - `granite-3.3-instruct`
+  - `granite-4`
+  - `granite-4-tiny-base-preview`
+  - `granite-4-tiny-preview`
+- `@cyberlangke/tokkit-openbmb`
+  - `minicpm-s-1b`
+  - `minicpm-sala`
+  - `minicpm3`
+  - `minicpm4`
+- `@cyberlangke/tokkit-qwen`
+  - `qwen3.5`
+  - `qwen3-coder-next`
+- `@cyberlangke/tokkit-deepseek`
+  - `deepseek-v3.1`
+  - `deepseek-v3.2`
+- `@cyberlangke/tokkit-glm`
+  - `glm-4.7`
+  - `glm-5`
+- `@cyberlangke/tokkit-step`
+  - `step-3.5-flash`
 
 ## 使用方法
 
@@ -59,4 +108,20 @@ const tokenizer = await getTokenizer("deepseek-v3.2")
 const sameTokenizer = await getTokenizer("deepseek-ai/DeepSeek-V3.2")
 
 console.log(tokenizer === sameTokenizer) // true
+```
+
+## 开发命令
+
+```bash
+# 生成内置 tokenizer 模块
+npm run generate:builtins
+
+# 跑完整测试
+npm run test:run
+
+# 生成构建产物
+npm run build
+
+# 对比 tokkit 与 Hugging Face 官方 tokenizer 的 encode 吞吐
+npm run benchmark:hf
 ```

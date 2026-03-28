@@ -20,6 +20,62 @@ class IdentityNormalizer implements Normalizer {
   }
 }
 
+/** 在文本头部添加固定前缀的 normalizer。 */
+class PrependNormalizer implements Normalizer {
+  private readonly prepend: string
+
+  /**
+   * 构造 Prepend normalizer。
+   * 输入：Prepend 配置。
+   * 输出：可复用的前缀注入器。
+   */
+  constructor(config: Record<string, unknown>) {
+    this.prepend = String(config.prepend ?? "")
+  }
+
+  /**
+   * 输入：原始文本。
+   * 输出：非空文本会被加上固定前缀。
+   */
+  normalize(text: string): string {
+    if (text.length === 0 || this.prepend.length === 0) {
+      return text
+    }
+
+    return this.prepend + text
+  }
+}
+
+/** 执行字面量或正则替换的 normalizer。 */
+class ReplaceNormalizer implements Normalizer {
+  private readonly pattern: string | RegExp
+  private readonly content: string
+
+  /**
+   * 构造 Replace normalizer。
+   * 输入：Replace 配置。
+   * 输出：可复用的替换器。
+   */
+  constructor(config: Record<string, unknown>) {
+    const pattern = (config.pattern as Record<string, unknown> | undefined) ?? {}
+    this.pattern =
+      pattern.String !== undefined
+        ? String(pattern.String)
+        : new RegExp(String(pattern.Regex ?? ""), "gu")
+    this.content = String(config.content ?? "")
+  }
+
+  /**
+   * 输入：原始文本。
+   * 输出：替换后的文本。
+   */
+  normalize(text: string): string {
+    return typeof this.pattern === "string"
+      ? text.split(this.pattern).join(this.content)
+      : text.replace(this.pattern, this.content)
+  }
+}
+
 /** 基于 Unicode 规范化表单的 normalizer。 */
 class UnicodeNormalizer implements Normalizer {
   private readonly form: "NFC" | "NFD" | "NFKC" | "NFKD"
@@ -81,6 +137,10 @@ export function createNormalizer(
   }
 
   switch (config.type) {
+    case "Prepend":
+      return new PrependNormalizer(config)
+    case "Replace":
+      return new ReplaceNormalizer(config)
     case "NFC":
     case "NFD":
     case "NFKC":

@@ -1,0 +1,7 @@
+Copyright (c) 2026 cyberlangke
+
+This package bundles tokenizer assets derived from official Hugging Face repositories under the deepseek-ai organization:
+- deepseek-ai/DeepSeek-V3.1 tokenizer.json
+- deepseek-ai/DeepSeek-V3.2 tokenizer.json
+
+See LICENSE for the full license text that applies to this package and its bundled assets.

@@ -1,0 +1,7 @@
+Copyright (c) 2026 cyberlangke
+
+This package bundles tokenizer assets derived from official Hugging Face repositories under the tiiuae organization:
+- tiiuae/falcon-rw-1b tokenizer.json
+- tiiuae/falcon-7b tokenizer.json
+
+See LICENSE for the full license text that applies to this package and its bundled assets.

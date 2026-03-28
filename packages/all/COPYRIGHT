@@ -1,0 +1,6 @@
+Copyright (c) 2026 cyberlangke
+
+This package contains the aggregate tokkit entrypoint code.
+Tokenizer assets are shipped by the vendor subpackages that this package depends on.
+
+See LICENSE for the full license text for this package.

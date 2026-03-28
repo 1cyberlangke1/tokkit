@@ -1,0 +1,7 @@
+Copyright (c) 2026 cyberlangke
+
+This package bundles tokenizer assets derived from official Hugging Face repositories under the Qwen organization:
+- Qwen/Qwen3.5-0.8B tokenizer.json
+- Qwen/Qwen3-Coder-Next tokenizer.json
+
+See LICENSE for the full license text that applies to this package and its bundled assets.

@@ -1,0 +1,15 @@
+Copyright (c) 2026 cyberlangke
+
+This package bundles tokenizer assets derived from official Hugging Face repositories under the microsoft organization:
+- microsoft/phi-1 tokenizer.json
+- microsoft/Phi-3-mini-4k-instruct tokenizer.json
+- microsoft/Phi-3-medium-4k-instruct tokenizer.json
+- microsoft/Phi-3.5-mini-instruct tokenizer.json
+- microsoft/Phi-mini-MoE-instruct tokenizer.json
+- microsoft/phi-4 tokenizer.json
+- microsoft/Phi-4-mini-instruct tokenizer.json
+- microsoft/Phi-4-mini-reasoning tokenizer.json
+- microsoft/Phi-4-mini-flash-reasoning tokenizer.json
+- microsoft/Phi-4-reasoning tokenizer.json
+
+See LICENSE for the full license text that applies to this package and its bundled assets.
