@@ -1,6 +1,6 @@
 {
   "name": "@cyberlangke/tokkit-openbmb",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "OpenBMB tokenizer families for tokkit.",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -22,7 +22,7 @@
     "dev": "tsup --watch"
   },
   "dependencies": {
-    "@cyberlangke/tokkit-core": "1.2.1"
+    "@cyberlangke/tokkit-core": "1.2.2"
   },
   "publishConfig": {
     "access": "public"

@@ -25,6 +25,12 @@ interface AddedTokenMatch {
   end: number
 }
 
+/** added token 前缀树节点。 */
+interface AddedTokenTrieNode {
+  children: Map<string, AddedTokenTrieNode>
+  tokens?: AddedTokenConfig[]
+}
+
 /** added token 分段遍历时使用的回调。 */
 interface SegmentVisitor {
   onText(value: string): void
@@ -37,10 +43,21 @@ const WORD_AT_END = /[\p{L}\p{N}\p{M}_]$/u
 const LEADING_SPACE = /^\s*/u
 const TRAILING_SPACE = /\s*$/u
 
+/**
+ * 创建空的 added token 前缀树节点。
+ * 输入：无。
+ * 输出：带空 children 映射的 trie 节点。
+ */
+function createTrieNode(): AddedTokenTrieNode {
+  return {
+    children: new Map<string, AddedTokenTrieNode>(),
+  }
+}
+
 /** 用顺序扫描实现 leftmost-longest 的 added token 匹配。 */
 export class SpecialTokenMatcher {
   private readonly tokens: AddedTokenConfig[]
-  private readonly tokensByFirstChar = new Map<string, AddedTokenConfig[]>()
+  private readonly trie = new Map<string, AddedTokenTrieNode>()
 
   /**
    * 构造匹配器。
@@ -62,13 +79,32 @@ export class SpecialTokenMatcher {
         continue
       }
 
-      const bucket = this.tokensByFirstChar.get(firstChar)
-      if (bucket) {
-        bucket.push(token)
+      let node: AddedTokenTrieNode | undefined = this.trie.get(firstChar)
+      if (!node) {
+        node = createTrieNode()
+        this.trie.set(firstChar, node)
+      }
+
+      for (let index = 1; index < token.content.length; index += 1) {
+        const character = token.content[index]
+        if (character === undefined) {
+          break
+        }
+
+        let child: AddedTokenTrieNode | undefined = node.children.get(character)
+        if (!child) {
+          child = createTrieNode()
+          node.children.set(character, child)
+        }
+        node = child
+      }
+
+      if (node.tokens) {
+        node.tokens.push(token)
         continue
       }
 
-      this.tokensByFirstChar.set(firstChar, [token])
+      node.tokens = [token]
     }
   }
 
@@ -144,12 +180,11 @@ export class SpecialTokenMatcher {
    */
   private findNextMatch(text: string, from: number): AddedTokenMatch | null {
     for (let start = from; start < text.length; start += 1) {
-      const candidates = this.tokensByFirstChar.get(text[start])
-      if (!candidates) {
+      if (!this.trie.has(text[start])) {
         continue
       }
 
-      const match = this.findMatchAt(text, start, from, candidates)
+      const match = this.findMatchAt(text, start, from)
       if (match) {
         return match
       }
@@ -166,39 +201,68 @@ export class SpecialTokenMatcher {
   private findMatchAt(
     text: string,
     start: number,
-    floor: number,
-    candidates: AddedTokenConfig[]
+    floor: number
   ): AddedTokenMatch | null {
-    for (const token of candidates) {
-      if (!text.startsWith(token.content, start)) {
-        continue
+    let node = this.trie.get(text[start]) ?? null
+    let cursor = start + 1
+    let bestMatch: AddedTokenMatch | null = null
+
+    while (node) {
+      if (node.tokens) {
+        const match = findMatchFromTokens(node.tokens, text, start, cursor, floor)
+        if (match) {
+          bestMatch = match
+        }
       }
 
-      const rawEnd = start + token.content.length
-      if (token.single_word && !isSingleWordMatch(text, start, rawEnd)) {
-        continue
+      if (cursor >= text.length) {
+        break
       }
 
-      let matchStart = start
-      let matchEnd = rawEnd
-
-      if (token.lstrip) {
-        matchStart = Math.max(findLeftWhitespaceStart(text, start), floor)
-      }
-
-      if (token.rstrip) {
-        matchEnd = findRightWhitespaceEnd(text, rawEnd)
-      }
-
-      return {
-        token,
-        start: matchStart,
-        end: matchEnd,
-      }
+      node = node.children.get(text[cursor]) ?? null
+      cursor += 1
     }
 
-    return null
+    return bestMatch
   }
+}
+
+/**
+ * 在同一前缀树节点上挑出当前深度可用的 added token。
+ * 输入：同一终点的 token 列表、全文、命中起点/终点与 plain 下界。
+ * 输出：命中的 added token；未命中则返回 null。
+ */
+function findMatchFromTokens(
+  tokens: AddedTokenConfig[],
+  text: string,
+  start: number,
+  rawEnd: number,
+  floor: number
+): AddedTokenMatch | null {
+  for (const token of tokens) {
+    if (token.single_word && !isSingleWordMatch(text, start, rawEnd)) {
+      continue
+    }
+
+    let matchStart = start
+    let matchEnd = rawEnd
+
+    if (token.lstrip) {
+      matchStart = Math.max(findLeftWhitespaceStart(text, start), floor)
+    }
+
+    if (token.rstrip) {
+      matchEnd = findRightWhitespaceEnd(text, rawEnd)
+    }
+
+    return {
+      token,
+      start: matchStart,
+      end: matchEnd,
+    }
+  }
+
+  return null
 }
 
 /**
