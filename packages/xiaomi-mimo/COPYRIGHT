@@ -1,0 +1,8 @@
+Copyright (c) 2026 cyberlangke
+
+This package bundles tokenizer assets derived from official Hugging Face repositories under the XiaomiMiMo organization:
+- XiaomiMiMo/MiMo-7B-SFT tokenizer.json
+- XiaomiMiMo/MiMo-7B-RL-0530 tokenizer.json
+- XiaomiMiMo/MiMo-V2-Flash tokenizer.json
+
+See LICENSE for the full license text that applies to this package and its bundled assets.

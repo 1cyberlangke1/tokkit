@@ -5,6 +5,15 @@
  */
 
 import { registerBuiltins as registerDeepseekBuiltins } from "@cyberlangke/tokkit-deepseek"
+import { registerBuiltins as registerTiiuaeBuiltins } from "@cyberlangke/tokkit-tiiuae"
+import { registerBuiltins as registerEleutherAIBuiltins } from "@cyberlangke/tokkit-eleutherai"
+import { registerBuiltins as registerLongCatBuiltins } from "@cyberlangke/tokkit-meituan-longcat"
+import { registerBuiltins as registerMiMoBuiltins } from "@cyberlangke/tokkit-xiaomi-mimo"
+import { registerBuiltins as registerMicrosoftBuiltins } from "@cyberlangke/tokkit-microsoft"
+import { registerBuiltins as registerMistralBuiltins } from "@cyberlangke/tokkit-mistral"
+import { registerBuiltins as registerAllenAIBuiltins } from "@cyberlangke/tokkit-allenai"
+import { registerBuiltins as registerGraniteBuiltins } from "@cyberlangke/tokkit-ibm-granite"
+import { registerBuiltins as registerOpenBMBBuiltins } from "@cyberlangke/tokkit-openbmb"
 import { registerBuiltins as registerGlmBuiltins } from "@cyberlangke/tokkit-glm"
 import { registerBuiltins as registerQwenBuiltins } from "@cyberlangke/tokkit-qwen"
 import { registerBuiltins as registerStepBuiltins } from "@cyberlangke/tokkit-step"
@@ -17,6 +26,15 @@ export * from "@cyberlangke/tokkit-core"
  * 输出：所有内置 family 都被写入全局注册表。
  */
 export function registerBuiltins(): void {
+  registerTiiuaeBuiltins()
+  registerEleutherAIBuiltins()
+  registerLongCatBuiltins()
+  registerMiMoBuiltins()
+  registerMicrosoftBuiltins()
+  registerMistralBuiltins()
+  registerAllenAIBuiltins()
+  registerGraniteBuiltins()
+  registerOpenBMBBuiltins()
   registerQwenBuiltins()
   registerDeepseekBuiltins()
   registerGlmBuiltins()

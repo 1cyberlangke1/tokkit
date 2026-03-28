@@ -4,6 +4,10 @@
  * 输出：验证懒加载、别名解析、ByteLevel / Metaspace / ByteFallback 行为。
  */
 
+import { readFileSync } from "node:fs"
+import { dirname, resolve } from "node:path"
+import { fileURLToPath } from "node:url"
+import { brotliDecompressSync } from "node:zlib"
 import { describe, it, expect, beforeEach } from "vitest"
 import { PreTrainedTokenizer } from "@huggingface/transformers"
 import {
@@ -19,6 +23,15 @@ import {
   resetRegistry,
 } from "./index.js"
 import type { TokenizerAsset } from "./index.js"
+
+/** 当前测试文件所在目录。 */
+const CURRENT_DIR = dirname(fileURLToPath(import.meta.url))
+
+/** 仓库根目录。 */
+const REPO_ROOT = resolve(CURRENT_DIR, "..", "..", "..")
+
+/** 每个内置 family 的稳定对拍输入。 */
+const BUILTIN_REFERENCE_SAMPLES = ["Hello, world!", "你好，世界！", "A+B=42"] as const
 
 describe("tokkit vNext architecture", () => {
   beforeEach(() => {
@@ -86,6 +99,78 @@ describe("tokkit vNext architecture", () => {
     ).toEqual([1])
   })
 
+  it("Digits pre-tokenizer 能按官方规则拆分数字片段", async () => {
+    const asset = createDigitsToyAsset()
+    registerTokenizerFamily({
+      family: "toy-digits",
+      asset,
+    })
+
+    const reference = new PreTrainedTokenizer(asset as any, {})
+    const sample = "abc123456def"
+
+    expect(
+      await encode(sample, "toy-digits", {
+        addSpecialTokens: false,
+      })
+    ).toEqual(reference.encode(sample, { add_special_tokens: false }))
+  })
+
+  it("Digits pre-tokenizer 的 individual_digits=true 行为和官方实现一致", async () => {
+    const asset = createIndividualDigitsToyAsset()
+    registerTokenizerFamily({
+      family: "toy-digits-individual",
+      asset,
+    })
+
+    const reference = new PreTrainedTokenizer(asset as any, {})
+    const sample = "abc123def"
+
+    expect(
+      await encode(sample, "toy-digits-individual", {
+        addSpecialTokens: false,
+      })
+    ).toEqual(reference.encode(sample, { add_special_tokens: false }))
+  })
+
+  it("Punctuation pre-tokenizer 的 contiguous 行为和官方实现一致", async () => {
+    const asset = createPunctuationToyAsset()
+    registerTokenizerFamily({
+      family: "toy-punctuation",
+      asset,
+    })
+
+    const reference = new PreTrainedTokenizer(asset as any, {})
+    const sample = "Hi,world!!"
+
+    expect(
+      await encode(sample, "toy-punctuation", {
+        addSpecialTokens: false,
+      })
+    ).toEqual(reference.encode(sample, { add_special_tokens: false }))
+  })
+
+  it("Prepend + Replace normalizer 行为和官方实现一致", async () => {
+    const asset = createPrependReplaceToyAsset()
+    registerTokenizerFamily({
+      family: "toy-prepend-replace",
+      asset,
+    })
+
+    const reference = new PreTrainedTokenizer(asset as any, {})
+    const sample = "Hello world"
+
+    const actual = await encode(sample, "toy-prepend-replace", {
+      addSpecialTokens: false,
+    })
+    const expected = reference.encode(sample, { add_special_tokens: false })
+
+    expect(actual).toEqual(expected)
+    expect(await decode(actual, "toy-prepend-replace")).toBe(
+      reference.decode(expected, { skip_special_tokens: false })
+    )
+  })
+
   it("支持特殊 token 白名单", async () => {
     registerTokenizerFamily({
       family: "toy-byte",
@@ -140,6 +225,23 @@ describe("tokkit vNext architecture", () => {
 
     expect(actual).toEqual([1, 2])
     expect(await decode(actual, "toy-meta-split")).toBe(sample)
+  })
+
+  it("Metaspace pre-tokenizer 的 prepend_scheme=first 在顶层调用时和官方实现一致", async () => {
+    const asset = createMetaspaceFirstPretokenizerToyAsset()
+    registerTokenizerFamily({
+      family: "toy-meta-first",
+      asset,
+    })
+
+    const reference = new PreTrainedTokenizer(asset as any, {})
+    const sample = "Hello"
+
+    expect(
+      await encode(sample, "toy-meta-first", {
+        addSpecialTokens: false,
+      })
+    ).toEqual(reference.encode(sample, { add_special_tokens: false }))
   })
 
   it("Metaspace decoder 的 prepend_scheme=never 行为和官方实现一致", async () => {
@@ -257,10 +359,52 @@ describe("builtin tokenizer families", () => {
     async () => {
       expect(listSupportedFamilies().sort()).toEqual(
         [
+          "devstral-small-2",
           "deepseek-v3.1",
           "deepseek-v3.2",
+          "falcon-rw-1b",
+          "falcon-7b",
           "glm-4.7",
           "glm-5",
+          "granite-3-instruct",
+          "granite-3.3-base",
+          "granite-3.3-instruct",
+          "granite-4",
+          "granite-4-tiny-base-preview",
+          "granite-4-tiny-preview",
+          "longcat-flash-chat",
+          "longcat-flash-lite",
+          "longcat-flash-thinking",
+          "minicpm-s-1b",
+          "minicpm-sala",
+          "minicpm3",
+          "minicpm4",
+          "mimo",
+          "mimo-7b-rl-0530",
+          "mimo-v2-flash",
+          "ministral-8b",
+          "mistral-7b-v0.1",
+          "mistral-7b-v0.3",
+          "mistral-small-3.1",
+          "mixtral-8x7b",
+          "olmo-1",
+          "olmo-2",
+          "olmo-3-instruct",
+          "olmo-hybrid",
+          "olmoe",
+          "phi-1",
+          "phi-3-mini",
+          "phi-3-medium",
+          "phi-3.5",
+          "phi-4",
+          "phi-4-mini",
+          "phi-4-mini-flash",
+          "phi-4-mini-reasoning",
+          "phi-4-reasoning",
+          "phi-moe",
+          "polyglot-ko",
+          "polyglot-ko-12.8",
+          "pythia",
           "qwen3-coder-next",
           "qwen3.5",
           "step-3.5-flash",
@@ -269,6 +413,59 @@ describe("builtin tokenizer families", () => {
 
       expect(listSupportedModels()).toEqual(
         expect.arrayContaining([
+          "tiiuae/falcon-rw-1b",
+          "tiiuae/falcon-rw-7b",
+          "tiiuae/falcon-7b",
+          "tiiuae/falcon-7b-instruct",
+          "tiiuae/falcon-40b",
+          "tiiuae/falcon-40b-instruct",
+          "EleutherAI/pythia-70m",
+          "EleutherAI/pythia-6.9b",
+          "EleutherAI/pythia-12b",
+          "EleutherAI/pythia-12b-deduped",
+          "EleutherAI/polyglot-ko-1.3b",
+          "EleutherAI/polyglot-ko-12.8b",
+          "meituan-longcat/LongCat-Flash-Prover",
+          "meituan-longcat/LongCat-Flash-Lite",
+          "meituan-longcat/LongCat-Flash-Chat",
+          "meituan-longcat/LongCat-Flash-Thinking",
+          "meituan-longcat/LongCat-Flash-Thinking-2601",
+          "meituan-longcat/LongCat-HeavyMode-Summary",
+          "XiaomiMiMo/MiMo-7B-Base",
+          "XiaomiMiMo/MiMo-7B-RL-0530",
+          "XiaomiMiMo/MiMo-7B-SFT",
+          "XiaomiMiMo/MiMo-V2-Flash",
+          "XiaomiMiMo/MiMo-V2-Flash-Base",
+          "microsoft/phi-1",
+          "microsoft/Phi-3-mini-4k-instruct",
+          "microsoft/Phi-3-medium-4k-instruct",
+          "microsoft/Phi-3.5-mini-instruct",
+          "microsoft/Phi-mini-MoE-instruct",
+          "microsoft/phi-4",
+          "microsoft/Phi-4-reasoning",
+          "microsoft/Phi-4-mini-instruct",
+          "microsoft/Phi-4-mini-reasoning",
+          "microsoft/Phi-4-mini-flash-reasoning",
+          "mistralai/Mistral-7B-v0.1",
+          "mistralai/Mixtral-8x7B-v0.1",
+          "mistralai/Ministral-8B-Instruct-2410",
+          "mistralai/Devstral-Small-2-24B-Instruct-2512",
+          "mistralai/Mistral-Small-3.1-24B-Instruct-2503",
+          "allenai/OLMo-1B-hf",
+          "allenai/OLMo-2-0425-1B",
+          "allenai/OLMo-2-1124-13B",
+          "allenai/Olmo-3-7B-Instruct",
+          "allenai/Olmo-Hybrid-7B",
+          "ibm-granite/granite-3.0-2b-base",
+          "ibm-granite/granite-3.0-2b-instruct",
+          "ibm-granite/granite-3.3-8b-base",
+          "ibm-granite/granite-3.3-8b-instruct",
+          "ibm-granite/granite-4.0-350m-base",
+          "ibm-granite/granite-4.0-tiny-preview",
+          "openbmb/MiniCPM-S-1B-sft",
+          "openbmb/MiniCPM-SALA",
+          "openbmb/MiniCPM3-4B",
+          "openbmb/MiniCPM4.1-8B",
           "Qwen/Qwen3.5-0.8B",
           "Qwen/Qwen3.5-27B",
           "Qwen/Qwen3.5-397B-A17B",
@@ -285,8 +482,28 @@ describe("builtin tokenizer families", () => {
       expect(await getEncoding("Qwen/Qwen3.5-27B")).toBe(qwen35)
       expect(await getEncoding("Qwen/Qwen3.5-397B-A17B")).toBe(qwen35)
 
+      const falcon7b = await getEncoding("falcon-7b")
+      expect(await getEncoding("tiiuae/falcon-7b-instruct")).toBe(falcon7b)
+      expect(await getEncoding("tiiuae/falcon-40b")).toBe(falcon7b)
+
+      const pythia = await getEncoding("pythia")
+      expect(await getEncoding("EleutherAI/pythia-12b")).toBe(pythia)
+      expect(await getEncoding("EleutherAI/pythia-12b-deduped")).toBe(pythia)
+
+      const mimo = await getEncoding("mimo")
+      expect(await getEncoding("XiaomiMiMo/MiMo-V2-Flash-Base")).toBe(mimo)
+
+      const mistral7bV01 = await getEncoding("mistral-7b-v0.1")
+      expect(await getEncoding("mistralai/Mixtral-8x7B-Instruct-v0.1")).toBe(mistral7bV01)
+
+      const mixtral8x7b = await getEncoding("mixtral-8x7b")
+      expect(await getEncoding("mistralai/Mixtral-8x7B-v0.1")).toBe(mixtral8x7b)
+
       const glm5 = await getEncoding("glm-5")
       expect(await getEncoding("zai-org/GLM-5")).toBe(glm5)
+
+      const olmo2 = await getEncoding("olmo-2")
+      expect(await getEncoding("allenai/OLMo-2-1124-13B")).toBe(olmo2)
 
       const deepseek32 = await getEncoding("deepseek-v3.2")
       expect(await getEncoding("deepseek-ai/DeepSeek-V3.2")).toBe(deepseek32)
@@ -294,20 +511,23 @@ describe("builtin tokenizer families", () => {
     60000
   )
 
-  it.each(BUILTIN_HF_CASES)(
-    "内置 family $family 的编码行为和 Hugging Face 真值一致",
-    async ({ family, samples }) => {
-      for (const sample of samples) {
-        const actualIds = await encode(sample.input, family, {
+  it("内置 family 的编码行为和 Hugging Face 真值一致", async () => {
+    const cases = await loadBuiltinReferenceCases()
+
+    for (const { family, reference } of cases) {
+      for (const input of BUILTIN_REFERENCE_SAMPLES) {
+        const actualIds = await encode(input, family, {
           addSpecialTokens: false,
         })
+        const expectedIds = reference.encode(input, { add_special_tokens: false })
 
-        expect(actualIds).toEqual(sample.ids)
-        expect(await decode(actualIds, family)).toBe(sample.decoded)
+        expect(actualIds).toEqual(expectedIds)
+        expect(await decode(actualIds, family)).toBe(
+          reference.decode(expectedIds, { skip_special_tokens: false })
+        )
       }
-    },
-    30000
-  )
+    }
+  }, 120000)
 })
 
 /**
@@ -437,6 +657,202 @@ function createNfcToyAsset(): TokenizerAsset {
 }
 
 /**
+ * 生成用于验证 Digits pre-tokenizer 的 toy tokenizer。
+ * 输入：无。
+ * 输出：按数字块切分后才能命中的最小资产。
+ */
+function createDigitsToyAsset(): TokenizerAsset {
+  return {
+    version: "1.0",
+    normalizer: null,
+    post_processor: null,
+    added_tokens: [],
+    pre_tokenizer: {
+      type: "Sequence",
+      pretokenizers: [
+        {
+          type: "Digits",
+          individual_digits: false,
+        },
+        {
+          type: "Split",
+          pattern: {
+            Regex: "[0-9][0-9][0-9]",
+          },
+          behavior: "Isolated",
+          invert: false,
+        },
+      ],
+    },
+    decoder: {
+      type: "Fuse",
+    },
+    model: {
+      type: "BPE",
+      vocab: {
+        "<unk>": 0,
+        "abc": 1,
+        "123": 2,
+        "456": 3,
+        "def": 4,
+      },
+      merges: [],
+      unk_token: "<unk>",
+      continuing_subword_prefix: "",
+      end_of_word_suffix: "",
+      byte_fallback: false,
+      ignore_merges: true,
+    },
+  }
+}
+
+/**
+ * 生成用于验证 individual_digits=true 的 toy tokenizer。
+ * 输入：无。
+ * 输出：必须把连续数字拆成单个字符的最小资产。
+ */
+function createIndividualDigitsToyAsset(): TokenizerAsset {
+  return {
+    version: "1.0",
+    normalizer: null,
+    post_processor: null,
+    added_tokens: [],
+    pre_tokenizer: {
+      type: "Digits",
+      individual_digits: true,
+    },
+    decoder: {
+      type: "Fuse",
+    },
+    model: {
+      type: "BPE",
+      vocab: {
+        "<unk>": 0,
+        "abc": 1,
+        "1": 2,
+        "2": 3,
+        "3": 4,
+        "def": 5,
+      },
+      merges: [],
+      unk_token: "<unk>",
+      continuing_subword_prefix: "",
+      end_of_word_suffix: "",
+      byte_fallback: false,
+      ignore_merges: true,
+    },
+  }
+}
+
+/**
+ * 生成用于验证 Punctuation pre-tokenizer 的 toy tokenizer。
+ * 输入：无。
+ * 输出：依赖 contiguous 标点切分的最小资产。
+ */
+function createPunctuationToyAsset(): TokenizerAsset {
+  return {
+    version: "1.0",
+    normalizer: null,
+    post_processor: null,
+    added_tokens: [],
+    pre_tokenizer: {
+      type: "Punctuation",
+      behavior: "Contiguous",
+    },
+    decoder: {
+      type: "Fuse",
+    },
+    model: {
+      type: "BPE",
+      vocab: {
+        "<unk>": 0,
+        "Hi": 1,
+        ",": 2,
+        "world": 3,
+        "!!": 4,
+      },
+      merges: [],
+      unk_token: "<unk>",
+      continuing_subword_prefix: "",
+      end_of_word_suffix: "",
+      byte_fallback: false,
+      ignore_merges: true,
+    },
+  }
+}
+
+/**
+ * 生成用于验证 Prepend + Replace normalizer 的 toy tokenizer。
+ * 输入：无。
+ * 输出：依赖序列 normalizer 和解码链的最小资产。
+ */
+function createPrependReplaceToyAsset(): TokenizerAsset {
+  return {
+    version: "1.0",
+    normalizer: {
+      type: "Sequence",
+      normalizers: [
+        {
+          type: "Prepend",
+          prepend: "▁",
+        },
+        {
+          type: "Replace",
+          pattern: {
+            String: " ",
+          },
+          content: "▁",
+        },
+      ],
+    },
+    post_processor: null,
+    added_tokens: [],
+    pre_tokenizer: null,
+    decoder: {
+      type: "Sequence",
+      decoders: [
+        {
+          type: "Replace",
+          pattern: {
+            String: "▁",
+          },
+          content: " ",
+        },
+        {
+          type: "Fuse",
+        },
+        {
+          type: "Strip",
+          content: " ",
+          start: 1,
+          stop: 0,
+        },
+      ],
+    },
+    model: {
+      type: "BPE",
+      vocab: createCharVocab([
+        "<unk>",
+        "▁",
+        "H",
+        "e",
+        "l",
+        "o",
+        "w",
+        "r",
+        "d",
+      ]),
+      merges: [],
+      unk_token: "<unk>",
+      continuing_subword_prefix: "",
+      end_of_word_suffix: "",
+      byte_fallback: false,
+      ignore_merges: true,
+    },
+  }
+}
+
+/**
  * 生成能暴露 Metaspace split 语义的 toy tokenizer。
  * 输入：无。
  * 输出：只有正确按 replacement 切段时才能命中的最小资产。
@@ -465,6 +881,60 @@ function createMetaspaceSplitToyAsset(): TokenizerAsset {
         "<unk>": 0,
         "▁Hey": 1,
         "▁friend!": 2,
+      },
+      merges: [],
+      unk_token: "<unk>",
+      continuing_subword_prefix: "",
+      end_of_word_suffix: "",
+      byte_fallback: false,
+      ignore_merges: true,
+    },
+  }
+}
+
+/**
+ * 生成专门验证 Metaspace `prepend_scheme=first` 顶层行为的 toy tokenizer。
+ * 输入：无。
+ * 输出：只有首段自动补 replacement 时才能命中的最小资产。
+ */
+function createMetaspaceFirstPretokenizerToyAsset(): TokenizerAsset {
+  return {
+    version: "1.0",
+    normalizer: null,
+    post_processor: null,
+    added_tokens: [],
+    pre_tokenizer: {
+      type: "Metaspace",
+      replacement: "▁",
+      prepend_scheme: "first",
+      split: false,
+    },
+    decoder: {
+      type: "Sequence",
+      decoders: [
+        {
+          type: "Replace",
+          pattern: {
+            String: "▁",
+          },
+          content: " ",
+        },
+        {
+          type: "Fuse",
+        },
+        {
+          type: "Strip",
+          content: " ",
+          start: 1,
+          stop: 0,
+        },
+      ],
+    },
+    model: {
+      type: "BPE",
+      vocab: {
+        "<unk>": 0,
+        "▁Hello": 1,
       },
       merges: [],
       unk_token: "<unk>",
@@ -771,149 +1241,23 @@ function createCharVocab(tokens: string[]): Record<string, number> {
 }
 
 /**
- * 真实 Hugging Face tokenizer 的期望样本。
+ * 读取内置 family 对应的 HF 参考 tokenizer。
  * 输入：无。
- * 输出：供内置 family 对拍的稳定样本集合。
+ * 输出：从仓库内 `.json.br` 快照解压得到的参考 tokenizer 列表。
  */
-const BUILTIN_HF_CASES = [
-  {
-    family: "qwen3.5",
-    samples: [
-      {
-        input: "Hello, world!",
-        ids: [9419, 11, 1814, 0],
-        decoded: "Hello, world!",
-      },
-      {
-        input: "你好，世界！",
-        ids: [109266, 3709, 96748, 6115],
-        decoded: "你好，世界！",
-      },
-      {
-        input: "line1\nline2",
-        ids: [1021, 16, 198, 1021, 17],
-        decoded: "line1\nline2",
-      },
-    ],
-  },
-  {
-    family: "qwen3-coder-next",
-    samples: [
-      {
-        input: "def add(a, b):\n    return a + b",
-        ids: [750, 912, 2877, 11, 293, 982, 262, 470, 264, 488, 293],
-        decoded: "def add(a, b):\n    return a + b",
-      },
-      {
-        input: "console.log('hi')",
-        ids: [5354, 1665, 492, 6023, 863],
-        decoded: "console.log('hi')",
-      },
-      {
-        input: "你好，世界！",
-        ids: [108386, 3837, 99489, 6313],
-        decoded: "你好，世界！",
-      },
-    ],
-  },
-  {
-    family: "deepseek-v3.1",
-    samples: [
-      {
-        input: "Hello, world!",
-        ids: [19923, 14, 2058, 3],
-        decoded: "Hello, world!",
-      },
-      {
-        input: "你好，世界！",
-        ids: [30594, 303, 3427, 1175],
-        decoded: "你好，世界！",
-      },
-      {
-        input: "12345678",
-        ids: [6895, 18009, 2597],
-        decoded: "12345678",
-      },
-    ],
-  },
-  {
-    family: "deepseek-v3.2",
-    samples: [
-      {
-        input: "Hello, world!",
-        ids: [19923, 14, 2058, 3],
-        decoded: "Hello, world!",
-      },
-      {
-        input: "你好，世界！",
-        ids: [30594, 303, 3427, 1175],
-        decoded: "你好，世界！",
-      },
-      {
-        input: "A+B=42",
-        ids: [35, 59920, 31, 3180],
-        decoded: "A+B=42",
-      },
-    ],
-  },
-  {
-    family: "glm-4.7",
-    samples: [
-      {
-        input: "Hello, world!",
-        ids: [9703, 11, 1879, 0],
-        decoded: "Hello, world!",
-      },
-      {
-        input: "你好，世界！",
-        ids: [109377, 3837, 99011, 6313],
-        decoded: "你好，世界！",
-      },
-      {
-        input: "line1\nline2",
-        ids: [1056, 16, 198, 1056, 17],
-        decoded: "line1\nline2",
-      },
-    ],
-  },
-  {
-    family: "glm-5",
-    samples: [
-      {
-        input: "Hello, world!",
-        ids: [9703, 11, 1879, 0],
-        decoded: "Hello, world!",
-      },
-      {
-        input: "你好，世界！",
-        ids: [109377, 3837, 99011, 6313],
-        decoded: "你好，世界！",
-      },
-      {
-        input: "A+B=42",
-        ids: [32, 79085, 28, 101961],
-        decoded: "A+B=42",
-      },
-    ],
-  },
-  {
-    family: "step-3.5-flash",
-    samples: [
-      {
-        input: "Hello, world!",
-        ids: [19923, 14, 2058, 3],
-        decoded: "Hello, world!",
-      },
-      {
-        input: "你好，世界！",
-        ids: [30594, 303, 3427, 1175],
-        decoded: "你好，世界！",
-      },
-      {
-        input: "A+B=42",
-        ids: [35, 59920, 31, 3180],
-        decoded: "A+B=42",
-      },
-    ],
-  },
-] as const
+async function loadBuiltinReferenceCases() {
+  // @ts-expect-error 这里直接导入构建脚本模块，测试只关心其运行时导出形状。
+  const { FAMILY_SPECS } = await import("../../../scripts/generate-builtins.mjs")
+
+  return FAMILY_SPECS.map((spec: { family: string; source: string }) => {
+    const sourcePath = resolve(REPO_ROOT, spec.source)
+    const compressed = readFileSync(sourcePath)
+    const rawJson = brotliDecompressSync(compressed).toString("utf8")
+    const asset = JSON.parse(rawJson) as TokenizerAsset
+
+    return {
+      family: spec.family,
+      reference: new PreTrainedTokenizer(asset as any, {}),
+    }
+  })
+}

@@ -1,0 +1,9 @@
+Copyright (c) 2026 cyberlangke
+
+This package bundles tokenizer assets derived from official Hugging Face repositories under the openbmb organization:
+- openbmb/MiniCPM-S-1B-sft tokenizer.json
+- openbmb/MiniCPM-SALA tokenizer.json
+- openbmb/MiniCPM3-4B tokenizer.json
+- openbmb/MiniCPM4-8B tokenizer.json
+
+See LICENSE for the full license text that applies to this package and its bundled assets.

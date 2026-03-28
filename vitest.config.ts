@@ -12,6 +12,33 @@ export default defineConfig({
       "@cyberlangke/tokkit-core": fileURLToPath(
         new URL("./packages/core/src/index.ts", import.meta.url)
       ),
+      "@cyberlangke/tokkit-tiiuae": fileURLToPath(
+        new URL("./packages/tiiuae/src/index.ts", import.meta.url)
+      ),
+      "@cyberlangke/tokkit-eleutherai": fileURLToPath(
+        new URL("./packages/eleutherai/src/index.ts", import.meta.url)
+      ),
+      "@cyberlangke/tokkit-meituan-longcat": fileURLToPath(
+        new URL("./packages/meituan-longcat/src/index.ts", import.meta.url)
+      ),
+      "@cyberlangke/tokkit-xiaomi-mimo": fileURLToPath(
+        new URL("./packages/xiaomi-mimo/src/index.ts", import.meta.url)
+      ),
+      "@cyberlangke/tokkit-microsoft": fileURLToPath(
+        new URL("./packages/microsoft/src/index.ts", import.meta.url)
+      ),
+      "@cyberlangke/tokkit-mistral": fileURLToPath(
+        new URL("./packages/mistral/src/index.ts", import.meta.url)
+      ),
+      "@cyberlangke/tokkit-allenai": fileURLToPath(
+        new URL("./packages/allenai/src/index.ts", import.meta.url)
+      ),
+      "@cyberlangke/tokkit-ibm-granite": fileURLToPath(
+        new URL("./packages/ibm-granite/src/index.ts", import.meta.url)
+      ),
+      "@cyberlangke/tokkit-openbmb": fileURLToPath(
+        new URL("./packages/openbmb/src/index.ts", import.meta.url)
+      ),
       "@cyberlangke/tokkit-qwen": fileURLToPath(
         new URL("./packages/qwen/src/index.ts", import.meta.url)
       ),

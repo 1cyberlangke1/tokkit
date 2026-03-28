@@ -13,6 +13,75 @@ describe("generate:builtins layout", () => {
 
     expect(module.FAMILY_SPECS).toEqual(
       expect.arrayContaining([
+        expect.objectContaining({ family: "falcon-rw-1b", packageName: "tiiuae" }),
+        expect.objectContaining({ family: "falcon-7b", packageName: "tiiuae" }),
+        expect.objectContaining({ family: "polyglot-ko", packageName: "eleutherai" }),
+        expect.objectContaining({ family: "polyglot-ko-12.8", packageName: "eleutherai" }),
+        expect.objectContaining({ family: "pythia", packageName: "eleutherai" }),
+        expect.objectContaining({
+          family: "longcat-flash-chat",
+          packageName: "meituan-longcat",
+        }),
+        expect.objectContaining({
+          family: "longcat-flash-lite",
+          packageName: "meituan-longcat",
+        }),
+        expect.objectContaining({
+          family: "longcat-flash-thinking",
+          packageName: "meituan-longcat",
+        }),
+        expect.objectContaining({ family: "mimo", packageName: "xiaomi-mimo" }),
+        expect.objectContaining({ family: "mimo-7b-rl-0530", packageName: "xiaomi-mimo" }),
+        expect.objectContaining({ family: "mimo-v2-flash", packageName: "xiaomi-mimo" }),
+        expect.objectContaining({ family: "phi-1", packageName: "microsoft" }),
+        expect.objectContaining({ family: "phi-3-mini", packageName: "microsoft" }),
+        expect.objectContaining({ family: "phi-3-medium", packageName: "microsoft" }),
+        expect.objectContaining({ family: "phi-3.5", packageName: "microsoft" }),
+        expect.objectContaining({ family: "phi-4", packageName: "microsoft" }),
+        expect.objectContaining({ family: "phi-4-mini", packageName: "microsoft" }),
+        expect.objectContaining({ family: "phi-4-mini-flash", packageName: "microsoft" }),
+        expect.objectContaining({
+          family: "phi-4-mini-reasoning",
+          packageName: "microsoft",
+        }),
+        expect.objectContaining({ family: "phi-4-reasoning", packageName: "microsoft" }),
+        expect.objectContaining({ family: "phi-moe", packageName: "microsoft" }),
+        expect.objectContaining({ family: "devstral-small-2", packageName: "mistral" }),
+        expect.objectContaining({ family: "ministral-8b", packageName: "mistral" }),
+        expect.objectContaining({ family: "mistral-7b-v0.1", packageName: "mistral" }),
+        expect.objectContaining({ family: "mistral-7b-v0.3", packageName: "mistral" }),
+        expect.objectContaining({ family: "mistral-small-3.1", packageName: "mistral" }),
+        expect.objectContaining({ family: "mixtral-8x7b", packageName: "mistral" }),
+        expect.objectContaining({ family: "olmo-1", packageName: "allenai" }),
+        expect.objectContaining({ family: "olmo-2", packageName: "allenai" }),
+        expect.objectContaining({ family: "olmo-3-instruct", packageName: "allenai" }),
+        expect.objectContaining({ family: "olmo-hybrid", packageName: "allenai" }),
+        expect.objectContaining({ family: "olmoe", packageName: "allenai" }),
+        expect.objectContaining({
+          family: "granite-3-instruct",
+          packageName: "ibm-granite",
+        }),
+        expect.objectContaining({
+          family: "granite-3.3-base",
+          packageName: "ibm-granite",
+        }),
+        expect.objectContaining({
+          family: "granite-3.3-instruct",
+          packageName: "ibm-granite",
+        }),
+        expect.objectContaining({ family: "granite-4", packageName: "ibm-granite" }),
+        expect.objectContaining({
+          family: "granite-4-tiny-base-preview",
+          packageName: "ibm-granite",
+        }),
+        expect.objectContaining({
+          family: "granite-4-tiny-preview",
+          packageName: "ibm-granite",
+        }),
+        expect.objectContaining({ family: "minicpm-s-1b", packageName: "openbmb" }),
+        expect.objectContaining({ family: "minicpm-sala", packageName: "openbmb" }),
+        expect.objectContaining({ family: "minicpm3", packageName: "openbmb" }),
+        expect.objectContaining({ family: "minicpm4", packageName: "openbmb" }),
         expect.objectContaining({ family: "qwen3.5", packageName: "qwen" }),
         expect.objectContaining({ family: "qwen3-coder-next", packageName: "qwen" }),
         expect.objectContaining({ family: "deepseek-v3.1", packageName: "deepseek" }),
@@ -23,15 +92,23 @@ describe("generate:builtins layout", () => {
       ])
     )
 
-    expect(module.resolveOutputModulePath("qwen", "qwen3_5")).toBe(
-      "packages/qwen/src/generated/qwen3_5.ts"
+    expect(module.resolveOutputModulePath("tiiuae", "falcon_rw_1b")).toBe(
+      "packages/tiiuae/src/generated/falcon_rw_1b.ts"
     )
-    expect(module.resolveOutputModulePath("deepseek", "deepseek_v3_1")).toBe(
-      "packages/deepseek/src/generated/deepseek_v3_1.ts"
+    expect(module.resolveOutputModulePath("microsoft", "phi_4_mini_reasoning")).toBe(
+      "packages/microsoft/src/generated/phi_4_mini_reasoning.ts"
     )
-    expect(module.resolveOutputModulePath("glm", "glm_5")).toBe("packages/glm/src/generated/glm_5.ts")
-    expect(module.resolveOutputModulePath("step", "step_3_5_flash")).toBe(
-      "packages/step/src/generated/step_3_5_flash.ts"
+    expect(module.resolveOutputModulePath("mistral", "mistral_small_3_2")).toBe(
+      "packages/mistral/src/generated/mistral_small_3_2.ts"
+    )
+    expect(module.resolveOutputModulePath("allenai", "olmo_hybrid")).toBe(
+      "packages/allenai/src/generated/olmo_hybrid.ts"
+    )
+    expect(module.resolveOutputModulePath("ibm-granite", "granite_4")).toBe(
+      "packages/ibm-granite/src/generated/granite_4.ts"
+    )
+    expect(module.resolveOutputModulePath("openbmb", "minicpm4")).toBe(
+      "packages/openbmb/src/generated/minicpm4.ts"
     )
   })
 })
