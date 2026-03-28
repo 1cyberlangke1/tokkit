@@ -1,0 +1,20 @@
+Copyright (c) 2026 cyberlangke
+
+This package bundles tokenizer assets derived from official Hugging Face repositories under the MiniMaxAI organization:
+- MiniMaxAI/MiniMax-M2 tokenizer.json
+- MiniMaxAI/MiniMax-M1-40k tokenizer.json
+- MiniMaxAI/MiniMax-Text-01-hf tokenizer.json
+
+The following supported model names are aliases confirmed to reuse those bundled tokenizer assets and are not shipped as separate snapshots:
+- MiniMaxAI/MiniMax-M2.1
+- MiniMaxAI/MiniMax-M2.5
+- MiniMaxAI/MiniMax-M1-80k
+- MiniMaxAI/MiniMax-M1-40k-hf
+- MiniMaxAI/MiniMax-M1-80k-hf
+- MiniMaxAI/MiniMax-Text-01
+
+This package also ships NOTICE to satisfy the attribution requirement from the
+MiniMax Model License used by MiniMaxAI/MiniMax-Text-01-hf.
+
+See LICENSE and NOTICE for the full license text and attribution notices that
+apply to this package and its bundled assets.

@@ -13,6 +13,9 @@ describe("generate:builtins layout", () => {
 
     expect(module.FAMILY_SPECS).toEqual(
       expect.arrayContaining([
+        expect.objectContaining({ family: "minimax-m1", packageName: "minimax" }),
+        expect.objectContaining({ family: "minimax-m2", packageName: "minimax" }),
+        expect.objectContaining({ family: "minimax-text-01", packageName: "minimax" }),
         expect.objectContaining({ family: "yi", packageName: "01-ai" }),
         expect.objectContaining({ family: "yi-1.5-9b-chat", packageName: "01-ai" }),
         expect.objectContaining({ family: "yi-coder", packageName: "01-ai" }),
@@ -119,6 +122,9 @@ describe("generate:builtins layout", () => {
 
     expect(module.resolveOutputModulePath("01-ai", "yi_coder_chat")).toBe(
       "packages/01-ai/src/generated/yi_coder_chat.ts"
+    )
+    expect(module.resolveOutputModulePath("minimax", "minimax_m2")).toBe(
+      "packages/minimax/src/generated/minimax_m2.ts"
     )
     expect(module.resolveOutputModulePath("tiiuae", "falcon_rw_1b")).toBe(
       "packages/tiiuae/src/generated/falcon_rw_1b.ts"

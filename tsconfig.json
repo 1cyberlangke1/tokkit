@@ -14,6 +14,7 @@
     "paths": {
       "@cyberlangke/tokkit-core": ["packages/core/src/index.ts"],
       "@cyberlangke/tokkit-01-ai": ["packages/01-ai/src/index.ts"],
+      "@cyberlangke/tokkit-minimax": ["packages/minimax/src/index.ts"],
       "@cyberlangke/tokkit-tiiuae": ["packages/tiiuae/src/index.ts"],
       "@cyberlangke/tokkit-eleutherai": ["packages/eleutherai/src/index.ts"],
       "@cyberlangke/tokkit-meituan-longcat": ["packages/meituan-longcat/src/index.ts"],
