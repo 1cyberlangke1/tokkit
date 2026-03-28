@@ -44,6 +44,7 @@ describe("publish workflow", () => {
     expect(workflow).toContain("NPM_TOKEN")
     expect(workflow).toContain("_authToken")
     expect(workflow).toContain("npm whoami")
+    expect(workflow).not.toContain("<<'EOF'")
     expect(workflow).toContain("publish: npm run release")
   })
 })
