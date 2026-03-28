@@ -95,4 +95,33 @@ describe("workspace layout", () => {
       expect(packageJson.publishConfig?.access).toBe("public")
     }
   })
+
+  it("package-lock.json 与当前 workspace 子包和全量包依赖保持同步", () => {
+    const packageLockPath = resolve(REPO_ROOT, "package-lock.json")
+    const packageLock = JSON.parse(readFileSync(packageLockPath, "utf8")) as {
+      packages?: Record<
+        string,
+        {
+          name?: string
+          dependencies?: Record<string, string>
+        }
+      >
+    }
+    const lockedPackages = packageLock.packages ?? {}
+    const allPackageDependencies = lockedPackages["packages/all"]?.dependencies ?? {}
+
+    for (const { directory, packageName } of EXPECTED_PACKAGES) {
+      const workspaceKey = `packages/${directory}`
+      const packageJsonPath = resolve(REPO_ROOT, workspaceKey, "package.json")
+      const packageJson = JSON.parse(readFileSync(packageJsonPath, "utf8")) as {
+        version?: string
+      }
+
+      expect(lockedPackages[workspaceKey]?.name).toBe(packageName)
+
+      if (directory !== "all") {
+        expect(allPackageDependencies[packageName]).toBe(packageJson.version)
+      }
+    }
+  })
 })
