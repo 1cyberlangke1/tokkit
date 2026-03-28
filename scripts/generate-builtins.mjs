@@ -1,7 +1,7 @@
 /**
  * 生成内置 tokenizer family 模块。
  * 输入：vendor/tokenizers/ 下提交到仓库的压缩 tokenizer 快照。
- * 输出：src/data/generated/ 下的 packed family TypeScript 模块。
+ * 输出：packages 下各 family 子包里的 packed TypeScript 模块。
  *
  * 预期行为：
  * - 运行时模块不再直接内联巨大的 vocab / merges 对象字面量。
@@ -16,63 +16,92 @@ import {
 } from "node:zlib"
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs"
 import { dirname, extname, resolve } from "node:path"
+import { fileURLToPath } from "node:url"
 
 /**
  * 需要内置的 family 清单。
- * 输入：family 名称、输出模块名和压缩 tokenizer 快照路径。
+ * 输入：family 名称、目标子包、输出模块名和压缩 tokenizer 快照路径。
  * 输出：用于批量生成目标模块的稳定配置。
  */
-const FAMILY_SPECS = [
+export const FAMILY_SPECS = [
   {
     family: "qwen3.5",
+    packageName: "qwen",
     moduleName: "qwen3_5",
     source: "vendor/tokenizers/Qwen__Qwen3.5-0.8B__tokenizer.json.br",
   },
   {
     family: "qwen3-coder-next",
+    packageName: "qwen",
     moduleName: "qwen3_coder_next",
     source: "vendor/tokenizers/Qwen__Qwen3-Coder-Next__tokenizer.json.br",
   },
   {
     family: "deepseek-v3.1",
+    packageName: "deepseek",
     moduleName: "deepseek_v3_1",
     source: "vendor/tokenizers/deepseek-ai__DeepSeek-V3.1__tokenizer.json.br",
   },
   {
     family: "deepseek-v3.2",
+    packageName: "deepseek",
     moduleName: "deepseek_v3_2",
     source: "vendor/tokenizers/deepseek-ai__DeepSeek-V3.2__tokenizer.json.br",
   },
   {
     family: "glm-4.7",
+    packageName: "glm",
     moduleName: "glm_4_7",
     source: "vendor/tokenizers/zai-org__GLM-4.7__tokenizer.json.br",
   },
   {
     family: "glm-5",
+    packageName: "glm",
     moduleName: "glm_5",
     source: "vendor/tokenizers/zai-org__GLM-5__tokenizer.json.br",
   },
   {
     family: "step-3.5-flash",
+    packageName: "step",
     moduleName: "step_3_5_flash",
     source: "vendor/tokenizers/stepfun-ai__Step-3.5-Flash__tokenizer.json.br",
   },
 ]
 
 const projectRoot = process.cwd()
-const outputDir = resolve(projectRoot, "src/data/generated")
+const currentScriptPath = fileURLToPath(import.meta.url)
 
-mkdirSync(outputDir, { recursive: true })
+/**
+ * 解析单个 family 模块的输出路径。
+ * 输入：目标子包名与模块名。
+ * 输出：相对仓库根目录的 generated 模块路径。
+ */
+export function resolveOutputModulePath(packageName, moduleName) {
+  return `packages/${packageName}/src/generated/${moduleName}.ts`
+}
 
-for (const spec of FAMILY_SPECS) {
-  const sourcePath = resolve(projectRoot, spec.source)
-  const rawTokenizer = readTokenizerSnapshot(sourcePath)
-  const packedAsset = packNormalizedAsset(rawTokenizer)
-  const modulePath = resolve(outputDir, `${spec.moduleName}.ts`)
+/**
+ * 执行内置 family 生成流程。
+ * 输入：无。
+ * 输出：把所有压缩快照重新生成为各子包下的 generated 模块。
+ */
+export function generateBuiltins() {
+  for (const spec of FAMILY_SPECS) {
+    const sourcePath = resolve(projectRoot, spec.source)
+    const rawTokenizer = readTokenizerSnapshot(sourcePath)
+    const packedAsset = packNormalizedAsset(rawTokenizer)
+    const modulePath = resolve(
+      projectRoot,
+      resolveOutputModulePath(spec.packageName, spec.moduleName)
+    )
 
-  mkdirSync(dirname(modulePath), { recursive: true })
-  writeFileSync(modulePath, renderModule(spec.family, packedAsset))
+    mkdirSync(dirname(modulePath), { recursive: true })
+    writeFileSync(modulePath, renderModule(spec.family, packedAsset))
+  }
+}
+
+if (isDirectExecution()) {
+  generateBuiltins()
 }
 
 /**
@@ -218,4 +247,13 @@ const packedAsset = ${JSON.stringify(packedAsset)}
 
 export default packedAsset
 `
+}
+
+/**
+ * 判断当前模块是否以脚本方式直接运行。
+ * 输入：无。
+ * 输出：直接通过 node 执行时返回 true，被测试或其他模块导入时返回 false。
+ */
+function isDirectExecution() {
+  return process.argv[1] ? resolve(process.argv[1]) === currentScriptPath : false
 }

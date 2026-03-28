@@ -6,7 +6,6 @@
 
 import { describe, it, expect, beforeEach } from "vitest"
 import { PreTrainedTokenizer } from "@huggingface/transformers"
-import { registerBuiltins } from "./data/index.js"
 import {
   clearCache,
   decode,
@@ -15,10 +14,11 @@ import {
   getEncodingSync,
   listSupportedFamilies,
   listSupportedModels,
+  registerBuiltins,
   registerTokenizerFamily,
   resetRegistry,
 } from "./index.js"
-import type { TokenizerAsset } from "./types.js"
+import type { TokenizerAsset } from "./index.js"
 
 describe("tokkit vNext architecture", () => {
   beforeEach(() => {
@@ -246,14 +246,14 @@ describe("tokkit vNext architecture", () => {
   })
 })
 
-describe("builtin recent tokenizer families", () => {
+describe("builtin tokenizer families", () => {
   beforeEach(() => {
     resetRegistry()
     registerBuiltins()
   })
 
   it(
-    "注册最近 8 个月内的内置 family 与常见模型别名",
+    "注册当前内置 family 与常见模型别名",
     async () => {
       expect(listSupportedFamilies().sort()).toEqual(
         [
