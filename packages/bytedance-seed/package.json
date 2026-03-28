@@ -1,7 +1,7 @@
 {
-  "name": "@cyberlangke/tokkit-mistral",
+  "name": "@cyberlangke/tokkit-bytedance-seed",
   "version": "1.2.0",
-  "description": "Mistral tokenizer families for tokkit.",
+  "description": "ByteDance-Seed tokenizer families for tokkit.",
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
@@ -36,5 +36,5 @@
     "url": "https://github.com/1cyberlangke1/tokkit/issues"
   },
   "author": "cyberlangke",
-  "license": "Apache-2.0"
+  "license": "SEE LICENSE IN LICENSE"
 }

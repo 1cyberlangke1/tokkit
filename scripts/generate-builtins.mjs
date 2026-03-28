@@ -187,6 +187,36 @@ export const FAMILY_SPECS = [
     source: "vendor/tokenizers/mistralai__Mixtral-8x7B-v0.1__tokenizer.json.br",
   },
   {
+    family: "smollm",
+    packageName: "huggingface-tb",
+    moduleName: "smollm",
+    source: "vendor/tokenizers/HuggingFaceTB__SmolLM-135M__tokenizer.json.br",
+  },
+  {
+    family: "smollm-1.7b",
+    packageName: "huggingface-tb",
+    moduleName: "smollm_1_7b",
+    source: "vendor/tokenizers/HuggingFaceTB__SmolLM-1.7B__tokenizer.json.br",
+  },
+  {
+    family: "smollm2-16k",
+    packageName: "huggingface-tb",
+    moduleName: "smollm2_16k",
+    source: "vendor/tokenizers/HuggingFaceTB__SmolLM2-1.7B-Instruct-16k__tokenizer.json.br",
+  },
+  {
+    family: "smollm3",
+    packageName: "huggingface-tb",
+    moduleName: "smollm3",
+    source: "vendor/tokenizers/HuggingFaceTB__SmolLM3-3B__tokenizer.json.br",
+  },
+  {
+    family: "smollm3-base",
+    packageName: "huggingface-tb",
+    moduleName: "smollm3_base",
+    source: "vendor/tokenizers/HuggingFaceTB__SmolLM3-3B-Base__tokenizer.json.br",
+  },
+  {
     family: "olmo-1",
     packageName: "allenai",
     moduleName: "olmo_1",
@@ -251,6 +281,30 @@ export const FAMILY_SPECS = [
     packageName: "ibm-granite",
     moduleName: "granite_4_tiny_preview",
     source: "vendor/tokenizers/ibm-granite__granite-4.0-tiny-preview__tokenizer.json.br",
+  },
+  {
+    family: "academic-ds",
+    packageName: "bytedance-seed",
+    moduleName: "academic_ds",
+    source: "vendor/tokenizers/ByteDance-Seed__academic-ds-9B__tokenizer.json.br",
+  },
+  {
+    family: "seed-oss",
+    packageName: "bytedance-seed",
+    moduleName: "seed_oss",
+    source: "vendor/tokenizers/ByteDance-Seed__Seed-OSS-36B-Base__tokenizer.json.br",
+  },
+  {
+    family: "seed-coder",
+    packageName: "bytedance-seed",
+    moduleName: "seed_coder",
+    source: "vendor/tokenizers/ByteDance-Seed__Seed-Coder-8B-Base__tokenizer.json.br",
+  },
+  {
+    family: "stable-diffcoder",
+    packageName: "bytedance-seed",
+    moduleName: "stable_diffcoder",
+    source: "vendor/tokenizers/ByteDance-Seed__Stable-DiffCoder-8B-Base__tokenizer.json.br",
   },
   {
     family: "minicpm-s-1b",

@@ -1,7 +1,7 @@
 {
-  "name": "@cyberlangke/tokkit-mistral",
+  "name": "@cyberlangke/tokkit-huggingface-tb",
   "version": "1.2.0",
-  "description": "Mistral tokenizer families for tokkit.",
+  "description": "HuggingFaceTB tokenizer families for tokkit.",
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
