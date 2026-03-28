@@ -30,11 +30,17 @@ export default defineConfig({
       "@cyberlangke/tokkit-mistral": fileURLToPath(
         new URL("./packages/mistral/src/index.ts", import.meta.url)
       ),
+      "@cyberlangke/tokkit-huggingface-tb": fileURLToPath(
+        new URL("./packages/huggingface-tb/src/index.ts", import.meta.url)
+      ),
       "@cyberlangke/tokkit-allenai": fileURLToPath(
         new URL("./packages/allenai/src/index.ts", import.meta.url)
       ),
       "@cyberlangke/tokkit-ibm-granite": fileURLToPath(
         new URL("./packages/ibm-granite/src/index.ts", import.meta.url)
+      ),
+      "@cyberlangke/tokkit-bytedance-seed": fileURLToPath(
+        new URL("./packages/bytedance-seed/src/index.ts", import.meta.url)
       ),
       "@cyberlangke/tokkit-openbmb": fileURLToPath(
         new URL("./packages/openbmb/src/index.ts", import.meta.url)
