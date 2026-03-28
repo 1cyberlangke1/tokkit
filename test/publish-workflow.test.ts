@@ -42,6 +42,8 @@ describe("publish workflow", () => {
 
     expect(workflow).toContain("changesets/action")
     expect(workflow).toContain("NPM_TOKEN")
+    expect(workflow).toContain("_authToken")
+    expect(workflow).toContain("npm whoami")
     expect(workflow).toContain("publish: npm run release")
   })
 })
