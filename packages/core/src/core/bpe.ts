@@ -113,6 +113,10 @@ export class BpeModel {
   private readonly ignoreMerges: boolean
   private readonly cache = new Map<string, string[]>()
   private readonly maxCacheEntries = 10000
+  private readonly largePieceIdCache = new Map<string, number[]>()
+  private readonly minLargePieceCacheLength = 256
+  private readonly maxLargePieceCacheLength = 16384
+  private readonly maxLargePieceCacheEntries = 16
 
   /**
    * 构造模型。
@@ -206,6 +210,16 @@ export class BpeModel {
       return
     }
 
+    const cachedLargePieceIds = this.largePieceIdCache.get(piece)
+    if (cachedLargePieceIds) {
+      for (const id of cachedLargePieceIds) {
+        target.push(id)
+      }
+      return
+    }
+
+    const startIndex = target.length
+
     const mergedTokens = this.mergePiece(piece)
 
     for (const token of mergedTokens) {
@@ -225,6 +239,8 @@ export class BpeModel {
         target.push(this.unkTokenId)
       }
     }
+
+    this.rememberLargePieceIds(piece, target, startIndex)
   }
 
   /**
@@ -261,6 +277,7 @@ export class BpeModel {
    */
   clearCache(): void {
     this.cache.clear()
+    this.largePieceIdCache.clear()
   }
 
   /**
@@ -413,6 +430,29 @@ export class BpeModel {
 
     node.score = rank + node.bias
     queue.push(node)
+  }
+
+  /**
+   * 记录超长单片段的最终编码结果。
+   * 输入：原始片段、目标数组与当前片段起始偏移。
+   * 输出：在受控上限内缓存 exact-match 的编码 id 数组。
+   */
+  private rememberLargePieceIds(piece: string, target: number[], startIndex: number): void {
+    if (
+      piece.length < this.minLargePieceCacheLength ||
+      piece.length > this.maxLargePieceCacheLength
+    ) {
+      return
+    }
+
+    if (this.largePieceIdCache.size >= this.maxLargePieceCacheEntries) {
+      const oldestKey = this.largePieceIdCache.keys().next().value as string | undefined
+      if (oldestKey) {
+        this.largePieceIdCache.delete(oldestKey)
+      }
+    }
+
+    this.largePieceIdCache.set(piece, target.slice(startIndex))
   }
 
   /**

@@ -76,6 +76,13 @@ describe("workspace layout", () => {
     expect(existsSync(benchmarkScriptPath)).toBe(true)
   })
 
+  it("core 包构建配置会排除测试源码，避免把测试产物发到 npm", () => {
+    const tsupConfigPath = resolve(REPO_ROOT, "packages", "core", "tsup.config.ts")
+    const tsupConfig = readFileSync(tsupConfigPath, "utf8")
+
+    expect(tsupConfig).toContain("!src/**/*.test.ts")
+  })
+
   it("存在 core、family、all 子包，并且包名、协议与版权文件正确", () => {
     for (const { directory, packageName, license } of EXPECTED_PACKAGES) {
       const packageRoot = resolve(REPO_ROOT, "packages", directory)
