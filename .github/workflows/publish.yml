@@ -43,8 +43,8 @@ jobs:
         with:
           version: npm run version:packages
           publish: npm run release
-          commit: 构建: 版本发布
-          title: 构建: 版本发布
+          commit: "构建: 版本发布"
+          title: "构建: 版本发布"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
