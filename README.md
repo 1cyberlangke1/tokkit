@@ -6,6 +6,11 @@
 
 - `@cyberlangke/tokkit`
   - 全量包，聚合当前所有 MIT / Apache-2.0 兼容的内置厂商 family
+- `@cyberlangke/tokkit-01-ai`
+  - `yi`
+  - `yi-1.5-9b-chat`
+  - `yi-coder`
+  - `yi-coder-chat`
 - `@cyberlangke/tokkit-tiiuae`
   - `falcon-rw-1b`
   - `falcon-7b`

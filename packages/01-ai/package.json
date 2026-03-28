@@ -1,7 +1,7 @@
 {
-  "name": "@cyberlangke/tokkit-xiaomi-mimo",
+  "name": "@cyberlangke/tokkit-01-ai",
   "version": "1.3.0",
-  "description": "XiaomiMiMo tokenizer families for tokkit.",
+  "description": "01.AI tokenizer families for tokkit.",
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
@@ -36,5 +36,5 @@
     "url": "https://github.com/1cyberlangke1/tokkit/issues"
   },
   "author": "cyberlangke",
-  "license": "MIT"
+  "license": "Apache-2.0"
 }

@@ -5,6 +5,7 @@
  */
 
 import { registerBuiltins as registerDeepseekBuiltins } from "@cyberlangke/tokkit-deepseek"
+import { registerBuiltins as register01AIBuiltins } from "@cyberlangke/tokkit-01-ai"
 import { registerBuiltins as registerTiiuaeBuiltins } from "@cyberlangke/tokkit-tiiuae"
 import { registerBuiltins as registerEleutherAIBuiltins } from "@cyberlangke/tokkit-eleutherai"
 import { registerBuiltins as registerLongCatBuiltins } from "@cyberlangke/tokkit-meituan-longcat"
@@ -28,6 +29,7 @@ export * from "@cyberlangke/tokkit-core"
  * 输出：所有内置 family 都被写入全局注册表。
  */
 export function registerBuiltins(): void {
+  register01AIBuiltins()
   registerTiiuaeBuiltins()
   registerEleutherAIBuiltins()
   registerLongCatBuiltins()

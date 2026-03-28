@@ -359,6 +359,10 @@ describe("builtin tokenizer families", () => {
     async () => {
       expect(listSupportedFamilies().sort()).toEqual(
         [
+          "yi",
+          "yi-1.5-9b-chat",
+          "yi-coder",
+          "yi-coder-chat",
           "devstral-small-2",
           "deepseek-v3.1",
           "deepseek-v3.2",
@@ -422,6 +426,28 @@ describe("builtin tokenizer families", () => {
 
       expect(listSupportedModels()).toEqual(
         expect.arrayContaining([
+          "01-ai/Yi-6B",
+          "01-ai/Yi-6B-Chat",
+          "01-ai/Yi-9B",
+          "01-ai/Yi-34B",
+          "01-ai/Yi-34B-Chat",
+          "01-ai/Yi-6B-200K",
+          "01-ai/Yi-9B-200K",
+          "01-ai/Yi-34B-200K",
+          "01-ai/Yi-1.5-6B",
+          "01-ai/Yi-1.5-6B-Chat",
+          "01-ai/Yi-1.5-9B",
+          "01-ai/Yi-1.5-9B-Chat",
+          "01-ai/Yi-1.5-9B-Chat-16K",
+          "01-ai/Yi-1.5-9B-32K",
+          "01-ai/Yi-1.5-34B",
+          "01-ai/Yi-1.5-34B-Chat",
+          "01-ai/Yi-1.5-34B-32K",
+          "01-ai/Yi-1.5-34B-Chat-16K",
+          "01-ai/Yi-Coder-9B",
+          "01-ai/Yi-Coder-9B-Chat",
+          "01-ai/Yi-Coder-1.5B",
+          "01-ai/Yi-Coder-1.5B-Chat",
           "tiiuae/falcon-rw-1b",
           "tiiuae/falcon-rw-7b",
           "tiiuae/falcon-7b",
@@ -496,6 +522,21 @@ describe("builtin tokenizer families", () => {
           "stepfun-ai/Step-3.5-Flash",
         ])
       )
+
+      const yi = await getEncoding("yi")
+      expect(await getEncoding("01-ai/Yi-6B")).toBe(yi)
+      expect(await getEncoding("01-ai/Yi-1.5-34B")).toBe(yi)
+
+      const yi15Chat = await getEncoding("yi-1.5-9b-chat")
+      expect(await getEncoding("01-ai/Yi-1.5-9B-Chat")).toBe(yi15Chat)
+
+      const yiCoder = await getEncoding("yi-coder")
+      expect(await getEncoding("01-ai/Yi-34B")).toBe(yiCoder)
+      expect(await getEncoding("01-ai/Yi-Coder-1.5B")).toBe(yiCoder)
+
+      const yiCoderChat = await getEncoding("yi-coder-chat")
+      expect(await getEncoding("01-ai/Yi-Coder-9B-Chat")).toBe(yiCoderChat)
+      expect(await getEncoding("01-ai/Yi-Coder-1.5B-Chat")).toBe(yiCoderChat)
 
       const qwen35 = await getEncoding("qwen3.5")
       expect(await getEncoding("Qwen/Qwen3.5-27B")).toBe(qwen35)

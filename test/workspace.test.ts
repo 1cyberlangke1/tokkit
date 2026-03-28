@@ -18,6 +18,7 @@ const REPO_ROOT = resolve(CURRENT_DIR, "..")
 /** 期望存在的 workspace 子包定义。 */
 const EXPECTED_PACKAGES = [
   { directory: "core", packageName: "@cyberlangke/tokkit-core", license: "MIT" },
+  { directory: "01-ai", packageName: "@cyberlangke/tokkit-01-ai", license: "Apache-2.0" },
   { directory: "tiiuae", packageName: "@cyberlangke/tokkit-tiiuae", license: "Apache-2.0" },
   { directory: "eleutherai", packageName: "@cyberlangke/tokkit-eleutherai", license: "Apache-2.0" },
   {
