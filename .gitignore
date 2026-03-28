@@ -2,7 +2,8 @@
 node_modules
 
 # 构建输出
-dist
+dist/
+packages/*/dist/
 *.tsbuildinfo
 
 # 环境变量文件

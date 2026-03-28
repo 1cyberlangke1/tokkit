@@ -1,10 +1,9 @@
 /**
- * tokkit 公共入口。
+ * tokkit core 公共入口。
  * 输入：family / 模型别名与 tokenizer family 定义。
- * 输出：按需加载的 Tokenizer 实例与注册表 API。
+ * 输出：不带任何内置模型数据的 tokenizer 运行时 API。
  */
 
-import { registerBuiltins } from "./data/index.js"
 import {
   clearCache,
   getEncoding,
@@ -16,20 +15,22 @@ import {
   resetRegistry,
 } from "./registry/store.js"
 import { Tokenizer } from "./core/tokenizer.js"
+import { unpackPackedAsset } from "./data/packed.js"
 import type { DecodeOptions, EncodeOptions, TokenizerFamilyDefinition } from "./types.js"
-
-registerBuiltins()
 
 export type {
   AddedTokenConfig,
   BpeModelConfig,
   DecodeOptions,
   EncodeOptions,
+  NormalizedBpeModelConfig,
+  NormalizedTokenizerAsset,
   TokenizerAsset,
+  TokenizerAssetSource,
   TokenizerFamilyDefinition,
 } from "./types.js"
 
-export { Tokenizer }
+export { Tokenizer, unpackPackedAsset }
 
 /**
  * 根据 family 或别名获取 Tokenizer。

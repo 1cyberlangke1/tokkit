@@ -1,36 +1,31 @@
 {
-  // 继承 Node20 推荐配置
   "extends": "@tsconfig/node20/tsconfig.json",
   "compilerOptions": {
-    // 输出目录
-    "outDir": "./dist",
-    // 源码根目录
-    "rootDir": "./src",
-    // 生成类型声明文件
-    "declaration": true,
-    // 生成类型声明映射
-    "declarationMap": true,
-    // 生成 source map
-    "sourceMap": true,
-    // 启用严格模式
     "strict": true,
-    // 支持 CommonJS 模块的默认导入
     "esModuleInterop": true,
-    // 跳过声明文件类型检查（加速编译）
     "skipLibCheck": true,
-    // 强制文件名大小写一致
     "forceConsistentCasingInFileNames": true,
-    // 允许导入 JSON 文件
     "resolveJsonModule": true,
-    // 忽略 TypeScript 6 弃用警告
     "ignoreDeprecations": "6.0",
-    // 包含的库类型定义
     "lib": ["ES2022", "DOM"],
-    // 类型声明
-    "types": ["node"]
+    "types": ["node"],
+    "noEmit": true,
+    "baseUrl": ".",
+    "paths": {
+      "@cyberlangke/tokkit-core": ["packages/core/src/index.ts"],
+      "@cyberlangke/tokkit-qwen": ["packages/qwen/src/index.ts"],
+      "@cyberlangke/tokkit-deepseek": ["packages/deepseek/src/index.ts"],
+      "@cyberlangke/tokkit-glm": ["packages/glm/src/index.ts"],
+      "@cyberlangke/tokkit-step": ["packages/step/src/index.ts"],
+      "@cyberlangke/tokkit": ["packages/all/src/index.ts"]
+    }
   },
-  // 包含的文件
-  "include": ["src/**/*"],
-  // 排除的文件
-  "exclude": ["node_modules", "dist", "**/*.test.ts"]
+  "include": [
+    "packages/**/*.ts",
+    "test/**/*.ts",
+    "scripts/**/*.mjs",
+    "scripts/**/*.d.ts",
+    "vitest.config.ts"
+  ],
+  "exclude": ["node_modules", "dist", "coverage", "tmp", "packages/*/dist"]
 }
