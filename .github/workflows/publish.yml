@@ -31,9 +31,7 @@ jobs:
 
       - name: Configure npm auth
         run: |
-          cat > ~/.npmrc <<EOF
-          //registry.npmjs.org/:_authToken=${NPM_TOKEN}
-          EOF
+          echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
