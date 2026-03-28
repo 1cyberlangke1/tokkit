@@ -13,6 +13,7 @@ export default defineConfig({
     "src/hf/*.ts",
     "src/registry/*.ts",
     "src/data/packed.ts",
+    "!src/**/*.test.ts",
   ],
   format: ["esm", "cjs"],
   target: "node20",

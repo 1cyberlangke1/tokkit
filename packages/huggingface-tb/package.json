@@ -1,6 +1,6 @@
 {
   "name": "@cyberlangke/tokkit-huggingface-tb",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "HuggingFaceTB tokenizer families for tokkit.",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -22,7 +22,7 @@
     "dev": "tsup --watch"
   },
   "dependencies": {
-    "@cyberlangke/tokkit-core": "1.2.2"
+    "@cyberlangke/tokkit-core": "1.2.3"
   },
   "publishConfig": {
     "access": "public"
