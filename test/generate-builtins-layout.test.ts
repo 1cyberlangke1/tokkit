@@ -151,4 +151,23 @@ describe("generate:builtins layout", () => {
       "packages/openbmb/src/generated/minicpm4.ts"
     )
   })
+
+  it("保留以 # 开头的真实 merge 规则，只跳过 #version 注释", async () => {
+    // @ts-expect-error 这里直接导入构建脚本模块，测试只关心其运行时导出形状。
+    const module = await import("../scripts/generate-builtins.mjs")
+    const tokenToId = new Map([
+      ["#", 1],
+      ["##", 2],
+      ["###", 3],
+      ["\n", 4],
+      ["###\n", 5],
+    ])
+
+    expect(
+      module.normalizeMergeTokenIdPairs(
+        ["#version: 0.2", "# #", "## #", "### \n"],
+        tokenToId
+      )
+    ).toEqual([1, 1, 2, 1, 3, 4])
+  })
 })

@@ -1,6 +1,6 @@
 {
   "name": "tokkit-workspace",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "A tokenizer library for counting tokens.",
   "private": true,
   "type": "module",
@@ -18,6 +18,9 @@
   "scripts": {
     "build": "npm run build --workspaces --if-present",
     "benchmark:hf": "node scripts/benchmark-hf.mjs",
+    "test:fineweb2": "node scripts/fineweb2-compare.mjs",
+    "test:fineweb2:smoke": "node scripts/fineweb2-compare.mjs --limit 64 --maxChars 4096 --continueOnMismatch --jobs 8 --referenceBackend python",
+    "test:fineweb2:decode:smoke": "node scripts/fineweb2-compare.mjs --limit 32 --maxChars 4096 --continueOnMismatch --checkDecode --jobs 8 --referenceBackend python",
     "generate:builtins": "node scripts/generate-builtins.mjs",
     "test": "vitest",
     "test:run": "vitest run",

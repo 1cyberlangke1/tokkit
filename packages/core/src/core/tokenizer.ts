@@ -32,7 +32,8 @@ export class Tokenizer {
   private readonly idToToken = new Map<number, string>()
   private readonly specialTokens: string[]
   private readonly specialTokenSet: Set<string>
-  private readonly addedTokenMatcher: SpecialTokenMatcher | null
+  private readonly nonNormalizedAddedTokenMatcher: SpecialTokenMatcher | null
+  private readonly normalizedAddedTokenMatcher: SpecialTokenMatcher | null
 
   /**
    * 构造 Tokenizer。
@@ -54,8 +55,12 @@ export class Tokenizer {
       .filter((token) => token.special)
       .map((token) => token.content)
     this.specialTokenSet = new Set(this.specialTokens)
-    this.addedTokenMatcher =
-      asset.addedTokens.length > 0 ? new SpecialTokenMatcher(asset.addedTokens) : null
+    this.nonNormalizedAddedTokenMatcher = createAddedTokenMatcher(
+      asset.addedTokens.filter((token) => !token.normalized)
+    )
+    this.normalizedAddedTokenMatcher = createAddedTokenMatcher(
+      asset.addedTokens.filter((token) => token.normalized)
+    )
 
     this.decoder.setSpecialTokens?.(this.specialTokens)
   }
@@ -66,43 +71,98 @@ export class Tokenizer {
    * 输出：token id 数组。
    */
   encode(text: string, options: EncodeOptions = {}): number[] {
-    const normalizedText = this.normalizer.normalize(text)
-    const addSpecialTokens = options.addSpecialTokens ?? true
+    const hasExplicitSpecialAllowlist =
+      options.allowedSpecial !== undefined && options.allowedSpecial !== "all"
     const allowedSpecialSet = this.resolveSpecialSet(options.allowedSpecial)
     const disallowedSpecialSet = this.resolveSpecialSet(options.disallowedSpecial)
+    const normalizedText = this.normalizer.normalize(text)
 
     for (const token of disallowedSpecialSet) {
-      if (normalizedText.includes(token)) {
+      if (text.includes(token) || normalizedText.includes(token)) {
         throw new Error(`Disallowed special token found: ${token}`)
       }
     }
 
     const ids: number[] = []
 
-    if (!this.addedTokenMatcher) {
-      this.appendOrdinaryIds(normalizedText, ids)
+    if (!this.nonNormalizedAddedTokenMatcher && !this.normalizedAddedTokenMatcher) {
+      this.appendOrdinaryIds(text, ids, 0)
       return ids
     }
 
-    this.addedTokenMatcher.visit(normalizedText, {
+    const state = { sectionIndex: 0 }
+    const emitAddedToken = (value: string, tokenContent: string, tokenId: number, special: boolean) => {
+      if (!special) {
+        ids.push(tokenId)
+        state.sectionIndex += 1
+        return true
+      }
+
+      if (!hasExplicitSpecialAllowlist || allowedSpecialSet.has(tokenContent)) {
+        ids.push(tokenId)
+        state.sectionIndex += 1
+        return true
+      }
+
+      return false
+    }
+
+    const appendNormalizedOrdinaryIds = (value: string) => {
+      if (value.length === 0) {
+        return
+      }
+
+      this.appendNormalizedOrdinaryIds(value, ids, state.sectionIndex)
+      state.sectionIndex += 1
+    }
+
+    const processNormalizedText = (value: string) => {
+      if (value.length === 0) {
+        return
+      }
+
+      if (!this.normalizedAddedTokenMatcher) {
+        appendNormalizedOrdinaryIds(value)
+        return
+      }
+
+      this.normalizedAddedTokenMatcher.visit(value, {
+        onText: (segment) => {
+          appendNormalizedOrdinaryIds(segment)
+        },
+        onAdded: (segment, token) => {
+          if (emitAddedToken(segment, token.content, token.id, Boolean(token.special))) {
+            return
+          }
+
+          appendNormalizedOrdinaryIds(segment)
+        },
+      })
+    }
+
+    const processRawText = (value: string) => {
+      if (value.length === 0) {
+        return
+      }
+
+      processNormalizedText(this.normalizer.normalize(value))
+    }
+
+    if (!this.nonNormalizedAddedTokenMatcher) {
+      processRawText(text)
+      return ids
+    }
+
+    this.nonNormalizedAddedTokenMatcher.visit(text, {
       onText: (value) => {
-        this.appendOrdinaryIds(value, ids)
+        processRawText(value)
       },
       onAdded: (value, token) => {
-        if (!token.special) {
-          ids.push(token.id)
+        if (emitAddedToken(value, token.content, token.id, Boolean(token.special))) {
           return
         }
 
-        if (addSpecialTokens && allowedSpecialSet.has(token.content)) {
-          const tokenId = this.tokenToId.get(token.content)
-          if (tokenId !== undefined) {
-            ids.push(tokenId)
-            return
-          }
-        }
-
-        this.appendOrdinaryIds(value, ids)
+        processRawText(value)
       },
     })
 
@@ -186,12 +246,31 @@ export class Tokenizer {
    * 输入：普通文本。
    * 输出：token id 数组。
    */
-  private appendOrdinaryIds(text: string, target: number[]): void {
+  private appendOrdinaryIds(text: string, target: number[], sectionIndex: number): void {
     if (text.length === 0) {
       return
     }
 
-    const pieces = this.pretokenizer.preTokenize(text)
+    this.appendNormalizedOrdinaryIds(this.normalizer.normalize(text), target, sectionIndex)
+  }
+
+  /**
+   * 编码已经完成 normalizer 处理的普通文本。
+   * 输入：规范化文本、目标数组和所在 section 索引。
+   * 输出：对应 token id 数组被直接追加到目标数组。
+   */
+  private appendNormalizedOrdinaryIds(
+    text: string,
+    target: number[],
+    sectionIndex: number
+  ): void {
+    if (text.length === 0) {
+      return
+    }
+
+    const pieces = this.pretokenizer.preTokenize(text, {
+      sectionIndex,
+    })
     this.model.appendEncodedPieces(pieces, target)
   }
 
@@ -211,4 +290,13 @@ export class Tokenizer {
 
     return new Set(value)
   }
+}
+
+/**
+ * 为给定 added token 列表创建匹配器。
+ * 输入：added token 列表。
+ * 输出：非空时返回匹配器，否则返回 null。
+ */
+function createAddedTokenMatcher(tokens: NormalizedTokenizerAsset["addedTokens"]): SpecialTokenMatcher | null {
+  return tokens.length > 0 ? new SpecialTokenMatcher(tokens) : null
 }

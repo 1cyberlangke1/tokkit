@@ -92,9 +92,28 @@ function normalizeMerges(merges: string[] | Array<[string, string]>): Array<[str
   }
 
   return (merges as string[])
-    .filter((merge) => merge && !merge.startsWith("#"))
-    .map((merge) => {
-      const [left, right] = merge.split(" ", 2)
-      return [left, right] as [string, string]
-    })
+    .map(parseStringMergeEntry)
+    .filter((merge): merge is [string, string] => merge !== null)
+}
+
+/**
+ * 解析字符串格式的 merge 条目。
+ * 输入：HF tokenizer.json 里的单条 merge 字符串。
+ * 输出：有效 merge 返回 `[left, right]`；版本注释返回 null。
+ */
+function parseStringMergeEntry(merge: string): [string, string] | null {
+  if (!merge) {
+    return null
+  }
+
+  if (/^#version:/i.test(merge)) {
+    return null
+  }
+
+  const separatorIndex = merge.indexOf(" ")
+  if (separatorIndex < 0) {
+    throw new Error(`Invalid BPE merge entry: ${merge}`)
+  }
+
+  return [merge.slice(0, separatorIndex), merge.slice(separatorIndex + 1)]
 }

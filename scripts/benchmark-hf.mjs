@@ -13,6 +13,7 @@ import { existsSync, readFileSync } from "node:fs"
 import { resolve } from "node:path"
 import { pathToFileURL } from "node:url"
 import { brotliDecompressSync } from "node:zlib"
+import { execFileSync } from "node:child_process"
 import { PreTrainedTokenizer } from "@huggingface/transformers"
 
 /** 仓库根目录。 */
@@ -23,6 +24,15 @@ const BENCH_ITERATIONS = Number.parseInt(process.env.TOKKIT_BENCH_ITERATIONS ?? 
 
 /** 热态 benchmark 前的预热次数。 */
 const WARMUP_ITERATIONS = Number.parseInt(process.env.TOKKIT_BENCH_WARMUP ?? "8", 10)
+
+/** official reference backend。 */
+const REFERENCE_BACKEND = (process.env.TOKKIT_REFERENCE_BACKEND ?? "js").trim()
+
+/** Python fast benchmark helper。 */
+const PYTHON_BENCHMARK_SCRIPT = resolve(REPO_ROOT, "scripts", "benchmark-reference-fast.py")
+
+/** Python 可执行文件命令。 */
+const PYTHON_EXECUTABLE = process.env.TOKKIT_REFERENCE_PYTHON || "python"
 
 /** 所有案例默认使用的长文本样本。 */
 const DEFAULT_SAMPLE =
@@ -104,6 +114,34 @@ function loadReferenceTokenizer(sourcePath) {
 }
 
 /**
+ * 用 Python tokenizers fast backend 测量官方 encode。
+ * 输入：source 路径、样本文本与 warmup / benchmark 次数。
+ * 输出：包含单次 ids 和总耗时的摘要。
+ */
+function measurePythonReference(sourcePath, sample, warmupIterations, benchmarkIterations) {
+  const stdout = execFileSync(
+    PYTHON_EXECUTABLE,
+    [
+      PYTHON_BENCHMARK_SCRIPT,
+      "--source",
+      sourcePath,
+      "--warmup",
+      String(warmupIterations),
+      "--iterations",
+      String(benchmarkIterations),
+    ],
+    {
+      cwd: REPO_ROOT,
+      encoding: "utf8",
+      input: sample,
+      maxBuffer: 16 * 1024 * 1024,
+    }
+  )
+
+  return JSON.parse(stdout)
+}
+
+/**
  * 运行指定次数的 encode 测量。
  * 输入：要测量的 encode 函数、样本文本和迭代次数。
  * 输出：总耗时毫秒数。
@@ -156,38 +194,65 @@ for (const benchCase of BENCHMARK_CASES) {
     moduleCache.set(benchCase.packageDir, vendorModule)
   }
 
-  const reference = loadReferenceTokenizer(benchCase.source)
   const sample = DEFAULT_SAMPLE.repeat(80)
-  const referenceEncode = (input) => reference.encode(input, { add_special_tokens: false })
   const tokkitEncode = (input) =>
     vendorModule.encode(input, benchCase.family, {
       addSpecialTokens: false,
     })
 
-  await assertEncodingParity(tokkitEncode, referenceEncode, sample, benchCase.family)
-
   for (let index = 0; index < WARMUP_ITERATIONS; index += 1) {
     await tokkitEncode(sample)
-    referenceEncode(sample)
   }
 
-  const expectedIds = referenceEncode(sample)
+  let expectedIds
+  let referenceDurationMs
+
+  if (REFERENCE_BACKEND === "python") {
+    const pythonBenchmark = measurePythonReference(
+      benchCase.source,
+      sample,
+      WARMUP_ITERATIONS,
+      BENCH_ITERATIONS
+    )
+    expectedIds = pythonBenchmark.ids
+    referenceDurationMs = pythonBenchmark.durationMs
+  } else {
+    const reference = loadReferenceTokenizer(benchCase.source)
+    const referenceEncode = (input) => reference.encode(input, { add_special_tokens: false })
+    await assertEncodingParity(tokkitEncode, referenceEncode, sample, benchCase.family)
+
+    for (let index = 0; index < WARMUP_ITERATIONS; index += 1) {
+      referenceEncode(sample)
+    }
+
+    expectedIds = referenceEncode(sample)
+    referenceDurationMs = await measureEncode(referenceEncode, sample, BENCH_ITERATIONS)
+  }
+
+  await assertEncodingParity(
+    tokkitEncode,
+    () => expectedIds,
+    sample,
+    benchCase.family
+  )
+
   const tokkitDurationMs = await measureEncode(tokkitEncode, sample, BENCH_ITERATIONS)
-  const hfDurationMs = await measureEncode(referenceEncode, sample, BENCH_ITERATIONS)
 
   results.push({
     family: benchCase.family,
     tokensPerIteration: expectedIds.length,
     iterations: BENCH_ITERATIONS,
     tokkit: summarizeThroughput(tokkitDurationMs, BENCH_ITERATIONS, expectedIds.length),
-    transformers: summarizeThroughput(hfDurationMs, BENCH_ITERATIONS, expectedIds.length),
-    speedupVsTransformers: Number((hfDurationMs / tokkitDurationMs).toFixed(2)),
+    referenceBackend: REFERENCE_BACKEND,
+    reference: summarizeThroughput(referenceDurationMs, BENCH_ITERATIONS, expectedIds.length),
+    speedupVsReference: Number((referenceDurationMs / tokkitDurationMs).toFixed(2)),
   })
 }
 
 console.log(
   JSON.stringify(
     {
+      referenceBackend: REFERENCE_BACKEND,
       warmupIterations: WARMUP_ITERATIONS,
       benchmarkIterations: BENCH_ITERATIONS,
       cases: results,
