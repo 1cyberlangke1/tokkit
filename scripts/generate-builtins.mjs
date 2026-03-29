@@ -553,15 +553,12 @@ function normalizeVocab(vocab) {
  * 输入：HF merges 列表和 token -> id 映射。
  * 输出：扁平化的 `[leftId, rightId, ...]` 数组。
  */
-function normalizeMergeTokenIdPairs(merges, tokenToId) {
+export function normalizeMergeTokenIdPairs(merges, tokenToId) {
   const normalizedMerges = Array.isArray(merges[0])
     ? merges
     : merges
-        .filter((merge) => merge && !merge.startsWith("#"))
-        .map((merge) => {
-          const [left, right] = merge.split(" ", 2)
-          return [left, right]
-        })
+        .map(parseStringMergeEntry)
+        .filter((merge) => merge !== null)
 
   const mergeTokenIdPairs = []
 
@@ -577,6 +574,28 @@ function normalizeMergeTokenIdPairs(merges, tokenToId) {
   }
 
   return mergeTokenIdPairs
+}
+
+/**
+ * 解析字符串格式的 merge 条目。
+ * 输入：HF tokenizer.json 里的单条 merge 字符串。
+ * 输出：有效 merge 返回 `[left, right]`；版本注释返回 null。
+ */
+function parseStringMergeEntry(merge) {
+  if (!merge) {
+    return null
+  }
+
+  if (/^#version:/i.test(merge)) {
+    return null
+  }
+
+  const separatorIndex = merge.indexOf(" ")
+  if (separatorIndex < 0) {
+    throw new Error(`Invalid BPE merge entry: ${merge}`)
+  }
+
+  return [merge.slice(0, separatorIndex), merge.slice(separatorIndex + 1)]
 }
 
 /**

@@ -133,6 +133,23 @@ describe("tokkit vNext architecture", () => {
     ).toEqual(reference.encode(sample, { add_special_tokens: false }))
   })
 
+  it("Digits pre-tokenizer 不会把上标数字当成普通 digit 拆开", async () => {
+    const asset = createNonAsciiDigitsToyAsset()
+    registerTokenizerFamily({
+      family: "toy-digits-non-ascii",
+      asset,
+    })
+
+    const reference = new PreTrainedTokenizer(asset as any, {})
+    const sample = " \u00b2"
+
+    expect(
+      await encode(sample, "toy-digits-non-ascii", {
+        addSpecialTokens: false,
+      })
+    ).toEqual(reference.encode(sample, { add_special_tokens: false }))
+  })
+
   it("Punctuation pre-tokenizer 的 contiguous 行为和官方实现一致", async () => {
     const asset = createPunctuationToyAsset()
     registerTokenizerFamily({
@@ -145,6 +162,57 @@ describe("tokkit vNext architecture", () => {
 
     expect(
       await encode(sample, "toy-punctuation", {
+        addSpecialTokens: false,
+      })
+    ).toEqual(reference.encode(sample, { add_special_tokens: false }))
+  })
+
+  it("Punctuation pre-tokenizer 会把 ASCII 标点符号连续段视为同一片段", async () => {
+    const asset = createAsciiPunctuationToyAsset()
+    registerTokenizerFamily({
+      family: "toy-punctuation-ascii",
+      asset,
+    })
+
+    const reference = new PreTrainedTokenizer(asset as any, {})
+    const sample = "a.|b"
+
+    expect(
+      await encode(sample, "toy-punctuation-ascii", {
+        addSpecialTokens: false,
+      })
+    ).toEqual(reference.encode(sample, { add_special_tokens: false }))
+  })
+
+  it("Split pre-tokenizer 会保留局部大小写不敏感的 contraction 片段", async () => {
+    const asset = createInlineCaseInsensitiveSplitToyAsset()
+    registerTokenizerFamily({
+      family: "toy-inline-ci",
+      asset,
+    })
+
+    const reference = new PreTrainedTokenizer(asset as any, {})
+    const sample = " AYA'DA"
+
+    expect(
+      await encode(sample, "toy-inline-ci", {
+        addSpecialTokens: false,
+      })
+    ).toEqual(reference.encode(sample, { add_special_tokens: false }))
+  })
+
+  it("BPE string merges 会保留以 # 开头的真实 merge 规则", async () => {
+    const asset = createHashMergeToyAsset()
+    registerTokenizerFamily({
+      family: "toy-hash-merge",
+      asset,
+    })
+
+    const reference = new PreTrainedTokenizer(asset as any, {})
+    const sample = "###\n"
+
+    expect(
+      await encode(sample, "toy-hash-merge", {
         addSpecialTokens: false,
       })
     ).toEqual(reference.encode(sample, { add_special_tokens: false }))
@@ -167,27 +235,81 @@ describe("tokkit vNext architecture", () => {
 
     expect(actual).toEqual(expected)
     expect(await decode(actual, "toy-prepend-replace")).toBe(
-      reference.decode(expected, { skip_special_tokens: false })
+      decodeWithReference(reference, expected)
     )
   })
 
-  it("支持特殊 token 白名单", async () => {
+  it("special added token 会像 Hugging Face 一样从原始输入中直接抽取", async () => {
+    const asset = createSpecialAddedTokenToyAsset()
+    registerTokenizerFamily({
+      family: "toy-special-added",
+      asset,
+    })
+
+    const reference = new PreTrainedTokenizer(asset as any, {})
+    const sample = "<s>du"
+
+    expect(
+      await encode(sample, "toy-special-added", {
+        addSpecialTokens: false,
+      })
+    ).toEqual(reference.encode(sample, { add_special_tokens: false }))
+  })
+
+  it("special added token 切段后仍会按片段重新应用 Prepend normalizer", async () => {
+    const asset = createPrependSpecialAddedTokenToyAsset()
+    registerTokenizerFamily({
+      family: "toy-special-prepend",
+      asset,
+    })
+
+    const reference = new PreTrainedTokenizer(asset as any, {})
+    const sample = "<s>du"
+
+    expect(
+      await encode(sample, "toy-special-prepend", {
+        addSpecialTokens: false,
+      })
+    ).toEqual(reference.encode(sample, { add_special_tokens: false }))
+  })
+
+  it("special added token 后续片段不会错误触发 Metaspace prepend_scheme=first", async () => {
+    const asset = createMetaspaceFirstSpecialAddedTokenToyAsset()
+    registerTokenizerFamily({
+      family: "toy-special-metaspace-first",
+      asset,
+    })
+
+    const reference = new PreTrainedTokenizer(asset as any, {})
+    const sample = "<s>du"
+
+    expect(
+      await encode(sample, "toy-special-metaspace-first", {
+        addSpecialTokens: false,
+      })
+    ).toEqual(reference.encode(sample, { add_special_tokens: false }))
+  })
+
+  it("disallowedSpecial 会阻止输入中的 special added token 被编码", async () => {
     registerTokenizerFamily({
       family: "toy-byte",
       asset: createByteLevelToyAsset(),
     })
 
     const tokenizer = await getEncoding("toy-byte")
-    const plain = tokenizer.encode("<|special|>Hi", {
-      addSpecialTokens: false,
-    })
-    const allowed = tokenizer.encode("<|special|>Hi", {
-      addSpecialTokens: true,
-      allowedSpecial: "all",
-    })
 
-    expect(allowed[0]).toBe(tokenizer.tokenToIdValue("<|special|>"))
-    expect(plain[0]).not.toBe(tokenizer.tokenToIdValue("<|special|>"))
+    expect(
+      tokenizer.encode("<|special|>Hi", {
+        addSpecialTokens: false,
+      })[0]
+    ).toBe(tokenizer.tokenToIdValue("<|special|>"))
+
+    expect(() =>
+      tokenizer.encode("<|special|>Hi", {
+        addSpecialTokens: false,
+        disallowedSpecial: "all",
+      })
+    ).toThrow(/Disallowed special token found/)
   })
 
   it("Metaspace 行为和官方实现一致", async () => {
@@ -279,7 +401,7 @@ describe("tokkit vNext architecture", () => {
     const ids = [1, 2]
 
     expect(await decode(ids, "toy-fallback-invalid")).toBe(
-      reference.decode(ids, { skip_special_tokens: false })
+      decodeWithReference(reference, ids)
     )
   })
 
@@ -589,9 +711,7 @@ describe("builtin tokenizer families", () => {
         const expectedIds = reference.encode(input, { add_special_tokens: false })
 
         expect(actualIds).toEqual(expectedIds)
-        expect(await decode(actualIds, family)).toBe(
-          reference.decode(expectedIds, { skip_special_tokens: false })
-        )
+        expect(await decode(actualIds, family)).toBe(decodeWithReference(reference, expectedIds))
       }
     }
   }, 120000)
@@ -812,6 +932,58 @@ function createIndividualDigitsToyAsset(): TokenizerAsset {
 }
 
 /**
+ * 生成用于验证非 ASCII 数字不会命中 Digits 预分词的 toy tokenizer。
+ * 输入：无。
+ * 输出：只有把 `²` 留给 ByteLevel 整体处理时才会命中的最小资产。
+ */
+function createNonAsciiDigitsToyAsset(): TokenizerAsset {
+  return {
+    version: "1.0",
+    normalizer: null,
+    post_processor: null,
+    added_tokens: [],
+    pre_tokenizer: {
+      type: "Sequence",
+      pretokenizers: [
+        {
+          type: "Digits",
+          individual_digits: true,
+        },
+        {
+          type: "ByteLevel",
+          add_prefix_space: false,
+          trim_offsets: true,
+          use_regex: true,
+        },
+      ],
+    },
+    decoder: {
+      type: "ByteLevel",
+      add_prefix_space: true,
+      trim_offsets: true,
+      use_regex: true,
+    },
+    model: {
+      type: "BPE",
+      vocab: {
+        "<unk>": 0,
+        "ĠÂ": 1,
+        "²": 2,
+        "Ġ": 3,
+        "Â": 4,
+        "Â²": 5,
+      },
+      merges: ["Ġ Â"],
+      unk_token: "<unk>",
+      continuing_subword_prefix: "",
+      end_of_word_suffix: "",
+      byte_fallback: false,
+      ignore_merges: false,
+    },
+  }
+}
+
+/**
  * 生成用于验证 Punctuation pre-tokenizer 的 toy tokenizer。
  * 输入：无。
  * 输出：依赖 contiguous 标点切分的最小资产。
@@ -844,6 +1016,132 @@ function createPunctuationToyAsset(): TokenizerAsset {
       end_of_word_suffix: "",
       byte_fallback: false,
       ignore_merges: true,
+    },
+  }
+}
+
+/**
+ * 生成用于验证 ASCII 标点连续段的 toy tokenizer。
+ * 输入：无。
+ * 输出：依赖 `. |` 同段切分的最小资产。
+ */
+function createAsciiPunctuationToyAsset(): TokenizerAsset {
+  return {
+    version: "1.0",
+    normalizer: null,
+    post_processor: null,
+    added_tokens: [],
+    pre_tokenizer: {
+      type: "Punctuation",
+      behavior: "Contiguous",
+    },
+    decoder: {
+      type: "Fuse",
+    },
+    model: {
+      type: "BPE",
+      vocab: {
+        "<unk>": 0,
+        "a": 1,
+        ".|": 2,
+        "b": 3,
+      },
+      merges: [],
+      unk_token: "<unk>",
+      continuing_subword_prefix: "",
+      end_of_word_suffix: "",
+      byte_fallback: false,
+      ignore_merges: true,
+    },
+  }
+}
+
+/**
+ * 生成用于验证 `(?i:...)` 局部大小写不敏感片段的 toy tokenizer。
+ * 输入：无。
+ * 输出：依赖 `Split + ByteLevel(use_regex=false)` 的最小资产。
+ */
+function createInlineCaseInsensitiveSplitToyAsset(): TokenizerAsset {
+  return {
+    version: "1.0",
+    normalizer: null,
+    post_processor: null,
+    added_tokens: [],
+    pre_tokenizer: {
+      type: "Sequence",
+      pretokenizers: [
+        {
+          type: "Split",
+          pattern: {
+            Regex:
+              "(?i:'s|'t|'re|'ve|'m|'ll|'d)|[^\\r\\n\\p{L}\\p{N}]?[\\p{L}\\p{M}]+|\\p{N}| ?[^\\s\\p{L}\\p{M}\\p{N}]+[\\r\\n]*|\\s*[\\r\\n]+|\\s+(?!\\S)|\\s+",
+          },
+          behavior: "Isolated",
+          invert: false,
+        },
+        {
+          type: "ByteLevel",
+          add_prefix_space: false,
+          trim_offsets: true,
+          use_regex: false,
+        },
+      ],
+    },
+    decoder: {
+      type: "ByteLevel",
+      add_prefix_space: true,
+      trim_offsets: true,
+      use_regex: true,
+    },
+    model: {
+      type: "BPE",
+      vocab: {
+        "<unk>": 0,
+        "ĠAYA": 1,
+        "'D": 2,
+        "A": 3,
+      },
+      merges: [],
+      unk_token: "<unk>",
+      continuing_subword_prefix: "",
+      end_of_word_suffix: "",
+      byte_fallback: false,
+      ignore_merges: true,
+    },
+  }
+}
+
+/**
+ * 生成用于验证 `#` 开头 merge 规则的 toy tokenizer。
+ * 输入：无。
+ * 输出：依赖字符串格式 merges 的最小资产。
+ */
+function createHashMergeToyAsset(): TokenizerAsset {
+  return {
+    version: "1.0",
+    normalizer: null,
+    post_processor: null,
+    added_tokens: [],
+    pre_tokenizer: null,
+    decoder: {
+      type: "Fuse",
+    },
+    model: {
+      type: "BPE",
+      vocab: {
+        "<unk>": 0,
+        "#": 1,
+        "##": 2,
+        "###": 3,
+        "\n": 4,
+        "###\n": 5,
+      },
+      merges: ["#version: 0.2", "# #", "## #", "### \n"],
+      unk_token: "<unk>",
+      continuing_subword_prefix: "",
+      end_of_word_suffix: "",
+      byte_fallback: false,
+      ignore_merges: false,
     },
   }
 }
@@ -1159,6 +1457,193 @@ function createAddedTokenToyAsset(): TokenizerAsset {
 }
 
 /**
+ * 生成用于验证 special added token 抽取行为的 toy tokenizer。
+ * 输入：无。
+ * 输出：包含 `<s>` special added token 的最小资产。
+ */
+function createSpecialAddedTokenToyAsset(): TokenizerAsset {
+  return {
+    version: "1.0",
+    normalizer: null,
+    post_processor: null,
+    added_tokens: [
+      {
+        id: 4,
+        content: "<s>",
+        single_word: false,
+        lstrip: false,
+        rstrip: false,
+        normalized: false,
+        special: true,
+      },
+    ],
+    pre_tokenizer: null,
+    decoder: {
+      type: "Fuse",
+    },
+    model: {
+      type: "BPE",
+      vocab: {
+        "<unk>": 0,
+        "<": 1,
+        "s": 2,
+        ">": 3,
+        "du": 5,
+      },
+      merges: [],
+      unk_token: "<unk>",
+      continuing_subword_prefix: "",
+      end_of_word_suffix: "",
+      byte_fallback: false,
+      ignore_merges: false,
+    },
+  }
+}
+
+/**
+ * 生成用于验证 added token 边界下 Prepend normalizer 行为的 toy tokenizer。
+ * 输入：无。
+ * 输出：切段后仍需给普通片段补前缀的最小资产。
+ */
+function createPrependSpecialAddedTokenToyAsset(): TokenizerAsset {
+  return {
+    version: "1.0",
+    normalizer: {
+      type: "Sequence",
+      normalizers: [
+        {
+          type: "Prepend",
+          prepend: "▁",
+        },
+        {
+          type: "Replace",
+          pattern: {
+            String: " ",
+          },
+          content: "▁",
+        },
+      ],
+    },
+    post_processor: null,
+    added_tokens: [
+      {
+        id: 1,
+        content: "<s>",
+        single_word: false,
+        lstrip: false,
+        rstrip: false,
+        normalized: false,
+        special: true,
+      },
+    ],
+    pre_tokenizer: null,
+    decoder: {
+      type: "Sequence",
+      decoders: [
+        {
+          type: "Replace",
+          pattern: {
+            String: "▁",
+          },
+          content: " ",
+        },
+        {
+          type: "Fuse",
+        },
+        {
+          type: "Strip",
+          content: " ",
+          start: 1,
+          stop: 0,
+        },
+      ],
+    },
+    model: {
+      type: "BPE",
+      vocab: {
+        "<unk>": 0,
+        "<s>": 1,
+        "▁du": 2,
+        "▁": 3,
+        "du": 4,
+      },
+      merges: [],
+      unk_token: "<unk>",
+      continuing_subword_prefix: "",
+      end_of_word_suffix: "",
+      byte_fallback: false,
+      ignore_merges: false,
+    },
+  }
+}
+
+/**
+ * 生成用于验证 added token 边界下 Metaspace first 语义的 toy tokenizer。
+ * 输入：无。
+ * 输出：后续普通片段不应再被当作首段处理的最小资产。
+ */
+function createMetaspaceFirstSpecialAddedTokenToyAsset(): TokenizerAsset {
+  return {
+    version: "1.0",
+    normalizer: null,
+    post_processor: null,
+    added_tokens: [
+      {
+        id: 1,
+        content: "<s>",
+        single_word: false,
+        lstrip: false,
+        rstrip: false,
+        normalized: false,
+        special: true,
+      },
+    ],
+    pre_tokenizer: {
+      type: "Metaspace",
+      replacement: "▁",
+      prepend_scheme: "first",
+      split: false,
+    },
+    decoder: {
+      type: "Sequence",
+      decoders: [
+        {
+          type: "Replace",
+          pattern: {
+            String: "▁",
+          },
+          content: " ",
+        },
+        {
+          type: "Fuse",
+        },
+        {
+          type: "Strip",
+          content: " ",
+          start: 1,
+          stop: 0,
+        },
+      ],
+    },
+    model: {
+      type: "BPE",
+      vocab: {
+        "<unk>": 0,
+        "<s>": 1,
+        "du": 2,
+        "▁du": 3,
+      },
+      merges: [],
+      unk_token: "<unk>",
+      continuing_subword_prefix: "",
+      end_of_word_suffix: "",
+      byte_fallback: false,
+      ignore_merges: false,
+    },
+  }
+}
+
+/**
  * 生成用于验证 overlapping added token 的 toy tokenizer。
  * 输入：无。
  * 输出：包含相同起点不同长度 added token 的最小资产。
@@ -1305,6 +1790,18 @@ function createCharVocab(tokens: string[]): Record<string, number> {
     vocab[token] = index
     return vocab
   }, {})
+}
+
+/**
+ * 调用 Hugging Face 参考 tokenizer 的原始 decode。
+ * 输入：参考 tokenizer 和 token ids。
+ * 输出：关闭空格清理后的 decode 文本。
+ */
+function decodeWithReference(reference: PreTrainedTokenizer, ids: number[]): string {
+  return reference.decode(ids, {
+    skip_special_tokens: false,
+    clean_up_tokenization_spaces: false,
+  })
 }
 
 /**

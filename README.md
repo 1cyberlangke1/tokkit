@@ -146,3 +146,30 @@ npm run build
 # 对比 tokkit 与 Hugging Face 官方 tokenizer 的 encode 吞吐
 npm run benchmark:hf
 ```
+
+## 真实数据回归
+
+仓库里的 `test/fineweb2_sample_10per.jsonl` 用于真实网页文本对拍。
+
+- 数据来源：Hugging Face `HuggingFaceFW/fineweb-2`
+- 数据集地址：`https://huggingface.co/datasets/HuggingFaceFW/fineweb-2`
+- 许可证：`ODC-By`
+- 当前脚本会拿 Hugging Face 官方 tokenizer 当 reference，对拍 `encode` / `decode` 是否一致
+- reference 摘要缓存默认写到 `tmp/fineweb2-cache/`，后续重复回归会优先复用缓存，避免每次都重算官方结果
+
+```bash
+# 默认先跑小样本 encode 抽检
+npm run test:fineweb2:smoke
+
+# 需要看 decode 时，再跑更小一档的 decode smoke
+npm run test:fineweb2:decode:smoke
+
+# 需要定点某几个 family 时，在 smoke 基础上追加 families
+npm run test:fineweb2:smoke -- --families qwen3.5,glm-5
+
+# 需要对拍非总包子包时，显式指定 workspace 包目录
+npm run test:fineweb2 -- --package minimax --families minimax-m1,minimax-m2,minimax-text-01 --limit 16 --maxChars 4096 --continueOnMismatch --jobs 3 --referenceBackend python
+
+# 只有必要时才跑完整份 FineWeb2 样本
+npm run test:fineweb2 -- --limit 0 --maxChars 0 --continueOnMismatch --jobs 8 --referenceBackend python
+```

@@ -1,6 +1,6 @@
 {
   "name": "@cyberlangke/tokkit-bytedance-seed",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "ByteDance-Seed tokenizer families for tokkit.",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -23,7 +23,7 @@
     "dev": "tsup --watch"
   },
   "dependencies": {
-    "@cyberlangke/tokkit-core": "1.4.0"
+    "@cyberlangke/tokkit-core": "1.4.1"
   },
   "publishConfig": {
     "access": "public"

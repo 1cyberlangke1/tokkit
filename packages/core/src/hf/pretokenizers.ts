@@ -90,9 +90,12 @@ class ByteLevelPretokenizer implements Pretokenizer {
    * 输入：原始文本。
    * 输出：映射成 ByteLevel 可见字符的片段数组。
    */
-  preTokenize(text: string): string[] {
+  preTokenize(text: string, context: PretokenizerContext = {}): string[] {
     let value = text
-    if (this.addPrefixSpace && !value.startsWith(" ")) {
+    const sectionIndex = context.sectionIndex
+    const isFirstSection = sectionIndex === undefined || sectionIndex === 0
+
+    if (this.addPrefixSpace && isFirstSection && !value.startsWith(" ")) {
       value = ` ${value}`
     }
 
@@ -222,26 +225,34 @@ class SequencePretokenizer implements Pretokenizer {
    * 输入：原始文本。
    * 输出：依次经过各子预分词器后的片段数组。
    */
-  preTokenize(text: string): string[] {
-    let sections = [text]
+  preTokenize(text: string, context: PretokenizerContext = {}): string[] {
+    let sections = [
+      {
+        value: text,
+        isFirstSection: context.sectionIndex === undefined || context.sectionIndex === 0,
+      },
+    ]
 
     for (const pretokenizer of this.pretokenizers) {
-      const nextSections: string[] = []
+      const nextSections: Array<{ value: string; isFirstSection: boolean }> = []
 
       for (let index = 0; index < sections.length; index += 1) {
-        const childSections = pretokenizer.preTokenize(sections[index], {
-          sectionIndex: index,
+        const childSections = pretokenizer.preTokenize(sections[index].value, {
+          sectionIndex: sections[index].isFirstSection ? 0 : 1,
         })
 
         for (let childIndex = 0; childIndex < childSections.length; childIndex += 1) {
-          nextSections.push(childSections[childIndex])
+          nextSections.push({
+            value: childSections[childIndex],
+            isFirstSection: sections[index].isFirstSection && childIndex === 0,
+          })
         }
       }
 
       sections = nextSections
     }
 
-    return sections
+    return sections.map((section) => section.value)
   }
 }
 
@@ -295,7 +306,7 @@ function createPattern(
   if (pattern.Regex !== undefined) {
     let regex = String(pattern.Regex)
       .replace(/\\([#&~])/g, "$1")
-      .replace(/\(\?i:/g, "(?:")
+    regex = expandInlineCaseInsensitiveGroups(regex)
 
     regex = regex.replace(/\\p\{/g, "\\p{").replace(/\\P\{/g, "\\P{")
     return new RegExp(regex, "gu")
@@ -381,16 +392,79 @@ function escapeRegExp(value: string): string {
  * 输出：标点返回 true，否则返回 false。
  */
 function isPunctuationCharacter(character: string): boolean {
-  return UNICODE_PUNCTUATION_PATTERN.test(character)
+  return isAsciiPunctuation(character) || UNICODE_PUNCTUATION_PATTERN.test(character)
 }
 
 /**
  * 判断字符是否是数字。
  * 输入：单个字符。
- * 输出：Unicode 数字返回 true，否则返回 false。
+ * 输出：ASCII digit 返回 true，否则返回 false。
  */
 function isDigitCharacter(character: string): boolean {
-  return /^\p{N}$/u.test(character)
+  return /^[0-9]$/u.test(character)
+}
+
+/**
+ * 判断字符是否属于 ASCII punctuation。
+ * 输入：单个字符。
+ * 输出：ASCII 标点返回 true，否则返回 false。
+ */
+function isAsciiPunctuation(character: string): boolean {
+  if (character.length !== 1) {
+    return false
+  }
+
+  const code = character.charCodeAt(0)
+  return (
+    (code >= 33 && code <= 47) ||
+    (code >= 58 && code <= 64) ||
+    (code >= 91 && code <= 96) ||
+    (code >= 123 && code <= 126)
+  )
+}
+
+/**
+ * 把 `(?i:...)` 这类局部大小写不敏感分组展开成 JS 可执行的等价模式。
+ * 输入：原始 regex 字符串。
+ * 输出：展开后的 regex 字符串。
+ */
+function expandInlineCaseInsensitiveGroups(pattern: string): string {
+  return pattern.replace(/\(\?i:((?:\\.|[^()])*)\)/g, (_match, group: string) => {
+    return `(?:${expandAsciiCaseInsensitiveLiterals(group)})`
+  })
+}
+
+/**
+ * 把 ASCII 字母展开成局部大小写不敏感字符类。
+ * 输入：`(?i:...)` 内部的字面量模式。
+ * 输出：只对 ASCII 字母扩展后的模式字符串。
+ */
+function expandAsciiCaseInsensitiveLiterals(pattern: string): string {
+  let result = ""
+
+  for (let index = 0; index < pattern.length; index += 1) {
+    const character = pattern[index]
+
+    if (character === "\\") {
+      result += character
+      if (index + 1 < pattern.length) {
+        result += pattern[index + 1]
+        index += 1
+      }
+      continue
+    }
+
+    if (/^[A-Za-z]$/.test(character)) {
+      const lower = character.toLowerCase()
+      const upper = character.toUpperCase()
+      result += lower === upper ? character : `[${lower}${upper}]`
+      continue
+    }
+
+    result += character
+  }
+
+  return result
 }
 
 /**

@@ -172,6 +172,23 @@ describe("workspace layout", () => {
     expect(existsSync(benchmarkScriptPath)).toBe(true)
   })
 
+  it("根 package.json 提供 FineWeb2 真实数据对拍脚本", () => {
+    const packageJsonPath = resolve(REPO_ROOT, "package.json")
+    const packageJson = JSON.parse(readFileSync(packageJsonPath, "utf8")) as {
+      scripts?: Record<string, string>
+    }
+    const compareScriptPath = resolve(REPO_ROOT, "scripts", "fineweb2-compare.mjs")
+
+    expect(packageJson.scripts?.["test:fineweb2"]).toBe("node scripts/fineweb2-compare.mjs")
+    expect(packageJson.scripts?.["test:fineweb2:smoke"]).toBe(
+      "node scripts/fineweb2-compare.mjs --limit 64 --maxChars 4096 --continueOnMismatch --jobs 8 --referenceBackend python"
+    )
+    expect(packageJson.scripts?.["test:fineweb2:decode:smoke"]).toBe(
+      "node scripts/fineweb2-compare.mjs --limit 32 --maxChars 4096 --continueOnMismatch --checkDecode --jobs 8 --referenceBackend python"
+    )
+    expect(existsSync(compareScriptPath)).toBe(true)
+  })
+
   it("core 包构建配置会排除测试源码，避免把测试产物发到 npm", () => {
     const tsupConfigPath = resolve(REPO_ROOT, "packages", "core", "tsup.config.ts")
     const tsupConfig = readFileSync(tsupConfigPath, "utf8")
