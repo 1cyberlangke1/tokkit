@@ -35,7 +35,21 @@ const BUILTIN_FAMILIES = [
   },
   {
     family: "minicpm4",
-    aliases: ["minicpm_4"],
+    aliases: [
+      "minicpm_4",
+      "minicpm4.1",
+      "minicpm4_1",
+      "bitcpm4",
+      "bitcpm_4",
+      "nosa",
+      "minicpm4-0.5b",
+      "minicpm4.1-8b",
+      "bitcpm4-0.5b",
+      "bitcpm4-1b",
+      "nosa-1b",
+      "nosa-3b",
+      "nosa-8b",
+    ],
     models: [
       "openbmb/MiniCPM4-0.5B",
       "openbmb/MiniCPM4-8B",

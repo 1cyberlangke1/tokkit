@@ -654,7 +654,10 @@ describe("builtin tokenizer families", () => {
           "openbmb/MiniCPM-S-1B-sft",
           "openbmb/MiniCPM-SALA",
           "openbmb/MiniCPM3-4B",
+          "openbmb/MiniCPM4-0.5B",
           "openbmb/MiniCPM4.1-8B",
+          "openbmb/BitCPM4-1B",
+          "openbmb/NOSA-8B",
           "Qwen/Qwen3.5-0.8B",
           "Qwen/Qwen3.5-27B",
           "Qwen/Qwen3.5-397B-A17B",
@@ -723,6 +726,13 @@ describe("builtin tokenizer families", () => {
 
       const mimo = await getEncoding("mimo")
       expect(await getEncoding("XiaomiMiMo/MiMo-V2-Flash-Base")).toBe(mimo)
+
+      const minicpm4 = await getEncoding("minicpm4")
+      expect(await getEncoding("bitcpm4")).toBe(minicpm4)
+      expect(await getEncoding("nosa")).toBe(minicpm4)
+      expect(await getEncoding("minicpm4.1")).toBe(minicpm4)
+      expect(await getEncoding("openbmb/BitCPM4-1B")).toBe(minicpm4)
+      expect(await getEncoding("openbmb/NOSA-8B")).toBe(minicpm4)
 
       const mistral7bV01 = await getEncoding("mistral-7b-v0.1")
       expect(await getEncoding("mistralai/Mixtral-8x7B-Instruct-v0.1")).toBe(mistral7bV01)
