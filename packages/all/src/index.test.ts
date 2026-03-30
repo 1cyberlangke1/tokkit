@@ -481,6 +481,7 @@ describe("builtin tokenizer families", () => {
     async () => {
       expect(listSupportedFamilies().sort()).toEqual(
         [
+          "bitnet-b1.58-2b-4t",
           "yi",
           "yi-1.5-9b-chat",
           "yi-coder",
@@ -605,6 +606,7 @@ describe("builtin tokenizer families", () => {
           "XiaomiMiMo/MiMo-7B-SFT",
           "XiaomiMiMo/MiMo-V2-Flash",
           "XiaomiMiMo/MiMo-V2-Flash-Base",
+          "microsoft/bitnet-b1.58-2B-4T",
           "microsoft/phi-1",
           "microsoft/Phi-3-mini-4k-instruct",
           "microsoft/Phi-3-medium-4k-instruct",
@@ -747,9 +749,10 @@ describe("builtin tokenizer families", () => {
   )
 
   it("内置 family 的编码行为和 Hugging Face 真值一致", async () => {
-    const cases = await loadBuiltinReferenceCases(listSupportedFamilies())
+    const cases = await listBuiltinReferenceCaseSpecs(listSupportedFamilies())
 
-    for (const { family, reference } of cases) {
+    for (const { family, source } of cases) {
+      const reference = loadBuiltinReferenceTokenizer(source)
       for (const input of BUILTIN_REFERENCE_SAMPLES) {
         const actualIds = await encode(input, family, {
           addSpecialTokens: false,
@@ -1855,7 +1858,7 @@ function decodeWithReference(reference: PreTrainedTokenizer, ids: number[]): str
  * 输入：可选的 family 过滤列表。
  * 输出：从仓库内 `.json.br` 快照解压得到的参考 tokenizer 列表。
  */
-async function loadBuiltinReferenceCases(familyFilter?: Iterable<string>) {
+async function listBuiltinReferenceCaseSpecs(familyFilter?: Iterable<string>) {
   // @ts-expect-error 这里直接导入构建脚本模块，测试只关心其运行时导出形状。
   const { FAMILY_SPECS } = await import("../../../scripts/generate-builtins.mjs")
   const allowedFamilies = familyFilter ? new Set(familyFilter) : null
@@ -1863,14 +1866,23 @@ async function loadBuiltinReferenceCases(familyFilter?: Iterable<string>) {
   return FAMILY_SPECS.filter((spec: { family: string }) =>
     allowedFamilies ? allowedFamilies.has(spec.family) : true
   ).map((spec: { family: string; source: string }) => {
-    const sourcePath = resolve(REPO_ROOT, spec.source)
-    const compressed = readFileSync(sourcePath)
-    const rawJson = brotliDecompressSync(compressed).toString("utf8")
-    const asset = JSON.parse(rawJson) as TokenizerAsset
-
     return {
       family: spec.family,
-      reference: new PreTrainedTokenizer(asset as any, {}),
+      source: spec.source,
     }
   })
+}
+
+/**
+ * 按需加载单个内置 family 的 HF 参考 tokenizer。
+ * 输入：family 对应的压缩 tokenizer 快照路径。
+ * 输出：只为当前断言创建的 Hugging Face 参考 tokenizer。
+ */
+function loadBuiltinReferenceTokenizer(source: string): PreTrainedTokenizer {
+  const sourcePath = resolve(REPO_ROOT, source)
+  const compressed = readFileSync(sourcePath)
+  const rawJson = brotliDecompressSync(compressed).toString("utf8")
+  const asset = JSON.parse(rawJson) as TokenizerAsset
+
+  return new PreTrainedTokenizer(asset as any, {})
 }

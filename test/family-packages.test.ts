@@ -125,6 +125,7 @@ const VENDOR_PACKAGE_CASES = [
   {
     relativePath: "packages/microsoft/src/index.ts",
     expectedFamilies: [
+      "bitnet-b1.58-2b-4t",
       "phi-1",
       "phi-3-mini",
       "phi-3-medium",
@@ -137,6 +138,7 @@ const VENDOR_PACKAGE_CASES = [
       "phi-moe",
     ],
     expectedModels: [
+      "microsoft/bitnet-b1.58-2B-4T",
       "microsoft/phi-1",
       "microsoft/phi-2",
       "microsoft/Phi-3-mini-4k-instruct",
@@ -299,6 +301,7 @@ const EXPECTED_ALL_FAMILIES = [
   "deepseek-v3.2",
   "falcon-rw-1b",
   "falcon-7b",
+  "bitnet-b1.58-2b-4t",
   "gpt-neo",
   "glm-4.7",
   "glm-5",

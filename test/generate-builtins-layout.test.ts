@@ -41,6 +41,7 @@ describe("generate:builtins layout", () => {
         expect.objectContaining({ family: "mimo", packageName: "xiaomi-mimo" }),
         expect.objectContaining({ family: "mimo-7b-rl-0530", packageName: "xiaomi-mimo" }),
         expect.objectContaining({ family: "mimo-v2-flash", packageName: "xiaomi-mimo" }),
+        expect.objectContaining({ family: "bitnet-b1.58-2b-4t", packageName: "microsoft" }),
         expect.objectContaining({ family: "phi-1", packageName: "microsoft" }),
         expect.objectContaining({ family: "phi-3-mini", packageName: "microsoft" }),
         expect.objectContaining({ family: "phi-3-medium", packageName: "microsoft" }),

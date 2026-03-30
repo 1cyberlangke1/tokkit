@@ -16,6 +16,12 @@ export * from "@cyberlangke/tokkit-core"
  */
 const BUILTIN_FAMILIES = [
   {
+    family: "bitnet-b1.58-2b-4t",
+    aliases: ["bitnet_b1_58_2b_4t"],
+    models: ["microsoft/bitnet-b1.58-2B-4T"],
+    modulePath: "./generated/bitnet_b1_58_2b_4t.js",
+  },
+  {
     family: "phi-1",
     aliases: ["phi1", "phi_1"],
     models: ["microsoft/phi-1", "microsoft/phi-1_5", "microsoft/phi-2"],

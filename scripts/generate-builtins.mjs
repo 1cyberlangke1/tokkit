@@ -139,6 +139,12 @@ export const FAMILY_SPECS = [
     source: "vendor/tokenizers/XiaomiMiMo__MiMo-V2-Flash__tokenizer.json.br",
   },
   {
+    family: "bitnet-b1.58-2b-4t",
+    packageName: "microsoft",
+    moduleName: "bitnet_b1_58_2b_4t",
+    source: "vendor/tokenizers/microsoft__bitnet-b1.58-2B-4T__tokenizer.json.br",
+  },
+  {
     family: "phi-1",
     packageName: "microsoft",
     moduleName: "phi_1",

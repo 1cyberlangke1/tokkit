@@ -33,6 +33,7 @@
   - `mimo-7b-rl-0530`
   - `mimo-v2-flash`
 - `@cyberlangke/tokkit-microsoft`
+  - `bitnet-b1.58-2b-4t`
   - `phi-1`
   - `phi-3-mini`
   - `phi-3-medium`
