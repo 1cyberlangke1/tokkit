@@ -131,6 +131,7 @@ describe("generate:builtins layout", () => {
         expect.objectContaining({ family: "deepseek-v3.1", packageName: "deepseek" }),
         expect.objectContaining({ family: "deepseek-r1", packageName: "deepseek" }),
         expect.objectContaining({ family: "deepseek-v3.2", packageName: "deepseek" }),
+        expect.objectContaining({ family: "glm-4-0414", packageName: "glm" }),
         expect.objectContaining({ family: "glm-4.7", packageName: "glm" }),
         expect.objectContaining({ family: "glm-5", packageName: "glm" }),
         expect.objectContaining({ family: "step-3.5-flash", packageName: "step" }),
@@ -172,6 +173,9 @@ describe("generate:builtins layout", () => {
     )
     expect(module.resolveOutputModulePath("openbmb", "minicpm4")).toBe(
       "packages/openbmb/src/generated/minicpm4.ts"
+    )
+    expect(module.resolveOutputModulePath("glm", "glm_4_0414")).toBe(
+      "packages/glm/src/generated/glm_4_0414.ts"
     )
   })
 

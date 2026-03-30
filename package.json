@@ -1,6 +1,6 @@
 {
   "name": "tokkit-workspace",
-  "version": "1.9.0",
+  "version": "1.10.0",
   "description": "A tokenizer library for counting tokens.",
   "private": true,
   "type": "module",

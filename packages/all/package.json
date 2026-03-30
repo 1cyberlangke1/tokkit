@@ -1,6 +1,6 @@
 {
   "name": "@cyberlangke/tokkit",
-  "version": "1.9.0",
+  "version": "1.10.0",
   "description": "A tokenizer library for counting tokens.",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -22,23 +22,23 @@
     "dev": "tsup --watch"
   },
   "dependencies": {
-    "@cyberlangke/tokkit-01-ai": "1.9.0",
-    "@cyberlangke/tokkit-allenai": "1.9.0",
-    "@cyberlangke/tokkit-bytedance-seed": "1.9.0",
-    "@cyberlangke/tokkit-core": "1.9.0",
-    "@cyberlangke/tokkit-deepseek": "1.9.0",
-    "@cyberlangke/tokkit-eleutherai": "1.9.0",
-    "@cyberlangke/tokkit-glm": "1.9.0",
-    "@cyberlangke/tokkit-huggingface-tb": "1.9.0",
-    "@cyberlangke/tokkit-ibm-granite": "1.9.0",
-    "@cyberlangke/tokkit-meituan-longcat": "1.9.0",
-    "@cyberlangke/tokkit-microsoft": "1.9.0",
-    "@cyberlangke/tokkit-mistral": "1.9.0",
-    "@cyberlangke/tokkit-openbmb": "1.9.0",
-    "@cyberlangke/tokkit-qwen": "1.9.0",
-    "@cyberlangke/tokkit-step": "1.9.0",
-    "@cyberlangke/tokkit-tiiuae": "1.9.0",
-    "@cyberlangke/tokkit-xiaomi-mimo": "1.9.0"
+    "@cyberlangke/tokkit-01-ai": "1.10.0",
+    "@cyberlangke/tokkit-allenai": "1.10.0",
+    "@cyberlangke/tokkit-bytedance-seed": "1.10.0",
+    "@cyberlangke/tokkit-core": "1.10.0",
+    "@cyberlangke/tokkit-deepseek": "1.10.0",
+    "@cyberlangke/tokkit-eleutherai": "1.10.0",
+    "@cyberlangke/tokkit-glm": "1.10.0",
+    "@cyberlangke/tokkit-huggingface-tb": "1.10.0",
+    "@cyberlangke/tokkit-ibm-granite": "1.10.0",
+    "@cyberlangke/tokkit-meituan-longcat": "1.10.0",
+    "@cyberlangke/tokkit-microsoft": "1.10.0",
+    "@cyberlangke/tokkit-mistral": "1.10.0",
+    "@cyberlangke/tokkit-openbmb": "1.10.0",
+    "@cyberlangke/tokkit-qwen": "1.10.0",
+    "@cyberlangke/tokkit-step": "1.10.0",
+    "@cyberlangke/tokkit-tiiuae": "1.10.0",
+    "@cyberlangke/tokkit-xiaomi-mimo": "1.10.0"
   },
   "publishConfig": {
     "access": "public"

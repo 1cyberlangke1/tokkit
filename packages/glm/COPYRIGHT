@@ -3,5 +3,6 @@ Copyright (c) 2026 cyberlangke
 This package bundles tokenizer assets derived from official Hugging Face repositories under the zai-org organization:
 - zai-org/GLM-4.7 tokenizer.json
 - zai-org/GLM-5 tokenizer.json
+- zai-org/GLM-4-9B-0414 tokenizer.json
 
 See LICENSE for the full license text that applies to this package and its bundled assets.

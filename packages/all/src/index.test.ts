@@ -493,6 +493,7 @@ describe("builtin tokenizer families", () => {
           "deepseek-v3.2",
           "falcon-rw-1b",
           "falcon-7b",
+          "glm-4-0414",
           "glm-4.7",
           "glm-5",
           "granite-3-instruct",
@@ -667,8 +668,20 @@ describe("builtin tokenizer families", () => {
           "deepseek-ai/DeepSeek-V3.2",
           "deepseek-ai/DeepSeek-V3.2-Exp",
           "deepseek-ai/DeepSeek-V3.2-Exp-Base",
+          "zai-org/GLM-4.5",
+          "zai-org/GLM-4.5-Base",
+          "zai-org/GLM-4.5-Air",
+          "zai-org/GLM-4.5-Air-Base",
+          "zai-org/GLM-4.6",
+          "zai-org/GLM-4-9B-0414",
+          "zai-org/GLM-4-32B-0414",
+          "zai-org/GLM-4-32B-Base-0414",
           "zai-org/GLM-4.7",
+          "zai-org/GLM-4.7-Flash",
           "zai-org/GLM-5",
+          "zai-org/GLM-Z1-9B-0414",
+          "zai-org/GLM-Z1-32B-0414",
+          "zai-org/GLM-Z1-Rumination-32B-0414",
           "stepfun-ai/Step-3.5-Flash",
         ])
       )
@@ -717,7 +730,17 @@ describe("builtin tokenizer families", () => {
       const mixtral8x7b = await getEncoding("mixtral-8x7b")
       expect(await getEncoding("mistralai/Mixtral-8x7B-v0.1")).toBe(mixtral8x7b)
 
+      const glm40414 = await getEncoding("glm-4-0414")
+      expect(await getEncoding("zai-org/GLM-4-9B-0414")).toBe(glm40414)
+      expect(await getEncoding("zai-org/GLM-Z1-32B-0414")).toBe(glm40414)
+      expect(await getEncoding("glm-z1")).toBe(glm40414)
+
+      const glm47 = await getEncoding("glm-4.7")
+      expect(await getEncoding("zai-org/GLM-4.5")).toBe(glm47)
+      expect(await getEncoding("zai-org/GLM-4.6")).toBe(glm47)
+
       const glm5 = await getEncoding("glm-5")
+      expect(await getEncoding("zai-org/GLM-4.7-Flash")).toBe(glm5)
       expect(await getEncoding("zai-org/GLM-5")).toBe(glm5)
 
       const olmo2 = await getEncoding("olmo-2")

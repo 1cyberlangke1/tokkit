@@ -19,6 +19,7 @@
 - [`deepseek-ai/DeepSeek-V3.2`](https://huggingface.co/deepseek-ai/DeepSeek-V3.2)
 - [`zai-org/GLM-4.7`](https://huggingface.co/zai-org/GLM-4.7)
 - [`zai-org/GLM-5`](https://huggingface.co/zai-org/GLM-5)
+- [`zai-org/GLM-Z1-32B-0414`](https://huggingface.co/zai-org/GLM-Z1-32B-0414)
 - [`stepfun-ai/Step-3.5-Flash`](https://huggingface.co/stepfun-ai/Step-3.5-Flash)
 
 ## 使用方法

@@ -457,6 +457,12 @@ export const FAMILY_SPECS = [
     source: "vendor/tokenizers/zai-org__GLM-5__tokenizer.json.br",
   },
   {
+    family: "glm-4-0414",
+    packageName: "glm",
+    moduleName: "glm_4_0414",
+    source: "vendor/tokenizers/zai-org__GLM-4-9B-0414__tokenizer.json.br",
+  },
+  {
     family: "step-3.5-flash",
     packageName: "step",
     moduleName: "step_3_5_flash",

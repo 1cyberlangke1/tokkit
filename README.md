@@ -90,6 +90,7 @@
   - `deepseek-v3.1`
   - `deepseek-v3.2`
 - `@cyberlangke/tokkit-glm`
+  - `glm-4-0414`
   - `glm-4.7`
   - `glm-5`
 - `@cyberlangke/tokkit-step`
