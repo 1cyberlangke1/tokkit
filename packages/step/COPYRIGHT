@@ -1,5 +1,7 @@
 Copyright (c) 2026 cyberlangke
 
-This package bundles tokenizer assets derived from the official Hugging Face repository stepfun-ai/Step-3.5-Flash.
+This package bundles tokenizer assets derived from official Hugging Face repositories under the stepfun-ai organization:
+- stepfun-ai/Step-3.5-Flash tokenizer.json
+- stepfun-ai/Step-3.5-Flash-Base-Midtrain tokenizer.json (same tokenizer family)
 
 See LICENSE for the full license text that applies to this package and its bundled assets.

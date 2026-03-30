@@ -1,10 +1,16 @@
 Copyright (c) 2026 cyberlangke
 
 This package bundles tokenizer assets derived from official Hugging Face repositories under the allenai organization:
+- allenai/OLMo-1B tokenizer.json
 - allenai/OLMo-1B-hf tokenizer.json
+- allenai/OLMo-7B-0424-hf tokenizer.json
 - allenai/OLMo-2-1124-13B tokenizer.json
-- allenai/OLMoE-1B-7B-0924 tokenizer.json
 - allenai/Olmo-3-7B-Instruct tokenizer.json
 - allenai/Olmo-Hybrid-7B tokenizer.json
+- allenai/Olmo-Hybrid-Think-SFT-7B tokenizer.json
+- allenai/OLMoE-1B-7B-0924 tokenizer.json
+- allenai/OLMoE-1B-7B-0924-Instruct tokenizer.json
+- allenai/OLMoE-1B-7B-0125 tokenizer.json
+- allenai/OLMoE-1B-7B-0125-Instruct tokenizer.json
 
 See LICENSE for the full license text that applies to this package and its bundled assets.

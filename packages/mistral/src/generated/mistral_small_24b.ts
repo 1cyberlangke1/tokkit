@@ -1,5 +1,5 @@
 /**
- * mistral-small-3.1 内置 tokenizer 资产。
+ * mistral-small-24b 内置 tokenizer 资产。
  * 输入：无。
  * 输出：当前 family 的 packed tokenizer 数据。
  */

@@ -376,7 +376,7 @@ export async function main(argv = process.argv.slice(2)) {
   const options = parseCliArgs(argv)
   const tokkit = await importWorkspacePackageModule(options.packageDir)
   const supportedFamilies = new Set(tokkit.listSupportedFamilies())
-  const familySpecs = resolveFamilySpecs(supportedFamilies, options.families)
+  const familySpecs = resolveFamilySpecs(supportedFamilies, options.families, options.packageDir)
   const summary =
     options.jobs > 1 && familySpecs.length > 1
       ? await runParallelComparison(options, familySpecs)
@@ -814,7 +814,7 @@ function hasSameSampleWindow(left, right) {
  * 输入：总包支持的 family 集合和可选的 CLI family 过滤。
  * 输出：当前轮次需要对拍的 `FAMILY_SPECS` 子集。
  */
-function resolveFamilySpecs(supportedFamilies, selectedFamilies) {
+export function resolveFamilySpecs(supportedFamilies, selectedFamilies, packageDir = DEFAULT_PACKAGE_DIR) {
   const requested = selectedFamilies ? new Set(selectedFamilies) : null
   const specs = FAMILY_SPECS.filter((spec) => {
     if (!supportedFamilies.has(spec.family)) {
@@ -827,7 +827,7 @@ function resolveFamilySpecs(supportedFamilies, selectedFamilies) {
   if (requested) {
     for (const family of requested) {
       if (!supportedFamilies.has(family)) {
-        throw new Error(`unsupported family for packages/all: ${family}`)
+        throw new Error(`unsupported family for packages/${packageDir}: ${family}`)
       }
     }
   }

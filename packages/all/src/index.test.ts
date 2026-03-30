@@ -481,7 +481,6 @@ describe("builtin tokenizer families", () => {
     async () => {
       expect(listSupportedFamilies().sort()).toEqual(
         [
-          "bitnet-b1.58-2b-4t",
           "yi",
           "yi-1.5-9b-chat",
           "yi-coder",
@@ -493,20 +492,21 @@ describe("builtin tokenizer families", () => {
           "deepseek-v3.2",
           "falcon-rw-1b",
           "falcon-7b",
-          "glm-4-0414",
+          "bitnet-b1.58-2b-4t",
           "glm-4.7",
           "glm-5",
+          "cosmo-1b",
           "granite-3-instruct",
           "granite-3.3-base",
           "granite-3.3-instruct",
-          "granite-4",
-          "granite-4-tiny-base-preview",
-          "granite-4-tiny-preview",
           "granite-7b-base",
           "granite-7b-instruct",
           "granite-code-base",
+          "granite-4",
+          "granite-4-tiny-base-preview",
+          "granite-4-tiny-preview",
           "academic-ds",
-          "cosmo-1b",
+          "agentcpm-explore",
           "longcat-flash-chat",
           "longcat-flash-lite",
           "longcat-flash-thinking",
@@ -514,13 +514,17 @@ describe("builtin tokenizer families", () => {
           "minicpm-sala",
           "minicpm3",
           "minicpm4",
+          "minicpm-moe",
           "mimo",
           "mimo-7b-rl-0530",
           "mimo-v2-flash",
-          "ministral-8b",
+          "mathstral-7b",
+          "mamba-codestral-7b",
+          "ministral-3",
           "mistral-7b-v0.1",
           "mistral-7b-v0.3",
-          "mistral-small-3.1",
+          "mistral-nemo",
+          "mistral-small-24b",
           "mixtral-8x7b",
           "seed-coder",
           "seed-oss",
@@ -530,11 +534,17 @@ describe("builtin tokenizer families", () => {
           "smollm3",
           "smollm3-base",
           "stable-diffcoder",
+          "olmo",
           "olmo-1",
+          "olmo-0424",
           "olmo-2",
           "olmo-3-instruct",
           "olmo-hybrid",
+          "olmo-hybrid-think",
           "olmoe",
+          "olmoe-instruct",
+          "olmoe-0125",
+          "olmoe-0125-instruct",
           "phi-1",
           "phi-3-mini",
           "phi-3-medium",
@@ -549,8 +559,12 @@ describe("builtin tokenizer families", () => {
           "polyglot-ko",
           "polyglot-ko-12.8",
           "pythia",
+          "qwen2",
+          "qwen2.5",
+          "qwen3",
           "qwen3-coder-next",
           "qwen3.5",
+          "qwen3.5-base",
           "step-3.5-flash",
         ].sort()
       )
@@ -611,6 +625,7 @@ describe("builtin tokenizer families", () => {
           "microsoft/phi-1",
           "microsoft/Phi-3-mini-4k-instruct",
           "microsoft/Phi-3-medium-4k-instruct",
+          "microsoft/Phi-3-medium-128k-instruct",
           "microsoft/Phi-3.5-mini-instruct",
           "microsoft/Phi-mini-MoE-instruct",
           "microsoft/phi-4",
@@ -618,75 +633,99 @@ describe("builtin tokenizer families", () => {
           "microsoft/Phi-4-mini-instruct",
           "microsoft/Phi-4-mini-reasoning",
           "microsoft/Phi-4-mini-flash-reasoning",
-          "mistralai/Mistral-7B-v0.1",
-          "mistralai/Mixtral-8x7B-v0.1",
-          "mistralai/Ministral-8B-Instruct-2410",
           "mistralai/Devstral-Small-2-24B-Instruct-2512",
-          "mistralai/Mistral-Small-3.1-24B-Instruct-2503",
+          "mistralai/Mathstral-7B-v0.1",
+          "mistralai/Mamba-Codestral-7B-v0.1",
+          "mistralai/Ministral-3-8B-Instruct-2512",
+          "mistralai/Ministral-3-14B-Reasoning-2512",
+          "mistralai/Mistral-7B-v0.1",
+          "mistralai/Mistral-Nemo-Instruct-2407",
+          "mistralai/Mistral-Small-24B-Instruct-2501",
+          "mistralai/Mixtral-8x7B-v0.1",
+          "mistralai/Mixtral-8x22B-Instruct-v0.1",
           "HuggingFaceTB/cosmo-1b",
           "HuggingFaceTB/SmolLM-135M",
           "HuggingFaceTB/SmolLM2-1.7B",
           "HuggingFaceTB/SmolLM2-1.7B-Instruct-16k",
           "HuggingFaceTB/SmolLM3-3B",
           "HuggingFaceTB/SmolLM3-3B-Base",
+          "allenai/OLMo-1B",
           "allenai/OLMo-1B-hf",
+          "allenai/OLMo-7B-hf",
+          "allenai/OLMo-7B-0424-hf",
+          "allenai/OLMo-7B-0724-hf",
           "allenai/OLMo-2-0425-1B",
+          "allenai/OLMo-2-1124-7B",
           "allenai/OLMo-2-1124-13B",
+          "allenai/OLMo-2-0325-32B",
           "allenai/Olmo-3-7B-Instruct",
+          "allenai/Olmo-3.1-32B-Instruct",
           "allenai/Olmo-Hybrid-7B",
-          "ibm-granite/granite-3.0-1b-a400m-base",
+          "allenai/Olmo-Hybrid-Think-SFT-7B",
+          "allenai/OLMoE-1B-7B-0924-Instruct",
+          "allenai/OLMoE-1B-7B-0125",
+          "allenai/OLMoE-1B-7B-0125-Instruct",
           "ibm-granite/granite-3.0-2b-base",
-          "ibm-granite/granite-3.0-1b-a400m-instruct",
           "ibm-granite/granite-3.0-2b-instruct",
           "ibm-granite/granite-3.3-8b-base",
           "ibm-granite/granite-3.3-8b-instruct",
-          "ibm-granite/granite-20b-code-instruct-8k",
-          "ibm-granite/granite-4.0-350m-base",
-          "ibm-granite/granite-4.0-tiny-preview",
-          "ibm-granite/granite-34b-code-instruct-8k",
           "ibm-granite/granite-7b-base",
           "ibm-granite/granite-7b-instruct",
+          "ibm-granite/granite-3b-code-base-2k",
+          "ibm-granite/granite-4.0-350m-base",
+          "ibm-granite/granite-4.0-tiny-preview",
           "ByteDance-Seed/academic-ds-9B",
           "ByteDance-Seed/Seed-OSS-36B-Base",
           "ByteDance-Seed/Seed-Coder-8B-Base",
           "ByteDance-Seed/Seed-Coder-8B-Reasoning",
           "ByteDance-Seed/Stable-DiffCoder-8B-Instruct",
+          "openbmb/AgentCPM-Explore",
+          "openbmb/AgentCPM-Report",
           "openbmb/MiniCPM-S-1B-sft",
           "openbmb/MiniCPM-SALA",
           "openbmb/MiniCPM3-4B",
-          "openbmb/MiniCPM4-0.5B",
+          "openbmb/MiniCPM-MoE-8x2B",
           "openbmb/MiniCPM4.1-8B",
-          "openbmb/BitCPM4-1B",
-          "openbmb/NOSA-8B",
+          "Qwen/Qwen2-0.5B",
+          "Qwen/Qwen2-7B-Instruct",
+          "Qwen/Qwen2.5-0.5B",
+          "Qwen/Qwen2.5-7B-Instruct",
+          "Qwen/Qwen2.5-Coder-32B-Instruct",
+          "Qwen/Qwen2.5-Math-7B-Instruct",
+          "Qwen/Qwen3-0.6B",
+          "Qwen/Qwen3-4B-Instruct-2507",
+          "Qwen/Qwen3-Next-80B-A3B-Instruct",
+          "Qwen/Qwen3-235B-A22B-Instruct-2507",
+          "Qwen/Qwen3.5-0.8B-Base",
           "Qwen/Qwen3.5-0.8B",
           "Qwen/Qwen3.5-27B",
+          "Qwen/Qwen3.5-122B-A10B",
           "Qwen/Qwen3.5-397B-A17B",
           "Qwen/Qwen3-Coder-Next",
+          "Qwen/QwQ-32B",
+          "Qwen/QwQ-32B-Preview",
           "deepseek-ai/DeepSeek-V3",
           "deepseek-ai/DeepSeek-V3-0324",
-          "deepseek-ai/DeepSeek-V3.1",
-          "deepseek-ai/DeepSeek-V3.1-Base",
           "deepseek-ai/DeepSeek-R1",
-          "deepseek-ai/DeepSeek-R1-0528",
           "deepseek-ai/DeepSeek-R1-Zero",
-          "deepseek-ai/DeepSeek-V3.2",
-          "deepseek-ai/DeepSeek-V3.2-Exp",
+          "deepseek-ai/DeepSeek-R1-0528",
+          "deepseek-ai/DeepSeek-V3.1-Base",
+          "deepseek-ai/DeepSeek-V3.1",
+          "deepseek-ai/DeepSeek-V3.1-Terminus",
           "deepseek-ai/DeepSeek-V3.2-Exp-Base",
+          "deepseek-ai/DeepSeek-V3.2-Exp",
+          "deepseek-ai/DeepSeek-V3.2",
+          "deepseek-ai/DeepSeek-V3.2-Speciale",
           "zai-org/GLM-4.5",
           "zai-org/GLM-4.5-Base",
           "zai-org/GLM-4.5-Air",
           "zai-org/GLM-4.5-Air-Base",
           "zai-org/GLM-4.6",
-          "zai-org/GLM-4-9B-0414",
-          "zai-org/GLM-4-32B-0414",
-          "zai-org/GLM-4-32B-Base-0414",
           "zai-org/GLM-4.7",
           "zai-org/GLM-4.7-Flash",
           "zai-org/GLM-5",
-          "zai-org/GLM-Z1-9B-0414",
-          "zai-org/GLM-Z1-32B-0414",
-          "zai-org/GLM-Z1-Rumination-32B-0414",
           "stepfun-ai/Step-3.5-Flash",
+          "stepfun-ai/Step-3.5-Flash-Base-Midtrain",
         ])
       )
 
@@ -705,9 +744,35 @@ describe("builtin tokenizer families", () => {
       expect(await getEncoding("01-ai/Yi-Coder-9B-Chat")).toBe(yiCoderChat)
       expect(await getEncoding("01-ai/Yi-Coder-1.5B-Chat")).toBe(yiCoderChat)
 
+      const qwen2 = await getEncoding("qwen2")
+      expect(await getEncoding("Qwen/Qwen2-7B")).toBe(qwen2)
+      expect(await getEncoding("Qwen/Qwen2-7B-Instruct")).toBe(qwen2)
+
+      const qwen25 = await getEncoding("qwen2.5")
+      expect(await getEncoding("Qwen/Qwen2.5-Coder-32B-Instruct")).toBe(qwen25)
+      expect(await getEncoding("Qwen/Qwen2.5-Math-7B-Instruct")).toBe(qwen25)
+      expect(await getEncoding("Qwen/QwQ-32B-Preview")).toBe(qwen25)
+      expect(await getEncoding("qwen3-base")).toBe(qwen25)
+
+      const qwen3 = await getEncoding("qwen3")
+      expect(await getEncoding("Qwen/Qwen3-30B-A3B-Instruct-2507")).toBe(qwen3)
+      expect(await getEncoding("Qwen/Qwen3-Next-80B-A3B-Instruct")).toBe(qwen3)
+      expect(await getEncoding("Qwen/Qwen3-235B-A22B-Instruct-2507")).toBe(qwen3)
+
       const qwen35 = await getEncoding("qwen3.5")
       expect(await getEncoding("Qwen/Qwen3.5-27B")).toBe(qwen35)
+      expect(await getEncoding("Qwen/Qwen3.5-122B-A10B")).toBe(qwen35)
       expect(await getEncoding("Qwen/Qwen3.5-397B-A17B")).toBe(qwen35)
+
+      const qwen35Base = await getEncoding("qwen3.5-base")
+      expect(await getEncoding("Qwen/Qwen3.5-35B-A3B-Base")).toBe(qwen35Base)
+      expect(await getEncoding("Qwen/Qwen3.5-0.8B-Base")).toBe(qwen35Base)
+
+      const qwen3CoderNext = await getEncoding("qwen3-coder-next")
+      expect(await getEncoding("Qwen/Qwen3-Coder-30B-A3B-Instruct")).toBe(qwen3CoderNext)
+      expect(await getEncoding("Qwen/Qwen3-30B-A3B-Thinking-2507")).toBe(qwen3CoderNext)
+      expect(await getEncoding("Qwen/QwQ-32B")).toBe(qwen3CoderNext)
+      expect(await getEncoding("qwen3-coder")).toBe(qwen3CoderNext)
 
       const falcon7b = await getEncoding("falcon-7b")
       expect(await getEncoding("tiiuae/falcon-7b-instruct")).toBe(falcon7b)
@@ -728,71 +793,59 @@ describe("builtin tokenizer families", () => {
       const mimo = await getEncoding("mimo")
       expect(await getEncoding("XiaomiMiMo/MiMo-V2-Flash-Base")).toBe(mimo)
 
-      const minicpm4 = await getEncoding("minicpm4")
-      expect(await getEncoding("bitcpm4")).toBe(minicpm4)
-      expect(await getEncoding("nosa")).toBe(minicpm4)
-      expect(await getEncoding("minicpm4.1")).toBe(minicpm4)
-      expect(await getEncoding("openbmb/BitCPM4-1B")).toBe(minicpm4)
-      expect(await getEncoding("openbmb/NOSA-8B")).toBe(minicpm4)
-
       const mistral7bV01 = await getEncoding("mistral-7b-v0.1")
       expect(await getEncoding("mistralai/Mixtral-8x7B-Instruct-v0.1")).toBe(mistral7bV01)
 
       const mixtral8x7b = await getEncoding("mixtral-8x7b")
       expect(await getEncoding("mistralai/Mixtral-8x7B-v0.1")).toBe(mixtral8x7b)
 
-      const glm40414 = await getEncoding("glm-4-0414")
-      expect(await getEncoding("zai-org/GLM-4-9B-0414")).toBe(glm40414)
-      expect(await getEncoding("zai-org/GLM-Z1-32B-0414")).toBe(glm40414)
-      expect(await getEncoding("glm-z1")).toBe(glm40414)
-
-      const glm47 = await getEncoding("glm-4.7")
-      expect(await getEncoding("zai-org/GLM-4.5")).toBe(glm47)
-      expect(await getEncoding("zai-org/GLM-4.6")).toBe(glm47)
-
       const glm5 = await getEncoding("glm-5")
-      expect(await getEncoding("zai-org/GLM-4.7-Flash")).toBe(glm5)
       expect(await getEncoding("zai-org/GLM-5")).toBe(glm5)
+      expect(await getEncoding("zai-org/GLM-4.7-Flash")).toBe(glm5)
+      expect(await getEncoding("glm-4.7-flash")).toBe(glm5)
 
       const olmo2 = await getEncoding("olmo-2")
       expect(await getEncoding("allenai/OLMo-2-1124-13B")).toBe(olmo2)
 
-      const deepseekR1 = await getEncoding("deepseek-r1")
-      expect(await getEncoding("deepseek-r1-0528")).toBe(deepseekR1)
-      expect(await getEncoding("deepseek-r1-zero")).toBe(deepseekR1)
-      expect(await getEncoding("deepseek-ai/DeepSeek-R1-0528")).toBe(deepseekR1)
-
       const deepseekV3 = await getEncoding("deepseek-v3")
-      expect(await getEncoding("deepseek-v3-0324")).toBe(deepseekV3)
-      expect(await getEncoding("deepseek-ai/DeepSeek-V3")).toBe(deepseekV3)
       expect(await getEncoding("deepseek-ai/DeepSeek-V3-0324")).toBe(deepseekV3)
+      expect(await getEncoding("deepseek-v3-base")).toBe(deepseekV3)
+
+      const deepseekR1 = await getEncoding("deepseek-r1")
+      expect(await getEncoding("deepseek-ai/DeepSeek-R1-0528")).toBe(deepseekR1)
+      expect(await getEncoding("deepseek-r1-zero")).toBe(deepseekR1)
 
       const deepseek31 = await getEncoding("deepseek-v3.1")
-      expect(await getEncoding("deepseek-v3.1-base")).toBe(deepseek31)
-      expect(await getEncoding("deepseek-v3.2-exp")).toBe(deepseek31)
       expect(await getEncoding("deepseek-ai/DeepSeek-V3.2-Exp")).toBe(deepseek31)
+      expect(await getEncoding("deepseek-v3.2-exp-base")).toBe(deepseek31)
 
       const deepseek32 = await getEncoding("deepseek-v3.2")
       expect(await getEncoding("deepseek-ai/DeepSeek-V3.2")).toBe(deepseek32)
+      expect(await getEncoding("deepseek-v3.2-speciale")).toBe(deepseek32)
+
+      const glm47 = await getEncoding("glm-4.7")
+      expect(await getEncoding("zai-org/GLM-4.5")).toBe(glm47)
+      expect(await getEncoding("zai-org/GLM-4.5-Air-Base")).toBe(glm47)
+      expect(await getEncoding("zai-org/GLM-4.6")).toBe(glm47)
+      expect(await getEncoding("glm-4.5-air")).toBe(glm47)
 
       const smollm = await getEncoding("smollm")
       expect(await getEncoding("smollm2")).toBe(smollm)
       expect(await getEncoding("HuggingFaceTB/SmolLM2-1.7B")).toBe(smollm)
 
-      const cosmo1b = await getEncoding("cosmo-1b")
-      expect(await getEncoding("HuggingFaceTB/cosmo-1b")).toBe(cosmo1b)
-
       const academicDs = await getEncoding("academic-ds")
       expect(await getEncoding("ByteDance-Seed/academic-ds-9B")).toBe(academicDs)
+
+      const step35Flash = await getEncoding("step-3.5-flash")
+      expect(await getEncoding("stepfun-ai/Step-3.5-Flash-Base-Midtrain")).toBe(step35Flash)
     },
     60000
   )
 
   it("内置 family 的编码行为和 Hugging Face 真值一致", async () => {
-    const cases = await listBuiltinReferenceCaseSpecs(listSupportedFamilies())
+    const cases = await loadBuiltinReferenceCases(listSupportedFamilies())
 
-    for (const { family, source } of cases) {
-      const reference = loadBuiltinReferenceTokenizer(source)
+    for (const { family, reference } of cases) {
       for (const input of BUILTIN_REFERENCE_SAMPLES) {
         const actualIds = await encode(input, family, {
           addSpecialTokens: false,
@@ -1898,7 +1951,7 @@ function decodeWithReference(reference: PreTrainedTokenizer, ids: number[]): str
  * 输入：可选的 family 过滤列表。
  * 输出：从仓库内 `.json.br` 快照解压得到的参考 tokenizer 列表。
  */
-async function listBuiltinReferenceCaseSpecs(familyFilter?: Iterable<string>) {
+async function loadBuiltinReferenceCases(familyFilter?: Iterable<string>) {
   // @ts-expect-error 这里直接导入构建脚本模块，测试只关心其运行时导出形状。
   const { FAMILY_SPECS } = await import("../../../scripts/generate-builtins.mjs")
   const allowedFamilies = familyFilter ? new Set(familyFilter) : null
@@ -1906,23 +1959,14 @@ async function listBuiltinReferenceCaseSpecs(familyFilter?: Iterable<string>) {
   return FAMILY_SPECS.filter((spec: { family: string }) =>
     allowedFamilies ? allowedFamilies.has(spec.family) : true
   ).map((spec: { family: string; source: string }) => {
+    const sourcePath = resolve(REPO_ROOT, spec.source)
+    const compressed = readFileSync(sourcePath)
+    const rawJson = brotliDecompressSync(compressed).toString("utf8")
+    const asset = JSON.parse(rawJson) as TokenizerAsset
+
     return {
       family: spec.family,
-      source: spec.source,
+      reference: new PreTrainedTokenizer(asset as any, {}),
     }
   })
-}
-
-/**
- * 按需加载单个内置 family 的 HF 参考 tokenizer。
- * 输入：family 对应的压缩 tokenizer 快照路径。
- * 输出：只为当前断言创建的 Hugging Face 参考 tokenizer。
- */
-function loadBuiltinReferenceTokenizer(source: string): PreTrainedTokenizer {
-  const sourcePath = resolve(REPO_ROOT, source)
-  const compressed = readFileSync(sourcePath)
-  const rawJson = brotliDecompressSync(compressed).toString("utf8")
-  const asset = JSON.parse(rawJson) as TokenizerAsset
-
-  return new PreTrainedTokenizer(asset as any, {})
 }

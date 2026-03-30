@@ -16,27 +16,56 @@ export * from "@cyberlangke/tokkit-core"
  */
 const BUILTIN_FAMILIES = [
   {
+    family: "olmo",
+    aliases: ["olmo_classic"],
+    models: [
+      "allenai/OLMo-1B",
+      "allenai/OLMo-7B",
+      "allenai/OLMo-7B-0424",
+      "allenai/OLMo-7B-Instruct",
+    ],
+    modulePath: "./generated/olmo.js",
+  },
+  {
     family: "olmo-1",
-    aliases: ["olmo_1"],
-    models: ["allenai/OLMo-1B-hf"],
+    aliases: ["olmo-hf", "olmo_1", "olmo_hf"],
+    models: ["allenai/OLMo-1B-hf", "allenai/OLMo-7B-hf"],
     modulePath: "./generated/olmo_1.js",
+  },
+  {
+    family: "olmo-0424",
+    aliases: ["olmo_0424"],
+    models: ["allenai/OLMo-7B-0424-hf"],
+    modulePath: "./generated/olmo_0424.js",
   },
   {
     family: "olmo-2",
     aliases: ["olmo2", "olmo_2"],
     models: [
       "allenai/OLMo-2-0425-1B",
+      "allenai/OLMo-2-0425-1B-Instruct",
       "allenai/OLMo-2-0325-32B",
+      "allenai/OLMo-2-0325-32B-Instruct",
+      "allenai/OLMo-2-1124-7B",
+      "allenai/OLMo-2-1124-7B-Instruct",
       "allenai/OLMo-2-1124-13B",
+      "allenai/OLMo-2-1124-13B-Instruct",
       "allenai/Olmo-3-1025-7B",
+      "allenai/Olmo-3-1125-32B",
+      "allenai/Olmo-3-7B-Think",
+      "allenai/Olmo-3-32B-Think",
       "allenai/Olmo-3.1-32B-Think",
     ],
     modulePath: "./generated/olmo_2.js",
   },
   {
     family: "olmo-3-instruct",
-    aliases: ["olmo_3_instruct"],
-    models: ["allenai/Olmo-3-7B-Instruct", "allenai/Olmo-Hybrid-Instruct-SFT-7B"],
+    aliases: ["olmo3-instruct", "olmo_3_instruct"],
+    models: [
+      "allenai/Olmo-3-7B-Instruct",
+      "allenai/Olmo-3.1-32B-Instruct",
+      "allenai/Olmo-Hybrid-Instruct-SFT-7B",
+    ],
     modulePath: "./generated/olmo_3_instruct.js",
   },
   {
@@ -46,10 +75,39 @@ const BUILTIN_FAMILIES = [
     modulePath: "./generated/olmo_hybrid.js",
   },
   {
+    family: "olmo-hybrid-think",
+    aliases: ["olmo_hybrid_think"],
+    models: ["allenai/Olmo-Hybrid-Think-SFT-7B"],
+    modulePath: "./generated/olmo_hybrid_think.js",
+  },
+  {
     family: "olmoe",
-    aliases: ["olmoe_1b_7b"],
-    models: ["allenai/OLMoE-1B-7B-0924"],
+    aliases: ["olmo-0724", "olmo_0724", "olmoe_1b_7b"],
+    models: [
+      "allenai/OLMo-1B-0724-hf",
+      "allenai/OLMo-7B-0724-hf",
+      "allenai/OLMo-7B-Instruct-hf",
+      "allenai/OLMoE-1B-7B-0924",
+    ],
     modulePath: "./generated/olmoe.js",
+  },
+  {
+    family: "olmoe-instruct",
+    aliases: ["olmoe_instruct"],
+    models: ["allenai/OLMoE-1B-7B-0924-Instruct"],
+    modulePath: "./generated/olmoe_instruct.js",
+  },
+  {
+    family: "olmoe-0125",
+    aliases: ["olmoe_0125"],
+    models: ["allenai/OLMoE-1B-7B-0125"],
+    modulePath: "./generated/olmoe_0125.js",
+  },
+  {
+    family: "olmoe-0125-instruct",
+    aliases: ["olmoe_0125_instruct"],
+    models: ["allenai/OLMoE-1B-7B-0125-Instruct"],
+    modulePath: "./generated/olmoe_0125_instruct.js",
   },
 ] as const
 

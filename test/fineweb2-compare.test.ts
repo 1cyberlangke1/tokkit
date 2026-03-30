@@ -14,6 +14,7 @@ import {
   compareFamilyAgainstSamples,
   decodeReferenceText,
   parseCliArgs,
+  resolveFamilySpecs,
 } from "../scripts/fineweb2-compare.mjs"
 
 /** 测试期间创建的临时目录列表。 */
@@ -79,6 +80,12 @@ describe("fineweb2 compare helpers", () => {
     const options = parseCliArgs(["--jobs", "3"])
 
     expect(options.jobs).toBe(3)
+  })
+
+  it("子包模式下 unsupported family 报错会带上目标包名", () => {
+    expect(() => resolveFamilySpecs(new Set(["minicpm4"]), ["agentcpm-explore"], "openbmb")).toThrow(
+      "unsupported family for packages/openbmb: agentcpm-explore"
+    )
   })
 
   it("收集 JSONL 样本时会跳过超长文本并保留行号与 id", async () => {

@@ -33,7 +33,6 @@
   - `mimo-7b-rl-0530`
   - `mimo-v2-flash`
 - `@cyberlangke/tokkit-microsoft`
-  - `bitnet-b1.58-2b-4t`
   - `phi-1`
   - `phi-3-mini`
   - `phi-3-medium`
@@ -45,25 +44,33 @@
   - `phi-4-reasoning`
   - `phi-moe`
 - `@cyberlangke/tokkit-mistral`
+  - `devstral-small-2`
+  - `mathstral-7b`
+  - `mamba-codestral-7b`
+  - `ministral-3`
   - `mistral-7b-v0.1`
   - `mistral-7b-v0.3`
+  - `mistral-nemo`
+  - `mistral-small-24b`
   - `mixtral-8x7b`
-  - `ministral-8b`
-  - `devstral-small-2`
-  - `mistral-small-3.1`
 - `@cyberlangke/tokkit-huggingface-tb`
-  - `cosmo-1b`
   - `smollm`
   - `smollm-1.7b`
   - `smollm2-16k`
   - `smollm3`
   - `smollm3-base`
 - `@cyberlangke/tokkit-allenai`
+  - `olmo`
   - `olmo-1`
+  - `olmo-0424`
   - `olmo-2`
   - `olmo-3-instruct`
   - `olmo-hybrid`
+  - `olmo-hybrid-think`
   - `olmoe`
+  - `olmoe-instruct`
+  - `olmoe-0125`
+  - `olmoe-0125-instruct`
 - `@cyberlangke/tokkit-ibm-granite`
   - `granite-3-instruct`
   - `granite-3.3-base`
@@ -77,20 +84,25 @@
   - `seed-coder`
   - `stable-diffcoder`
 - `@cyberlangke/tokkit-openbmb`
+  - `agentcpm-explore`
   - `minicpm-s-1b`
+  - `minicpm-moe`
   - `minicpm-sala`
   - `minicpm3`
   - `minicpm4`
 - `@cyberlangke/tokkit-qwen`
+  - `qwen2`
+  - `qwen2.5`
+  - `qwen3`
   - `qwen3.5`
+  - `qwen3.5-base`
   - `qwen3-coder-next`
 - `@cyberlangke/tokkit-deepseek`
-  - `deepseek-r1`
   - `deepseek-v3`
+  - `deepseek-r1`
   - `deepseek-v3.1`
   - `deepseek-v3.2`
 - `@cyberlangke/tokkit-glm`
-  - `glm-4-0414`
   - `glm-4.7`
   - `glm-5`
 - `@cyberlangke/tokkit-step`

@@ -69,9 +69,12 @@ export default defineConfig({
   test: {
     globals: true,
     environment: "node",
-    maxWorkers: 2,
     include: ["packages/**/*.test.ts", "test/**/*.test.ts"],
     exclude: ["node_modules", "dist", "tmp", "packages/*/dist"],
+    // generated tokenizer modules are large; a single worker avoids duplicating
+    // multiple full builtin graphs and keeps the test process within a stable heap.
+    maxWorkers: 1,
+    execArgv: ["--max-old-space-size=8192"],
     coverage: {
       reporter: ["text", "json", "html"],
     },

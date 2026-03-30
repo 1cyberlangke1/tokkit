@@ -9,53 +9,54 @@ import type { NormalizedTokenizerAsset } from "@cyberlangke/tokkit-core"
 
 export * from "@cyberlangke/tokkit-core"
 
-/** 当前子包内置 family 的声明表。 */
+/**
+ * 当前子包内置 family 的声明表。
+ * 输入：无。
+ * 输出：供 registerBuiltins 批量注册的稳定 family 配置。
+ */
 const BUILTIN_FAMILIES = [
   {
     family: "deepseek-v3",
-    aliases: ["deepseek_v3", "deepseek-v3-0324", "deepseek_v3_0324"],
-    models: ["deepseek-ai/DeepSeek-V3", "deepseek-ai/DeepSeek-V3-0324"],
+    aliases: ["deepseek_v3", "deepseek-v3-base", "deepseek-v3-0324"],
+    models: [
+      "deepseek-ai/DeepSeek-V3-Base",
+      "deepseek-ai/DeepSeek-V3",
+      "deepseek-ai/DeepSeek-V3-0324",
+    ],
     modulePath: "./generated/deepseek_v3.js",
+  },
+  {
+    family: "deepseek-r1",
+    aliases: ["deepseek_r1", "deepseek-r1-zero", "deepseek-r1-0528"],
+    models: [
+      "deepseek-ai/DeepSeek-R1",
+      "deepseek-ai/DeepSeek-R1-Zero",
+      "deepseek-ai/DeepSeek-R1-0528",
+    ],
+    modulePath: "./generated/deepseek_r1.js",
   },
   {
     family: "deepseek-v3.1",
     aliases: [
       "deepseek_v3_1",
       "deepseek-v3.1-base",
-      "deepseek_v3_1_base",
+      "deepseek-v3.1-terminus",
       "deepseek-v3.2-exp",
-      "deepseek_v3_2_exp",
       "deepseek-v3.2-exp-base",
-      "deepseek_v3_2_exp_base",
     ],
     models: [
-      "deepseek-ai/DeepSeek-V3.1",
       "deepseek-ai/DeepSeek-V3.1-Base",
-      "deepseek-ai/DeepSeek-V3.2-Exp",
+      "deepseek-ai/DeepSeek-V3.1",
+      "deepseek-ai/DeepSeek-V3.1-Terminus",
       "deepseek-ai/DeepSeek-V3.2-Exp-Base",
+      "deepseek-ai/DeepSeek-V3.2-Exp",
     ],
     modulePath: "./generated/deepseek_v3_1.js",
   },
   {
-    family: "deepseek-r1",
-    aliases: [
-      "deepseek_r1",
-      "deepseek-r1-0528",
-      "deepseek_r1_0528",
-      "deepseek-r1-zero",
-      "deepseek_r1_zero",
-    ],
-    models: [
-      "deepseek-ai/DeepSeek-R1",
-      "deepseek-ai/DeepSeek-R1-0528",
-      "deepseek-ai/DeepSeek-R1-Zero",
-    ],
-    modulePath: "./generated/deepseek_r1.js",
-  },
-  {
     family: "deepseek-v3.2",
-    aliases: ["deepseek_v3_2"],
-    models: ["deepseek-ai/DeepSeek-V3.2"],
+    aliases: ["deepseek_v3_2", "deepseek-v3.2-speciale"],
+    models: ["deepseek-ai/DeepSeek-V3.2", "deepseek-ai/DeepSeek-V3.2-Speciale"],
     modulePath: "./generated/deepseek_v3_2.js",
   },
 ] as const

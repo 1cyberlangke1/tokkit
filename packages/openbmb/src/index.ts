@@ -16,6 +16,12 @@ export * from "@cyberlangke/tokkit-core"
  */
 const BUILTIN_FAMILIES = [
   {
+    family: "agentcpm-explore",
+    aliases: ["agentcpm_explore"],
+    models: ["openbmb/AgentCPM-Explore"],
+    modulePath: "./generated/agentcpm_explore.js",
+  },
+  {
     family: "minicpm-s-1b",
     aliases: ["minicpm_s_1b"],
     models: ["openbmb/MiniCPM-S-1B-sft"],
@@ -35,32 +41,27 @@ const BUILTIN_FAMILIES = [
   },
   {
     family: "minicpm4",
-    aliases: [
-      "minicpm_4",
-      "minicpm4.1",
-      "minicpm4_1",
-      "bitcpm4",
-      "bitcpm_4",
-      "nosa",
-      "minicpm4-0.5b",
-      "minicpm4.1-8b",
-      "bitcpm4-0.5b",
-      "bitcpm4-1b",
-      "nosa-1b",
-      "nosa-3b",
-      "nosa-8b",
-    ],
+    aliases: ["minicpm_4"],
     models: [
       "openbmb/MiniCPM4-0.5B",
       "openbmb/MiniCPM4-8B",
       "openbmb/MiniCPM4.1-8B",
+      "openbmb/AgentCPM-Report",
       "openbmb/BitCPM4-0.5B",
       "openbmb/BitCPM4-1B",
+      "openbmb/MiniCPM4-MCP",
+      "openbmb/MiniCPM4-Survey",
       "openbmb/NOSA-1B",
       "openbmb/NOSA-3B",
       "openbmb/NOSA-8B",
     ],
     modulePath: "./generated/minicpm4.js",
+  },
+  {
+    family: "minicpm-moe",
+    aliases: ["minicpm_moe"],
+    models: ["openbmb/MiniCPM-MoE-8x2B"],
+    modulePath: "./generated/minicpm_moe.js",
   },
 ] as const
 

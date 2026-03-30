@@ -126,5 +126,17 @@ export function compareFamilyAgainstSamples(input: {
 /** 调用关闭空格清理后的 reference decode。 */
 export function decodeReferenceText(reference: ReferenceDecoder, ids: number[]): string
 
+/** 基于当前支持的 family 与可选过滤项解析对拍清单。 */
+export function resolveFamilySpecs(
+  supportedFamilies: Set<string>,
+  selectedFamilies?: Iterable<string> | null,
+  packageDir?: string
+): Array<{
+  family: string
+  packageName: string
+  moduleName: string
+  source: string
+}>
+
 /** 执行脚本主流程。 */
 export function main(argv?: string[]): Promise<unknown>

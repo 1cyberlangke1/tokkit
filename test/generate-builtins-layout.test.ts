@@ -41,7 +41,6 @@ describe("generate:builtins layout", () => {
         expect.objectContaining({ family: "mimo", packageName: "xiaomi-mimo" }),
         expect.objectContaining({ family: "mimo-7b-rl-0530", packageName: "xiaomi-mimo" }),
         expect.objectContaining({ family: "mimo-v2-flash", packageName: "xiaomi-mimo" }),
-        expect.objectContaining({ family: "bitnet-b1.58-2b-4t", packageName: "microsoft" }),
         expect.objectContaining({ family: "phi-1", packageName: "microsoft" }),
         expect.objectContaining({ family: "phi-3-mini", packageName: "microsoft" }),
         expect.objectContaining({ family: "phi-3-medium", packageName: "microsoft" }),
@@ -56,22 +55,30 @@ describe("generate:builtins layout", () => {
         expect.objectContaining({ family: "phi-4-reasoning", packageName: "microsoft" }),
         expect.objectContaining({ family: "phi-moe", packageName: "microsoft" }),
         expect.objectContaining({ family: "devstral-small-2", packageName: "mistral" }),
-        expect.objectContaining({ family: "ministral-8b", packageName: "mistral" }),
+        expect.objectContaining({ family: "mathstral-7b", packageName: "mistral" }),
+        expect.objectContaining({ family: "mamba-codestral-7b", packageName: "mistral" }),
+        expect.objectContaining({ family: "ministral-3", packageName: "mistral" }),
         expect.objectContaining({ family: "mistral-7b-v0.1", packageName: "mistral" }),
         expect.objectContaining({ family: "mistral-7b-v0.3", packageName: "mistral" }),
-        expect.objectContaining({ family: "mistral-small-3.1", packageName: "mistral" }),
+        expect.objectContaining({ family: "mistral-nemo", packageName: "mistral" }),
+        expect.objectContaining({ family: "mistral-small-24b", packageName: "mistral" }),
         expect.objectContaining({ family: "mixtral-8x7b", packageName: "mistral" }),
         expect.objectContaining({ family: "smollm", packageName: "huggingface-tb" }),
-        expect.objectContaining({ family: "cosmo-1b", packageName: "huggingface-tb" }),
         expect.objectContaining({ family: "smollm-1.7b", packageName: "huggingface-tb" }),
         expect.objectContaining({ family: "smollm2-16k", packageName: "huggingface-tb" }),
         expect.objectContaining({ family: "smollm3", packageName: "huggingface-tb" }),
         expect.objectContaining({ family: "smollm3-base", packageName: "huggingface-tb" }),
+        expect.objectContaining({ family: "olmo", packageName: "allenai" }),
         expect.objectContaining({ family: "olmo-1", packageName: "allenai" }),
+        expect.objectContaining({ family: "olmo-0424", packageName: "allenai" }),
         expect.objectContaining({ family: "olmo-2", packageName: "allenai" }),
         expect.objectContaining({ family: "olmo-3-instruct", packageName: "allenai" }),
         expect.objectContaining({ family: "olmo-hybrid", packageName: "allenai" }),
+        expect.objectContaining({ family: "olmo-hybrid-think", packageName: "allenai" }),
         expect.objectContaining({ family: "olmoe", packageName: "allenai" }),
+        expect.objectContaining({ family: "olmoe-instruct", packageName: "allenai" }),
+        expect.objectContaining({ family: "olmoe-0125", packageName: "allenai" }),
+        expect.objectContaining({ family: "olmoe-0125-instruct", packageName: "allenai" }),
         expect.objectContaining({
           family: "granite-3-instruct",
           packageName: "ibm-granite",
@@ -82,18 +89,6 @@ describe("generate:builtins layout", () => {
         }),
         expect.objectContaining({
           family: "granite-3.3-instruct",
-          packageName: "ibm-granite",
-        }),
-        expect.objectContaining({
-          family: "granite-7b-base",
-          packageName: "ibm-granite",
-        }),
-        expect.objectContaining({
-          family: "granite-7b-instruct",
-          packageName: "ibm-granite",
-        }),
-        expect.objectContaining({
-          family: "granite-code-base",
           packageName: "ibm-granite",
         }),
         expect.objectContaining({ family: "granite-4", packageName: "ibm-granite" }),
@@ -121,17 +116,22 @@ describe("generate:builtins layout", () => {
           family: "stable-diffcoder",
           packageName: "bytedance-seed",
         }),
+        expect.objectContaining({ family: "agentcpm-explore", packageName: "openbmb" }),
         expect.objectContaining({ family: "minicpm-s-1b", packageName: "openbmb" }),
         expect.objectContaining({ family: "minicpm-sala", packageName: "openbmb" }),
         expect.objectContaining({ family: "minicpm3", packageName: "openbmb" }),
         expect.objectContaining({ family: "minicpm4", packageName: "openbmb" }),
+        expect.objectContaining({ family: "minicpm-moe", packageName: "openbmb" }),
+        expect.objectContaining({ family: "qwen2", packageName: "qwen" }),
+        expect.objectContaining({ family: "qwen2.5", packageName: "qwen" }),
+        expect.objectContaining({ family: "qwen3", packageName: "qwen" }),
         expect.objectContaining({ family: "qwen3.5", packageName: "qwen" }),
+        expect.objectContaining({ family: "qwen3.5-base", packageName: "qwen" }),
         expect.objectContaining({ family: "qwen3-coder-next", packageName: "qwen" }),
         expect.objectContaining({ family: "deepseek-v3", packageName: "deepseek" }),
-        expect.objectContaining({ family: "deepseek-v3.1", packageName: "deepseek" }),
         expect.objectContaining({ family: "deepseek-r1", packageName: "deepseek" }),
+        expect.objectContaining({ family: "deepseek-v3.1", packageName: "deepseek" }),
         expect.objectContaining({ family: "deepseek-v3.2", packageName: "deepseek" }),
-        expect.objectContaining({ family: "glm-4-0414", packageName: "glm" }),
         expect.objectContaining({ family: "glm-4.7", packageName: "glm" }),
         expect.objectContaining({ family: "glm-5", packageName: "glm" }),
         expect.objectContaining({ family: "step-3.5-flash", packageName: "step" }),
@@ -153,9 +153,6 @@ describe("generate:builtins layout", () => {
     expect(module.resolveOutputModulePath("huggingface-tb", "smollm3")).toBe(
       "packages/huggingface-tb/src/generated/smollm3.ts"
     )
-    expect(module.resolveOutputModulePath("huggingface-tb", "cosmo_1b")).toBe(
-      "packages/huggingface-tb/src/generated/cosmo_1b.ts"
-    )
     expect(module.resolveOutputModulePath("mistral", "mistral_small_3_2")).toBe(
       "packages/mistral/src/generated/mistral_small_3_2.ts"
     )
@@ -165,17 +162,20 @@ describe("generate:builtins layout", () => {
     expect(module.resolveOutputModulePath("ibm-granite", "granite_4")).toBe(
       "packages/ibm-granite/src/generated/granite_4.ts"
     )
-    expect(module.resolveOutputModulePath("ibm-granite", "granite_code_base")).toBe(
-      "packages/ibm-granite/src/generated/granite_code_base.ts"
-    )
     expect(module.resolveOutputModulePath("bytedance-seed", "seed_oss")).toBe(
       "packages/bytedance-seed/src/generated/seed_oss.ts"
+    )
+    expect(module.resolveOutputModulePath("openbmb", "agentcpm_explore")).toBe(
+      "packages/openbmb/src/generated/agentcpm_explore.ts"
     )
     expect(module.resolveOutputModulePath("openbmb", "minicpm4")).toBe(
       "packages/openbmb/src/generated/minicpm4.ts"
     )
-    expect(module.resolveOutputModulePath("glm", "glm_4_0414")).toBe(
-      "packages/glm/src/generated/glm_4_0414.ts"
+    expect(module.resolveOutputModulePath("qwen", "qwen3_5_base")).toBe(
+      "packages/qwen/src/generated/qwen3_5_base.ts"
+    )
+    expect(module.resolveOutputModulePath("deepseek", "deepseek_r1")).toBe(
+      "packages/deepseek/src/generated/deepseek_r1.ts"
     )
   })
 

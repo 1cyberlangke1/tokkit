@@ -18,7 +18,7 @@ export function registerBuiltins(): void {
   registerTokenizerFamily({
     family: "step-3.5-flash",
     aliases: ["step3.5-flash", "step_3_5_flash"],
-    models: ["stepfun-ai/Step-3.5-Flash"],
+    models: ["stepfun-ai/Step-3.5-Flash", "stepfun-ai/Step-3.5-Flash-Base-Midtrain"],
     load: () => loadFamilyAsset("./generated/step_3_5_flash.js"),
   })
 }

@@ -144,6 +144,7 @@ const VENDOR_PACKAGE_CASES = [
       "microsoft/Phi-3-mini-4k-instruct",
       "microsoft/Phi-3-mini-128k-instruct",
       "microsoft/Phi-3-medium-4k-instruct",
+      "microsoft/Phi-3-medium-128k-instruct",
       "microsoft/Phi-3.5-mini-instruct",
       "microsoft/Phi-3.5-MoE-instruct",
       "microsoft/Phi-mini-MoE-instruct",
@@ -160,35 +161,46 @@ const VENDOR_PACKAGE_CASES = [
     relativePath: "packages/mistral/src/index.ts",
     expectedFamilies: [
       "devstral-small-2",
-      "ministral-8b",
+      "mathstral-7b",
+      "mamba-codestral-7b",
+      "ministral-3",
       "mistral-7b-v0.1",
       "mistral-7b-v0.3",
-      "mistral-small-3.1",
+      "mistral-nemo",
+      "mistral-small-24b",
       "mixtral-8x7b",
     ],
     expectedModels: [
+      "mistralai/Devstral-Small-2-24B-Instruct-2512",
+      "mistralai/Mathstral-7B-v0.1",
+      "mistralai/Mamba-Codestral-7B-v0.1",
+      "mistralai/Ministral-3-3B-Base-2512",
+      "mistralai/Ministral-3-3B-Instruct-2512",
+      "mistralai/Ministral-3-3B-Reasoning-2512",
+      "mistralai/Ministral-3-8B-Base-2512",
+      "mistralai/Ministral-3-8B-Instruct-2512",
+      "mistralai/Ministral-3-8B-Reasoning-2512",
+      "mistralai/Ministral-3-14B-Base-2512",
+      "mistralai/Ministral-3-14B-Instruct-2512",
+      "mistralai/Ministral-3-14B-Reasoning-2512",
       "mistralai/Mistral-7B-v0.1",
       "mistralai/Mistral-7B-Instruct-v0.1",
       "mistralai/Mistral-7B-Instruct-v0.2",
       "mistralai/Mistral-7B-v0.3",
       "mistralai/Mistral-7B-Instruct-v0.3",
+      "mistralai/Mistral-Nemo-Base-2407",
+      "mistralai/Mistral-Nemo-Instruct-2407",
+      "mistralai/Mistral-Small-24B-Base-2501",
+      "mistralai/Mistral-Small-24B-Instruct-2501",
+      "mistralai/Mixtral-8x22B-v0.1",
+      "mistralai/Mixtral-8x22B-Instruct-v0.1",
       "mistralai/Mixtral-8x7B-v0.1",
       "mistralai/Mixtral-8x7B-Instruct-v0.1",
-      "mistralai/Ministral-8B-Instruct-2410",
-      "mistralai/Devstral-Small-2-24B-Instruct-2512",
-      "mistralai/Mistral-Small-3.1-24B-Instruct-2503",
     ],
   },
   {
     relativePath: "packages/huggingface-tb/src/index.ts",
-    expectedFamilies: [
-      "cosmo-1b",
-      "smollm",
-      "smollm-1.7b",
-      "smollm2-16k",
-      "smollm3",
-      "smollm3-base",
-    ],
+    expectedFamilies: ["cosmo-1b", "smollm", "smollm-1.7b", "smollm2-16k", "smollm3", "smollm3-base"],
     expectedModels: [
       "HuggingFaceTB/cosmo-1b",
       "HuggingFaceTB/SmolLM-135M",
@@ -210,18 +222,51 @@ const VENDOR_PACKAGE_CASES = [
   },
   {
     relativePath: "packages/allenai/src/index.ts",
-    expectedFamilies: ["olmo-1", "olmo-2", "olmo-3-instruct", "olmo-hybrid", "olmoe"],
+    expectedFamilies: [
+      "olmo",
+      "olmo-1",
+      "olmo-0424",
+      "olmo-2",
+      "olmo-3-instruct",
+      "olmo-hybrid",
+      "olmo-hybrid-think",
+      "olmoe",
+      "olmoe-instruct",
+      "olmoe-0125",
+      "olmoe-0125-instruct",
+    ],
     expectedModels: [
+      "allenai/OLMo-1B",
       "allenai/OLMo-1B-hf",
+      "allenai/OLMo-1B-0724-hf",
+      "allenai/OLMo-7B",
+      "allenai/OLMo-7B-0424",
+      "allenai/OLMo-7B-Instruct",
+      "allenai/OLMo-7B-hf",
+      "allenai/OLMo-7B-0424-hf",
+      "allenai/OLMo-7B-0724-hf",
+      "allenai/OLMo-7B-Instruct-hf",
       "allenai/OLMoE-1B-7B-0924",
+      "allenai/OLMoE-1B-7B-0924-Instruct",
+      "allenai/OLMoE-1B-7B-0125",
+      "allenai/OLMoE-1B-7B-0125-Instruct",
       "allenai/OLMo-2-0425-1B",
+      "allenai/OLMo-2-0425-1B-Instruct",
       "allenai/OLMo-2-0325-32B",
       "allenai/OLMo-2-1124-13B",
+      "allenai/OLMo-2-1124-7B",
+      "allenai/OLMo-2-1124-7B-Instruct",
+      "allenai/OLMo-2-0325-32B-Instruct",
       "allenai/Olmo-3-1025-7B",
+      "allenai/Olmo-3-1125-32B",
+      "allenai/Olmo-3-7B-Think",
+      "allenai/Olmo-3-32B-Think",
       "allenai/Olmo-3.1-32B-Think",
       "allenai/Olmo-3-7B-Instruct",
+      "allenai/Olmo-3.1-32B-Instruct",
       "allenai/Olmo-Hybrid-7B",
       "allenai/Olmo-Hybrid-Instruct-SFT-7B",
+      "allenai/Olmo-Hybrid-Think-SFT-7B",
     ],
   },
   {
@@ -230,52 +275,27 @@ const VENDOR_PACKAGE_CASES = [
       "granite-3-instruct",
       "granite-3.3-base",
       "granite-3.3-instruct",
-      "granite-4",
-      "granite-4-tiny-base-preview",
-      "granite-4-tiny-preview",
       "granite-7b-base",
       "granite-7b-instruct",
       "granite-code-base",
+      "granite-4",
+      "granite-4-tiny-base-preview",
+      "granite-4-tiny-preview",
     ],
     expectedModels: [
-      "ibm-granite/granite-3.0-1b-a400m-base",
       "ibm-granite/granite-3.0-2b-base",
       "ibm-granite/granite-3.1-8b-base",
-      "ibm-granite/granite-20b-code-instruct-8k",
-      "ibm-granite/granite-3.0-1b-a400m-instruct",
       "ibm-granite/granite-3.0-2b-instruct",
-      "ibm-granite/granite-3.1-3b-a800m-instruct",
       "ibm-granite/granite-3.2-8b-instruct",
-      "ibm-granite/granite-3.2-8b-instruct-preview",
       "ibm-granite/granite-3.3-8b-base",
       "ibm-granite/granite-3.3-8b-instruct",
-      "ibm-granite/granite-34b-code-instruct-8k",
+      "ibm-granite/granite-7b-base",
+      "ibm-granite/granite-7b-instruct",
+      "ibm-granite/granite-3b-code-base-2k",
       "ibm-granite/granite-4.0-350m-base",
       "ibm-granite/granite-4.0-h-1b",
       "ibm-granite/granite-4.0-tiny-base-preview",
       "ibm-granite/granite-4.0-tiny-preview",
-      "ibm-granite/granite-7b-base",
-      "ibm-granite/granite-7b-instruct",
-    ],
-  },
-  {
-    relativePath: "packages/glm/src/index.ts",
-    expectedFamilies: ["glm-4-0414", "glm-4.7", "glm-5"],
-    expectedModels: [
-      "zai-org/GLM-4.5",
-      "zai-org/GLM-4.5-Base",
-      "zai-org/GLM-4.5-Air",
-      "zai-org/GLM-4.5-Air-Base",
-      "zai-org/GLM-4.6",
-      "zai-org/GLM-4.7",
-      "zai-org/GLM-4.7-Flash",
-      "zai-org/GLM-5",
-      "zai-org/GLM-4-9B-0414",
-      "zai-org/GLM-4-32B-0414",
-      "zai-org/GLM-4-32B-Base-0414",
-      "zai-org/GLM-Z1-9B-0414",
-      "zai-org/GLM-Z1-32B-0414",
-      "zai-org/GLM-Z1-Rumination-32B-0414",
     ],
   },
   {
@@ -295,8 +315,17 @@ const VENDOR_PACKAGE_CASES = [
   },
   {
     relativePath: "packages/openbmb/src/index.ts",
-    expectedFamilies: ["minicpm-s-1b", "minicpm-sala", "minicpm3", "minicpm4"],
+    expectedFamilies: [
+      "agentcpm-explore",
+      "minicpm-s-1b",
+      "minicpm-sala",
+      "minicpm3",
+      "minicpm4",
+      "minicpm-moe",
+    ],
     expectedModels: [
+      "openbmb/AgentCPM-Explore",
+      "openbmb/AgentCPM-Report",
       "openbmb/MiniCPM-S-1B-sft",
       "openbmb/MiniCPM-SALA",
       "openbmb/MiniCPM3-4B",
@@ -305,9 +334,12 @@ const VENDOR_PACKAGE_CASES = [
       "openbmb/MiniCPM4.1-8B",
       "openbmb/BitCPM4-0.5B",
       "openbmb/BitCPM4-1B",
+      "openbmb/MiniCPM4-MCP",
+      "openbmb/MiniCPM4-Survey",
       "openbmb/NOSA-1B",
       "openbmb/NOSA-3B",
       "openbmb/NOSA-8B",
+      "openbmb/MiniCPM-MoE-8x2B",
     ],
   },
 ] as const
@@ -327,48 +359,58 @@ const EXPECTED_ALL_FAMILIES = [
   "falcon-7b",
   "bitnet-b1.58-2b-4t",
   "gpt-neo",
-  "glm-4-0414",
+  "cosmo-1b",
   "glm-4.7",
   "glm-5",
   "granite-3-instruct",
   "granite-3.3-base",
   "granite-3.3-instruct",
-  "granite-4",
-  "granite-4-tiny-base-preview",
-  "granite-4-tiny-preview",
   "granite-7b-base",
   "granite-7b-instruct",
   "granite-code-base",
+  "granite-4",
+  "granite-4-tiny-base-preview",
+  "granite-4-tiny-preview",
   "longcat-flash-chat",
   "longcat-flash-lite",
   "longcat-flash-thinking",
   "academic-ds",
+  "agentcpm-explore",
   "minicpm-s-1b",
   "minicpm-sala",
   "minicpm3",
   "minicpm4",
+  "minicpm-moe",
   "mimo",
   "mimo-7b-rl-0530",
   "mimo-v2-flash",
-  "ministral-8b",
+  "mathstral-7b",
+  "mamba-codestral-7b",
+  "ministral-3",
   "mistral-7b-v0.1",
   "mistral-7b-v0.3",
-  "mistral-small-3.1",
+  "mistral-nemo",
+  "mistral-small-24b",
   "mixtral-8x7b",
   "seed-coder",
   "seed-oss",
-  "cosmo-1b",
   "smollm",
   "smollm-1.7b",
   "smollm2-16k",
   "smollm3",
   "smollm3-base",
   "stable-diffcoder",
+  "olmo",
   "olmo-1",
+  "olmo-0424",
   "olmo-2",
   "olmo-3-instruct",
   "olmo-hybrid",
+  "olmo-hybrid-think",
   "olmoe",
+  "olmoe-instruct",
+  "olmoe-0125",
+  "olmoe-0125-instruct",
   "phi-1",
   "phi-3-mini",
   "phi-3-medium",
@@ -382,8 +424,12 @@ const EXPECTED_ALL_FAMILIES = [
   "polyglot-ko",
   "polyglot-ko-12.8",
   "pythia",
+  "qwen2",
+  "qwen2.5",
+  "qwen3",
   "qwen3-coder-next",
   "qwen3.5",
+  "qwen3.5-base",
   "step-3.5-flash",
 ] as const
 
@@ -420,13 +466,21 @@ describe("family packages", () => {
     core.resetRegistry()
     qwen.registerBuiltins()
 
-    expect(core.listSupportedFamilies().sort()).toEqual(["qwen3-coder-next", "qwen3.5"].sort())
+    expect(core.listSupportedFamilies().sort()).toEqual(
+      ["qwen2", "qwen2.5", "qwen3", "qwen3.5", "qwen3.5-base", "qwen3-coder-next"].sort()
+    )
     expect(core.listSupportedModels()).toEqual(
       expect.arrayContaining([
+        "Qwen/Qwen2-7B-Instruct",
+        "Qwen/Qwen2.5-7B-Instruct",
+        "Qwen/Qwen3-0.6B",
+        "Qwen/Qwen3-235B-A22B-Instruct-2507",
         "Qwen/Qwen3.5-0.8B",
         "Qwen/Qwen3.5-27B",
+        "Qwen/Qwen3.5-0.8B-Base",
         "Qwen/Qwen3.5-397B-A17B",
         "Qwen/Qwen3-Coder-Next",
+        "Qwen/QwQ-32B",
       ])
     )
   })
@@ -439,20 +493,55 @@ describe("family packages", () => {
     deepseek.registerBuiltins()
 
     expect(core.listSupportedFamilies().sort()).toEqual(
-      ["deepseek-r1", "deepseek-v3", "deepseek-v3.1", "deepseek-v3.2"].sort()
+      ["deepseek-v3", "deepseek-r1", "deepseek-v3.1", "deepseek-v3.2"].sort()
     )
     expect(core.listSupportedModels()).toEqual(
       expect.arrayContaining([
         "deepseek-ai/DeepSeek-V3",
         "deepseek-ai/DeepSeek-V3-0324",
-        "deepseek-ai/DeepSeek-V3.1",
-        "deepseek-ai/DeepSeek-V3.1-Base",
         "deepseek-ai/DeepSeek-R1",
         "deepseek-ai/DeepSeek-R1-0528",
-        "deepseek-ai/DeepSeek-R1-Zero",
-        "deepseek-ai/DeepSeek-V3.2",
+        "deepseek-ai/DeepSeek-V3.1",
         "deepseek-ai/DeepSeek-V3.2-Exp",
-        "deepseek-ai/DeepSeek-V3.2-Exp-Base",
+        "deepseek-ai/DeepSeek-V3.2",
+      ])
+    )
+  })
+
+  it("step 包只注册 step 系列 family", async () => {
+    const core = await importModule("packages/core/src/index.ts")
+    const step = await importModule("packages/step/src/index.ts")
+
+    core.resetRegistry()
+    step.registerBuiltins()
+
+    expect(core.listSupportedFamilies().sort()).toEqual(["step-3.5-flash"].sort())
+    expect(core.listSupportedModels()).toEqual(
+      expect.arrayContaining([
+        "stepfun-ai/Step-3.5-Flash",
+        "stepfun-ai/Step-3.5-Flash-Base-Midtrain",
+      ])
+    )
+  })
+
+  it("glm 包只注册 glm 系列 family", async () => {
+    const core = await importModule("packages/core/src/index.ts")
+    const glm = await importModule("packages/glm/src/index.ts")
+
+    core.resetRegistry()
+    glm.registerBuiltins()
+
+    expect(core.listSupportedFamilies().sort()).toEqual(["glm-4.7", "glm-5"].sort())
+    expect(core.listSupportedModels()).toEqual(
+      expect.arrayContaining([
+        "zai-org/GLM-4.5",
+        "zai-org/GLM-4.5-Base",
+        "zai-org/GLM-4.5-Air",
+        "zai-org/GLM-4.5-Air-Base",
+        "zai-org/GLM-4.6",
+        "zai-org/GLM-4.7",
+        "zai-org/GLM-4.7-Flash",
+        "zai-org/GLM-5",
       ])
     )
   })

@@ -139,12 +139,6 @@ export const FAMILY_SPECS = [
     source: "vendor/tokenizers/XiaomiMiMo__MiMo-V2-Flash__tokenizer.json.br",
   },
   {
-    family: "bitnet-b1.58-2b-4t",
-    packageName: "microsoft",
-    moduleName: "bitnet_b1_58_2b_4t",
-    source: "vendor/tokenizers/microsoft__bitnet-b1.58-2B-4T__tokenizer.json.br",
-  },
-  {
     family: "phi-1",
     packageName: "microsoft",
     moduleName: "phi_1",
@@ -211,10 +205,22 @@ export const FAMILY_SPECS = [
     source: "vendor/tokenizers/mistralai__Devstral-Small-2-24B-Instruct-2512__tokenizer.json.br",
   },
   {
-    family: "ministral-8b",
+    family: "mathstral-7b",
     packageName: "mistral",
-    moduleName: "ministral_8b",
-    source: "vendor/tokenizers/mistralai__Ministral-8B-Instruct-2410__tokenizer.json.br",
+    moduleName: "mathstral_7b",
+    source: "vendor/tokenizers/mistralai__Mathstral-7B-v0.1__tokenizer.json.br",
+  },
+  {
+    family: "mamba-codestral-7b",
+    packageName: "mistral",
+    moduleName: "mamba_codestral_7b",
+    source: "vendor/tokenizers/mistralai__Mamba-Codestral-7B-v0.1__tokenizer.json.br",
+  },
+  {
+    family: "ministral-3",
+    packageName: "mistral",
+    moduleName: "ministral_3",
+    source: "vendor/tokenizers/mistralai__Ministral-3-3B-Base-2512__tokenizer.json.br",
   },
   {
     family: "mistral-7b-v0.1",
@@ -229,10 +235,16 @@ export const FAMILY_SPECS = [
     source: "vendor/tokenizers/mistralai__Mistral-7B-v0.3__tokenizer.json.br",
   },
   {
-    family: "mistral-small-3.1",
+    family: "mistral-nemo",
     packageName: "mistral",
-    moduleName: "mistral_small_3_1",
-    source: "vendor/tokenizers/mistralai__Mistral-Small-3.1-24B-Instruct-2503__tokenizer.json.br",
+    moduleName: "mistral_nemo",
+    source: "vendor/tokenizers/mistralai__Mistral-Nemo-Base-2407__tokenizer.json.br",
+  },
+  {
+    family: "mistral-small-24b",
+    packageName: "mistral",
+    moduleName: "mistral_small_24b",
+    source: "vendor/tokenizers/mistralai__Mistral-Small-24B-Base-2501__tokenizer.json.br",
   },
   {
     family: "mixtral-8x7b",
@@ -245,12 +257,6 @@ export const FAMILY_SPECS = [
     packageName: "huggingface-tb",
     moduleName: "smollm",
     source: "vendor/tokenizers/HuggingFaceTB__SmolLM-135M__tokenizer.json.br",
-  },
-  {
-    family: "cosmo-1b",
-    packageName: "huggingface-tb",
-    moduleName: "cosmo_1b",
-    source: "vendor/tokenizers/HuggingFaceTB__cosmo-1b__tokenizer.json.br",
   },
   {
     family: "smollm-1.7b",
@@ -277,10 +283,22 @@ export const FAMILY_SPECS = [
     source: "vendor/tokenizers/HuggingFaceTB__SmolLM3-3B-Base__tokenizer.json.br",
   },
   {
+    family: "olmo",
+    packageName: "allenai",
+    moduleName: "olmo",
+    source: "vendor/tokenizers/allenai__OLMo-1B__tokenizer.json.br",
+  },
+  {
     family: "olmo-1",
     packageName: "allenai",
     moduleName: "olmo_1",
     source: "vendor/tokenizers/allenai__OLMo-1B-hf__tokenizer.json.br",
+  },
+  {
+    family: "olmo-0424",
+    packageName: "allenai",
+    moduleName: "olmo_0424",
+    source: "vendor/tokenizers/allenai__OLMo-7B-0424-hf__tokenizer.json.br",
   },
   {
     family: "olmo-2",
@@ -301,10 +319,34 @@ export const FAMILY_SPECS = [
     source: "vendor/tokenizers/allenai__Olmo-Hybrid-7B__tokenizer.json.br",
   },
   {
+    family: "olmo-hybrid-think",
+    packageName: "allenai",
+    moduleName: "olmo_hybrid_think",
+    source: "vendor/tokenizers/allenai__Olmo-Hybrid-Think-SFT-7B__tokenizer.json.br",
+  },
+  {
     family: "olmoe",
     packageName: "allenai",
     moduleName: "olmoe",
     source: "vendor/tokenizers/allenai__OLMoE-1B-7B-0924__tokenizer.json.br",
+  },
+  {
+    family: "olmoe-instruct",
+    packageName: "allenai",
+    moduleName: "olmoe_instruct",
+    source: "vendor/tokenizers/allenai__OLMoE-1B-7B-0924-Instruct__tokenizer.json.br",
+  },
+  {
+    family: "olmoe-0125",
+    packageName: "allenai",
+    moduleName: "olmoe_0125",
+    source: "vendor/tokenizers/allenai__OLMoE-1B-7B-0125__tokenizer.json.br",
+  },
+  {
+    family: "olmoe-0125-instruct",
+    packageName: "allenai",
+    moduleName: "olmoe_0125_instruct",
+    source: "vendor/tokenizers/allenai__OLMoE-1B-7B-0125-Instruct__tokenizer.json.br",
   },
   {
     family: "granite-3-instruct",
@@ -323,24 +365,6 @@ export const FAMILY_SPECS = [
     packageName: "ibm-granite",
     moduleName: "granite_3_3_instruct",
     source: "vendor/tokenizers/ibm-granite__granite-3.3-8b-instruct__tokenizer.json.br",
-  },
-  {
-    family: "granite-7b-base",
-    packageName: "ibm-granite",
-    moduleName: "granite_7b_base",
-    source: "vendor/tokenizers/ibm-granite__granite-7b-base__tokenizer.json.br",
-  },
-  {
-    family: "granite-7b-instruct",
-    packageName: "ibm-granite",
-    moduleName: "granite_7b_instruct",
-    source: "vendor/tokenizers/ibm-granite__granite-7b-instruct__tokenizer.json.br",
-  },
-  {
-    family: "granite-code-base",
-    packageName: "ibm-granite",
-    moduleName: "granite_code_base",
-    source: "vendor/tokenizers/ibm-granite__granite-3b-code-base-2k__tokenizer.json.br",
   },
   {
     family: "granite-4",
@@ -385,6 +409,12 @@ export const FAMILY_SPECS = [
     source: "vendor/tokenizers/ByteDance-Seed__Stable-DiffCoder-8B-Base__tokenizer.json.br",
   },
   {
+    family: "agentcpm-explore",
+    packageName: "openbmb",
+    moduleName: "agentcpm_explore",
+    source: "vendor/tokenizers/openbmb__AgentCPM-Explore__tokenizer.json.br",
+  },
+  {
     family: "minicpm-s-1b",
     packageName: "openbmb",
     moduleName: "minicpm_s_1b",
@@ -409,10 +439,40 @@ export const FAMILY_SPECS = [
     source: "vendor/tokenizers/openbmb__MiniCPM4-8B__tokenizer.json.br",
   },
   {
+    family: "minicpm-moe",
+    packageName: "openbmb",
+    moduleName: "minicpm_moe",
+    source: "vendor/tokenizers/openbmb__MiniCPM-MoE-8x2B__tokenizer.json.br",
+  },
+  {
+    family: "qwen2",
+    packageName: "qwen",
+    moduleName: "qwen2",
+    source: "vendor/tokenizers/Qwen__Qwen2-0.5B__tokenizer.json.br",
+  },
+  {
+    family: "qwen2.5",
+    packageName: "qwen",
+    moduleName: "qwen2_5",
+    source: "vendor/tokenizers/Qwen__Qwen2.5-0.5B__tokenizer.json.br",
+  },
+  {
+    family: "qwen3",
+    packageName: "qwen",
+    moduleName: "qwen3",
+    source: "vendor/tokenizers/Qwen__Qwen3-0.6B__tokenizer.json.br",
+  },
+  {
     family: "qwen3.5",
     packageName: "qwen",
     moduleName: "qwen3_5",
     source: "vendor/tokenizers/Qwen__Qwen3.5-0.8B__tokenizer.json.br",
+  },
+  {
+    family: "qwen3.5-base",
+    packageName: "qwen",
+    moduleName: "qwen3_5_base",
+    source: "vendor/tokenizers/Qwen__Qwen3.5-0.8B-Base__tokenizer.json.br",
   },
   {
     family: "qwen3-coder-next",
@@ -427,16 +487,16 @@ export const FAMILY_SPECS = [
     source: "vendor/tokenizers/deepseek-ai__DeepSeek-V3-0324__tokenizer.json.br",
   },
   {
-    family: "deepseek-v3.1",
-    packageName: "deepseek",
-    moduleName: "deepseek_v3_1",
-    source: "vendor/tokenizers/deepseek-ai__DeepSeek-V3.1__tokenizer.json.br",
-  },
-  {
     family: "deepseek-r1",
     packageName: "deepseek",
     moduleName: "deepseek_r1",
     source: "vendor/tokenizers/deepseek-ai__DeepSeek-R1__tokenizer.json.br",
+  },
+  {
+    family: "deepseek-v3.1",
+    packageName: "deepseek",
+    moduleName: "deepseek_v3_1",
+    source: "vendor/tokenizers/deepseek-ai__DeepSeek-V3.1__tokenizer.json.br",
   },
   {
     family: "deepseek-v3.2",
@@ -455,12 +515,6 @@ export const FAMILY_SPECS = [
     packageName: "glm",
     moduleName: "glm_5",
     source: "vendor/tokenizers/zai-org__GLM-5__tokenizer.json.br",
-  },
-  {
-    family: "glm-4-0414",
-    packageName: "glm",
-    moduleName: "glm_4_0414",
-    source: "vendor/tokenizers/zai-org__GLM-4-9B-0414__tokenizer.json.br",
   },
   {
     family: "step-3.5-flash",
