@@ -1,6 +1,6 @@
 {
   "name": "@cyberlangke/tokkit-core",
-  "version": "1.4.1",
+  "version": "1.5.0",
   "description": "Core runtime for counting BPE tokens.",
   "type": "module",
   "main": "./dist/index.cjs",

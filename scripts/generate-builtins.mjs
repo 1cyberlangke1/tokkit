@@ -91,6 +91,12 @@ export const FAMILY_SPECS = [
     source: "vendor/tokenizers/EleutherAI__polyglot-ko-12.8b__tokenizer.json.br",
   },
   {
+    family: "gpt-neo",
+    packageName: "eleutherai",
+    moduleName: "gpt_neo",
+    source: "vendor/tokenizers/EleutherAI__gpt-neo-125m__tokenizer.json.br",
+  },
+  {
     family: "pythia",
     packageName: "eleutherai",
     moduleName: "pythia",

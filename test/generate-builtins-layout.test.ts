@@ -24,6 +24,7 @@ describe("generate:builtins layout", () => {
         expect.objectContaining({ family: "falcon-7b", packageName: "tiiuae" }),
         expect.objectContaining({ family: "polyglot-ko", packageName: "eleutherai" }),
         expect.objectContaining({ family: "polyglot-ko-12.8", packageName: "eleutherai" }),
+        expect.objectContaining({ family: "gpt-neo", packageName: "eleutherai" }),
         expect.objectContaining({ family: "pythia", packageName: "eleutherai" }),
         expect.objectContaining({
           family: "longcat-flash-chat",

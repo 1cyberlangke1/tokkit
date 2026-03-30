@@ -537,6 +537,7 @@ describe("builtin tokenizer families", () => {
           "phi-4-mini-reasoning",
           "phi-4-reasoning",
           "phi-moe",
+          "gpt-neo",
           "polyglot-ko",
           "polyglot-ko-12.8",
           "pythia",
@@ -576,6 +577,11 @@ describe("builtin tokenizer families", () => {
           "tiiuae/falcon-7b-instruct",
           "tiiuae/falcon-40b",
           "tiiuae/falcon-40b-instruct",
+          "EleutherAI/gpt-neo-125m",
+          "EleutherAI/gpt-neo-2.7B",
+          "EleutherAI/gpt-j-6b",
+          "EleutherAI/gpt-neox-20b",
+          "EleutherAI/pythia-14m",
           "EleutherAI/pythia-70m",
           "EleutherAI/pythia-6.9b",
           "EleutherAI/pythia-12b",
@@ -668,9 +674,17 @@ describe("builtin tokenizer families", () => {
       expect(await getEncoding("tiiuae/falcon-7b-instruct")).toBe(falcon7b)
       expect(await getEncoding("tiiuae/falcon-40b")).toBe(falcon7b)
 
+      const gptNeo = await getEncoding("gpt-neo")
+      expect(await getEncoding("EleutherAI/gpt-j-6b")).toBe(gptNeo)
+      expect(await getEncoding("EleutherAI/gpt-neo-2.7B")).toBe(gptNeo)
+      expect(await getEncoding("gpt-j")).toBe(gptNeo)
+
       const pythia = await getEncoding("pythia")
+      expect(await getEncoding("EleutherAI/gpt-neox-20b")).toBe(pythia)
+      expect(await getEncoding("EleutherAI/pythia-14m")).toBe(pythia)
       expect(await getEncoding("EleutherAI/pythia-12b")).toBe(pythia)
       expect(await getEncoding("EleutherAI/pythia-12b-deduped")).toBe(pythia)
+      expect(await getEncoding("gpt-neox")).toBe(pythia)
 
       const mimo = await getEncoding("mimo")
       expect(await getEncoding("XiaomiMiMo/MiMo-V2-Flash-Base")).toBe(mimo)

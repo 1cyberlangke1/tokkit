@@ -16,9 +16,24 @@ export * from "@cyberlangke/tokkit-core"
  */
 const BUILTIN_FAMILIES = [
   {
-    family: "pythia",
-    aliases: ["pythia_6_9b"],
+    family: "gpt-neo",
+    aliases: ["gpt_neo", "gpt-j", "gpt_j"],
     models: [
+      "EleutherAI/gpt-neo-125m",
+      "EleutherAI/gpt-neo-1.3B",
+      "EleutherAI/gpt-neo-2.7B",
+      "EleutherAI/gpt-j-6b",
+    ],
+    modulePath: "./generated/gpt_neo.js",
+  },
+  {
+    family: "pythia",
+    aliases: ["pythia_6_9b", "gpt-neox", "gpt_neox"],
+    models: [
+      "EleutherAI/gpt-neox-20b",
+      "EleutherAI/pythia-14m",
+      "EleutherAI/pythia-14m-deduped",
+      "EleutherAI/pythia-31m-deduped",
       "EleutherAI/pythia-70m",
       "EleutherAI/pythia-160m",
       "EleutherAI/pythia-410m",

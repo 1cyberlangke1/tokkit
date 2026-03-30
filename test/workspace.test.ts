@@ -58,8 +58,9 @@ const EXPECTED_PACKAGES = [
   {
     directory: "eleutherai",
     packageName: "@cyberlangke/tokkit-eleutherai",
-    license: "Apache-2.0",
+    license: "SEE LICENSE IN LICENSE",
     includedInAll: true,
+    requiredFiles: ["COPYRIGHT", "LICENSE"],
   },
   {
     directory: "meituan-longcat",

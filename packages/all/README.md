@@ -8,6 +8,8 @@
 - [`01-ai/Yi-1.5-9B-Chat`](https://huggingface.co/01-ai/Yi-1.5-9B-Chat)
 - [`01-ai/Yi-Coder-9B`](https://huggingface.co/01-ai/Yi-Coder-9B)
 - [`01-ai/Yi-Coder-9B-Chat`](https://huggingface.co/01-ai/Yi-Coder-9B-Chat)
+- [`EleutherAI/gpt-j-6b`](https://huggingface.co/EleutherAI/gpt-j-6b)
+- [`EleutherAI/gpt-neox-20b`](https://huggingface.co/EleutherAI/gpt-neox-20b)
 - [`Qwen/Qwen3.5-0.8B`](https://huggingface.co/Qwen/Qwen3.5-0.8B)
 - [`Qwen/Qwen3.5-27B`](https://huggingface.co/Qwen/Qwen3.5-27B)
 - [`Qwen/Qwen3.5-397B-A17B`](https://huggingface.co/Qwen/Qwen3.5-397B-A17B)

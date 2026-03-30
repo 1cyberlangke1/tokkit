@@ -20,6 +20,7 @@
   - `falcon-rw-1b`
   - `falcon-7b`
 - `@cyberlangke/tokkit-eleutherai`
+  - `gpt-neo`
   - `pythia`
   - `polyglot-ko`
   - `polyglot-ko-12.8`
