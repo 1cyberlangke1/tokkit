@@ -1,6 +1,6 @@
 {
   "name": "@cyberlangke/tokkit-xiaomi-mimo",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "description": "XiaomiMiMo tokenizer families for tokkit.",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -22,7 +22,7 @@
     "dev": "tsup --watch"
   },
   "dependencies": {
-    "@cyberlangke/tokkit-core": "1.6.0"
+    "@cyberlangke/tokkit-core": "1.7.0"
   },
   "publishConfig": {
     "access": "public"

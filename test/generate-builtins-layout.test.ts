@@ -83,6 +83,18 @@ describe("generate:builtins layout", () => {
           family: "granite-3.3-instruct",
           packageName: "ibm-granite",
         }),
+        expect.objectContaining({
+          family: "granite-7b-base",
+          packageName: "ibm-granite",
+        }),
+        expect.objectContaining({
+          family: "granite-7b-instruct",
+          packageName: "ibm-granite",
+        }),
+        expect.objectContaining({
+          family: "granite-code-base",
+          packageName: "ibm-granite",
+        }),
         expect.objectContaining({ family: "granite-4", packageName: "ibm-granite" }),
         expect.objectContaining({
           family: "granite-4-tiny-base-preview",
@@ -148,6 +160,9 @@ describe("generate:builtins layout", () => {
     )
     expect(module.resolveOutputModulePath("ibm-granite", "granite_4")).toBe(
       "packages/ibm-granite/src/generated/granite_4.ts"
+    )
+    expect(module.resolveOutputModulePath("ibm-granite", "granite_code_base")).toBe(
+      "packages/ibm-granite/src/generated/granite_code_base.ts"
     )
     expect(module.resolveOutputModulePath("bytedance-seed", "seed_oss")).toBe(
       "packages/bytedance-seed/src/generated/seed_oss.ts"

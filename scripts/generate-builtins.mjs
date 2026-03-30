@@ -319,6 +319,24 @@ export const FAMILY_SPECS = [
     source: "vendor/tokenizers/ibm-granite__granite-3.3-8b-instruct__tokenizer.json.br",
   },
   {
+    family: "granite-7b-base",
+    packageName: "ibm-granite",
+    moduleName: "granite_7b_base",
+    source: "vendor/tokenizers/ibm-granite__granite-7b-base__tokenizer.json.br",
+  },
+  {
+    family: "granite-7b-instruct",
+    packageName: "ibm-granite",
+    moduleName: "granite_7b_instruct",
+    source: "vendor/tokenizers/ibm-granite__granite-7b-instruct__tokenizer.json.br",
+  },
+  {
+    family: "granite-code-base",
+    packageName: "ibm-granite",
+    moduleName: "granite_code_base",
+    source: "vendor/tokenizers/ibm-granite__granite-3b-code-base-2k__tokenizer.json.br",
+  },
+  {
     family: "granite-4",
     packageName: "ibm-granite",
     moduleName: "granite_4",

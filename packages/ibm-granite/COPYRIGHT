@@ -2,10 +2,13 @@ Copyright (c) 2026 cyberlangke
 
 This package bundles tokenizer assets derived from official Hugging Face repositories under the ibm-granite organization:
 - ibm-granite/granite-3.0-2b-instruct tokenizer.json
+- ibm-granite/granite-3b-code-base-2k tokenizer.json
 - ibm-granite/granite-3.3-8b-base tokenizer.json
 - ibm-granite/granite-3.3-8b-instruct tokenizer.json
 - ibm-granite/granite-4.0-350m-base tokenizer.json
 - ibm-granite/granite-4.0-tiny-base-preview tokenizer.json
 - ibm-granite/granite-4.0-tiny-preview tokenizer.json
+- ibm-granite/granite-7b-base tokenizer.json
+- ibm-granite/granite-7b-instruct tokenizer.json
 
 See LICENSE for the full license text that applies to this package and its bundled assets.
