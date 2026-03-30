@@ -486,6 +486,8 @@ describe("builtin tokenizer families", () => {
           "yi-coder",
           "yi-coder-chat",
           "devstral-small-2",
+          "deepseek-r1",
+          "deepseek-v3",
           "deepseek-v3.1",
           "deepseek-v3.2",
           "falcon-rw-1b",
@@ -654,8 +656,15 @@ describe("builtin tokenizer families", () => {
           "Qwen/Qwen3.5-27B",
           "Qwen/Qwen3.5-397B-A17B",
           "Qwen/Qwen3-Coder-Next",
+          "deepseek-ai/DeepSeek-V3-0324",
           "deepseek-ai/DeepSeek-V3.1",
+          "deepseek-ai/DeepSeek-V3.1-Base",
+          "deepseek-ai/DeepSeek-R1",
+          "deepseek-ai/DeepSeek-R1-0528",
+          "deepseek-ai/DeepSeek-R1-Zero",
           "deepseek-ai/DeepSeek-V3.2",
+          "deepseek-ai/DeepSeek-V3.2-Exp",
+          "deepseek-ai/DeepSeek-V3.2-Exp-Base",
           "zai-org/GLM-4.7",
           "zai-org/GLM-5",
           "stepfun-ai/Step-3.5-Flash",
@@ -711,6 +720,15 @@ describe("builtin tokenizer families", () => {
 
       const olmo2 = await getEncoding("olmo-2")
       expect(await getEncoding("allenai/OLMo-2-1124-13B")).toBe(olmo2)
+
+      const deepseekR1 = await getEncoding("deepseek-r1")
+      expect(await getEncoding("deepseek-ai/DeepSeek-R1-0528")).toBe(deepseekR1)
+
+      const deepseekV3 = await getEncoding("deepseek-v3")
+      expect(await getEncoding("deepseek-ai/DeepSeek-V3-0324")).toBe(deepseekV3)
+
+      const deepseek31 = await getEncoding("deepseek-v3.1")
+      expect(await getEncoding("deepseek-ai/DeepSeek-V3.2-Exp")).toBe(deepseek31)
 
       const deepseek32 = await getEncoding("deepseek-v3.2")
       expect(await getEncoding("deepseek-ai/DeepSeek-V3.2")).toBe(deepseek32)

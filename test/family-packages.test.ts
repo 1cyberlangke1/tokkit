@@ -293,6 +293,8 @@ const EXPECTED_ALL_FAMILIES = [
   "yi-coder",
   "yi-coder-chat",
   "devstral-small-2",
+  "deepseek-r1",
+  "deepseek-v3",
   "deepseek-v3.1",
   "deepseek-v3.2",
   "falcon-rw-1b",
@@ -408,9 +410,21 @@ describe("family packages", () => {
     core.resetRegistry()
     deepseek.registerBuiltins()
 
-    expect(core.listSupportedFamilies().sort()).toEqual(["deepseek-v3.1", "deepseek-v3.2"].sort())
+    expect(core.listSupportedFamilies().sort()).toEqual(
+      ["deepseek-r1", "deepseek-v3", "deepseek-v3.1", "deepseek-v3.2"].sort()
+    )
     expect(core.listSupportedModels()).toEqual(
-      expect.arrayContaining(["deepseek-ai/DeepSeek-V3.1", "deepseek-ai/DeepSeek-V3.2"])
+      expect.arrayContaining([
+        "deepseek-ai/DeepSeek-V3-0324",
+        "deepseek-ai/DeepSeek-V3.1",
+        "deepseek-ai/DeepSeek-V3.1-Base",
+        "deepseek-ai/DeepSeek-R1",
+        "deepseek-ai/DeepSeek-R1-0528",
+        "deepseek-ai/DeepSeek-R1-Zero",
+        "deepseek-ai/DeepSeek-V3.2",
+        "deepseek-ai/DeepSeek-V3.2-Exp",
+        "deepseek-ai/DeepSeek-V3.2-Exp-Base",
+      ])
     )
   })
 

@@ -84,6 +84,8 @@
   - `qwen3.5`
   - `qwen3-coder-next`
 - `@cyberlangke/tokkit-deepseek`
+  - `deepseek-r1`
+  - `deepseek-v3`
   - `deepseek-v3.1`
   - `deepseek-v3.2`
 - `@cyberlangke/tokkit-glm`

@@ -415,10 +415,22 @@ export const FAMILY_SPECS = [
     source: "vendor/tokenizers/Qwen__Qwen3-Coder-Next__tokenizer.json.br",
   },
   {
+    family: "deepseek-v3",
+    packageName: "deepseek",
+    moduleName: "deepseek_v3",
+    source: "vendor/tokenizers/deepseek-ai__DeepSeek-V3-0324__tokenizer.json.br",
+  },
+  {
     family: "deepseek-v3.1",
     packageName: "deepseek",
     moduleName: "deepseek_v3_1",
     source: "vendor/tokenizers/deepseek-ai__DeepSeek-V3.1__tokenizer.json.br",
+  },
+  {
+    family: "deepseek-r1",
+    packageName: "deepseek",
+    moduleName: "deepseek_r1",
+    source: "vendor/tokenizers/deepseek-ai__DeepSeek-R1__tokenizer.json.br",
   },
   {
     family: "deepseek-v3.2",
