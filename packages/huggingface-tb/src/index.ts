@@ -16,6 +16,12 @@ export * from "@cyberlangke/tokkit-core"
  */
 const BUILTIN_FAMILIES = [
   {
+    family: "cosmo-1b",
+    aliases: ["cosmo1b", "cosmo_1b"],
+    models: ["HuggingFaceTB/cosmo-1b"],
+    modulePath: "./generated/cosmo_1b.js",
+  },
+  {
     family: "smollm",
     aliases: ["smollm2", "smollm_2"],
     models: [

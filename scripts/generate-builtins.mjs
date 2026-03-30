@@ -241,6 +241,12 @@ export const FAMILY_SPECS = [
     source: "vendor/tokenizers/HuggingFaceTB__SmolLM-135M__tokenizer.json.br",
   },
   {
+    family: "cosmo-1b",
+    packageName: "huggingface-tb",
+    moduleName: "cosmo_1b",
+    source: "vendor/tokenizers/HuggingFaceTB__cosmo-1b__tokenizer.json.br",
+  },
+  {
     family: "smollm-1.7b",
     packageName: "huggingface-tb",
     moduleName: "smollm_1_7b",

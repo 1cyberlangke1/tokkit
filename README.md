@@ -51,6 +51,7 @@
   - `devstral-small-2`
   - `mistral-small-3.1`
 - `@cyberlangke/tokkit-huggingface-tb`
+  - `cosmo-1b`
   - `smollm`
   - `smollm-1.7b`
   - `smollm2-16k`

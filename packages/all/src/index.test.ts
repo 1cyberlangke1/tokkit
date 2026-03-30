@@ -499,6 +499,7 @@ describe("builtin tokenizer families", () => {
           "granite-4-tiny-base-preview",
           "granite-4-tiny-preview",
           "academic-ds",
+          "cosmo-1b",
           "longcat-flash-chat",
           "longcat-flash-lite",
           "longcat-flash-thinking",
@@ -614,6 +615,7 @@ describe("builtin tokenizer families", () => {
           "mistralai/Ministral-8B-Instruct-2410",
           "mistralai/Devstral-Small-2-24B-Instruct-2512",
           "mistralai/Mistral-Small-3.1-24B-Instruct-2503",
+          "HuggingFaceTB/cosmo-1b",
           "HuggingFaceTB/SmolLM-135M",
           "HuggingFaceTB/SmolLM2-1.7B",
           "HuggingFaceTB/SmolLM2-1.7B-Instruct-16k",
@@ -707,6 +709,9 @@ describe("builtin tokenizer families", () => {
       const smollm = await getEncoding("smollm")
       expect(await getEncoding("smollm2")).toBe(smollm)
       expect(await getEncoding("HuggingFaceTB/SmolLM2-1.7B")).toBe(smollm)
+
+      const cosmo1b = await getEncoding("cosmo-1b")
+      expect(await getEncoding("HuggingFaceTB/cosmo-1b")).toBe(cosmo1b)
 
       const academicDs = await getEncoding("academic-ds")
       expect(await getEncoding("ByteDance-Seed/academic-ds-9B")).toBe(academicDs)

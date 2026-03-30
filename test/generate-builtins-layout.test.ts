@@ -61,6 +61,7 @@ describe("generate:builtins layout", () => {
         expect.objectContaining({ family: "mistral-small-3.1", packageName: "mistral" }),
         expect.objectContaining({ family: "mixtral-8x7b", packageName: "mistral" }),
         expect.objectContaining({ family: "smollm", packageName: "huggingface-tb" }),
+        expect.objectContaining({ family: "cosmo-1b", packageName: "huggingface-tb" }),
         expect.objectContaining({ family: "smollm-1.7b", packageName: "huggingface-tb" }),
         expect.objectContaining({ family: "smollm2-16k", packageName: "huggingface-tb" }),
         expect.objectContaining({ family: "smollm3", packageName: "huggingface-tb" }),
@@ -135,6 +136,9 @@ describe("generate:builtins layout", () => {
     )
     expect(module.resolveOutputModulePath("huggingface-tb", "smollm3")).toBe(
       "packages/huggingface-tb/src/generated/smollm3.ts"
+    )
+    expect(module.resolveOutputModulePath("huggingface-tb", "cosmo_1b")).toBe(
+      "packages/huggingface-tb/src/generated/cosmo_1b.ts"
     )
     expect(module.resolveOutputModulePath("mistral", "mistral_small_3_2")).toBe(
       "packages/mistral/src/generated/mistral_small_3_2.ts"

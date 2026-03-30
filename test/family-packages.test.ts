@@ -179,8 +179,16 @@ const VENDOR_PACKAGE_CASES = [
   },
   {
     relativePath: "packages/huggingface-tb/src/index.ts",
-    expectedFamilies: ["smollm", "smollm-1.7b", "smollm2-16k", "smollm3", "smollm3-base"],
+    expectedFamilies: [
+      "cosmo-1b",
+      "smollm",
+      "smollm-1.7b",
+      "smollm2-16k",
+      "smollm3",
+      "smollm3-base",
+    ],
     expectedModels: [
+      "HuggingFaceTB/cosmo-1b",
       "HuggingFaceTB/SmolLM-135M",
       "HuggingFaceTB/SmolLM-135M-Instruct",
       "HuggingFaceTB/SmolLM-360M",
@@ -305,6 +313,7 @@ const EXPECTED_ALL_FAMILIES = [
   "mixtral-8x7b",
   "seed-coder",
   "seed-oss",
+  "cosmo-1b",
   "smollm",
   "smollm-1.7b",
   "smollm2-16k",
