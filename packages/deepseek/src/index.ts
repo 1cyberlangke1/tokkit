@@ -13,13 +13,21 @@ export * from "@cyberlangke/tokkit-core"
 const BUILTIN_FAMILIES = [
   {
     family: "deepseek-v3",
-    aliases: ["deepseek_v3"],
-    models: ["deepseek-ai/DeepSeek-V3-0324"],
+    aliases: ["deepseek_v3", "deepseek-v3-0324", "deepseek_v3_0324"],
+    models: ["deepseek-ai/DeepSeek-V3", "deepseek-ai/DeepSeek-V3-0324"],
     modulePath: "./generated/deepseek_v3.js",
   },
   {
     family: "deepseek-v3.1",
-    aliases: ["deepseek_v3_1"],
+    aliases: [
+      "deepseek_v3_1",
+      "deepseek-v3.1-base",
+      "deepseek_v3_1_base",
+      "deepseek-v3.2-exp",
+      "deepseek_v3_2_exp",
+      "deepseek-v3.2-exp-base",
+      "deepseek_v3_2_exp_base",
+    ],
     models: [
       "deepseek-ai/DeepSeek-V3.1",
       "deepseek-ai/DeepSeek-V3.1-Base",
@@ -30,7 +38,13 @@ const BUILTIN_FAMILIES = [
   },
   {
     family: "deepseek-r1",
-    aliases: ["deepseek_r1"],
+    aliases: [
+      "deepseek_r1",
+      "deepseek-r1-0528",
+      "deepseek_r1_0528",
+      "deepseek-r1-zero",
+      "deepseek_r1_zero",
+    ],
     models: [
       "deepseek-ai/DeepSeek-R1",
       "deepseek-ai/DeepSeek-R1-0528",

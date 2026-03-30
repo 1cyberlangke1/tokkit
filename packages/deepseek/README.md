@@ -5,6 +5,7 @@ DeepSeek 官方 tokenizer 的 tokkit 子包。
 当前内置 family：
 
 - `deepseek-v3`
+  - 覆盖 `deepseek-ai/DeepSeek-V3`
   - 覆盖 `deepseek-ai/DeepSeek-V3-0324`
 - `deepseek-v3.1`
   - 覆盖 `deepseek-ai/DeepSeek-V3.1`
@@ -17,12 +18,16 @@ DeepSeek 官方 tokenizer 的 tokkit 子包。
 
 当前不纳入：
 
-- `deepseek-ai/DeepSeek-V3` 原版：仓库 `LICENSE-MODEL` 不是 MIT 兼容，不能进入当前 MIT 子包
 - `DeepSeek-R1-Distill-*`：蒸馏模型
 - `DeepSeek-V3.1-Terminus`：quantized 派生模型
 - `DeepSeek-V3.2-Speciale`：finetune 派生模型
 - `DeepSeek-Prover-*`、`DeepSeek-Math-*`、`ESFT-*`：专项 / 任务模型
 - 旧 `deepseek-llm*`、`deepseek-coder*`、`DeepSeek-V2*`、`deepseek-moe*`：当前 HF API 许可证信号不是 MIT 兼容
+
+说明：
+
+- `DeepSeek-V3` 原版仓库自带 `LICENSE-MODEL`，不是 MIT 兼容；但它的 `tokenizer.json` 与 `DeepSeek-V3-0324` 完全同 hash。
+- 因此当前包仍只分发 `DeepSeek-V3-0324` 的 MIT tokenizer 快照，同时把 `deepseek-ai/DeepSeek-V3` 作为等价模型别名映射到 `deepseek-v3` family。
 
 ## 使用方法
 
@@ -33,7 +38,7 @@ npm install @cyberlangke/tokkit-deepseek
 ```ts
 import { encode } from "@cyberlangke/tokkit-deepseek"
 
-const ids = await encode("Hello, world!", "deepseek-r1", {
+const ids = await encode("Hello, world!", "deepseek-ai/DeepSeek-V3", {
   addSpecialTokens: false,
 })
 

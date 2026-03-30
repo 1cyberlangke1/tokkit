@@ -443,6 +443,7 @@ describe("family packages", () => {
     )
     expect(core.listSupportedModels()).toEqual(
       expect.arrayContaining([
+        "deepseek-ai/DeepSeek-V3",
         "deepseek-ai/DeepSeek-V3-0324",
         "deepseek-ai/DeepSeek-V3.1",
         "deepseek-ai/DeepSeek-V3.1-Base",
