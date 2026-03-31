@@ -2,6 +2,7 @@ Copyright (c) 2026 cyberlangke
 
 This package bundles tokenizer assets derived from official Hugging Face repositories under the microsoft organization:
 - microsoft/bitnet-b1.58-2B-4T tokenizer.json
+- microsoft/NextCoder-7B tokenizer.json
 - microsoft/phi-1 tokenizer.json
 - microsoft/Phi-3-mini-4k-instruct tokenizer.json
 - microsoft/Phi-3-medium-4k-instruct tokenizer.json

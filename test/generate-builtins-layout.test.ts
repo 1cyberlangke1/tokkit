@@ -48,6 +48,7 @@ describe("generate:builtins layout", () => {
           family: "bitnet-b1.58-2b-4t",
           packageName: "microsoft",
         }),
+        expect.objectContaining({ family: "nextcoder", packageName: "microsoft" }),
         expect.objectContaining({ family: "phi-1", packageName: "microsoft" }),
         expect.objectContaining({ family: "phi-3-mini", packageName: "microsoft" }),
         expect.objectContaining({ family: "phi-3-medium", packageName: "microsoft" }),

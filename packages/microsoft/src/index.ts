@@ -22,6 +22,16 @@ const BUILTIN_FAMILIES = [
     modulePath: "./generated/bitnet_b1_58_2b_4t.js",
   },
   {
+    family: "nextcoder",
+    aliases: ["next-coder", "next_coder"],
+    models: [
+      "microsoft/NextCoder-7B",
+      "microsoft/NextCoder-14B",
+      "microsoft/NextCoder-32B",
+    ],
+    modulePath: "./generated/nextcoder.js",
+  },
+  {
     family: "phi-1",
     aliases: ["phi1", "phi_1"],
     models: ["microsoft/phi-1", "microsoft/phi-1_5", "microsoft/phi-2"],
@@ -30,7 +40,12 @@ const BUILTIN_FAMILIES = [
   {
     family: "phi-3-mini",
     aliases: ["phi3-mini", "phi_3_mini"],
-    models: ["microsoft/Phi-3-mini-4k-instruct", "microsoft/Phi-3-mini-128k-instruct"],
+    models: [
+      "microsoft/Phi-3-mini-4k-instruct",
+      "microsoft/Phi-3-mini-128k-instruct",
+      "microsoft/MediPhi",
+      "microsoft/MediPhi-Instruct",
+    ],
     modulePath: "./generated/phi_3_mini.js",
   },
   {

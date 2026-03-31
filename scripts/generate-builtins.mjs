@@ -145,6 +145,12 @@ export const FAMILY_SPECS = [
     source: "vendor/tokenizers/microsoft__bitnet-b1.58-2B-4T__tokenizer.json.br",
   },
   {
+    family: "nextcoder",
+    packageName: "microsoft",
+    moduleName: "nextcoder",
+    source: "vendor/tokenizers/microsoft__NextCoder-7B__tokenizer.json.br",
+  },
+  {
     family: "phi-1",
     packageName: "microsoft",
     moduleName: "phi_1",
