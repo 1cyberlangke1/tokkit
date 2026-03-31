@@ -118,6 +118,12 @@ const EXPECTED_PACKAGES = [
     requiredFiles: ["COPYRIGHT", "LICENSE"],
   },
   {
+    directory: "openai",
+    packageName: "@cyberlangke/tokkit-openai",
+    license: "Apache-2.0",
+    includedInAll: true,
+  },
+  {
     directory: "bytedance-seed",
     packageName: "@cyberlangke/tokkit-bytedance-seed",
     license: "SEE LICENSE IN LICENSE",

@@ -457,6 +457,12 @@ export const FAMILY_SPECS = [
     source: "vendor/tokenizers/upstage__solar-pro-preview-instruct__tokenizer.json.br",
   },
   {
+    family: "gpt-oss",
+    packageName: "openai",
+    moduleName: "gpt_oss",
+    source: "vendor/tokenizers/openai__gpt-oss-20b__tokenizer.json.br",
+  },
+  {
     family: "academic-ds",
     packageName: "bytedance-seed",
     moduleName: "academic_ds",

@@ -329,6 +329,11 @@ const VENDOR_PACKAGE_CASES = [
     ],
   },
   {
+    relativePath: "packages/openai/src/index.ts",
+    expectedFamilies: ["gpt-oss"],
+    expectedModels: ["openai/gpt-oss-20b", "openai/gpt-oss-120b"],
+  },
+  {
     relativePath: "packages/bytedance-seed/src/index.ts",
     expectedFamilies: ["academic-ds", "seed-oss", "seed-coder", "stable-diffcoder"],
     expectedModels: [
@@ -397,6 +402,7 @@ const EXPECTED_ALL_FAMILIES = [
   "danube3.1-4b-chat",
   "solar",
   "solar-pro",
+  "gpt-oss",
   "glm-4.7",
   "glm-5",
   "granite-3-instruct",

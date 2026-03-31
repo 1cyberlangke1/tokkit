@@ -51,6 +51,9 @@ export default defineConfig({
       "@cyberlangke/tokkit-upstage": fileURLToPath(
         new URL("./packages/upstage/src/index.ts", import.meta.url)
       ),
+      "@cyberlangke/tokkit-openai": fileURLToPath(
+        new URL("./packages/openai/src/index.ts", import.meta.url)
+      ),
       "@cyberlangke/tokkit-bytedance-seed": fileURLToPath(
         new URL("./packages/bytedance-seed/src/index.ts", import.meta.url)
       ),

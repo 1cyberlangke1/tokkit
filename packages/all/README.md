@@ -17,6 +17,8 @@
 - [`upstage/SOLAR-10.7B-v1.0`](https://huggingface.co/upstage/SOLAR-10.7B-v1.0)
 - [`upstage/TinySolar-248m-4k`](https://huggingface.co/upstage/TinySolar-248m-4k)
 - [`upstage/solar-pro-preview-instruct`](https://huggingface.co/upstage/solar-pro-preview-instruct)
+- [`openai/gpt-oss-20b`](https://huggingface.co/openai/gpt-oss-20b)
+- [`openai/gpt-oss-120b`](https://huggingface.co/openai/gpt-oss-120b)
 - [`Qwen/Qwen3.5-0.8B`](https://huggingface.co/Qwen/Qwen3.5-0.8B)
 - [`Qwen/Qwen3.5-0.8B-Base`](https://huggingface.co/Qwen/Qwen3.5-0.8B-Base)
 - [`Qwen/Qwen3-0.6B`](https://huggingface.co/Qwen/Qwen3-0.6B)

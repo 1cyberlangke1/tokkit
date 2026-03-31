@@ -136,6 +136,7 @@ describe("generate:builtins layout", () => {
         }),
         expect.objectContaining({ family: "solar", packageName: "upstage" }),
         expect.objectContaining({ family: "solar-pro", packageName: "upstage" }),
+        expect.objectContaining({ family: "gpt-oss", packageName: "openai" }),
         expect.objectContaining({
           family: "academic-ds",
           packageName: "bytedance-seed",
@@ -203,6 +204,9 @@ describe("generate:builtins layout", () => {
     )
     expect(module.resolveOutputModulePath("upstage", "solar_pro")).toBe(
       "packages/upstage/src/generated/solar_pro.ts"
+    )
+    expect(module.resolveOutputModulePath("openai", "gpt_oss")).toBe(
+      "packages/openai/src/generated/gpt_oss.ts"
     )
     expect(module.resolveOutputModulePath("bytedance-seed", "seed_oss")).toBe(
       "packages/bytedance-seed/src/generated/seed_oss.ts"
