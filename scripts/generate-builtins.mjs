@@ -211,6 +211,18 @@ export const FAMILY_SPECS = [
     source: "vendor/tokenizers/mistralai__Devstral-Small-2-24B-Instruct-2512__tokenizer.json.br",
   },
   {
+    family: "devstral-small-2505",
+    packageName: "mistral",
+    moduleName: "devstral_small_2505",
+    source: "vendor/tokenizers/mistralai__Devstral-Small-2505__tokenizer.json.br",
+  },
+  {
+    family: "leanstral-2603",
+    packageName: "mistral",
+    moduleName: "leanstral_2603",
+    source: "vendor/tokenizers/mistralai__Leanstral-2603__tokenizer.json.br",
+  },
+  {
     family: "mathstral-7b",
     packageName: "mistral",
     moduleName: "mathstral_7b",
@@ -221,6 +233,12 @@ export const FAMILY_SPECS = [
     packageName: "mistral",
     moduleName: "mamba_codestral_7b",
     source: "vendor/tokenizers/mistralai__Mamba-Codestral-7B-v0.1__tokenizer.json.br",
+  },
+  {
+    family: "magistral-small-2507",
+    packageName: "mistral",
+    moduleName: "magistral_small_2507",
+    source: "vendor/tokenizers/mistralai__Magistral-Small-2507__tokenizer.json.br",
   },
   {
     family: "ministral-3",
@@ -245,6 +263,12 @@ export const FAMILY_SPECS = [
     packageName: "mistral",
     moduleName: "mistral_nemo",
     source: "vendor/tokenizers/mistralai__Mistral-Nemo-Base-2407__tokenizer.json.br",
+  },
+  {
+    family: "mistral-small-3.2",
+    packageName: "mistral",
+    moduleName: "mistral_small_3_2",
+    source: "vendor/tokenizers/mistralai__Mistral-Small-3.2-24B-Instruct-2506__tokenizer.json.br",
   },
   {
     family: "mistral-small-24b",

@@ -2,13 +2,19 @@ Copyright (c) 2026 cyberlangke
 
 This package bundles tokenizer assets derived from official Hugging Face repositories under the mistralai organization:
 - mistralai/Devstral-Small-2-24B-Instruct-2512 tokenizer.json
+- mistralai/Devstral-Small-2505 tekken.json
+- mistralai/Leanstral-2603 tekken.json
 - mistralai/Mathstral-7B-v0.1 tokenizer.json
 - mistralai/Mamba-Codestral-7B-v0.1 tokenizer.json
+- mistralai/Magistral-Small-2507 tekken.json
 - mistralai/Ministral-3-3B-Base-2512 tokenizer.json
 - mistralai/Mistral-7B-v0.1 tokenizer.json
 - mistralai/Mistral-7B-v0.3 tokenizer.json
 - mistralai/Mistral-Nemo-Base-2407 tokenizer.json
+- mistralai/Mistral-Small-3.2-24B-Instruct-2506 tekken.json
 - mistralai/Mistral-Small-24B-Base-2501 tokenizer.json
 - mistralai/Mixtral-8x7B-v0.1 tokenizer.json
+
+For families derived from official `tekken.json`, the published payload is a converted `tokenizer.json` representation produced to match the official `mistral-common` tokenizer behavior.
 
 See LICENSE for the full license text that applies to this package and its bundled assets.

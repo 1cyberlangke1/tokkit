@@ -9,6 +9,9 @@ import { encodeTextToByteLevel } from "../core/bytes.js"
 /** Unicode 标点判定正则。 */
 const UNICODE_PUNCTUATION_PATTERN = /^\p{P}$/u
 
+/** JS 原生支持的 Unicode 属性名缓存。 */
+const SUPPORTED_UNICODE_PROPERTY_CACHE = new Map<string, boolean>()
+
 /** 预分词调用时携带的上下文。 */
 interface PretokenizerContext {
   sectionIndex?: number
@@ -308,6 +311,8 @@ function createPattern(
       .replace(/\\([#&~])/g, "$1")
     regex = expandInlineCaseInsensitiveGroups(regex)
     regex = normalizeUnsupportedPossessiveQuantifiers(regex)
+    regex = normalizeUnsupportedUnicodeProperties(regex)
+    regex = normalizeUnsupportedCharacterClassSetOperations(regex)
 
     regex = regex.replace(/\\p\{/g, "\\p{").replace(/\\P\{/g, "\\P{")
     return new RegExp(regex, "gu")
@@ -456,6 +461,189 @@ function normalizeUnsupportedPossessiveQuantifiers(pattern: string): string {
 }
 
 /**
+ * 把 Rust regex 允许的脚本属性简写归一成 JS 可解析的形式。
+ * 输入：原始 regex 字符串。
+ * 输出：把 `\p{Han}` 这类脚本名改写成 `\p{Script=Han}` 的模式字符串。
+ */
+function normalizeUnsupportedUnicodeProperties(pattern: string): string {
+  return pattern.replace(/\\([pP])\{([^}]+)\}/g, (match, kind: string, name: string) => {
+    if (name.includes("=") || isJavaScriptUnicodePropertySupported(name)) {
+      return match
+    }
+
+    const scriptName = `Script=${name}`
+    if (isJavaScriptUnicodePropertySupported(scriptName)) {
+      return `\\${kind}{${scriptName}}`
+    }
+
+    return match
+  })
+}
+
+/**
+ * 判断给定 Unicode 属性名是否可被 JS `RegExp` 直接解析。
+ * 输入：属性名。
+ * 输出：支持时返回 true，否则返回 false。
+ */
+function isJavaScriptUnicodePropertySupported(name: string): boolean {
+  const cached = SUPPORTED_UNICODE_PROPERTY_CACHE.get(name)
+  if (cached !== undefined) {
+    return cached
+  }
+
+  let supported = false
+  try {
+    new RegExp(`\\p{${name}}`, "u")
+    supported = true
+  } catch {
+    supported = false
+  }
+
+  SUPPORTED_UNICODE_PROPERTY_CACHE.set(name, supported)
+  return supported
+}
+
+/**
+ * 把 Rust regex 的字符类交集降级成 JS 可解析的 lookaround 形式。
+ * 输入：原始 regex 字符串。
+ * 输出：把 `[A&&[^B]]` 改写为 `(?:(?![B])[A])` 的模式字符串。
+ */
+function normalizeUnsupportedCharacterClassSetOperations(pattern: string): string {
+  let result = ""
+
+  for (let index = 0; index < pattern.length; index += 1) {
+    const character = pattern[index]
+
+    if (character === "\\") {
+      if (
+        (pattern[index + 1] === "p" || pattern[index + 1] === "P") &&
+        pattern[index + 2] === "{"
+      ) {
+        const end = pattern.indexOf("}", index + 3)
+        if (end !== -1) {
+          result += pattern.slice(index, end + 1)
+          index = end
+          continue
+        }
+      }
+
+      const end = Math.min(index + 2, pattern.length)
+      result += pattern.slice(index, end)
+      index = end - 1
+      continue
+    }
+
+    if (character === "[") {
+      const end = findCharacterClassEnd(pattern, index)
+      const rawClass = pattern.slice(index, end + 1)
+      result += rewriteCharacterClassSetOperation(rawClass)
+      index = end
+      continue
+    }
+
+    result += character
+  }
+
+  return result
+}
+
+/**
+ * 把单个字符类里的交集表达式改写成 JS lookaround。
+ * 输入：完整字符类文本。
+ * 输出：若存在交集则返回等价 group，否则原样返回。
+ */
+function rewriteCharacterClassSetOperation(rawClass: string): string {
+  const content = rawClass.slice(1, -1)
+  const parts = splitTopLevelCharacterClassExpression(content, "&&")
+  if (parts.length <= 1) {
+    return rawClass
+  }
+
+  const consumer = normalizeCharacterClassOperand(parts[0] ?? "")
+  const lookarounds = parts
+    .slice(1)
+    .map((operand) => createCharacterClassIntersectionLookaround(operand))
+    .join("")
+  return `(?:${lookarounds}${consumer})`
+}
+
+/**
+ * 在字符类内容的顶层按指定运算符切分。
+ * 输入：字符类内容与运算符。
+ * 输出：按顶层运算符切开的片段数组。
+ */
+function splitTopLevelCharacterClassExpression(content: string, operator: string): string[] {
+  const parts: string[] = []
+  let current = ""
+  let nestedClassDepth = 0
+
+  for (let index = 0; index < content.length; index += 1) {
+    const character = content[index]
+
+    if (character === "\\") {
+      const end = Math.min(index + 2, content.length)
+      current += content.slice(index, end)
+      index = end - 1
+      continue
+    }
+
+    if (character === "[") {
+      nestedClassDepth += 1
+      current += character
+      continue
+    }
+
+    if (character === "]" && nestedClassDepth > 0) {
+      nestedClassDepth -= 1
+      current += character
+      continue
+    }
+
+    if (nestedClassDepth === 0 && content.startsWith(operator, index)) {
+      parts.push(current)
+      current = ""
+      index += operator.length - 1
+      continue
+    }
+
+    current += character
+  }
+
+  parts.push(current)
+  return parts
+}
+
+/**
+ * 规范化交集操作里的字符类操作数。
+ * 输入：字符类操作数字符串。
+ * 输出：始终可直接用于消费单个字符的字符类文本。
+ */
+function normalizeCharacterClassOperand(operand: string): string {
+  const trimmed = operand.trim()
+  if (trimmed.startsWith("[") && trimmed.endsWith("]")) {
+    return trimmed
+  }
+
+  return `[${trimmed}]`
+}
+
+/**
+ * 为交集右侧操作数生成等价 lookaround。
+ * 输入：交集右侧的字符类操作数。
+ * 输出：消费前约束同一字符集合的 lookaround。
+ */
+function createCharacterClassIntersectionLookaround(operand: string): string {
+  const normalized = normalizeCharacterClassOperand(operand)
+  const content = normalized.slice(1, -1)
+
+  if (content.startsWith("^")) {
+    return `(?![${content.slice(1)}])`
+  }
+
+  return `(?=${normalized})`
+}
+
+/**
  * 判断字符是否属于 Unicode 标点。
  * 输入：单个字符。
  * 输出：标点返回 true，否则返回 false。
@@ -498,9 +686,21 @@ function isAsciiPunctuation(character: string): boolean {
  * 输出：对应 `]` 的下标；若不存在则返回原始下标。
  */
 function findCharacterClassEnd(pattern: string, start: number): number {
+  let nestedClassDepth = 0
+
   for (let index = start + 1; index < pattern.length; index += 1) {
     if (pattern[index] === "\\") {
       index += 1
+      continue
+    }
+
+    if (pattern[index] === "[") {
+      nestedClassDepth += 1
+      continue
+    }
+
+    if (pattern[index] === "]" && nestedClassDepth > 0) {
+      nestedClassDepth -= 1
       continue
     }
 

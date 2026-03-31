@@ -220,6 +220,23 @@ describe("tokkit vNext architecture", () => {
     expect(await decode(actual, "toy-possessive-split")).toBe(sample)
   })
 
+  it("Split pre-tokenizer 会兼容 TikToken 风格的脚本属性与字符类交集", async () => {
+    const asset = createCharacterClassIntersectionSplitToyAsset()
+    registerTokenizerFamily({
+      family: "toy-class-intersection-split",
+      asset,
+    })
+
+    const sample = "汉字 Hello's"
+
+    const actual = await encode(sample, "toy-class-intersection-split", {
+      addSpecialTokens: false,
+    })
+
+    expect(actual).toEqual([1, 2])
+    expect(await decode(actual, "toy-class-intersection-split")).toBe(sample)
+  })
+
   it("BPE string merges 会保留以 # 开头的真实 merge 规则", async () => {
     const asset = createHashMergeToyAsset()
     registerTokenizerFamily({
@@ -505,6 +522,7 @@ describe("builtin tokenizer families", () => {
           "yi-coder",
           "yi-coder-chat",
           "devstral-small-2",
+          "devstral-small-2505",
           "deepseek-r1",
           "deepseek-v3",
           "deepseek-v3.1",
@@ -535,6 +553,7 @@ describe("builtin tokenizer families", () => {
           "granite-4",
           "granite-4-tiny-base-preview",
           "granite-4-tiny-preview",
+          "leanstral-2603",
           "molm",
           "powerlm",
           "academic-ds",
@@ -552,10 +571,12 @@ describe("builtin tokenizer families", () => {
           "mimo-v2-flash",
           "mathstral-7b",
           "mamba-codestral-7b",
+          "magistral-small-2507",
           "ministral-3",
           "mistral-7b-v0.1",
           "mistral-7b-v0.3",
           "mistral-nemo",
+          "mistral-small-3.2",
           "mistral-small-24b",
           "mixtral-8x7b",
           "seed-coder",
@@ -850,6 +871,23 @@ describe("builtin tokenizer families", () => {
 
       const mistral7bV01 = await getEncoding("mistral-7b-v0.1")
       expect(await getEncoding("mistralai/Mixtral-8x7B-Instruct-v0.1")).toBe(mistral7bV01)
+
+      const devstralSmall2505 = await getEncoding("devstral-small-2505")
+      expect(await getEncoding("mistralai/Devstral-Small-2505")).toBe(devstralSmall2505)
+
+      const mistralSmall32 = await getEncoding("mistral-small-3.2")
+      expect(await getEncoding("mistralai/Devstral-Small-2507")).toBe(mistralSmall32)
+      expect(await getEncoding("mistralai/Magistral-Small-2506")).toBe(mistralSmall32)
+      expect(await getEncoding("mistralai/Mistral-Small-3.2-24B-Instruct-2506")).toBe(
+        mistralSmall32
+      )
+      expect(await getEncoding("devstral-small-2507")).toBe(mistralSmall32)
+
+      const magistralSmall2507 = await getEncoding("magistral-small-2507")
+      expect(await getEncoding("mistralai/Magistral-Small-2509")).toBe(magistralSmall2507)
+
+      const leanstral2603 = await getEncoding("leanstral-2603")
+      expect(await getEncoding("mistralai/Leanstral-2603")).toBe(leanstral2603)
 
       const mixtral8x7b = await getEncoding("mixtral-8x7b")
       expect(await getEncoding("mistralai/Mixtral-8x7B-v0.1")).toBe(mixtral8x7b)
@@ -1351,6 +1389,46 @@ function createPossessiveQuantifierSplitToyAsset(): TokenizerAsset {
         "<unk>": 0,
         "ĠHello": 1,
         "!!": 2,
+      },
+      merges: [],
+      unk_token: "<unk>",
+      continuing_subword_prefix: "",
+      end_of_word_suffix: "",
+      byte_fallback: false,
+      ignore_merges: true,
+    },
+  }
+}
+
+/**
+ * 生成用于验证 TikToken/Kimi 字符类交集兼容性的 toy tokenizer。
+ * 输入：无。
+ * 输出：依赖 `\p{Han}` 与 `[...&&[^...]]` 语义的最小 Split 资产。
+ */
+function createCharacterClassIntersectionSplitToyAsset(): TokenizerAsset {
+  return {
+    version: "1.0",
+    normalizer: null,
+    post_processor: null,
+    added_tokens: [],
+    pre_tokenizer: {
+      type: "Split",
+      pattern: {
+        Regex:
+          "\\p{Han}+|[^\\r\\n\\p{L}\\p{N}]?[\\p{Lu}\\p{Lt}\\p{Lm}\\p{Lo}\\p{M}&&[^\\p{Han}]]*[\\p{Ll}\\p{Lm}\\p{Lo}\\p{M}&&[^\\p{Han}]]+(?i:'s|'t|'re|'ve|'m|'ll|'d)?|[^\\r\\n\\p{L}\\p{N}]?[\\p{Lu}\\p{Lt}\\p{Lm}\\p{Lo}\\p{M}&&[^\\p{Han}]]+[\\p{Ll}\\p{Lm}\\p{Lo}\\p{M}&&[^\\p{Han}]]*(?i:'s|'t|'re|'ve|'m|'ll|'d)?|\\p{N}{1,3}| ?[^\\s\\p{L}\\p{N}]+[\\r\\n]*|\\s*[\\r\\n]+|\\s+(?!\\S)|\\s+",
+      },
+      behavior: "Isolated",
+      invert: false,
+    },
+    decoder: {
+      type: "Fuse",
+    },
+    model: {
+      type: "BPE",
+      vocab: {
+        "<unk>": 0,
+        "汉字": 1,
+        " Hello's": 2,
       },
       merges: [],
       unk_token: "<unk>",

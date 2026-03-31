@@ -2,15 +2,21 @@
 
 Mistral family 的 tokkit 子包，只包含当前 Apache-2.0 且落在纯文本 BPE 边界内的官方 tokenizer。
 
+部分较新的 Mistral 模型官方仓库只直接公开 `tekken.json`。这类 family 当前按官方 `mistral-common` 的 `Tekkenizer` 语义转换为标准 `tokenizer.json` 后再打包，行为对齐仍以官方实现为准。
+
 ## 支持的 family
 
 - `devstral-small-2`：覆盖 `Devstral-Small-2-24B-Instruct-2512`，以及共享同一 tokenizer 的 `Ministral-3-* -Instruct`
+- `devstral-small-2505`：覆盖 `Devstral-Small-2505`
+- `leanstral-2603`：覆盖 `Leanstral-2603`
 - `mathstral-7b`：覆盖 `Mathstral-7B-v0.1`
 - `mamba-codestral-7b`：覆盖 `Mamba-Codestral-7B-v0.1`
+- `magistral-small-2507`：覆盖 `Magistral-Small-2507`、`Magistral-Small-2509`
 - `ministral-3`：覆盖 `Ministral-3-* -Base / -Reasoning`
 - `mistral-7b-v0.1`：覆盖 `Mistral-7B-v0.1`、`Mistral-7B-Instruct-v0.1 / v0.2`，以及共享同一 tokenizer 的 `Mixtral-8x22B-v0.1`、`Mixtral-8x7B-Instruct-v0.1`
 - `mistral-7b-v0.3`：覆盖 `Mistral-7B-v0.3`、`Mistral-7B-Instruct-v0.3`，以及共享同一 tokenizer 的 `Mixtral-8x22B-Instruct-v0.1`
 - `mistral-nemo`：覆盖 `Mistral-Nemo-Base-2407`、`Mistral-Nemo-Instruct-2407`
+- `mistral-small-3.2`：覆盖 `Mistral-Small-3.2-24B-Instruct-2506`，以及共享同一 tokenizer 的 `Devstral-Small-2507`、`Magistral-Small-2506`
 - `mistral-small-24b`：覆盖 `Mistral-Small-24B-Base-2501`、`Mistral-Small-24B-Instruct-2501`
 - `mixtral-8x7b`：覆盖 `Mixtral-8x7B-v0.1`
 
@@ -32,14 +38,6 @@ Mistral family 的 tokkit 子包，只包含当前 Apache-2.0 且落在纯文本
 - `Voxtral-*`
 
 这些模型属于多模态 / 语音路线，不在当前纯文本 BPE 主线内。
-
-- `Mistral-Small-3.2-24B-Instruct-2506`
-- `Devstral-Small-2505`
-- `Devstral-Small-2507`
-- `Magistral-*`
-- `Leanstral-2603`
-
-这些模型当前官方仓库只有 `tekken.json` 或未直接公开可分发的 `tokenizer.json`，先不纳入当前 BPE 子包。
 
 ## 使用方法
 

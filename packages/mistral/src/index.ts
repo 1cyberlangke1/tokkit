@@ -27,6 +27,18 @@ const BUILTIN_FAMILIES = [
     modulePath: "./generated/devstral_small_2.js",
   },
   {
+    family: "devstral-small-2505",
+    aliases: ["devstral_small_2505"],
+    models: ["mistralai/Devstral-Small-2505"],
+    modulePath: "./generated/devstral_small_2505.js",
+  },
+  {
+    family: "leanstral-2603",
+    aliases: ["leanstral_2603"],
+    models: ["mistralai/Leanstral-2603"],
+    modulePath: "./generated/leanstral_2603.js",
+  },
+  {
     family: "mathstral-7b",
     aliases: ["mathstral_7b"],
     models: ["mistralai/Mathstral-7B-v0.1"],
@@ -37,6 +49,12 @@ const BUILTIN_FAMILIES = [
     aliases: ["mamba_codestral_7b"],
     models: ["mistralai/Mamba-Codestral-7B-v0.1"],
     modulePath: "./generated/mamba_codestral_7b.js",
+  },
+  {
+    family: "magistral-small-2507",
+    aliases: ["magistral_small_2507", "magistral-small-2509"],
+    models: ["mistralai/Magistral-Small-2507", "mistralai/Magistral-Small-2509"],
+    modulePath: "./generated/magistral_small_2507.js",
   },
   {
     family: "ministral-3",
@@ -78,6 +96,22 @@ const BUILTIN_FAMILIES = [
     aliases: ["mistral_nemo"],
     models: ["mistralai/Mistral-Nemo-Base-2407", "mistralai/Mistral-Nemo-Instruct-2407"],
     modulePath: "./generated/mistral_nemo.js",
+  },
+  {
+    family: "mistral-small-3.2",
+    aliases: [
+      "mistral_small_3_2",
+      "mistral-small-3.2-24b",
+      "mistral-small-3.2-24b-instruct",
+      "devstral-small-2507",
+      "magistral-small-2506",
+    ],
+    models: [
+      "mistralai/Devstral-Small-2507",
+      "mistralai/Magistral-Small-2506",
+      "mistralai/Mistral-Small-3.2-24B-Instruct-2506",
+    ],
+    modulePath: "./generated/mistral_small_3_2.js",
   },
   {
     family: "mistral-small-24b",
