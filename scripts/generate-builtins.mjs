@@ -415,6 +415,18 @@ export const FAMILY_SPECS = [
     source: "vendor/tokenizers/ibm-granite__granite-4.0-tiny-preview__tokenizer.json.br",
   },
   {
+    family: "powerlm",
+    packageName: "ibm-research",
+    moduleName: "powerlm",
+    source: "vendor/tokenizers/ibm-research__PowerLM-3b__tokenizer.json.br",
+  },
+  {
+    family: "molm",
+    packageName: "ibm-research",
+    moduleName: "molm",
+    source: "vendor/tokenizers/ibm-research__MoLM-350M-4B__tokenizer.json.br",
+  },
+  {
     family: "danube",
     packageName: "h2oai",
     moduleName: "danube",

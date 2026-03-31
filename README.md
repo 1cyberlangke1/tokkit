@@ -78,6 +78,9 @@
   - `granite-4`
   - `granite-4-tiny-base-preview`
   - `granite-4-tiny-preview`
+- `@cyberlangke/tokkit-ibm-research`
+  - `powerlm`
+  - `molm`
 - `@cyberlangke/tokkit-h2oai`
   - `danube`
   - `danube2`

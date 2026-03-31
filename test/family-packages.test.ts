@@ -299,6 +299,17 @@ const VENDOR_PACKAGE_CASES = [
     ],
   },
   {
+    relativePath: "packages/ibm-research/src/index.ts",
+    expectedFamilies: ["molm", "powerlm"],
+    expectedModels: [
+      "ibm-research/MoLM-350M-4B",
+      "ibm-research/MoLM-700M-4B",
+      "ibm-research/MoLM-700M-8B",
+      "ibm-research/PowerLM-3b",
+      "ibm-research/PowerMoE-3b",
+    ],
+  },
+  {
     relativePath: "packages/h2oai/src/index.ts",
     expectedFamilies: [
       "danube",
@@ -427,6 +438,8 @@ const EXPECTED_ALL_FAMILIES = [
   "granite-4",
   "granite-4-tiny-base-preview",
   "granite-4-tiny-preview",
+  "molm",
+  "powerlm",
   "longcat-flash-chat",
   "longcat-flash-lite",
   "longcat-flash-thinking",

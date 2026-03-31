@@ -1,0 +1,7 @@
+Copyright (c) 2026 cyberlangke
+
+This package bundles tokenizer assets derived from official Hugging Face repositories under the ibm-research organization:
+- ibm-research/PowerLM-3b tokenizer.json
+- ibm-research/MoLM-350M-4B tokenizer.json
+
+See LICENSE for the full license text that applies to this package and its bundled assets.
