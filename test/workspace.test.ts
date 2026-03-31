@@ -124,6 +124,13 @@ const EXPECTED_PACKAGES = [
     includedInAll: true,
   },
   {
+    directory: "gsai-ml",
+    packageName: "@cyberlangke/tokkit-gsai-ml",
+    license: "SEE LICENSE IN LICENSE",
+    includedInAll: true,
+    requiredFiles: ["COPYRIGHT", "LICENSE"],
+  },
+  {
     directory: "bytedance-seed",
     packageName: "@cyberlangke/tokkit-bytedance-seed",
     license: "SEE LICENSE IN LICENSE",

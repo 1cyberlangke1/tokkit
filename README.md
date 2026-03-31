@@ -89,6 +89,10 @@
   - `solar-pro`
 - `@cyberlangke/tokkit-openai`
   - `gpt-oss`
+- `@cyberlangke/tokkit-gsai-ml`
+  - `llada`
+  - `llada-base`
+  - `refusion`
 - `@cyberlangke/tokkit-bytedance-seed`
   - `academic-ds`
   - `seed-oss`

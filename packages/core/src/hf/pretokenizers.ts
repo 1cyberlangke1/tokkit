@@ -307,6 +307,7 @@ function createPattern(
     let regex = String(pattern.Regex)
       .replace(/\\([#&~])/g, "$1")
     regex = expandInlineCaseInsensitiveGroups(regex)
+    regex = normalizeUnsupportedPossessiveQuantifiers(regex)
 
     regex = regex.replace(/\\p\{/g, "\\p{").replace(/\\P\{/g, "\\P{")
     return new RegExp(regex, "gu")
@@ -387,6 +388,74 @@ function escapeRegExp(value: string): string {
 }
 
 /**
+ * 把 Rust regex 的 possessive quantifier 降级成 JS 可解析的 greedy quantifier。
+ * 输入：原始 regex 字符串。
+ * 输出：去掉 JS 不支持的 possessive `+` 修饰后的模式字符串。
+ */
+function normalizeUnsupportedPossessiveQuantifiers(pattern: string): string {
+  let result = ""
+  let index = 0
+  let previousTokenWasQuantifier = false
+
+  while (index < pattern.length) {
+    const character = pattern[index]
+
+    if (character === "\\") {
+      if (
+        (pattern[index + 1] === "p" || pattern[index + 1] === "P") &&
+        pattern[index + 2] === "{"
+      ) {
+        const end = pattern.indexOf("}", index + 3)
+        if (end !== -1) {
+          result += pattern.slice(index, end + 1)
+          index = end + 1
+          previousTokenWasQuantifier = false
+          continue
+        }
+      }
+
+      const end = Math.min(index + 2, pattern.length)
+      result += pattern.slice(index, end)
+      index = end
+      previousTokenWasQuantifier = false
+      continue
+    }
+
+    if (character === "[") {
+      const end = findCharacterClassEnd(pattern, index)
+      result += pattern.slice(index, end + 1)
+      index = end + 1
+      previousTokenWasQuantifier = false
+      continue
+    }
+
+    if (character === "{") {
+      const end = pattern.indexOf("}", index + 1)
+      if (end !== -1) {
+        const body = pattern.slice(index + 1, end)
+        if (/^\d+(,\d*)?$|^,\d+$/u.test(body)) {
+          result += pattern.slice(index, end + 1)
+          index = end + 1
+          previousTokenWasQuantifier = true
+          continue
+        }
+      }
+    }
+
+    if (character === "+" && previousTokenWasQuantifier) {
+      index += 1
+      continue
+    }
+
+    result += character
+    previousTokenWasQuantifier = character === "?" || character === "*" || character === "+"
+    index += 1
+  }
+
+  return result
+}
+
+/**
  * 判断字符是否属于 Unicode 标点。
  * 输入：单个字符。
  * 输出：标点返回 true，否则返回 false。
@@ -424,6 +493,26 @@ function isAsciiPunctuation(character: string): boolean {
 }
 
 /**
+ * 找到字符类的结束位置。
+ * 输入：regex 字符串与 `[` 的起始下标。
+ * 输出：对应 `]` 的下标；若不存在则返回原始下标。
+ */
+function findCharacterClassEnd(pattern: string, start: number): number {
+  for (let index = start + 1; index < pattern.length; index += 1) {
+    if (pattern[index] === "\\") {
+      index += 1
+      continue
+    }
+
+    if (pattern[index] === "]") {
+      return index
+    }
+  }
+
+  return start
+}
+
+/**
  * 把 `(?i:...)` 这类局部大小写不敏感分组展开成 JS 可执行的等价模式。
  * 输入：原始 regex 字符串。
  * 输出：展开后的 regex 字符串。
@@ -441,6 +530,7 @@ function expandInlineCaseInsensitiveGroups(pattern: string): string {
  */
 function expandAsciiCaseInsensitiveLiterals(pattern: string): string {
   let result = ""
+  let inCharacterClass = false
 
   for (let index = 0; index < pattern.length; index += 1) {
     const character = pattern[index]
@@ -454,10 +544,34 @@ function expandAsciiCaseInsensitiveLiterals(pattern: string): string {
       continue
     }
 
+    if (character === "[") {
+      inCharacterClass = true
+      result += character
+      continue
+    }
+
+    if (character === "]" && inCharacterClass) {
+      inCharacterClass = false
+      result += character
+      continue
+    }
+
     if (/^[A-Za-z]$/.test(character)) {
       const lower = character.toLowerCase()
       const upper = character.toUpperCase()
-      result += lower === upper ? character : `[${lower}${upper}]`
+      if (lower === upper) {
+        result += character
+        continue
+      }
+
+      if (inCharacterClass) {
+        const previous = pattern[index - 1]
+        const next = pattern[index + 1]
+        result += previous === "-" || next === "-" ? character : `${lower}${upper}`
+        continue
+      }
+
+      result += `[${lower}${upper}]`
       continue
     }
 

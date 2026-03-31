@@ -54,6 +54,9 @@ export default defineConfig({
       "@cyberlangke/tokkit-openai": fileURLToPath(
         new URL("./packages/openai/src/index.ts", import.meta.url)
       ),
+      "@cyberlangke/tokkit-gsai-ml": fileURLToPath(
+        new URL("./packages/gsai-ml/src/index.ts", import.meta.url)
+      ),
       "@cyberlangke/tokkit-bytedance-seed": fileURLToPath(
         new URL("./packages/bytedance-seed/src/index.ts", import.meta.url)
       ),

@@ -463,6 +463,24 @@ export const FAMILY_SPECS = [
     source: "vendor/tokenizers/openai__gpt-oss-20b__tokenizer.json.br",
   },
   {
+    family: "llada",
+    packageName: "gsai-ml",
+    moduleName: "llada",
+    source: "vendor/tokenizers/GSAI-ML__LLaDA-8B-Instruct__tokenizer.json.br",
+  },
+  {
+    family: "llada-base",
+    packageName: "gsai-ml",
+    moduleName: "llada_base",
+    source: "vendor/tokenizers/GSAI-ML__LLaDA-8B-Base__tokenizer.json.br",
+  },
+  {
+    family: "refusion",
+    packageName: "gsai-ml",
+    moduleName: "refusion",
+    source: "vendor/tokenizers/GSAI-ML__ReFusion__tokenizer.json.br",
+  },
+  {
     family: "academic-ds",
     packageName: "bytedance-seed",
     moduleName: "academic_ds",

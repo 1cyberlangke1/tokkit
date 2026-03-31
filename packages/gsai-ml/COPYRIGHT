@@ -1,0 +1,8 @@
+Copyright (c) 2026 cyberlangke
+
+This package bundles tokenizer assets derived from official Hugging Face repositories under the GSAI-ML organization:
+- GSAI-ML/LLaDA-8B-Instruct tokenizer.json (MIT)
+- GSAI-ML/LLaDA-8B-Base tokenizer.json (MIT)
+- GSAI-ML/ReFusion tokenizer.json (Apache-2.0)
+
+See LICENSE for the full license text that applies to this package and its bundled assets.

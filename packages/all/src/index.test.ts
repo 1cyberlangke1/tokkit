@@ -201,6 +201,25 @@ describe("tokkit vNext architecture", () => {
     ).toEqual(reference.encode(sample, { add_special_tokens: false }))
   })
 
+  it("Split pre-tokenizer 会兼容 HF/Rust 的 possessive quantifier regex", async () => {
+    const asset = createPossessiveQuantifierSplitToyAsset()
+    registerTokenizerFamily({
+      family: "toy-possessive-split",
+      asset,
+    })
+
+    const reference = new PreTrainedTokenizer(asset as any, {})
+    const sample = " Hello!!"
+
+    const actual = await encode(sample, "toy-possessive-split", {
+      addSpecialTokens: false,
+    })
+    const expected = reference.encode(sample, { add_special_tokens: false })
+
+    expect(actual).toEqual(expected)
+    expect(await decode(actual, "toy-possessive-split")).toBe(sample)
+  })
+
   it("BPE string merges 会保留以 # 开头的真实 merge 规则", async () => {
     const asset = createHashMergeToyAsset()
     registerTokenizerFamily({
@@ -501,6 +520,9 @@ describe("builtin tokenizer families", () => {
           "solar",
           "solar-pro",
           "gpt-oss",
+          "llada",
+          "llada-base",
+          "refusion",
           "glm-4.7",
           "glm-5",
           "cosmo-1b",
@@ -696,6 +718,10 @@ describe("builtin tokenizer families", () => {
           "upstage/solar-pro-preview-instruct",
           "openai/gpt-oss-20b",
           "openai/gpt-oss-120b",
+          "GSAI-ML/LLaDA-8B-Instruct",
+          "GSAI-ML/LLaDA-1.5",
+          "GSAI-ML/LLaDA-8B-Base",
+          "GSAI-ML/ReFusion",
           "ByteDance-Seed/academic-ds-9B",
           "ByteDance-Seed/Seed-OSS-36B-Base",
           "ByteDance-Seed/Seed-Coder-8B-Base",
@@ -1264,6 +1290,60 @@ function createInlineCaseInsensitiveSplitToyAsset(): TokenizerAsset {
         "ĠAYA": 1,
         "'D": 2,
         "A": 3,
+      },
+      merges: [],
+      unk_token: "<unk>",
+      continuing_subword_prefix: "",
+      end_of_word_suffix: "",
+      byte_fallback: false,
+      ignore_merges: true,
+    },
+  }
+}
+
+/**
+ * 生成用于验证 Rust possessive quantifier 兼容性的 toy tokenizer。
+ * 输入：无。
+ * 输出：依赖 `?+` / `++` 语义的最小 Split + ByteLevel 资产。
+ */
+function createPossessiveQuantifierSplitToyAsset(): TokenizerAsset {
+  return {
+    version: "1.0",
+    normalizer: null,
+    post_processor: null,
+    added_tokens: [],
+    pre_tokenizer: {
+      type: "Sequence",
+      pretokenizers: [
+        {
+          type: "Split",
+          pattern: {
+            Regex:
+              "'(?i:[sdmt]|ll|ve|re)|[^\\r\\n\\p{L}\\p{N}]?+\\p{L}+|\\p{N}| ?[^\\s\\p{L}\\p{N}]++[\\r\\n]*|\\s*[\\r\\n]|\\s+(?!\\S)|\\s+",
+          },
+          behavior: "Isolated",
+          invert: false,
+        },
+        {
+          type: "ByteLevel",
+          add_prefix_space: false,
+          trim_offsets: true,
+          use_regex: false,
+        },
+      ],
+    },
+    decoder: {
+      type: "ByteLevel",
+      add_prefix_space: true,
+      trim_offsets: true,
+      use_regex: true,
+    },
+    model: {
+      type: "BPE",
+      vocab: {
+        "<unk>": 0,
+        "ĠHello": 1,
+        "!!": 2,
       },
       merges: [],
       unk_token: "<unk>",

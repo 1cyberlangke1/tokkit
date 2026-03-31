@@ -334,6 +334,16 @@ const VENDOR_PACKAGE_CASES = [
     expectedModels: ["openai/gpt-oss-20b", "openai/gpt-oss-120b"],
   },
   {
+    relativePath: "packages/gsai-ml/src/index.ts",
+    expectedFamilies: ["llada", "llada-base", "refusion"],
+    expectedModels: [
+      "GSAI-ML/LLaDA-8B-Instruct",
+      "GSAI-ML/LLaDA-1.5",
+      "GSAI-ML/LLaDA-8B-Base",
+      "GSAI-ML/ReFusion",
+    ],
+  },
+  {
     relativePath: "packages/bytedance-seed/src/index.ts",
     expectedFamilies: ["academic-ds", "seed-oss", "seed-coder", "stable-diffcoder"],
     expectedModels: [
@@ -403,6 +413,9 @@ const EXPECTED_ALL_FAMILIES = [
   "solar",
   "solar-pro",
   "gpt-oss",
+  "llada",
+  "llada-base",
+  "refusion",
   "glm-4.7",
   "glm-5",
   "granite-3-instruct",
