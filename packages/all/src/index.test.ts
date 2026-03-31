@@ -768,16 +768,21 @@ describe("builtin tokenizer families", () => {
           "Qwen/Qwen2.5-7B-Instruct",
           "Qwen/Qwen2.5-Coder-32B-Instruct",
           "Qwen/Qwen2.5-Math-7B-Instruct",
+          "Qwen/Qwen3-14B-Base",
           "Qwen/Qwen3-0.6B",
           "Qwen/Qwen3-4B-Instruct-2507",
           "Qwen/Qwen3-Next-80B-A3B-Instruct",
+          "Qwen/Qwen3-Next-80B-A3B-Thinking",
           "Qwen/Qwen3-235B-A22B-Instruct-2507",
+          "Qwen/Qwen3-235B-A22B-Thinking-2507",
           "Qwen/Qwen3.5-0.8B-Base",
           "Qwen/Qwen3.5-0.8B",
           "Qwen/Qwen3.5-27B",
           "Qwen/Qwen3.5-122B-A10B",
           "Qwen/Qwen3.5-397B-A17B",
           "Qwen/Qwen3-Coder-Next",
+          "Qwen/Qwen3-Coder-480B-A35B-Instruct",
+          "Qwen/Qwen3-Coder-Next-Base",
           "Qwen/QwQ-32B",
           "Qwen/QwQ-32B-Preview",
           "deepseek-ai/DeepSeek-V3",
@@ -828,11 +833,13 @@ describe("builtin tokenizer families", () => {
       expect(await getEncoding("Qwen/Qwen2.5-Coder-32B-Instruct")).toBe(qwen25)
       expect(await getEncoding("Qwen/Qwen2.5-Math-7B-Instruct")).toBe(qwen25)
       expect(await getEncoding("Qwen/QwQ-32B-Preview")).toBe(qwen25)
+      expect(await getEncoding("Qwen/Qwen3-14B-Base")).toBe(qwen25)
       expect(await getEncoding("qwen3-base")).toBe(qwen25)
 
       const qwen3 = await getEncoding("qwen3")
       expect(await getEncoding("Qwen/Qwen3-30B-A3B-Instruct-2507")).toBe(qwen3)
       expect(await getEncoding("Qwen/Qwen3-Next-80B-A3B-Instruct")).toBe(qwen3)
+      expect(await getEncoding("Qwen/Qwen3-Next-80B-A3B-Thinking")).toBe(qwen3)
       expect(await getEncoding("Qwen/Qwen3-235B-A22B-Instruct-2507")).toBe(qwen3)
 
       const qwen35 = await getEncoding("qwen3.5")
@@ -846,7 +853,10 @@ describe("builtin tokenizer families", () => {
 
       const qwen3CoderNext = await getEncoding("qwen3-coder-next")
       expect(await getEncoding("Qwen/Qwen3-Coder-30B-A3B-Instruct")).toBe(qwen3CoderNext)
+      expect(await getEncoding("Qwen/Qwen3-Coder-480B-A35B-Instruct")).toBe(qwen3CoderNext)
+      expect(await getEncoding("Qwen/Qwen3-Coder-Next-Base")).toBe(qwen3CoderNext)
       expect(await getEncoding("Qwen/Qwen3-30B-A3B-Thinking-2507")).toBe(qwen3CoderNext)
+      expect(await getEncoding("Qwen/Qwen3-235B-A22B-Thinking-2507")).toBe(qwen3CoderNext)
       expect(await getEncoding("Qwen/QwQ-32B")).toBe(qwen3CoderNext)
       expect(await getEncoding("qwen3-coder")).toBe(qwen3CoderNext)
 

@@ -557,13 +557,18 @@ describe("family packages", () => {
       expect.arrayContaining([
         "Qwen/Qwen2-7B-Instruct",
         "Qwen/Qwen2.5-7B-Instruct",
+        "Qwen/Qwen3-14B-Base",
         "Qwen/Qwen3-0.6B",
+        "Qwen/Qwen3-Next-80B-A3B-Thinking",
         "Qwen/Qwen3-235B-A22B-Instruct-2507",
+        "Qwen/Qwen3-235B-A22B-Thinking-2507",
         "Qwen/Qwen3.5-0.8B",
         "Qwen/Qwen3.5-27B",
         "Qwen/Qwen3.5-0.8B-Base",
         "Qwen/Qwen3.5-397B-A17B",
         "Qwen/Qwen3-Coder-Next",
+        "Qwen/Qwen3-Coder-480B-A35B-Instruct",
+        "Qwen/Qwen3-Coder-Next-Base",
         "Qwen/QwQ-32B",
       ])
     )
