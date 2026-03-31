@@ -1,0 +1,7 @@
+Copyright (c) 2026 cyberlangke
+
+This package bundles tokenizer assets derived from official Hugging Face repositories under the Nanbeige organization:
+- Nanbeige/Nanbeige4-3B-Base tokenizer.json
+- Nanbeige/Nanbeige4.1-3B tokenizer.json
+
+See LICENSE for the full license text that applies to this package and its bundled assets.

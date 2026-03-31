@@ -309,6 +309,23 @@ describe("tokkit vNext architecture", () => {
     ).toEqual(reference.encode(sample, { add_special_tokens: false }))
   })
 
+  it("normalized special added token 在中间切段后仍会按片段重新应用 Prepend normalizer", async () => {
+    const asset = createNormalizedPrependSpecialAddedTokenToyAsset()
+    registerTokenizerFamily({
+      family: "toy-special-prepend-normalized",
+      asset,
+    })
+
+    const reference = new PreTrainedTokenizer(asset as any, {})
+    const sample = "sa <s>du"
+
+    expect(
+      await encode(sample, "toy-special-prepend-normalized", {
+        addSpecialTokens: false,
+      })
+    ).toEqual(reference.encode(sample, { add_special_tokens: false }))
+  })
+
   it("special added token 后续片段不会错误触发 Metaspace prepend_scheme=first", async () => {
     const asset = createMetaspaceFirstSpecialAddedTokenToyAsset()
     registerTokenizerFamily({
@@ -536,6 +553,8 @@ describe("builtin tokenizer families", () => {
           "danube3-500m-chat",
           "danube3-4b-chat",
           "danube3.1-4b-chat",
+          "nanbeige4",
+          "nanbeige4-base",
           "solar",
           "solar-pro",
           "gpt-oss",
@@ -747,6 +766,11 @@ describe("builtin tokenizer families", () => {
           "h2oai/h2o-danube3-4b-base",
           "h2oai/h2o-danube3-4b-chat",
           "h2oai/h2o-danube3.1-4b-chat",
+          "Nanbeige/Nanbeige4-3B-Base",
+          "Nanbeige/Nanbeige4.1-3B",
+          "Nanbeige/Nanbeige4-3B-Thinking-2510",
+          "Nanbeige/Nanbeige4-3B-Thinking-2511",
+          "Nanbeige/ToolMind-Web-3B",
           "upstage/SOLAR-10.7B-v1.0",
           "upstage/TinySolar-248m-4k",
           "upstage/solar-pro-preview-instruct",
@@ -1911,6 +1935,84 @@ function createPrependSpecialAddedTokenToyAsset(): TokenizerAsset {
         "▁du": 2,
         "▁": 3,
         "du": 4,
+      },
+      merges: [],
+      unk_token: "<unk>",
+      continuing_subword_prefix: "",
+      end_of_word_suffix: "",
+      byte_fallback: false,
+      ignore_merges: false,
+    },
+  }
+}
+
+/**
+ * 生成用于验证 normalized special added token 边界下 Prepend normalizer 行为的 toy tokenizer。
+ * 输入：无。
+ * 输出：special token 在中间切段时，前后普通片段都要按独立 section 重新 normalizer。
+ */
+function createNormalizedPrependSpecialAddedTokenToyAsset(): TokenizerAsset {
+  return {
+    version: "1.0",
+    normalizer: {
+      type: "Sequence",
+      normalizers: [
+        {
+          type: "Prepend",
+          prepend: "▁",
+        },
+        {
+          type: "Replace",
+          pattern: {
+            String: " ",
+          },
+          content: "▁",
+        },
+      ],
+    },
+    post_processor: null,
+    added_tokens: [
+      {
+        id: 1,
+        content: "<s>",
+        single_word: false,
+        lstrip: false,
+        rstrip: false,
+        normalized: true,
+        special: true,
+      },
+    ],
+    pre_tokenizer: null,
+    decoder: {
+      type: "Sequence",
+      decoders: [
+        {
+          type: "Replace",
+          pattern: {
+            String: "▁",
+          },
+          content: " ",
+        },
+        {
+          type: "Fuse",
+        },
+        {
+          type: "Strip",
+          content: " ",
+          start: 1,
+          stop: 0,
+        },
+      ],
+    },
+    model: {
+      type: "BPE",
+      vocab: {
+        "<unk>": 0,
+        "<s>": 1,
+        "▁sa": 2,
+        "▁": 3,
+        "▁du": 4,
+        "du": 5,
       },
       merges: [],
       unk_token: "<unk>",

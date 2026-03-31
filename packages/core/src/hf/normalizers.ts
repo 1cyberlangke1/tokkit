@@ -7,6 +7,7 @@
 /** 统一的 normalizer 接口。 */
 export interface Normalizer {
   normalize(text: string): string
+  normalizeSectionStart(text: string): string
 }
 
 /** 不做任何处理的 normalizer。 */
@@ -16,6 +17,10 @@ class IdentityNormalizer implements Normalizer {
    * 输出：原样返回。
    */
   normalize(text: string): string {
+    return text
+  }
+
+  normalizeSectionStart(text: string): string {
     return text
   }
 }
@@ -43,6 +48,14 @@ class PrependNormalizer implements Normalizer {
     }
 
     return this.prepend + text
+  }
+
+  /**
+   * 输入：已完成其他常规归一化、但处于新 section 起点的文本。
+   * 输出：像 Hugging Face 一样在 added token 边界后重新补前缀。
+   */
+  normalizeSectionStart(text: string): string {
+    return this.normalize(text)
   }
 }
 
@@ -74,6 +87,10 @@ class ReplaceNormalizer implements Normalizer {
       ? text.split(this.pattern).join(this.content)
       : text.replace(this.pattern, this.content)
   }
+
+  normalizeSectionStart(text: string): string {
+    return text
+  }
 }
 
 /** 基于 Unicode 规范化表单的 normalizer。 */
@@ -95,6 +112,10 @@ class UnicodeNormalizer implements Normalizer {
    */
   normalize(text: string): string {
     return text.normalize(this.form)
+  }
+
+  normalizeSectionStart(text: string): string {
+    return text
   }
 }
 
@@ -119,6 +140,18 @@ class SequenceNormalizer implements Normalizer {
     let current = text
     for (const normalizer of this.normalizers) {
       current = normalizer.normalize(current)
+    }
+    return current
+  }
+
+  /**
+   * 输入：已完成常规归一化、但位于新 section 起点的文本。
+   * 输出：只重放带 section 起点语义的归一化步骤。
+   */
+  normalizeSectionStart(text: string): string {
+    let current = text
+    for (const normalizer of this.normalizers) {
+      current = normalizer.normalizeSectionStart(current)
     }
     return current
   }

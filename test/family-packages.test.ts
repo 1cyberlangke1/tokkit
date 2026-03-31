@@ -348,6 +348,17 @@ const VENDOR_PACKAGE_CASES = [
     ],
   },
   {
+    relativePath: "packages/nanbeige/src/index.ts",
+    expectedFamilies: ["nanbeige4", "nanbeige4-base"],
+    expectedModels: [
+      "Nanbeige/Nanbeige4-3B-Base",
+      "Nanbeige/Nanbeige4.1-3B",
+      "Nanbeige/Nanbeige4-3B-Thinking-2510",
+      "Nanbeige/Nanbeige4-3B-Thinking-2511",
+      "Nanbeige/ToolMind-Web-3B",
+    ],
+  },
+  {
     relativePath: "packages/upstage/src/index.ts",
     expectedFamilies: ["solar", "solar-pro"],
     expectedModels: [
@@ -439,6 +450,8 @@ const EXPECTED_ALL_FAMILIES = [
   "danube3-500m-chat",
   "danube3-4b-chat",
   "danube3.1-4b-chat",
+  "nanbeige4",
+  "nanbeige4-base",
   "solar",
   "solar-pro",
   "gpt-oss",

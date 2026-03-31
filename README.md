@@ -87,6 +87,9 @@
   - `danube3-500m-chat`
   - `danube3-4b-chat`
   - `danube3.1-4b-chat`
+- `@cyberlangke/tokkit-nanbeige`
+  - `nanbeige4`
+  - `nanbeige4-base`
 - `@cyberlangke/tokkit-upstage`
   - `solar`
   - `solar-pro`

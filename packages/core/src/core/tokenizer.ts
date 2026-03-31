@@ -112,8 +112,13 @@ export class Tokenizer {
         return
       }
 
-      this.appendNormalizedOrdinaryIds(value, ids, state.sectionIndex)
+      const sectionText = normalizedSectionStartPending
+        ? this.normalizer.normalizeSectionStart(value)
+        : value
+
+      this.appendNormalizedOrdinaryIds(sectionText, ids, state.sectionIndex)
       state.sectionIndex += 1
+      normalizedSectionStartPending = false
     }
 
     const processNormalizedText = (value: string) => {
@@ -132,6 +137,7 @@ export class Tokenizer {
         },
         onAdded: (segment, token) => {
           if (emitAddedToken(segment, token.content, token.id, Boolean(token.special))) {
+            normalizedSectionStartPending = true
             return
           }
 
@@ -139,6 +145,8 @@ export class Tokenizer {
         },
       })
     }
+
+    let normalizedSectionStartPending = false
 
     const processRawText = (value: string) => {
       if (value.length === 0) {

@@ -117,6 +117,12 @@ const EXPECTED_PACKAGES = [
     includedInAll: true,
   },
   {
+    directory: "nanbeige",
+    packageName: "@cyberlangke/tokkit-nanbeige",
+    license: "Apache-2.0",
+    includedInAll: true,
+  },
+  {
     directory: "upstage",
     packageName: "@cyberlangke/tokkit-upstage",
     license: "SEE LICENSE IN LICENSE",

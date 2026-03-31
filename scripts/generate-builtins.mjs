@@ -487,6 +487,18 @@ export const FAMILY_SPECS = [
     source: "vendor/tokenizers/h2oai__h2o-danube3.1-4b-chat__tokenizer.json.br",
   },
   {
+    family: "nanbeige4",
+    packageName: "nanbeige",
+    moduleName: "nanbeige4",
+    source: "vendor/tokenizers/Nanbeige__Nanbeige4.1-3B__tokenizer.json.br",
+  },
+  {
+    family: "nanbeige4-base",
+    packageName: "nanbeige",
+    moduleName: "nanbeige4_base",
+    source: "vendor/tokenizers/Nanbeige__Nanbeige4-3B-Base__tokenizer.json.br",
+  },
+  {
     family: "solar",
     packageName: "upstage",
     moduleName: "solar",
