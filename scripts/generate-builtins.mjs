@@ -139,6 +139,12 @@ export const FAMILY_SPECS = [
     source: "vendor/tokenizers/XiaomiMiMo__MiMo-V2-Flash__tokenizer.json.br",
   },
   {
+    family: "bitnet-b1.58-2b-4t",
+    packageName: "microsoft",
+    moduleName: "bitnet_b1_58_2b_4t",
+    source: "vendor/tokenizers/microsoft__bitnet-b1.58-2B-4T__tokenizer.json.br",
+  },
+  {
     family: "phi-1",
     packageName: "microsoft",
     moduleName: "phi_1",
@@ -253,6 +259,12 @@ export const FAMILY_SPECS = [
     source: "vendor/tokenizers/mistralai__Mixtral-8x7B-v0.1__tokenizer.json.br",
   },
   {
+    family: "cosmo-1b",
+    packageName: "huggingface-tb",
+    moduleName: "cosmo_1b",
+    source: "vendor/tokenizers/HuggingFaceTB__cosmo-1b__tokenizer.json.br",
+  },
+  {
     family: "smollm",
     packageName: "huggingface-tb",
     moduleName: "smollm",
@@ -365,6 +377,24 @@ export const FAMILY_SPECS = [
     packageName: "ibm-granite",
     moduleName: "granite_3_3_instruct",
     source: "vendor/tokenizers/ibm-granite__granite-3.3-8b-instruct__tokenizer.json.br",
+  },
+  {
+    family: "granite-7b-base",
+    packageName: "ibm-granite",
+    moduleName: "granite_7b_base",
+    source: "vendor/tokenizers/ibm-granite__granite-7b-base__tokenizer.json.br",
+  },
+  {
+    family: "granite-7b-instruct",
+    packageName: "ibm-granite",
+    moduleName: "granite_7b_instruct",
+    source: "vendor/tokenizers/ibm-granite__granite-7b-instruct__tokenizer.json.br",
+  },
+  {
+    family: "granite-code-base",
+    packageName: "ibm-granite",
+    moduleName: "granite_code_base",
+    source: "vendor/tokenizers/ibm-granite__granite-3b-code-base-2k__tokenizer.json.br",
   },
   {
     family: "granite-4",

@@ -4,6 +4,9 @@
  * 输出：验证每个 family 都会写入对应子包，而不是根目录旧路径。
  */
 
+import { readdirSync, readFileSync } from "node:fs"
+import { resolve } from "node:path"
+
 import { describe, expect, it } from "vitest"
 
 describe("generate:builtins layout", () => {
@@ -41,6 +44,10 @@ describe("generate:builtins layout", () => {
         expect.objectContaining({ family: "mimo", packageName: "xiaomi-mimo" }),
         expect.objectContaining({ family: "mimo-7b-rl-0530", packageName: "xiaomi-mimo" }),
         expect.objectContaining({ family: "mimo-v2-flash", packageName: "xiaomi-mimo" }),
+        expect.objectContaining({
+          family: "bitnet-b1.58-2b-4t",
+          packageName: "microsoft",
+        }),
         expect.objectContaining({ family: "phi-1", packageName: "microsoft" }),
         expect.objectContaining({ family: "phi-3-mini", packageName: "microsoft" }),
         expect.objectContaining({ family: "phi-3-medium", packageName: "microsoft" }),
@@ -63,6 +70,7 @@ describe("generate:builtins layout", () => {
         expect.objectContaining({ family: "mistral-nemo", packageName: "mistral" }),
         expect.objectContaining({ family: "mistral-small-24b", packageName: "mistral" }),
         expect.objectContaining({ family: "mixtral-8x7b", packageName: "mistral" }),
+        expect.objectContaining({ family: "cosmo-1b", packageName: "huggingface-tb" }),
         expect.objectContaining({ family: "smollm", packageName: "huggingface-tb" }),
         expect.objectContaining({ family: "smollm-1.7b", packageName: "huggingface-tb" }),
         expect.objectContaining({ family: "smollm2-16k", packageName: "huggingface-tb" }),
@@ -89,6 +97,18 @@ describe("generate:builtins layout", () => {
         }),
         expect.objectContaining({
           family: "granite-3.3-instruct",
+          packageName: "ibm-granite",
+        }),
+        expect.objectContaining({
+          family: "granite-7b-base",
+          packageName: "ibm-granite",
+        }),
+        expect.objectContaining({
+          family: "granite-7b-instruct",
+          packageName: "ibm-granite",
+        }),
+        expect.objectContaining({
+          family: "granite-code-base",
           packageName: "ibm-granite",
         }),
         expect.objectContaining({ family: "granite-4", packageName: "ibm-granite" }),
@@ -196,5 +216,44 @@ describe("generate:builtins layout", () => {
         tokenToId
       )
     ).toEqual([1, 1, 2, 1, 3, 4])
+  })
+
+  it("每个子包注册的 canonical family 都在 FAMILY_SPECS 里有生成条目", async () => {
+    // @ts-expect-error 这里直接导入构建脚本模块，测试只关心其运行时导出形状。
+    const module = await import("../scripts/generate-builtins.mjs")
+    const specFamiliesByPackage = new Map<string, Set<string>>()
+
+    for (const spec of module.FAMILY_SPECS as Array<{ family: string; packageName: string }>) {
+      const families = specFamiliesByPackage.get(spec.packageName) ?? new Set<string>()
+      families.add(spec.family)
+      specFamiliesByPackage.set(spec.packageName, families)
+    }
+
+    const packagesDir = resolve(process.cwd(), "packages")
+    const packageNames = readdirSync(packagesDir, { withFileTypes: true })
+      .filter((entry) => entry.isDirectory())
+      .map((entry) => entry.name)
+      .filter((name) => name !== "all" && name !== "core")
+
+    for (const packageName of packageNames) {
+      const indexPath = resolve(packagesDir, packageName, "src", "index.ts")
+      const source = readFileSync(indexPath, "utf8")
+      const registeredFamilies = [...source.matchAll(/family:\s*"([^"]+)"/g)].map(
+        (match) => match[1]
+      )
+
+      if (registeredFamilies.length === 0) {
+        continue
+      }
+
+      const missingFamilies = registeredFamilies.filter(
+        (family) => !specFamiliesByPackage.get(packageName)?.has(family)
+      )
+
+      expect(
+        missingFamilies,
+        `${packageName} 缺少 FAMILY_SPECS 条目: ${missingFamilies.join(", ")}`
+      ).toEqual([])
+    }
   })
 })
