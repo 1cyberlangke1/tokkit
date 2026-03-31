@@ -111,6 +111,13 @@ const EXPECTED_PACKAGES = [
     includedInAll: true,
   },
   {
+    directory: "upstage",
+    packageName: "@cyberlangke/tokkit-upstage",
+    license: "SEE LICENSE IN LICENSE",
+    includedInAll: true,
+    requiredFiles: ["COPYRIGHT", "LICENSE"],
+  },
+  {
     directory: "bytedance-seed",
     packageName: "@cyberlangke/tokkit-bytedance-seed",
     license: "SEE LICENSE IN LICENSE",

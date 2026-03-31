@@ -445,6 +445,18 @@ export const FAMILY_SPECS = [
     source: "vendor/tokenizers/h2oai__h2o-danube3.1-4b-chat__tokenizer.json.br",
   },
   {
+    family: "solar",
+    packageName: "upstage",
+    moduleName: "solar",
+    source: "vendor/tokenizers/upstage__SOLAR-10.7B-v1.0__tokenizer.json.br",
+  },
+  {
+    family: "solar-pro",
+    packageName: "upstage",
+    moduleName: "solar_pro",
+    source: "vendor/tokenizers/upstage__solar-pro-preview-instruct__tokenizer.json.br",
+  },
+  {
     family: "academic-ds",
     packageName: "bytedance-seed",
     moduleName: "academic_ds",

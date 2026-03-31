@@ -16,6 +16,7 @@ import { registerBuiltins as registerHuggingFaceTBBuiltins } from "@cyberlangke/
 import { registerBuiltins as registerAllenAIBuiltins } from "@cyberlangke/tokkit-allenai"
 import { registerBuiltins as registerGraniteBuiltins } from "@cyberlangke/tokkit-ibm-granite"
 import { registerBuiltins as registerH2OAIBuiltins } from "@cyberlangke/tokkit-h2oai"
+import { registerBuiltins as registerUpstageBuiltins } from "@cyberlangke/tokkit-upstage"
 import { registerBuiltins as registerByteDanceSeedBuiltins } from "@cyberlangke/tokkit-bytedance-seed"
 import { registerBuiltins as registerOpenBMBBuiltins } from "@cyberlangke/tokkit-openbmb"
 import { registerBuiltins as registerGlmBuiltins } from "@cyberlangke/tokkit-glm"
@@ -41,6 +42,7 @@ export function registerBuiltins(): void {
   registerAllenAIBuiltins()
   registerGraniteBuiltins()
   registerH2OAIBuiltins()
+  registerUpstageBuiltins()
   registerByteDanceSeedBuiltins()
   registerOpenBMBBuiltins()
   registerQwenBuiltins()

@@ -134,6 +134,8 @@ describe("generate:builtins layout", () => {
           family: "danube3.1-4b-chat",
           packageName: "h2oai",
         }),
+        expect.objectContaining({ family: "solar", packageName: "upstage" }),
+        expect.objectContaining({ family: "solar-pro", packageName: "upstage" }),
         expect.objectContaining({
           family: "academic-ds",
           packageName: "bytedance-seed",
@@ -198,6 +200,9 @@ describe("generate:builtins layout", () => {
     )
     expect(module.resolveOutputModulePath("h2oai", "danube3_1_4b_chat")).toBe(
       "packages/h2oai/src/generated/danube3_1_4b_chat.ts"
+    )
+    expect(module.resolveOutputModulePath("upstage", "solar_pro")).toBe(
+      "packages/upstage/src/generated/solar_pro.ts"
     )
     expect(module.resolveOutputModulePath("bytedance-seed", "seed_oss")).toBe(
       "packages/bytedance-seed/src/generated/seed_oss.ts"

@@ -320,6 +320,15 @@ const VENDOR_PACKAGE_CASES = [
     ],
   },
   {
+    relativePath: "packages/upstage/src/index.ts",
+    expectedFamilies: ["solar", "solar-pro"],
+    expectedModels: [
+      "upstage/SOLAR-10.7B-v1.0",
+      "upstage/TinySolar-248m-4k",
+      "upstage/solar-pro-preview-instruct",
+    ],
+  },
+  {
     relativePath: "packages/bytedance-seed/src/index.ts",
     expectedFamilies: ["academic-ds", "seed-oss", "seed-coder", "stable-diffcoder"],
     expectedModels: [
@@ -386,6 +395,8 @@ const EXPECTED_ALL_FAMILIES = [
   "danube3-500m-chat",
   "danube3-4b-chat",
   "danube3.1-4b-chat",
+  "solar",
+  "solar-pro",
   "glm-4.7",
   "glm-5",
   "granite-3-instruct",

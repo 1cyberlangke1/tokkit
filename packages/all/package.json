@@ -39,6 +39,7 @@
     "@cyberlangke/tokkit-qwen": "1.11.0",
     "@cyberlangke/tokkit-step": "1.11.0",
     "@cyberlangke/tokkit-tiiuae": "1.11.0",
+    "@cyberlangke/tokkit-upstage": "1.11.0",
     "@cyberlangke/tokkit-xiaomi-mimo": "1.11.0"
   },
   "publishConfig": {

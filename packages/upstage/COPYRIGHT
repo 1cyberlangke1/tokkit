@@ -1,0 +1,7 @@
+Copyright (c) 2026 cyberlangke
+
+This package bundles tokenizer assets derived from official Hugging Face repositories under the upstage organization:
+- upstage/SOLAR-10.7B-v1.0 tokenizer.json
+- upstage/solar-pro-preview-instruct tokenizer.json
+
+See LICENSE for the full license text that applies to this package and its bundled assets.
