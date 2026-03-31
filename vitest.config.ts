@@ -45,6 +45,9 @@ export default defineConfig({
       "@cyberlangke/tokkit-ibm-granite": fileURLToPath(
         new URL("./packages/ibm-granite/src/index.ts", import.meta.url)
       ),
+      "@cyberlangke/tokkit-h2oai": fileURLToPath(
+        new URL("./packages/h2oai/src/index.ts", import.meta.url)
+      ),
       "@cyberlangke/tokkit-bytedance-seed": fileURLToPath(
         new URL("./packages/bytedance-seed/src/index.ts", import.meta.url)
       ),

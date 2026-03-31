@@ -78,6 +78,12 @@
   - `granite-4`
   - `granite-4-tiny-base-preview`
   - `granite-4-tiny-preview`
+- `@cyberlangke/tokkit-h2oai`
+  - `danube`
+  - `danube2`
+  - `danube3-500m-chat`
+  - `danube3-4b-chat`
+  - `danube3.1-4b-chat`
 - `@cyberlangke/tokkit-bytedance-seed`
   - `academic-ds`
   - `seed-oss`

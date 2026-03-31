@@ -120,6 +120,20 @@ describe("generate:builtins layout", () => {
           family: "granite-4-tiny-preview",
           packageName: "ibm-granite",
         }),
+        expect.objectContaining({ family: "danube", packageName: "h2oai" }),
+        expect.objectContaining({ family: "danube2", packageName: "h2oai" }),
+        expect.objectContaining({
+          family: "danube3-500m-chat",
+          packageName: "h2oai",
+        }),
+        expect.objectContaining({
+          family: "danube3-4b-chat",
+          packageName: "h2oai",
+        }),
+        expect.objectContaining({
+          family: "danube3.1-4b-chat",
+          packageName: "h2oai",
+        }),
         expect.objectContaining({
           family: "academic-ds",
           packageName: "bytedance-seed",
@@ -181,6 +195,9 @@ describe("generate:builtins layout", () => {
     )
     expect(module.resolveOutputModulePath("ibm-granite", "granite_4")).toBe(
       "packages/ibm-granite/src/generated/granite_4.ts"
+    )
+    expect(module.resolveOutputModulePath("h2oai", "danube3_1_4b_chat")).toBe(
+      "packages/h2oai/src/generated/danube3_1_4b_chat.ts"
     )
     expect(module.resolveOutputModulePath("bytedance-seed", "seed_oss")).toBe(
       "packages/bytedance-seed/src/generated/seed_oss.ts"

@@ -415,6 +415,36 @@ export const FAMILY_SPECS = [
     source: "vendor/tokenizers/ibm-granite__granite-4.0-tiny-preview__tokenizer.json.br",
   },
   {
+    family: "danube",
+    packageName: "h2oai",
+    moduleName: "danube",
+    source: "vendor/tokenizers/h2oai__h2o-danube-1.8b-base__tokenizer.json.br",
+  },
+  {
+    family: "danube2",
+    packageName: "h2oai",
+    moduleName: "danube2",
+    source: "vendor/tokenizers/h2oai__h2o-danube2-1.8b-base__tokenizer.json.br",
+  },
+  {
+    family: "danube3-500m-chat",
+    packageName: "h2oai",
+    moduleName: "danube3_500m_chat",
+    source: "vendor/tokenizers/h2oai__h2o-danube3-500m-chat__tokenizer.json.br",
+  },
+  {
+    family: "danube3-4b-chat",
+    packageName: "h2oai",
+    moduleName: "danube3_4b_chat",
+    source: "vendor/tokenizers/h2oai__h2o-danube3-4b-chat__tokenizer.json.br",
+  },
+  {
+    family: "danube3.1-4b-chat",
+    packageName: "h2oai",
+    moduleName: "danube3_1_4b_chat",
+    source: "vendor/tokenizers/h2oai__h2o-danube3.1-4b-chat__tokenizer.json.br",
+  },
+  {
     family: "academic-ds",
     packageName: "bytedance-seed",
     moduleName: "academic_ds",

@@ -105,6 +105,12 @@ const EXPECTED_PACKAGES = [
     includedInAll: true,
   },
   {
+    directory: "h2oai",
+    packageName: "@cyberlangke/tokkit-h2oai",
+    license: "Apache-2.0",
+    includedInAll: true,
+  },
+  {
     directory: "bytedance-seed",
     packageName: "@cyberlangke/tokkit-bytedance-seed",
     license: "SEE LICENSE IN LICENSE",

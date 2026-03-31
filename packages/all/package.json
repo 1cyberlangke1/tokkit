@@ -30,6 +30,7 @@
     "@cyberlangke/tokkit-eleutherai": "1.11.0",
     "@cyberlangke/tokkit-glm": "1.11.0",
     "@cyberlangke/tokkit-huggingface-tb": "1.11.0",
+    "@cyberlangke/tokkit-h2oai": "1.11.0",
     "@cyberlangke/tokkit-ibm-granite": "1.11.0",
     "@cyberlangke/tokkit-meituan-longcat": "1.11.0",
     "@cyberlangke/tokkit-microsoft": "1.11.0",

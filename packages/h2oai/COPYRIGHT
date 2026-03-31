@@ -1,0 +1,10 @@
+Copyright (c) 2026 cyberlangke
+
+This package bundles tokenizer assets derived from official Hugging Face repositories under the h2oai organization:
+- h2oai/h2o-danube-1.8b-base tokenizer.json
+- h2oai/h2o-danube2-1.8b-base tokenizer.json
+- h2oai/h2o-danube3-500m-chat tokenizer.json
+- h2oai/h2o-danube3-4b-chat tokenizer.json
+- h2oai/h2o-danube3.1-4b-chat tokenizer.json
+
+See LICENSE for the full license text that applies to this package and its bundled assets.
