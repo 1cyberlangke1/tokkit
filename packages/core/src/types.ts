@@ -20,7 +20,7 @@ export interface AddedTokenConfig {
 
 /** Hugging Face 风格的 BPE 模型配置。 */
 export interface BpeModelConfig {
-  type: "BPE"
+  type?: "BPE"
   vocab: Record<string, number> | string[]
   merges?: string[] | Array<[string, string]>
   unk_token?: string | null

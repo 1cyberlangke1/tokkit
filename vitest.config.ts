@@ -81,6 +81,9 @@ export default defineConfig({
       "@cyberlangke/tokkit-deepseek": fileURLToPath(
         new URL("./packages/deepseek/src/index.ts", import.meta.url)
       ),
+      "@cyberlangke/tokkit-distilbert": fileURLToPath(
+        new URL("./packages/distilbert/src/index.ts", import.meta.url)
+      ),
       "@cyberlangke/tokkit-glm": fileURLToPath(
         new URL("./packages/glm/src/index.ts", import.meta.url)
       ),

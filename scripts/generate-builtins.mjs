@@ -673,6 +673,12 @@ export const FAMILY_SPECS = [
     source: "vendor/tokenizers/deepseek-ai__DeepSeek-V3.2__tokenizer.json.br",
   },
   {
+    family: "distilgpt2",
+    packageName: "distilbert",
+    moduleName: "distilgpt2",
+    source: "vendor/tokenizers/distilbert__distilgpt2__tokenizer.json.br",
+  },
+  {
     family: "glm-4.7",
     packageName: "glm",
     moduleName: "glm_4_7",
@@ -749,7 +755,9 @@ function readTokenizerSnapshot(sourcePath) {
  * 输出：运行时可解包的 brotli + base64 字符串。
  */
 function packNormalizedAsset(rawTokenizer) {
-  if (rawTokenizer?.model?.type !== "BPE") {
+  const modelType = inferBpeModelType(rawTokenizer)
+
+  if (modelType !== "BPE") {
     throw new Error(`Only BPE tokenizer families are supported, got: ${rawTokenizer?.model?.type}`)
   }
 
@@ -788,6 +796,23 @@ function packNormalizedAsset(rawTokenizer) {
   })
 
   return Buffer.from(compressed).toString("base64")
+}
+
+/**
+ * 兼容老版 GPT-2 风格 tokenizer.json 未显式写出 model.type 的情况。
+ * 输入：原始 tokenizer.json 对象。
+ * 输出：推断出的 model type。
+ */
+function inferBpeModelType(rawTokenizer) {
+  if (rawTokenizer?.model?.type === "BPE") {
+    return "BPE"
+  }
+
+  if (rawTokenizer?.model?.vocab && rawTokenizer?.model?.merges) {
+    return "BPE"
+  }
+
+  return undefined
 }
 
 /**

@@ -371,6 +371,11 @@ const VENDOR_PACKAGE_CASES = [
     ],
   },
   {
+    relativePath: "packages/distilbert/src/index.ts",
+    expectedFamilies: ["distilgpt2"],
+    expectedModels: ["distilbert/distilgpt2"],
+  },
+  {
     relativePath: "packages/tinyllama/src/index.ts",
     expectedFamilies: ["danube"],
     expectedModels: [
@@ -462,6 +467,7 @@ const EXPECTED_ALL_FAMILIES = [
   "deepseek-v3",
   "deepseek-v3.1",
   "deepseek-v3.2",
+  "distilgpt2",
   "falcon-rw-1b",
   "falcon-7b",
   "bitnet-b1.58-2b-4t",

@@ -36,6 +36,7 @@
       "@cyberlangke/tokkit-openbmb": ["packages/openbmb/src/index.ts"],
       "@cyberlangke/tokkit-qwen": ["packages/qwen/src/index.ts"],
       "@cyberlangke/tokkit-deepseek": ["packages/deepseek/src/index.ts"],
+      "@cyberlangke/tokkit-distilbert": ["packages/distilbert/src/index.ts"],
       "@cyberlangke/tokkit-glm": ["packages/glm/src/index.ts"],
       "@cyberlangke/tokkit-step": ["packages/step/src/index.ts"],
       "@cyberlangke/tokkit": ["packages/all/src/index.ts"]

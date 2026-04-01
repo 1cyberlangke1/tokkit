@@ -16,7 +16,9 @@ import type {
  * 输出：规范化后的运行时结构。
  */
 export function normalizeTokenizerAsset(asset: TokenizerAsset): NormalizedTokenizerAsset {
-  if (asset.model.type !== "BPE") {
+  const modelType = inferBpeModelType(asset)
+
+  if (modelType !== "BPE") {
     throw new Error(`Unsupported tokenizer model type: ${asset.model.type}`)
   }
 
@@ -37,6 +39,23 @@ export function normalizeTokenizerAsset(asset: TokenizerAsset): NormalizedTokeni
       ignoreMerges: asset.model.ignore_merges ?? false,
     },
   }
+}
+
+/**
+ * 推断 tokenizer model 类型。
+ * 输入：原始 tokenizer 资产。
+ * 输出：显式的 BPE 类型，或 undefined。
+ */
+function inferBpeModelType(asset: TokenizerAsset): "BPE" | undefined {
+  if (asset.model.type === "BPE") {
+    return "BPE"
+  }
+
+  if ("vocab" in asset.model && "merges" in asset.model) {
+    return "BPE"
+  }
+
+  return undefined
 }
 
 /**
