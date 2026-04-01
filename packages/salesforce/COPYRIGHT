@@ -1,0 +1,10 @@
+Copyright (c) 2026 cyberlangke
+
+This package bundles tokenizer assets derived from official Hugging Face repositories under the Salesforce organization:
+- Salesforce/codegen-350M-mono tokenizer.json (BSD-3-Clause)
+- Salesforce/codegen-350M-nl tokenizer.json (BSD-3-Clause)
+- Salesforce/codegen2-1B_P tokenizer.json (Apache-2.0)
+
+The remaining bundled model aliases are mapped to these tokenizer snapshots after hash verification.
+
+See LICENSE for the full license text that applies to this package and its bundled assets.

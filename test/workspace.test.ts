@@ -216,6 +216,13 @@ const EXPECTED_PACKAGES = [
     includedInAll: true,
   },
   {
+    directory: "salesforce",
+    packageName: "@cyberlangke/tokkit-salesforce",
+    license: "SEE LICENSE IN LICENSE",
+    includedInAll: true,
+    requiredFiles: ["COPYRIGHT", "LICENSE"],
+  },
+  {
     directory: "janhq",
     packageName: "@cyberlangke/tokkit-janhq",
     license: "Apache-2.0",

@@ -19,6 +19,7 @@ import { registerBuiltins as registerAllenAIBuiltins } from "@cyberlangke/tokkit
 import { registerBuiltins as registerAISageBuiltins } from "@cyberlangke/tokkit-ai-sage"
 import { registerBuiltins as registerEssentialAIBuiltins } from "@cyberlangke/tokkit-essentialai"
 import { registerBuiltins as registerServiceNowAIBuiltins } from "@cyberlangke/tokkit-servicenow-ai"
+import { registerBuiltins as registerSalesforceBuiltins } from "@cyberlangke/tokkit-salesforce"
 import { registerBuiltins as registerJanHQBuiltins } from "@cyberlangke/tokkit-janhq"
 import { registerBuiltins as registerZyphraBuiltins } from "@cyberlangke/tokkit-zyphra"
 import { registerBuiltins as registerGraniteBuiltins } from "@cyberlangke/tokkit-ibm-granite"
@@ -59,6 +60,7 @@ export function registerBuiltins(): void {
   registerAISageBuiltins()
   registerEssentialAIBuiltins()
   registerServiceNowAIBuiltins()
+  registerSalesforceBuiltins()
   registerJanHQBuiltins()
   registerZyphraBuiltins()
   registerGraniteBuiltins()

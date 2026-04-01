@@ -715,6 +715,24 @@ export const FAMILY_SPECS = [
     source: "vendor/tokenizers/ServiceNow-AI__Apriel-5B-Base__tokenizer.json.br",
   },
   {
+    family: "codegen",
+    packageName: "salesforce",
+    moduleName: "codegen",
+    source: "vendor/tokenizers/Salesforce__codegen-350M-mono__tokenizer.json.br",
+  },
+  {
+    family: "codegen-nl",
+    packageName: "salesforce",
+    moduleName: "codegen_nl",
+    source: "vendor/tokenizers/Salesforce__codegen-350M-nl__tokenizer.json.br",
+  },
+  {
+    family: "codegen2",
+    packageName: "salesforce",
+    moduleName: "codegen2",
+    source: "vendor/tokenizers/Salesforce__codegen2-1B_P__tokenizer.json.br",
+  },
+  {
     family: "zamba-7b-v1",
     packageName: "zyphra",
     moduleName: "zamba_7b_v1",

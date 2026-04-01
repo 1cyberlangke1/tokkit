@@ -597,6 +597,9 @@ describe("builtin tokenizer families", () => {
           "academic-ds",
           "agentcpm-explore",
           "apriel-5b",
+          "codegen",
+          "codegen-nl",
+          "codegen2",
           "longcat-flash-chat",
           "longcat-flash-lite",
           "longcat-flash-thinking",
@@ -812,6 +815,22 @@ describe("builtin tokenizer families", () => {
           "EssentialAI/rnj-1-instruct",
           "ServiceNow-AI/Apriel-5B-Base",
           "ServiceNow-AI/Apriel-5B-Instruct",
+          "Salesforce/codegen-350M-mono",
+          "Salesforce/codegen-350M-multi",
+          "Salesforce/codegen-350M-nl",
+          "Salesforce/codegen-2B-mono",
+          "Salesforce/codegen-2B-multi",
+          "Salesforce/codegen-2B-nl",
+          "Salesforce/codegen-6B-mono",
+          "Salesforce/codegen-6B-multi",
+          "Salesforce/codegen-6B-nl",
+          "Salesforce/codegen-16B-mono",
+          "Salesforce/codegen-16B-multi",
+          "Salesforce/codegen-16B-nl",
+          "Salesforce/codegen2-1B_P",
+          "Salesforce/codegen2-3_7B_P",
+          "Salesforce/codegen2-7B_P",
+          "Salesforce/codegen2-16B_P",
           "janhq/Jan-v1-4B",
           "janhq/Jan-v1-edge",
           "janhq/Jan-v1-2509",
@@ -956,6 +975,28 @@ describe("builtin tokenizer families", () => {
       const apriel5b = await getEncoding("apriel-5b")
       expect(await getEncoding("ServiceNow-AI/Apriel-5B-Base")).toBe(apriel5b)
       expect(await getEncoding("ServiceNow-AI/Apriel-5B-Instruct")).toBe(apriel5b)
+
+      const codegen = await getEncoding("codegen")
+      expect(await getEncoding("Salesforce/codegen-350M-mono")).toBe(codegen)
+      expect(await getEncoding("Salesforce/codegen-350M-multi")).toBe(codegen)
+      expect(await getEncoding("Salesforce/codegen-2B-mono")).toBe(codegen)
+      expect(await getEncoding("Salesforce/codegen-2B-multi")).toBe(codegen)
+      expect(await getEncoding("Salesforce/codegen-6B-mono")).toBe(codegen)
+      expect(await getEncoding("Salesforce/codegen-6B-multi")).toBe(codegen)
+      expect(await getEncoding("Salesforce/codegen-16B-mono")).toBe(codegen)
+      expect(await getEncoding("Salesforce/codegen-16B-multi")).toBe(codegen)
+
+      const codegenNl = await getEncoding("codegen-nl")
+      expect(await getEncoding("Salesforce/codegen-350M-nl")).toBe(codegenNl)
+      expect(await getEncoding("Salesforce/codegen-2B-nl")).toBe(codegenNl)
+      expect(await getEncoding("Salesforce/codegen-6B-nl")).toBe(codegenNl)
+      expect(await getEncoding("Salesforce/codegen-16B-nl")).toBe(codegenNl)
+
+      const codegen2 = await getEncoding("codegen2")
+      expect(await getEncoding("Salesforce/codegen2-1B_P")).toBe(codegen2)
+      expect(await getEncoding("Salesforce/codegen2-3_7B_P")).toBe(codegen2)
+      expect(await getEncoding("Salesforce/codegen2-7B_P")).toBe(codegen2)
+      expect(await getEncoding("Salesforce/codegen2-16B_P")).toBe(codegen2)
 
       const qwen35 = await getEncoding("qwen3.5")
       expect(await getEncoding("Qwen/Qwen3.5-27B")).toBe(qwen35)
