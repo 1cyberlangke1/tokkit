@@ -15,6 +15,9 @@ export default defineConfig({
       "@cyberlangke/tokkit-01-ai": fileURLToPath(
         new URL("./packages/01-ai/src/index.ts", import.meta.url)
       ),
+      "@cyberlangke/tokkit-abeja": fileURLToPath(
+        new URL("./packages/abeja/src/index.ts", import.meta.url)
+      ),
       "@cyberlangke/tokkit-minimax": fileURLToPath(
         new URL("./packages/minimax/src/index.ts", import.meta.url)
       ),

@@ -794,6 +794,10 @@ describe("builtin tokenizer families", () => {
           "skt/A.X-3.1-Light",
           "skt/A.X-4.0-Light",
           "skt/A.X-K1",
+          "abeja/ABEJA-Qwen2.5-32b-Japanese-v1.0",
+          "abeja/ABEJA-Qwen2.5-7b-Japanese-v0.1",
+          "abeja/ABEJA-QwQ32b-Reasoning-Japanese-v1.0",
+          "abeja/ABEJA-Qwen3-14B-Agentic-256k-v0.1",
           "ai-sage/GigaChat-20B-A3B-base",
           "ai-sage/GigaChat-20B-A3B-instruct",
           "ai-sage/GigaChat-20B-A3B-instruct-v1.5",
@@ -916,12 +920,16 @@ describe("builtin tokenizer families", () => {
       expect(await getEncoding("Qwen/QwQ-32B-Preview")).toBe(qwen25)
       expect(await getEncoding("Qwen/Qwen3-14B-Base")).toBe(qwen25)
       expect(await getEncoding("qwen3-base")).toBe(qwen25)
+      expect(await getEncoding("abeja/ABEJA-Qwen2.5-32b-Japanese-v1.0")).toBe(qwen25)
+      expect(await getEncoding("abeja/ABEJA-Qwen2.5-7b-Japanese-v0.1")).toBe(qwen25)
+      expect(await getEncoding("abeja/ABEJA-QwQ32b-Reasoning-Japanese-v1.0")).toBe(qwen25)
 
       const qwen3 = await getEncoding("qwen3")
       expect(await getEncoding("Qwen/Qwen3-30B-A3B-Instruct-2507")).toBe(qwen3)
       expect(await getEncoding("Qwen/Qwen3-Next-80B-A3B-Instruct")).toBe(qwen3)
       expect(await getEncoding("Qwen/Qwen3-Next-80B-A3B-Thinking")).toBe(qwen3)
       expect(await getEncoding("Qwen/Qwen3-235B-A22B-Instruct-2507")).toBe(qwen3)
+      expect(await getEncoding("abeja/ABEJA-Qwen3-14B-Agentic-256k-v0.1")).toBe(qwen3)
 
       const qwen35 = await getEncoding("qwen3.5")
       expect(await getEncoding("Qwen/Qwen3.5-27B")).toBe(qwen35)

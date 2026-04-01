@@ -7,6 +7,7 @@
 import { registerBuiltins as registerDeepseekBuiltins } from "@cyberlangke/tokkit-deepseek"
 import { registerBuiltins as registerDistilBertBuiltins } from "@cyberlangke/tokkit-distilbert"
 import { registerBuiltins as register01AIBuiltins } from "@cyberlangke/tokkit-01-ai"
+import { registerBuiltins as registerABEJABuiltins } from "@cyberlangke/tokkit-abeja"
 import { registerBuiltins as registerTiiuaeBuiltins } from "@cyberlangke/tokkit-tiiuae"
 import { registerBuiltins as registerEleutherAIBuiltins } from "@cyberlangke/tokkit-eleutherai"
 import { registerBuiltins as registerLongCatBuiltins } from "@cyberlangke/tokkit-meituan-longcat"
@@ -43,6 +44,7 @@ export * from "@cyberlangke/tokkit-core"
  */
 export function registerBuiltins(): void {
   register01AIBuiltins()
+  registerABEJABuiltins()
   registerTiiuaeBuiltins()
   registerEleutherAIBuiltins()
   registerLongCatBuiltins()

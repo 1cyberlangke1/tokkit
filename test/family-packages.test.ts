@@ -421,6 +421,18 @@ const VENDOR_PACKAGE_CASES = [
     ],
   },
   {
+    relativePath: "packages/abeja/src/index.ts",
+    expectedFamilies: ["qwen2.5", "qwen3"],
+    expectedModels: [
+      "Qwen/Qwen2.5-32B-Instruct",
+      "Qwen/Qwen3-14B",
+      "abeja/ABEJA-Qwen2.5-32b-Japanese-v1.0",
+      "abeja/ABEJA-Qwen2.5-7b-Japanese-v0.1",
+      "abeja/ABEJA-QwQ32b-Reasoning-Japanese-v1.0",
+      "abeja/ABEJA-Qwen3-14B-Agentic-256k-v0.1",
+    ],
+  },
+  {
     relativePath: "packages/zyphra/src/index.ts",
     expectedFamilies: [
       "zamba-7b-v1",
