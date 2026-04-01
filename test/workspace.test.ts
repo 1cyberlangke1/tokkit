@@ -204,6 +204,12 @@ const EXPECTED_PACKAGES = [
     includedInAll: true,
   },
   {
+    directory: "essentialai",
+    packageName: "@cyberlangke/tokkit-essentialai",
+    license: "Apache-2.0",
+    includedInAll: true,
+  },
+  {
     directory: "abeja",
     packageName: "@cyberlangke/tokkit-abeja",
     license: "Apache-2.0",

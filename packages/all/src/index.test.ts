@@ -551,6 +551,7 @@ describe("builtin tokenizer families", () => {
           "gigachat-20b-instruct",
           "gigachat3",
           "gigachat3.1",
+          "rnj-1",
           "zamba-7b-v1",
           "zamba2-1.2b",
           "zamba2-2.7b",
@@ -806,6 +807,8 @@ describe("builtin tokenizer families", () => {
           "ai-sage/GigaChat3-702B-A36B-preview",
           "ai-sage/GigaChat3.1-10B-A1.8B",
           "ai-sage/GigaChat3.1-702B-A36B",
+          "EssentialAI/rnj-1",
+          "EssentialAI/rnj-1-instruct",
           "Zyphra/Zamba-7B-v1",
           "Zyphra/Zamba2-1.2B",
           "Zyphra/Zamba2-1.2B-instruct",
@@ -930,6 +933,10 @@ describe("builtin tokenizer families", () => {
       expect(await getEncoding("Qwen/Qwen3-Next-80B-A3B-Thinking")).toBe(qwen3)
       expect(await getEncoding("Qwen/Qwen3-235B-A22B-Instruct-2507")).toBe(qwen3)
       expect(await getEncoding("abeja/ABEJA-Qwen3-14B-Agentic-256k-v0.1")).toBe(qwen3)
+
+      const rnj1 = await getEncoding("rnj-1")
+      expect(await getEncoding("EssentialAI/rnj-1")).toBe(rnj1)
+      expect(await getEncoding("EssentialAI/rnj-1-instruct")).toBe(rnj1)
 
       const qwen35 = await getEncoding("qwen3.5")
       expect(await getEncoding("Qwen/Qwen3.5-27B")).toBe(qwen35)

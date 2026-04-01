@@ -703,6 +703,12 @@ export const FAMILY_SPECS = [
     source: "vendor/tokenizers/ai-sage__GigaChat3.1-10B-A1.8B__tokenizer.json.br",
   },
   {
+    family: "rnj-1",
+    packageName: "essentialai",
+    moduleName: "rnj_1",
+    source: "vendor/tokenizers/EssentialAI__rnj-1__tokenizer.json.br",
+  },
+  {
     family: "zamba-7b-v1",
     packageName: "zyphra",
     moduleName: "zamba_7b_v1",

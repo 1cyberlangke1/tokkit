@@ -421,6 +421,11 @@ const VENDOR_PACKAGE_CASES = [
     ],
   },
   {
+    relativePath: "packages/essentialai/src/index.ts",
+    expectedFamilies: ["rnj-1"],
+    expectedModels: ["EssentialAI/rnj-1", "EssentialAI/rnj-1-instruct"],
+  },
+  {
     relativePath: "packages/abeja/src/index.ts",
     expectedFamilies: ["qwen2.5", "qwen3"],
     expectedModels: [
@@ -557,6 +562,7 @@ const EXPECTED_ALL_FAMILIES = [
   "gigachat-20b-instruct",
   "gigachat3",
   "gigachat3.1",
+  "rnj-1",
   "zamba-7b-v1",
   "zamba2-1.2b",
   "zamba2-2.7b",

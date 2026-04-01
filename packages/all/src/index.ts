@@ -17,6 +17,7 @@ import { registerBuiltins as registerMistralBuiltins } from "@cyberlangke/tokkit
 import { registerBuiltins as registerHuggingFaceTBBuiltins } from "@cyberlangke/tokkit-huggingface-tb"
 import { registerBuiltins as registerAllenAIBuiltins } from "@cyberlangke/tokkit-allenai"
 import { registerBuiltins as registerAISageBuiltins } from "@cyberlangke/tokkit-ai-sage"
+import { registerBuiltins as registerEssentialAIBuiltins } from "@cyberlangke/tokkit-essentialai"
 import { registerBuiltins as registerZyphraBuiltins } from "@cyberlangke/tokkit-zyphra"
 import { registerBuiltins as registerGraniteBuiltins } from "@cyberlangke/tokkit-ibm-granite"
 import { registerBuiltins as registerIBMResearchBuiltins } from "@cyberlangke/tokkit-ibm-research"
@@ -54,6 +55,7 @@ export function registerBuiltins(): void {
   registerHuggingFaceTBBuiltins()
   registerAllenAIBuiltins()
   registerAISageBuiltins()
+  registerEssentialAIBuiltins()
   registerZyphraBuiltins()
   registerGraniteBuiltins()
   registerIBMResearchBuiltins()

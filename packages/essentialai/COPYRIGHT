@@ -1,0 +1,7 @@
+Copyright (c) 2026 cyberlangke
+
+This package bundles tokenizer assets derived from official Hugging Face repositories under the EssentialAI organization:
+- EssentialAI/rnj-1 tokenizer.json
+- EssentialAI/rnj-1-instruct tokenizer.json (same tokenizer family)
+
+See LICENSE for the full license text that applies to this package and its bundled assets.
