@@ -24,6 +24,7 @@
   "dependencies": {
     "@cyberlangke/tokkit-01-ai": "1.11.0",
     "@cyberlangke/tokkit-allenai": "1.11.0",
+    "@cyberlangke/tokkit-baichuan-inc": "1.11.0",
     "@cyberlangke/tokkit-bytedance-seed": "1.11.0",
     "@cyberlangke/tokkit-core": "1.11.0",
     "@cyberlangke/tokkit-deepseek": "1.11.0",

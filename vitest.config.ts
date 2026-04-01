@@ -54,6 +54,9 @@ export default defineConfig({
       "@cyberlangke/tokkit-internlm": fileURLToPath(
         new URL("./packages/internlm/src/index.ts", import.meta.url)
       ),
+      "@cyberlangke/tokkit-baichuan-inc": fileURLToPath(
+        new URL("./packages/baichuan-inc/src/index.ts", import.meta.url)
+      ),
       "@cyberlangke/tokkit-nanbeige": fileURLToPath(
         new URL("./packages/nanbeige/src/index.ts", import.meta.url)
       ),

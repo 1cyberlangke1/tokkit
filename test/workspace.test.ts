@@ -192,6 +192,12 @@ const EXPECTED_PACKAGES = [
     includedInAll: true,
   },
   {
+    directory: "baichuan-inc",
+    packageName: "@cyberlangke/tokkit-baichuan-inc",
+    license: "Apache-2.0",
+    includedInAll: true,
+  },
+  {
     directory: "glm",
     packageName: "@cyberlangke/tokkit-glm",
     license: "MIT",

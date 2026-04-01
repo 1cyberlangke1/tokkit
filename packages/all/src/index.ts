@@ -29,6 +29,7 @@ import { registerBuiltins as registerByteDanceSeedBuiltins } from "@cyberlangke/
 import { registerBuiltins as registerOpenBMBBuiltins } from "@cyberlangke/tokkit-openbmb"
 import { registerBuiltins as registerGlmBuiltins } from "@cyberlangke/tokkit-glm"
 import { registerBuiltins as registerQwenBuiltins } from "@cyberlangke/tokkit-qwen"
+import { registerBuiltins as registerBaichuanBuiltins } from "@cyberlangke/tokkit-baichuan-inc"
 import { registerBuiltins as registerStepBuiltins } from "@cyberlangke/tokkit-step"
 
 export * from "@cyberlangke/tokkit-core"
@@ -61,6 +62,7 @@ export function registerBuiltins(): void {
   registerByteDanceSeedBuiltins()
   registerOpenBMBBuiltins()
   registerQwenBuiltins()
+  registerBaichuanBuiltins()
   registerDeepseekBuiltins()
   registerDistilBertBuiltins()
   registerGlmBuiltins()

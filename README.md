@@ -125,6 +125,8 @@
   - `qwen3.5`
   - `qwen3.5-base`
   - `qwen3-coder-next`
+- `@cyberlangke/tokkit-baichuan-inc`
+  - alias-only package，复用 `qwen3`
 - `@cyberlangke/tokkit-deepseek`
   - `deepseek-v3`
   - `deepseek-r1`

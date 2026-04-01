@@ -385,6 +385,28 @@ const VENDOR_PACKAGE_CASES = [
     ],
   },
   {
+    relativePath: "packages/baichuan-inc/src/index.ts",
+    expectedFamilies: ["qwen3"],
+    expectedModels: [
+      "Qwen/Qwen3-0.6B",
+      "Qwen/Qwen3-1.7B",
+      "Qwen/Qwen3-4B",
+      "Qwen/Qwen3-8B",
+      "Qwen/Qwen3-14B",
+      "Qwen/Qwen3-30B-A3B",
+      "Qwen/Qwen3-32B",
+      "Qwen/Qwen3-235B-A22B",
+      "Qwen/Qwen3-4B-Instruct-2507",
+      "Qwen/Qwen3-30B-A3B-Instruct-2507",
+      "Qwen/Qwen3-235B-A22B-Instruct-2507",
+      "Qwen/Qwen3-4B-Thinking-2507",
+      "Qwen/Qwen3-Next-80B-A3B-Instruct",
+      "Qwen/Qwen3-Next-80B-A3B-Thinking",
+      "baichuan-inc/Baichuan-M2-32B",
+      "baichuan-inc/Baichuan-M3-235B",
+    ],
+  },
+  {
     relativePath: "packages/tinyllama/src/index.ts",
     expectedFamilies: ["danube"],
     expectedModels: [

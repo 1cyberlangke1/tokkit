@@ -132,12 +132,18 @@ const BUILTIN_FAMILIES = [
 ] as const
 
 /**
- * 注册 qwen 子包内置的 family。
- * 输入：无。
- * 输出：qwen 相关 family 被写入全局注册表。
+ * 注册 qwen 子包内置的 family，可按 family 名称过滤。
+ * 输入：可选的 family 名称列表。
+ * 输出：选中的 qwen family 被写入全局注册表。
  */
-export function registerBuiltins(): void {
+export function registerBuiltinsForFamilies(families?: readonly string[]): void {
+  const allowedFamilies = families ? new Set(families) : null
+
   for (const spec of BUILTIN_FAMILIES) {
+    if (allowedFamilies && !allowedFamilies.has(spec.family)) {
+      continue
+    }
+
     registerTokenizerFamily({
       family: spec.family,
       aliases: [...spec.aliases],
@@ -145,6 +151,15 @@ export function registerBuiltins(): void {
       load: () => loadFamilyAsset(spec.modulePath),
     })
   }
+}
+
+/**
+ * 注册 qwen 子包内置的全部 family。
+ * 输入：无。
+ * 输出：qwen 相关 family 被写入全局注册表。
+ */
+export function registerBuiltins(): void {
+  registerBuiltinsForFamilies()
 }
 
 /**

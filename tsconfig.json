@@ -27,6 +27,7 @@
       "@cyberlangke/tokkit-ibm-research": ["packages/ibm-research/src/index.ts"],
       "@cyberlangke/tokkit-h2oai": ["packages/h2oai/src/index.ts"],
       "@cyberlangke/tokkit-internlm": ["packages/internlm/src/index.ts"],
+      "@cyberlangke/tokkit-baichuan-inc": ["packages/baichuan-inc/src/index.ts"],
       "@cyberlangke/tokkit-nanbeige": ["packages/nanbeige/src/index.ts"],
       "@cyberlangke/tokkit-skt": ["packages/skt/src/index.ts"],
       "@cyberlangke/tokkit-tinyllama": ["packages/tinyllama/src/index.ts"],
