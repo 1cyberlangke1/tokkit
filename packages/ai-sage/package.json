@@ -1,0 +1,40 @@
+{
+  "name": "@cyberlangke/tokkit-ai-sage",
+  "version": "1.11.0",
+  "description": "AI-Sage tokenizer families for tokkit.",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist",
+    "COPYRIGHT"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch"
+  },
+  "dependencies": {
+    "@cyberlangke/tokkit-core": "1.11.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/1cyberlangke1/tokkit.git"
+  },
+  "homepage": "https://github.com/1cyberlangke1/tokkit#readme",
+  "bugs": {
+    "url": "https://github.com/1cyberlangke1/tokkit/issues"
+  },
+  "author": "cyberlangke",
+  "license": "MIT"
+}

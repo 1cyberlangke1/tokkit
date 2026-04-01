@@ -198,6 +198,12 @@ const EXPECTED_PACKAGES = [
     includedInAll: true,
   },
   {
+    directory: "ai-sage",
+    packageName: "@cyberlangke/tokkit-ai-sage",
+    license: "MIT",
+    includedInAll: true,
+  },
+  {
     directory: "glm",
     packageName: "@cyberlangke/tokkit-glm",
     license: "MIT",

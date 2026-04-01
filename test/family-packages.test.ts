@@ -407,6 +407,20 @@ const VENDOR_PACKAGE_CASES = [
     ],
   },
   {
+    relativePath: "packages/ai-sage/src/index.ts",
+    expectedFamilies: ["gigachat-20b-base", "gigachat-20b-instruct", "gigachat3", "gigachat3.1"],
+    expectedModels: [
+      "ai-sage/GigaChat-20B-A3B-base",
+      "ai-sage/GigaChat-20B-A3B-instruct",
+      "ai-sage/GigaChat-20B-A3B-instruct-v1.5",
+      "ai-sage/GigaChat3-10B-A1.8B-base",
+      "ai-sage/GigaChat3-10B-A1.8B",
+      "ai-sage/GigaChat3-702B-A36B-preview",
+      "ai-sage/GigaChat3.1-10B-A1.8B",
+      "ai-sage/GigaChat3.1-702B-A36B",
+    ],
+  },
+  {
     relativePath: "packages/tinyllama/src/index.ts",
     expectedFamilies: ["danube"],
     expectedModels: [
@@ -501,6 +515,10 @@ const EXPECTED_ALL_FAMILIES = [
   "distilgpt2",
   "falcon-rw-1b",
   "falcon-7b",
+  "gigachat-20b-base",
+  "gigachat-20b-instruct",
+  "gigachat3",
+  "gigachat3.1",
   "internlm2.5-1.8b",
   "internlm2.5-20b",
   "bitnet-b1.58-2b-4t",

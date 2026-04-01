@@ -679,6 +679,30 @@ export const FAMILY_SPECS = [
     source: "vendor/tokenizers/distilbert__distilgpt2__tokenizer.json.br",
   },
   {
+    family: "gigachat-20b-base",
+    packageName: "ai-sage",
+    moduleName: "gigachat_20b_base",
+    source: "vendor/tokenizers/ai-sage__GigaChat-20B-A3B-base__tokenizer.json.br",
+  },
+  {
+    family: "gigachat-20b-instruct",
+    packageName: "ai-sage",
+    moduleName: "gigachat_20b_instruct",
+    source: "vendor/tokenizers/ai-sage__GigaChat-20B-A3B-instruct__tokenizer.json.br",
+  },
+  {
+    family: "gigachat3",
+    packageName: "ai-sage",
+    moduleName: "gigachat3",
+    source: "vendor/tokenizers/ai-sage__GigaChat3-10B-A1.8B-base__tokenizer.json.br",
+  },
+  {
+    family: "gigachat3.1",
+    packageName: "ai-sage",
+    moduleName: "gigachat3_1",
+    source: "vendor/tokenizers/ai-sage__GigaChat3.1-10B-A1.8B__tokenizer.json.br",
+  },
+  {
     family: "internlm2.5-1.8b",
     packageName: "internlm",
     moduleName: "internlm2_5_1_8b",

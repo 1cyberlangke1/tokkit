@@ -42,6 +42,9 @@ export default defineConfig({
       "@cyberlangke/tokkit-allenai": fileURLToPath(
         new URL("./packages/allenai/src/index.ts", import.meta.url)
       ),
+      "@cyberlangke/tokkit-ai-sage": fileURLToPath(
+        new URL("./packages/ai-sage/src/index.ts", import.meta.url)
+      ),
       "@cyberlangke/tokkit-ibm-granite": fileURLToPath(
         new URL("./packages/ibm-granite/src/index.ts", import.meta.url)
       ),
