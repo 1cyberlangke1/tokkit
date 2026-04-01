@@ -28,6 +28,7 @@
       "@cyberlangke/tokkit-h2oai": ["packages/h2oai/src/index.ts"],
       "@cyberlangke/tokkit-nanbeige": ["packages/nanbeige/src/index.ts"],
       "@cyberlangke/tokkit-skt": ["packages/skt/src/index.ts"],
+      "@cyberlangke/tokkit-tinyllama": ["packages/tinyllama/src/index.ts"],
       "@cyberlangke/tokkit-upstage": ["packages/upstage/src/index.ts"],
       "@cyberlangke/tokkit-openai": ["packages/openai/src/index.ts"],
       "@cyberlangke/tokkit-gsai-ml": ["packages/gsai-ml/src/index.ts"],

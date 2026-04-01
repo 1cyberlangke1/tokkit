@@ -38,6 +38,7 @@
     "@cyberlangke/tokkit-mistral": "1.11.0",
     "@cyberlangke/tokkit-nanbeige": "1.11.0",
     "@cyberlangke/tokkit-skt": "1.11.0",
+    "@cyberlangke/tokkit-tinyllama": "1.11.0",
     "@cyberlangke/tokkit-gsai-ml": "1.11.0",
     "@cyberlangke/tokkit-openai": "1.11.0",
     "@cyberlangke/tokkit-openbmb": "1.11.0",

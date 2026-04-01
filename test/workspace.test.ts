@@ -129,6 +129,12 @@ const EXPECTED_PACKAGES = [
     includedInAll: true,
   },
   {
+    directory: "tinyllama",
+    packageName: "@cyberlangke/tokkit-tinyllama",
+    license: "Apache-2.0",
+    includedInAll: true,
+  },
+  {
     directory: "upstage",
     packageName: "@cyberlangke/tokkit-upstage",
     license: "SEE LICENSE IN LICENSE",

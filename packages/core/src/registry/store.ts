@@ -51,6 +51,18 @@ export function registerTokenizerFamily(definition: TokenizerFamilyDefinition): 
  */
 export function registerModelAliases(family: string, aliases: string[]): void {
   const targetFamily = resolveFamily(family)
+  const definition = familyDefinitions.get(targetFamily)
+
+  if (definition) {
+    const mergedModels = new Set(definition.models ?? [])
+
+    for (const alias of aliases) {
+      mergedModels.add(alias)
+    }
+
+    definition.models = [...mergedModels]
+  }
+
   for (const alias of aliases) {
     aliasToFamily.set(alias, targetFamily)
   }

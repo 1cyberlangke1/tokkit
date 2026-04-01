@@ -780,6 +780,8 @@ describe("builtin tokenizer families", () => {
           "skt/A.X-3.1-Light",
           "skt/A.X-4.0-Light",
           "skt/A.X-K1",
+          "TinyLlama/TinyLlama_v1.1",
+          "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
           "upstage/SOLAR-10.7B-v1.0",
           "upstage/TinySolar-248m-4k",
           "upstage/solar-pro-preview-instruct",

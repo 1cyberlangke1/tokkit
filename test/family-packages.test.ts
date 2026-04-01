@@ -371,6 +371,16 @@ const VENDOR_PACKAGE_CASES = [
     ],
   },
   {
+    relativePath: "packages/tinyllama/src/index.ts",
+    expectedFamilies: ["danube"],
+    expectedModels: [
+      "h2oai/h2o-danube-1.8b-base",
+      "h2oai/h2o-danube-1.8b-chat",
+      "TinyLlama/TinyLlama_v1.1",
+      "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+    ],
+  },
+  {
     relativePath: "packages/upstage/src/index.ts",
     expectedFamilies: ["solar", "solar-pro"],
     expectedModels: [
