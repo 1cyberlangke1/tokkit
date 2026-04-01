@@ -18,7 +18,7 @@
     "COPYRIGHT"
   ],
   "scripts": {
-    "build": "npm run build --workspace @cyberlangke/tokkit-qwen && tsup",
+    "build": "npm run build --workspace @cyberlangke/tokkit-core && npm run build --workspace @cyberlangke/tokkit-qwen && tsup",
     "dev": "tsup --watch"
   },
   "dependencies": {
