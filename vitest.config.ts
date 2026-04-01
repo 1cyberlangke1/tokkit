@@ -51,6 +51,9 @@ export default defineConfig({
       "@cyberlangke/tokkit-h2oai": fileURLToPath(
         new URL("./packages/h2oai/src/index.ts", import.meta.url)
       ),
+      "@cyberlangke/tokkit-internlm": fileURLToPath(
+        new URL("./packages/internlm/src/index.ts", import.meta.url)
+      ),
       "@cyberlangke/tokkit-nanbeige": fileURLToPath(
         new URL("./packages/nanbeige/src/index.ts", import.meta.url)
       ),

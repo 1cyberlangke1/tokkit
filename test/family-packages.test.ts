@@ -376,6 +376,15 @@ const VENDOR_PACKAGE_CASES = [
     expectedModels: ["distilbert/distilgpt2"],
   },
   {
+    relativePath: "packages/internlm/src/index.ts",
+    expectedFamilies: ["internlm2.5-1.8b", "internlm2.5-20b", "danube"],
+    expectedModels: [
+      "internlm/internlm2_5-1_8b",
+      "internlm/internlm2_5-20b",
+      "internlm/AlchemistCoder-L-7B",
+    ],
+  },
+  {
     relativePath: "packages/tinyllama/src/index.ts",
     expectedFamilies: ["danube"],
     expectedModels: [
@@ -470,6 +479,8 @@ const EXPECTED_ALL_FAMILIES = [
   "distilgpt2",
   "falcon-rw-1b",
   "falcon-7b",
+  "internlm2.5-1.8b",
+  "internlm2.5-20b",
   "bitnet-b1.58-2b-4t",
   "gpt-neo",
   "cosmo-1b",

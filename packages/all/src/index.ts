@@ -18,6 +18,7 @@ import { registerBuiltins as registerAllenAIBuiltins } from "@cyberlangke/tokkit
 import { registerBuiltins as registerGraniteBuiltins } from "@cyberlangke/tokkit-ibm-granite"
 import { registerBuiltins as registerIBMResearchBuiltins } from "@cyberlangke/tokkit-ibm-research"
 import { registerBuiltins as registerH2OAIBuiltins } from "@cyberlangke/tokkit-h2oai"
+import { registerBuiltins as registerInternLMBuiltins } from "@cyberlangke/tokkit-internlm"
 import { registerBuiltins as registerNanbeigeBuiltins } from "@cyberlangke/tokkit-nanbeige"
 import { registerBuiltins as registerSKTBuiltins } from "@cyberlangke/tokkit-skt"
 import { registerBuiltins as registerTinyLlamaBuiltins } from "@cyberlangke/tokkit-tinyllama"
@@ -53,6 +54,7 @@ export function registerBuiltins(): void {
   registerNanbeigeBuiltins()
   registerSKTBuiltins()
   registerTinyLlamaBuiltins()
+  registerInternLMBuiltins()
   registerUpstageBuiltins()
   registerOpenAIBuiltins()
   registerGSAIMLBuiltins()

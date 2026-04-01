@@ -87,6 +87,9 @@
   - `danube3-500m-chat`
   - `danube3-4b-chat`
   - `danube3.1-4b-chat`
+- `@cyberlangke/tokkit-internlm`
+  - `internlm2.5-1.8b`
+  - `internlm2.5-20b`
 - `@cyberlangke/tokkit-distilbert`
   - `distilgpt2`
 - `@cyberlangke/tokkit-tinyllama`

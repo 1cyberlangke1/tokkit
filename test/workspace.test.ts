@@ -186,6 +186,12 @@ const EXPECTED_PACKAGES = [
     includedInAll: true,
   },
   {
+    directory: "internlm",
+    packageName: "@cyberlangke/tokkit-internlm",
+    license: "Apache-2.0",
+    includedInAll: true,
+  },
+  {
     directory: "glm",
     packageName: "@cyberlangke/tokkit-glm",
     license: "MIT",

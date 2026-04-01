@@ -30,6 +30,13 @@ const loadingCache = new Map<string, Promise<Tokenizer>>()
  * 输出：注册表与别名表被更新。
  */
 export function registerTokenizerFamily(definition: TokenizerFamilyDefinition): void {
+  const previousDefinition = familyDefinitions.get(definition.family)
+
+  if (previousDefinition?.models?.length) {
+    const mergedModels = new Set([...(previousDefinition.models ?? []), ...(definition.models ?? [])])
+    definition.models = [...mergedModels]
+  }
+
   familyDefinitions.set(definition.family, definition)
   aliasToFamily.set(definition.family, definition.family)
 

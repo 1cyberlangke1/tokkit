@@ -1,0 +1,15 @@
+Copyright (c) 2026 cyberlangke
+
+This package bundles tokenizer data derived from the InternLM official
+Hugging Face model repositories:
+
+- internlm/internlm2_5-1_8b
+- internlm/internlm2_5-20b
+
+This package also registers the official model alias below against an existing
+tokenizer family distributed by another Apache-2.0 package in this monorepo:
+
+- internlm/AlchemistCoder-L-7B -> danube
+
+The packaged code and bundled tokenizer snapshots are distributed under
+Apache-2.0. See LICENSE for details.

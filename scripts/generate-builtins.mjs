@@ -679,6 +679,18 @@ export const FAMILY_SPECS = [
     source: "vendor/tokenizers/distilbert__distilgpt2__tokenizer.json.br",
   },
   {
+    family: "internlm2.5-1.8b",
+    packageName: "internlm",
+    moduleName: "internlm2_5_1_8b",
+    source: "vendor/tokenizers/internlm__internlm2_5-1_8b__tokenizer.json.br",
+  },
+  {
+    family: "internlm2.5-20b",
+    packageName: "internlm",
+    moduleName: "internlm2_5_20b",
+    source: "vendor/tokenizers/internlm__internlm2_5-20b__tokenizer.json.br",
+  },
+  {
     family: "glm-4.7",
     packageName: "glm",
     moduleName: "glm_4_7",
