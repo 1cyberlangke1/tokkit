@@ -29,7 +29,11 @@ const BUILTIN_FAMILIES = [
   {
     family: "olmo-1",
     aliases: ["olmo-hf", "olmo_1", "olmo_hf"],
-    models: ["allenai/OLMo-1B-hf", "allenai/OLMo-7B-hf"],
+    models: [
+      "allenai/OLMo-1B-hf",
+      "allenai/OLMo-7B-hf",
+      "allenai/OLMo-7B-Twin-2T-hf",
+    ],
     modulePath: "./generated/olmo_1.js",
   },
   {
@@ -86,6 +90,7 @@ const BUILTIN_FAMILIES = [
     models: [
       "allenai/OLMo-1B-0724-hf",
       "allenai/OLMo-7B-0724-hf",
+      "allenai/OLMo-7B-0724-Instruct-hf",
       "allenai/OLMo-7B-Instruct-hf",
       "allenai/OLMoE-1B-7B-0924",
     ],

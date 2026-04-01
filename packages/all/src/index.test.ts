@@ -732,6 +732,7 @@ describe("builtin tokenizer families", () => {
           "allenai/OLMo-7B-hf",
           "allenai/OLMo-7B-0424-hf",
           "allenai/OLMo-7B-0724-hf",
+          "allenai/OLMo-7B-0724-Instruct-hf",
           "allenai/OLMo-2-0425-1B",
           "allenai/OLMo-2-1124-7B",
           "allenai/OLMo-2-1124-13B",
@@ -743,6 +744,7 @@ describe("builtin tokenizer families", () => {
           "allenai/OLMoE-1B-7B-0924-Instruct",
           "allenai/OLMoE-1B-7B-0125",
           "allenai/OLMoE-1B-7B-0125-Instruct",
+          "allenai/OLMo-7B-Twin-2T-hf",
           "ibm-granite/granite-3.0-2b-base",
           "ibm-granite/granite-3.0-2b-instruct",
           "ibm-granite/granite-3.3-8b-base",
@@ -939,6 +941,12 @@ describe("builtin tokenizer families", () => {
 
       const olmo2 = await getEncoding("olmo-2")
       expect(await getEncoding("allenai/OLMo-2-1124-13B")).toBe(olmo2)
+
+      const olmo1 = await getEncoding("olmo-1")
+      expect(await getEncoding("allenai/OLMo-7B-Twin-2T-hf")).toBe(olmo1)
+
+      const olmoe = await getEncoding("olmoe")
+      expect(await getEncoding("allenai/OLMo-7B-0724-Instruct-hf")).toBe(olmoe)
 
       const deepseekV3 = await getEncoding("deepseek-v3")
       expect(await getEncoding("deepseek-ai/DeepSeek-V3-0324")).toBe(deepseekV3)
