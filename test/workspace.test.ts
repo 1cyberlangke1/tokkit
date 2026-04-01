@@ -204,6 +204,12 @@ const EXPECTED_PACKAGES = [
     includedInAll: true,
   },
   {
+    directory: "zyphra",
+    packageName: "@cyberlangke/tokkit-zyphra",
+    license: "Apache-2.0",
+    includedInAll: true,
+  },
+  {
     directory: "glm",
     packageName: "@cyberlangke/tokkit-glm",
     license: "MIT",

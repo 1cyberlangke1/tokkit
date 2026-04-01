@@ -1,0 +1,14 @@
+Copyright (c) 2026 cyberlangke
+
+This package bundles tokenizer assets derived from official Hugging Face repositories under the Zyphra organization:
+- Zyphra/Zamba-7B-v1 tokenizer.json
+- Zyphra/Zamba2-1.2B tokenizer.json
+- Zyphra/Zamba2-1.2B-instruct tokenizer.json
+- Zyphra/Zamba2-1.2B-Instruct-v2 tokenizer.json
+- Zyphra/Zamba2-2.7B tokenizer.json
+- Zyphra/ZR1-1.5B tokenizer.json
+- Zyphra/ZAYA1-base tokenizer.json
+
+The model aliases Zyphra/Zamba2-2.7B-instruct, Zyphra/Zamba2-7B-Instruct, Zyphra/Zamba2-2.7B-Instruct-v2, Zyphra/Zamba2-7B-Instruct-v2, and Zyphra/ZAYA1-reasoning-base are mapped to bundled tokenizer snapshots after hash verification.
+
+See LICENSE for the full license text that applies to this package and its bundled assets.

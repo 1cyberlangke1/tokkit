@@ -24,6 +24,7 @@
       "@cyberlangke/tokkit-huggingface-tb": ["packages/huggingface-tb/src/index.ts"],
       "@cyberlangke/tokkit-allenai": ["packages/allenai/src/index.ts"],
       "@cyberlangke/tokkit-ai-sage": ["packages/ai-sage/src/index.ts"],
+      "@cyberlangke/tokkit-zyphra": ["packages/zyphra/src/index.ts"],
       "@cyberlangke/tokkit-ibm-granite": ["packages/ibm-granite/src/index.ts"],
       "@cyberlangke/tokkit-ibm-research": ["packages/ibm-research/src/index.ts"],
       "@cyberlangke/tokkit-h2oai": ["packages/h2oai/src/index.ts"],

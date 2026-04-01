@@ -45,6 +45,9 @@ export default defineConfig({
       "@cyberlangke/tokkit-ai-sage": fileURLToPath(
         new URL("./packages/ai-sage/src/index.ts", import.meta.url)
       ),
+      "@cyberlangke/tokkit-zyphra": fileURLToPath(
+        new URL("./packages/zyphra/src/index.ts", import.meta.url)
+      ),
       "@cyberlangke/tokkit-ibm-granite": fileURLToPath(
         new URL("./packages/ibm-granite/src/index.ts", import.meta.url)
       ),

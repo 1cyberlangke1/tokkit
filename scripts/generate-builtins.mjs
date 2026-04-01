@@ -703,6 +703,48 @@ export const FAMILY_SPECS = [
     source: "vendor/tokenizers/ai-sage__GigaChat3.1-10B-A1.8B__tokenizer.json.br",
   },
   {
+    family: "zamba-7b-v1",
+    packageName: "zyphra",
+    moduleName: "zamba_7b_v1",
+    source: "vendor/tokenizers/Zyphra__Zamba-7B-v1__tokenizer.json.br",
+  },
+  {
+    family: "zamba2-1.2b",
+    packageName: "zyphra",
+    moduleName: "zamba2_1_2b",
+    source: "vendor/tokenizers/Zyphra__Zamba2-1.2B__tokenizer.json.br",
+  },
+  {
+    family: "zamba2-2.7b",
+    packageName: "zyphra",
+    moduleName: "zamba2_2_7b",
+    source: "vendor/tokenizers/Zyphra__Zamba2-2.7B__tokenizer.json.br",
+  },
+  {
+    family: "zamba2-instruct",
+    packageName: "zyphra",
+    moduleName: "zamba2_instruct",
+    source: "vendor/tokenizers/Zyphra__Zamba2-1.2B-instruct__tokenizer.json.br",
+  },
+  {
+    family: "zamba2-instruct-v2",
+    packageName: "zyphra",
+    moduleName: "zamba2_instruct_v2",
+    source: "vendor/tokenizers/Zyphra__Zamba2-1.2B-Instruct-v2__tokenizer.json.br",
+  },
+  {
+    family: "zr1-1.5b",
+    packageName: "zyphra",
+    moduleName: "zr1_1_5b",
+    source: "vendor/tokenizers/Zyphra__ZR1-1.5B__tokenizer.json.br",
+  },
+  {
+    family: "zaya1",
+    packageName: "zyphra",
+    moduleName: "zaya1",
+    source: "vendor/tokenizers/Zyphra__ZAYA1-base__tokenizer.json.br",
+  },
+  {
     family: "internlm2.5-1.8b",
     packageName: "internlm",
     moduleName: "internlm2_5_1_8b",
