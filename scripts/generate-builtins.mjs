@@ -709,6 +709,12 @@ export const FAMILY_SPECS = [
     source: "vendor/tokenizers/EssentialAI__rnj-1__tokenizer.json.br",
   },
   {
+    family: "apriel-5b",
+    packageName: "servicenow-ai",
+    moduleName: "apriel_5b",
+    source: "vendor/tokenizers/ServiceNow-AI__Apriel-5B-Base__tokenizer.json.br",
+  },
+  {
     family: "zamba-7b-v1",
     packageName: "zyphra",
     moduleName: "zamba_7b_v1",

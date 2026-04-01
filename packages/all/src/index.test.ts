@@ -596,6 +596,7 @@ describe("builtin tokenizer families", () => {
           "powerlm",
           "academic-ds",
           "agentcpm-explore",
+          "apriel-5b",
           "longcat-flash-chat",
           "longcat-flash-lite",
           "longcat-flash-thinking",
@@ -809,6 +810,8 @@ describe("builtin tokenizer families", () => {
           "ai-sage/GigaChat3.1-702B-A36B",
           "EssentialAI/rnj-1",
           "EssentialAI/rnj-1-instruct",
+          "ServiceNow-AI/Apriel-5B-Base",
+          "ServiceNow-AI/Apriel-5B-Instruct",
           "janhq/Jan-v1-4B",
           "janhq/Jan-v1-edge",
           "janhq/Jan-v1-2509",
@@ -950,6 +953,10 @@ describe("builtin tokenizer families", () => {
       expect(await getEncoding("EssentialAI/rnj-1")).toBe(rnj1)
       expect(await getEncoding("EssentialAI/rnj-1-instruct")).toBe(rnj1)
 
+      const apriel5b = await getEncoding("apriel-5b")
+      expect(await getEncoding("ServiceNow-AI/Apriel-5B-Base")).toBe(apriel5b)
+      expect(await getEncoding("ServiceNow-AI/Apriel-5B-Instruct")).toBe(apriel5b)
+
       const qwen35 = await getEncoding("qwen3.5")
       expect(await getEncoding("Qwen/Qwen3.5-27B")).toBe(qwen35)
       expect(await getEncoding("Qwen/Qwen3.5-122B-A10B")).toBe(qwen35)
@@ -1073,7 +1080,7 @@ describe("builtin tokenizer families", () => {
         expect(await decode(actualIds, family)).toBe(decodeWithReference(reference, expectedIds))
       }
     }
-  }, 120000)
+  }, 240000)
 })
 
 /**

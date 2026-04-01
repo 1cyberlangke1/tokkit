@@ -210,6 +210,12 @@ const EXPECTED_PACKAGES = [
     includedInAll: true,
   },
   {
+    directory: "servicenow-ai",
+    packageName: "@cyberlangke/tokkit-servicenow-ai",
+    license: "MIT",
+    includedInAll: true,
+  },
+  {
     directory: "janhq",
     packageName: "@cyberlangke/tokkit-janhq",
     license: "Apache-2.0",

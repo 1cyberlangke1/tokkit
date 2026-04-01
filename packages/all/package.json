@@ -27,6 +27,7 @@
     "@cyberlangke/tokkit-allenai": "1.11.0",
     "@cyberlangke/tokkit-ai-sage": "1.11.0",
     "@cyberlangke/tokkit-essentialai": "1.11.0",
+    "@cyberlangke/tokkit-servicenow-ai": "1.11.0",
     "@cyberlangke/tokkit-janhq": "1.11.0",
     "@cyberlangke/tokkit-baichuan-inc": "1.11.0",
     "@cyberlangke/tokkit-bytedance-seed": "1.11.0",

@@ -426,6 +426,14 @@ const VENDOR_PACKAGE_CASES = [
     expectedModels: ["EssentialAI/rnj-1", "EssentialAI/rnj-1-instruct"],
   },
   {
+    relativePath: "packages/servicenow-ai/src/index.ts",
+    expectedFamilies: ["apriel-5b"],
+    expectedModels: [
+      "ServiceNow-AI/Apriel-5B-Base",
+      "ServiceNow-AI/Apriel-5B-Instruct",
+    ],
+  },
+  {
     relativePath: "packages/janhq/src/index.ts",
     expectedFamilies: ["qwen3"],
     expectedModels: [
@@ -589,6 +597,7 @@ const EXPECTED_ALL_FAMILIES = [
   "gigachat3",
   "gigachat3.1",
   "rnj-1",
+  "apriel-5b",
   "zamba-7b-v1",
   "zamba2-1.2b",
   "zamba2-2.7b",

@@ -51,6 +51,9 @@ export default defineConfig({
       "@cyberlangke/tokkit-essentialai": fileURLToPath(
         new URL("./packages/essentialai/src/index.ts", import.meta.url)
       ),
+      "@cyberlangke/tokkit-servicenow-ai": fileURLToPath(
+        new URL("./packages/servicenow-ai/src/index.ts", import.meta.url)
+      ),
       "@cyberlangke/tokkit-janhq": fileURLToPath(
         new URL("./packages/janhq/src/index.ts", import.meta.url)
       ),
