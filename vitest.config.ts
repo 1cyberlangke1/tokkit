@@ -57,6 +57,9 @@ export default defineConfig({
       "@cyberlangke/tokkit-salesforce": fileURLToPath(
         new URL("./packages/salesforce/src/index.ts", import.meta.url)
       ),
+      "@cyberlangke/tokkit-cerebras": fileURLToPath(
+        new URL("./packages/cerebras/src/index.ts", import.meta.url)
+      ),
       "@cyberlangke/tokkit-janhq": fileURLToPath(
         new URL("./packages/janhq/src/index.ts", import.meta.url)
       ),

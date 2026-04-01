@@ -1,0 +1,9 @@
+Copyright (c) 2026 cyberlangke
+
+This package bundles tokenizer assets derived from official Hugging Face repositories under the cerebras organization:
+- cerebras/Cerebras-GPT-111M tokenizer.json
+- cerebras/btlm-3b-8k-chat tokenizer.json
+
+The model aliases cerebras/Cerebras-GPT-256M, cerebras/Cerebras-GPT-590M, cerebras/Cerebras-GPT-1.3B, cerebras/Cerebras-GPT-2.7B, cerebras/Cerebras-GPT-6.7B, cerebras/Cerebras-GPT-13B, and cerebras/btlm-3b-8k-base are mapped to bundled tokenizer snapshots after hash verification.
+
+See LICENSE for the full license text that applies to this package and its bundled assets.

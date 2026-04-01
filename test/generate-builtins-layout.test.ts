@@ -175,6 +175,11 @@ describe("generate:builtins layout", () => {
         expect.objectContaining({ family: "codegen", packageName: "salesforce" }),
         expect.objectContaining({ family: "codegen-nl", packageName: "salesforce" }),
         expect.objectContaining({ family: "codegen2", packageName: "salesforce" }),
+        expect.objectContaining({ family: "cerebras-gpt", packageName: "cerebras" }),
+        expect.objectContaining({
+          family: "btlm-3b-8k-chat",
+          packageName: "cerebras",
+        }),
         expect.objectContaining({ family: "qwen2", packageName: "qwen" }),
         expect.objectContaining({ family: "qwen2.5", packageName: "qwen" }),
         expect.objectContaining({ family: "qwen3", packageName: "qwen" }),
@@ -238,6 +243,9 @@ describe("generate:builtins layout", () => {
     )
     expect(module.resolveOutputModulePath("openbmb", "minicpm4")).toBe(
       "packages/openbmb/src/generated/minicpm4.ts"
+    )
+    expect(module.resolveOutputModulePath("cerebras", "cerebras_gpt")).toBe(
+      "packages/cerebras/src/generated/cerebras_gpt.ts"
     )
     expect(module.resolveOutputModulePath("qwen", "qwen3_5_base")).toBe(
       "packages/qwen/src/generated/qwen3_5_base.ts"

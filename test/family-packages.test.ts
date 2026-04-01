@@ -456,6 +456,21 @@ const VENDOR_PACKAGE_CASES = [
     ],
   },
   {
+    relativePath: "packages/cerebras/src/index.ts",
+    expectedFamilies: ["btlm-3b-8k-chat", "cerebras-gpt"],
+    expectedModels: [
+      "cerebras/Cerebras-GPT-111M",
+      "cerebras/Cerebras-GPT-256M",
+      "cerebras/Cerebras-GPT-590M",
+      "cerebras/Cerebras-GPT-1.3B",
+      "cerebras/Cerebras-GPT-2.7B",
+      "cerebras/Cerebras-GPT-6.7B",
+      "cerebras/Cerebras-GPT-13B",
+      "cerebras/btlm-3b-8k-base",
+      "cerebras/btlm-3b-8k-chat",
+    ],
+  },
+  {
     relativePath: "packages/janhq/src/index.ts",
     expectedFamilies: ["qwen3"],
     expectedModels: [
@@ -623,6 +638,8 @@ const EXPECTED_ALL_FAMILIES = [
   "codegen",
   "codegen-nl",
   "codegen2",
+  "cerebras-gpt",
+  "btlm-3b-8k-chat",
   "zamba-7b-v1",
   "zamba2-1.2b",
   "zamba2-2.7b",

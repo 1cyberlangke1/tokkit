@@ -223,6 +223,12 @@ const EXPECTED_PACKAGES = [
     requiredFiles: ["COPYRIGHT", "LICENSE"],
   },
   {
+    directory: "cerebras",
+    packageName: "@cyberlangke/tokkit-cerebras",
+    license: "Apache-2.0",
+    includedInAll: true,
+  },
+  {
     directory: "janhq",
     packageName: "@cyberlangke/tokkit-janhq",
     license: "Apache-2.0",

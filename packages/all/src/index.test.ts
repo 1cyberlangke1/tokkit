@@ -600,6 +600,8 @@ describe("builtin tokenizer families", () => {
           "codegen",
           "codegen-nl",
           "codegen2",
+          "cerebras-gpt",
+          "btlm-3b-8k-chat",
           "longcat-flash-chat",
           "longcat-flash-lite",
           "longcat-flash-thinking",
@@ -831,6 +833,15 @@ describe("builtin tokenizer families", () => {
           "Salesforce/codegen2-3_7B_P",
           "Salesforce/codegen2-7B_P",
           "Salesforce/codegen2-16B_P",
+          "cerebras/Cerebras-GPT-111M",
+          "cerebras/Cerebras-GPT-256M",
+          "cerebras/Cerebras-GPT-590M",
+          "cerebras/Cerebras-GPT-1.3B",
+          "cerebras/Cerebras-GPT-2.7B",
+          "cerebras/Cerebras-GPT-6.7B",
+          "cerebras/Cerebras-GPT-13B",
+          "cerebras/btlm-3b-8k-base",
+          "cerebras/btlm-3b-8k-chat",
           "janhq/Jan-v1-4B",
           "janhq/Jan-v1-edge",
           "janhq/Jan-v1-2509",
@@ -997,6 +1008,22 @@ describe("builtin tokenizer families", () => {
       expect(await getEncoding("Salesforce/codegen2-3_7B_P")).toBe(codegen2)
       expect(await getEncoding("Salesforce/codegen2-7B_P")).toBe(codegen2)
       expect(await getEncoding("Salesforce/codegen2-16B_P")).toBe(codegen2)
+
+      const cerebrasGpt = await getEncoding("cerebras-gpt")
+      expect(await getEncoding("cerebras/Cerebras-GPT-111M")).toBe(cerebrasGpt)
+      expect(await getEncoding("cerebras/Cerebras-GPT-256M")).toBe(cerebrasGpt)
+      expect(await getEncoding("cerebras/Cerebras-GPT-590M")).toBe(cerebrasGpt)
+      expect(await getEncoding("cerebras/Cerebras-GPT-1.3B")).toBe(cerebrasGpt)
+      expect(await getEncoding("cerebras/Cerebras-GPT-2.7B")).toBe(cerebrasGpt)
+      expect(await getEncoding("cerebras/Cerebras-GPT-6.7B")).toBe(cerebrasGpt)
+      expect(await getEncoding("cerebras/Cerebras-GPT-13B")).toBe(cerebrasGpt)
+
+      const btlm3b8k = await getEncoding("btlm-3b-8k")
+      expect(btlm3b8k).toBe(cerebrasGpt)
+      expect(await getEncoding("cerebras/btlm-3b-8k-base")).toBe(cerebrasGpt)
+
+      const btlm3b8kChat = await getEncoding("btlm-3b-8k-chat")
+      expect(await getEncoding("cerebras/btlm-3b-8k-chat")).toBe(btlm3b8kChat)
 
       const qwen35 = await getEncoding("qwen3.5")
       expect(await getEncoding("Qwen/Qwen3.5-27B")).toBe(qwen35)

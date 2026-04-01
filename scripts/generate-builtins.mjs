@@ -733,6 +733,18 @@ export const FAMILY_SPECS = [
     source: "vendor/tokenizers/Salesforce__codegen2-1B_P__tokenizer.json.br",
   },
   {
+    family: "cerebras-gpt",
+    packageName: "cerebras",
+    moduleName: "cerebras_gpt",
+    source: "vendor/tokenizers/cerebras__Cerebras-GPT-111M__tokenizer.json.br",
+  },
+  {
+    family: "btlm-3b-8k-chat",
+    packageName: "cerebras",
+    moduleName: "btlm_3b_8k_chat",
+    source: "vendor/tokenizers/cerebras__btlm-3b-8k-chat__tokenizer.json.br",
+  },
+  {
     family: "zamba-7b-v1",
     packageName: "zyphra",
     moduleName: "zamba_7b_v1",
