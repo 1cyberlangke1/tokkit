@@ -26,6 +26,7 @@
       "@cyberlangke/tokkit-allenai": ["packages/allenai/src/index.ts"],
       "@cyberlangke/tokkit-ai-sage": ["packages/ai-sage/src/index.ts"],
       "@cyberlangke/tokkit-essentialai": ["packages/essentialai/src/index.ts"],
+      "@cyberlangke/tokkit-janhq": ["packages/janhq/src/index.ts"],
       "@cyberlangke/tokkit-zyphra": ["packages/zyphra/src/index.ts"],
       "@cyberlangke/tokkit-ibm-granite": ["packages/ibm-granite/src/index.ts"],
       "@cyberlangke/tokkit-ibm-research": ["packages/ibm-research/src/index.ts"],

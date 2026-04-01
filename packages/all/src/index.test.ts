@@ -809,6 +809,12 @@ describe("builtin tokenizer families", () => {
           "ai-sage/GigaChat3.1-702B-A36B",
           "EssentialAI/rnj-1",
           "EssentialAI/rnj-1-instruct",
+          "janhq/Jan-v1-4B",
+          "janhq/Jan-v1-edge",
+          "janhq/Jan-v1-2509",
+          "janhq/Jan-v3-4B-base-instruct",
+          "janhq/Jan-v3.5-4B",
+          "janhq/Jan-code-4b",
           "Zyphra/Zamba-7B-v1",
           "Zyphra/Zamba2-1.2B",
           "Zyphra/Zamba2-1.2B-instruct",
@@ -933,6 +939,12 @@ describe("builtin tokenizer families", () => {
       expect(await getEncoding("Qwen/Qwen3-Next-80B-A3B-Thinking")).toBe(qwen3)
       expect(await getEncoding("Qwen/Qwen3-235B-A22B-Instruct-2507")).toBe(qwen3)
       expect(await getEncoding("abeja/ABEJA-Qwen3-14B-Agentic-256k-v0.1")).toBe(qwen3)
+      expect(await getEncoding("janhq/Jan-v1-4B")).toBe(qwen3)
+      expect(await getEncoding("janhq/Jan-v1-edge")).toBe(qwen3)
+      expect(await getEncoding("janhq/Jan-v1-2509")).toBe(qwen3)
+      expect(await getEncoding("janhq/Jan-v3-4B-base-instruct")).toBe(qwen3)
+      expect(await getEncoding("janhq/Jan-v3.5-4B")).toBe(qwen3)
+      expect(await getEncoding("janhq/Jan-code-4b")).toBe(qwen3)
 
       const rnj1 = await getEncoding("rnj-1")
       expect(await getEncoding("EssentialAI/rnj-1")).toBe(rnj1)

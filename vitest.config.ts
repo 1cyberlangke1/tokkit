@@ -51,6 +51,9 @@ export default defineConfig({
       "@cyberlangke/tokkit-essentialai": fileURLToPath(
         new URL("./packages/essentialai/src/index.ts", import.meta.url)
       ),
+      "@cyberlangke/tokkit-janhq": fileURLToPath(
+        new URL("./packages/janhq/src/index.ts", import.meta.url)
+      ),
       "@cyberlangke/tokkit-zyphra": fileURLToPath(
         new URL("./packages/zyphra/src/index.ts", import.meta.url)
       ),
