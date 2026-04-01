@@ -123,6 +123,12 @@ const EXPECTED_PACKAGES = [
     includedInAll: true,
   },
   {
+    directory: "skt",
+    packageName: "@cyberlangke/tokkit-skt",
+    license: "Apache-2.0",
+    includedInAll: true,
+  },
+  {
     directory: "upstage",
     packageName: "@cyberlangke/tokkit-upstage",
     license: "SEE LICENSE IN LICENSE",

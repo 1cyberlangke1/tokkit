@@ -361,6 +361,16 @@ const VENDOR_PACKAGE_CASES = [
     ],
   },
   {
+    relativePath: "packages/skt/src/index.ts",
+    expectedFamilies: ["ax-3.1", "ax-light", "ax-k1"],
+    expectedModels: [
+      "skt/A.X-3.1",
+      "skt/A.X-3.1-Light",
+      "skt/A.X-4.0-Light",
+      "skt/A.X-K1",
+    ],
+  },
+  {
     relativePath: "packages/upstage/src/index.ts",
     expectedFamilies: ["solar", "solar-pro"],
     expectedModels: [
@@ -454,6 +464,9 @@ const EXPECTED_ALL_FAMILIES = [
   "danube3.1-4b-chat",
   "nanbeige4",
   "nanbeige4-base",
+  "ax-3.1",
+  "ax-light",
+  "ax-k1",
   "solar",
   "solar-pro",
   "gpt-oss",

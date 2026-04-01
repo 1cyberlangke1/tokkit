@@ -54,6 +54,9 @@ export default defineConfig({
       "@cyberlangke/tokkit-nanbeige": fileURLToPath(
         new URL("./packages/nanbeige/src/index.ts", import.meta.url)
       ),
+      "@cyberlangke/tokkit-skt": fileURLToPath(
+        new URL("./packages/skt/src/index.ts", import.meta.url)
+      ),
       "@cyberlangke/tokkit-upstage": fileURLToPath(
         new URL("./packages/upstage/src/index.ts", import.meta.url)
       ),

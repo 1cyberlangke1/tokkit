@@ -1,0 +1,10 @@
+Copyright (c) 2026 cyberlangke
+
+This package bundles tokenizer assets derived from official Hugging Face repositories under the skt organization:
+- skt/A.X-3.1 tokenizer.json
+- skt/A.X-3.1-Light tokenizer.json
+- skt/A.X-K1 tokenizer.json
+
+The model alias skt/A.X-4.0-Light is mapped to the bundled A.X-3.1-Light tokenizer snapshot after hash verification.
+
+See LICENSE for the full license text that applies to this package and its bundled assets.

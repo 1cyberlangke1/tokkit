@@ -499,6 +499,24 @@ export const FAMILY_SPECS = [
     source: "vendor/tokenizers/Nanbeige__Nanbeige4-3B-Base__tokenizer.json.br",
   },
   {
+    family: "ax-3.1",
+    packageName: "skt",
+    moduleName: "ax_3_1",
+    source: "vendor/tokenizers/skt__A.X-3.1__tokenizer.json.br",
+  },
+  {
+    family: "ax-light",
+    packageName: "skt",
+    moduleName: "ax_light",
+    source: "vendor/tokenizers/skt__A.X-3.1-Light__tokenizer.json.br",
+  },
+  {
+    family: "ax-k1",
+    packageName: "skt",
+    moduleName: "ax_k1",
+    source: "vendor/tokenizers/skt__A.X-K1__tokenizer.json.br",
+  },
+  {
     family: "solar",
     packageName: "upstage",
     moduleName: "solar",
