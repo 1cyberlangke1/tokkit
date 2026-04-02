@@ -619,6 +619,14 @@ const VENDOR_PACKAGE_CASES = [
     ],
   },
   {
+    relativePath: "packages/snowflake/src/index.ts",
+    expectedFamilies: ["snowflake-arctic-base", "snowflake-arctic-instruct"],
+    expectedModels: [
+      "Snowflake/snowflake-arctic-base",
+      "Snowflake/snowflake-arctic-instruct",
+    ],
+  },
+  {
     relativePath: "packages/tinyllama/src/index.ts",
     expectedFamilies: ["danube"],
     expectedModels: [
@@ -783,6 +791,8 @@ const EXPECTED_ALL_FAMILIES = [
   "powerlm",
   "mamba-130m",
   "mamba-790m",
+  "snowflake-arctic-base",
+  "snowflake-arctic-instruct",
   "longcat-flash-chat",
   "longcat-flash-lite",
   "longcat-flash-thinking",

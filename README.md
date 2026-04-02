@@ -99,6 +99,9 @@
 - `@cyberlangke/tokkit-state-spaces`
   - `mamba-130m`
   - `mamba-790m`
+- `@cyberlangke/tokkit-snowflake`
+  - `snowflake-arctic-base`
+  - `snowflake-arctic-instruct`
 - `@cyberlangke/tokkit-tinyllama`
   - alias-only package，复用 `danube`
 - `@cyberlangke/tokkit-nanbeige`

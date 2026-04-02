@@ -270,6 +270,14 @@ const BUILTIN_ALIAS_CASE_GROUPS = [
           "state-spaces/mamba-2.8b-hf",
         ],
       },
+      {
+        canonical: "snowflake-arctic-base",
+        aliases: ["Snowflake/snowflake-arctic-base"],
+      },
+      {
+        canonical: "snowflake-arctic-instruct",
+        aliases: ["Snowflake/snowflake-arctic-instruct"],
+      },
     ],
   },
   {
@@ -969,6 +977,8 @@ describe("builtin tokenizer families", () => {
           "trinity-large-thinking",
           "mamba-130m",
           "mamba-790m",
+          "snowflake-arctic-base",
+          "snowflake-arctic-instruct",
           "longcat-flash-chat",
           "longcat-flash-lite",
           "longcat-flash-thinking",
@@ -1260,6 +1270,8 @@ describe("builtin tokenizer families", () => {
           "arcee-ai/Trinity-Large-Base",
           "arcee-ai/Trinity-Large-Preview",
           "arcee-ai/Trinity-Large-Thinking",
+          "Snowflake/snowflake-arctic-base",
+          "Snowflake/snowflake-arctic-instruct",
           "TinyLlama/TinyLlama_v1.1",
           "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
           "baichuan-inc/Baichuan-M2-32B",

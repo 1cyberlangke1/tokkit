@@ -847,6 +847,18 @@ export const FAMILY_SPECS = [
     source: "vendor/tokenizers/state-spaces__mamba-790m-hf__tokenizer.json.br",
   },
   {
+    family: "snowflake-arctic-base",
+    packageName: "snowflake",
+    moduleName: "snowflake_arctic_base",
+    source: "vendor/tokenizers/Snowflake__snowflake-arctic-base__tokenizer.json.br",
+  },
+  {
+    family: "snowflake-arctic-instruct",
+    packageName: "snowflake",
+    moduleName: "snowflake_arctic_instruct",
+    source: "vendor/tokenizers/Snowflake__snowflake-arctic-instruct__tokenizer.json.br",
+  },
+  {
     family: "zamba-7b-v1",
     packageName: "zyphra",
     moduleName: "zamba_7b_v1",
