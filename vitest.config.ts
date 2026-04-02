@@ -60,6 +60,9 @@ export default defineConfig({
       "@cyberlangke/tokkit-cerebras": fileURLToPath(
         new URL("./packages/cerebras/src/index.ts", import.meta.url)
       ),
+      "@cyberlangke/tokkit-inclusionai": fileURLToPath(
+        new URL("./packages/inclusionai/src/index.ts", import.meta.url)
+      ),
       "@cyberlangke/tokkit-janhq": fileURLToPath(
         new URL("./packages/janhq/src/index.ts", import.meta.url)
       ),

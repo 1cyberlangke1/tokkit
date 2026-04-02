@@ -745,6 +745,42 @@ export const FAMILY_SPECS = [
     source: "vendor/tokenizers/cerebras__btlm-3b-8k-chat__tokenizer.json.br",
   },
   {
+    family: "llada2",
+    packageName: "inclusionai",
+    moduleName: "llada2",
+    source: "vendor/tokenizers/inclusionAI__LLaDA2.1-mini__tokenizer.json.br",
+  },
+  {
+    family: "ring-2.5-1t",
+    packageName: "inclusionai",
+    moduleName: "ring_2_5_1t",
+    source: "vendor/tokenizers/inclusionAI__Ring-2.5-1T__tokenizer.json.br",
+  },
+  {
+    family: "ling-2",
+    packageName: "inclusionai",
+    moduleName: "ling_2",
+    source: "vendor/tokenizers/inclusionAI__Ling-mini-2.0__tokenizer.json.br",
+  },
+  {
+    family: "ring-mini-2.0",
+    packageName: "inclusionai",
+    moduleName: "ring_mini_2_0",
+    source: "vendor/tokenizers/inclusionAI__Ring-mini-2.0__tokenizer.json.br",
+  },
+  {
+    family: "ring-flash-2.0",
+    packageName: "inclusionai",
+    moduleName: "ring_flash_2_0",
+    source: "vendor/tokenizers/inclusionAI__Ring-flash-2.0__tokenizer.json.br",
+  },
+  {
+    family: "ring-1t",
+    packageName: "inclusionai",
+    moduleName: "ring_1t",
+    source: "vendor/tokenizers/inclusionAI__Ring-1T__tokenizer.json.br",
+  },
+  {
     family: "zamba-7b-v1",
     packageName: "zyphra",
     moduleName: "zamba_7b_v1",

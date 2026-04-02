@@ -1,0 +1,11 @@
+Copyright (c) 2026 cyberlangke
+
+This package includes original package code and bundled tokenizer assets.
+
+Bundled tokenizer asset origins:
+- inclusionAI/LLaDA2.1-mini tokenizer.json: Apache-2.0
+- inclusionAI/Ring-2.5-1T tokenizer.json: MIT
+- inclusionAI/Ling-mini-2.0 tokenizer.json: MIT
+- inclusionAI/Ring-mini-2.0 tokenizer.json: MIT
+- inclusionAI/Ring-flash-2.0 tokenizer.json: MIT
+- inclusionAI/Ring-1T tokenizer.json: MIT

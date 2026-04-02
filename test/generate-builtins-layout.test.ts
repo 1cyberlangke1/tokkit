@@ -180,6 +180,12 @@ describe("generate:builtins layout", () => {
           family: "btlm-3b-8k-chat",
           packageName: "cerebras",
         }),
+        expect.objectContaining({ family: "llada2", packageName: "inclusionai" }),
+        expect.objectContaining({ family: "ring-2.5-1t", packageName: "inclusionai" }),
+        expect.objectContaining({ family: "ling-2", packageName: "inclusionai" }),
+        expect.objectContaining({ family: "ring-mini-2.0", packageName: "inclusionai" }),
+        expect.objectContaining({ family: "ring-flash-2.0", packageName: "inclusionai" }),
+        expect.objectContaining({ family: "ring-1t", packageName: "inclusionai" }),
         expect.objectContaining({ family: "qwen2", packageName: "qwen" }),
         expect.objectContaining({ family: "qwen2.5", packageName: "qwen" }),
         expect.objectContaining({ family: "qwen3", packageName: "qwen" }),
@@ -246,6 +252,9 @@ describe("generate:builtins layout", () => {
     )
     expect(module.resolveOutputModulePath("cerebras", "cerebras_gpt")).toBe(
       "packages/cerebras/src/generated/cerebras_gpt.ts"
+    )
+    expect(module.resolveOutputModulePath("inclusionai", "llada2")).toBe(
+      "packages/inclusionai/src/generated/llada2.ts"
     )
     expect(module.resolveOutputModulePath("qwen", "qwen3_5_base")).toBe(
       "packages/qwen/src/generated/qwen3_5_base.ts"

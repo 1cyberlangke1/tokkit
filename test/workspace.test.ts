@@ -229,6 +229,13 @@ const EXPECTED_PACKAGES = [
     includedInAll: true,
   },
   {
+    directory: "inclusionai",
+    packageName: "@cyberlangke/tokkit-inclusionai",
+    license: "SEE LICENSE IN LICENSE",
+    includedInAll: true,
+    requiredFiles: ["COPYRIGHT", "LICENSE"],
+  },
+  {
     directory: "janhq",
     packageName: "@cyberlangke/tokkit-janhq",
     license: "Apache-2.0",
