@@ -907,11 +907,12 @@ export function resolveOutputModulePath(packageName, moduleName) {
  * 输入：无。
  * 输出：把所有压缩快照重新生成为各子包下的 generated 模块。
  */
-export function generateBuiltins() {
+export function generateBuiltins(options = {}) {
+  const selectedSpecs = filterFamilySpecs(FAMILY_SPECS, options)
   let writtenCount = 0
   let skippedCount = 0
 
-  for (const spec of FAMILY_SPECS) {
+  for (const spec of selectedSpecs) {
     const sourcePath = resolve(projectRoot, spec.source)
     const rawTokenizer = readTokenizerSnapshot(sourcePath)
     const packedAsset = packNormalizedAsset(rawTokenizer)
@@ -929,13 +930,93 @@ export function generateBuiltins() {
   }
 
   return {
+    selectedCount: selectedSpecs.length,
     writtenCount,
     skippedCount,
   }
 }
 
 if (isDirectExecution()) {
-  generateBuiltins()
+  generateBuiltins(parseGenerateCliArgs(process.argv.slice(2)))
+}
+
+/**
+ * 过滤本轮需要生成的 family 清单。
+ * 输入：完整 family specs 与可选的 family / package 过滤条件。
+ * 输出：保持原顺序的目标 family specs 子集。
+ */
+export function filterFamilySpecs(familySpecs, { families = null, packageNames = null } = {}) {
+  const familyFilter = families ? new Set(families) : null
+  const packageFilter = packageNames ? new Set(packageNames) : null
+
+  return familySpecs.filter((spec) => {
+    if (familyFilter && !familyFilter.has(spec.family)) {
+      return false
+    }
+
+    if (packageFilter && !packageFilter.has(spec.packageName)) {
+      return false
+    }
+
+    return true
+  })
+}
+
+/**
+ * 解析 generate:builtins 的 CLI 参数。
+ * 输入：命令行参数数组。
+ * 输出：供 generateBuiltins 使用的过滤条件。
+ */
+function parseGenerateCliArgs(argv) {
+  const options = {
+    families: null,
+    packageNames: null,
+  }
+
+  for (let index = 0; index < argv.length; index += 1) {
+    const argument = argv[index]
+
+    if (argument === "--families") {
+      options.families = splitCsv(readRequiredArgValue(argv, ++index, "--families"))
+      continue
+    }
+
+    if (argument === "--packages") {
+      options.packageNames = splitCsv(readRequiredArgValue(argv, ++index, "--packages"))
+      continue
+    }
+
+    throw new Error(`unknown argument: ${argument}`)
+  }
+
+  return options
+}
+
+/**
+ * 读取缺失值时报错。
+ * 输入：参数数组、目标索引和 flag 名称。
+ * 输出：flag 后面的值字符串。
+ */
+function readRequiredArgValue(argv, index, flagName) {
+  const value = argv[index]
+
+  if (value === undefined) {
+    throw new Error(`missing value for ${flagName}`)
+  }
+
+  return value
+}
+
+/**
+ * 把逗号分隔参数切成数组。
+ * 输入：例如 `pleias-350m,monad` 这样的字符串。
+ * 输出：去空白后的名称数组。
+ */
+function splitCsv(value) {
+  return value
+    .split(",")
+    .map((item) => item.trim())
+    .filter(Boolean)
 }
 
 /**

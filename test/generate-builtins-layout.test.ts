@@ -355,4 +355,27 @@ describe("generate:builtins layout", () => {
 
     rmSync(fixtureDir, { recursive: true, force: true })
   })
+
+  it("支持按 family 和包名过滤生成范围", async () => {
+    // @ts-expect-error 这里直接导入构建脚本模块，测试只关心其运行时导出形状。
+    const module = await import("../scripts/generate-builtins.mjs")
+
+    const byFamily = module.filterFamilySpecs(module.FAMILY_SPECS, {
+      families: ["pleias-350m", "monad"],
+    })
+    const byPackage = module.filterFamilySpecs(module.FAMILY_SPECS, {
+      packageNames: ["pleias"],
+    })
+
+    expect(byFamily.map((spec: { family: string }) => spec.family)).toEqual([
+      "pleias-350m",
+      "monad",
+    ])
+    expect(
+      new Set(byPackage.map((spec: { packageName: string }) => spec.packageName))
+    ).toEqual(new Set(["pleias"]))
+    expect(
+      byPackage.some((spec: { family: string }) => spec.family === "qwen3")
+    ).toBe(false)
+  })
 })
