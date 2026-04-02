@@ -1,0 +1,9 @@
+Copyright (c) 2026 cyberlangke
+
+This package bundles tokenizer assets derived from official Hugging Face repositories under the swiss-ai organization:
+- swiss-ai/Apertus-8B-2509 tokenizer.json
+- swiss-ai/Apertus-70B-2509 tokenizer.json (same tokenizer family as Apertus-8B-2509)
+- swiss-ai/Apertus-8B-Instruct-2509 tokenizer.json
+- swiss-ai/Apertus-70B-Instruct-2509 tokenizer.json (same tokenizer family as Apertus-8B-Instruct-2509)
+
+See LICENSE for the full license text that applies to this package and its bundled assets.

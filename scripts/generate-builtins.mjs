@@ -877,6 +877,18 @@ export const FAMILY_SPECS = [
     source: "vendor/tokenizers/cyberagent__calm3-22b-chat__tokenizer.json.br",
   },
   {
+    family: "apertus",
+    packageName: "swiss-ai",
+    moduleName: "apertus",
+    source: "vendor/tokenizers/swiss-ai__Apertus-8B-2509__tokenizer.json.br",
+  },
+  {
+    family: "apertus-instruct",
+    packageName: "swiss-ai",
+    moduleName: "apertus_instruct",
+    source: "vendor/tokenizers/swiss-ai__Apertus-8B-Instruct-2509__tokenizer.json.br",
+  },
+  {
     family: "zamba-7b-v1",
     packageName: "zyphra",
     moduleName: "zamba_7b_v1",

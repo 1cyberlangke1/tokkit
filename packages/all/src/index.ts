@@ -28,6 +28,7 @@ import { registerBuiltins as registerZyphraBuiltins } from "@cyberlangke/tokkit-
 import { registerBuiltins as registerArceeAIBuiltins } from "@cyberlangke/tokkit-arcee-ai"
 import { registerBuiltins as registerStateSpacesBuiltins } from "@cyberlangke/tokkit-state-spaces"
 import { registerBuiltins as registerSnowflakeBuiltins } from "@cyberlangke/tokkit-snowflake"
+import { registerBuiltins as registerSwissAIBuiltins } from "@cyberlangke/tokkit-swiss-ai"
 import { registerBuiltins as registerGraniteBuiltins } from "@cyberlangke/tokkit-ibm-granite"
 import { registerBuiltins as registerIBMResearchBuiltins } from "@cyberlangke/tokkit-ibm-research"
 import { registerBuiltins as registerH2OAIBuiltins } from "@cyberlangke/tokkit-h2oai"
@@ -75,6 +76,7 @@ export function registerBuiltins(): void {
   registerArceeAIBuiltins()
   registerStateSpacesBuiltins()
   registerSnowflakeBuiltins()
+  registerSwissAIBuiltins()
   registerGraniteBuiltins()
   registerIBMResearchBuiltins()
   registerH2OAIBuiltins()

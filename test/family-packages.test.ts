@@ -642,6 +642,16 @@ const VENDOR_PACKAGE_CASES = [
     ],
   },
   {
+    relativePath: "packages/swiss-ai/src/index.ts",
+    expectedFamilies: ["apertus", "apertus-instruct"],
+    expectedModels: [
+      "swiss-ai/Apertus-8B-2509",
+      "swiss-ai/Apertus-70B-2509",
+      "swiss-ai/Apertus-8B-Instruct-2509",
+      "swiss-ai/Apertus-70B-Instruct-2509",
+    ],
+  },
+  {
     relativePath: "packages/tinyllama/src/index.ts",
     expectedFamilies: ["danube"],
     expectedModels: [
@@ -808,6 +818,8 @@ const EXPECTED_ALL_FAMILIES = [
   "mamba-790m",
   "snowflake-arctic-base",
   "snowflake-arctic-instruct",
+  "apertus",
+  "apertus-instruct",
   "longcat-flash-chat",
   "longcat-flash-lite",
   "longcat-flash-thinking",

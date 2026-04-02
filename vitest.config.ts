@@ -81,6 +81,9 @@ export default defineConfig({
       "@cyberlangke/tokkit-snowflake": fileURLToPath(
         new URL("./packages/snowflake/src/index.ts", import.meta.url)
       ),
+      "@cyberlangke/tokkit-swiss-ai": fileURLToPath(
+        new URL("./packages/swiss-ai/src/index.ts", import.meta.url)
+      ),
       "@cyberlangke/tokkit-cyberagent": fileURLToPath(
         new URL("./packages/cyberagent/src/index.ts", import.meta.url)
       ),

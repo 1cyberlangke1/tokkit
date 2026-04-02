@@ -289,6 +289,13 @@ const EXPECTED_PACKAGES = [
     requiredFiles: ["COPYRIGHT", "LICENSE"],
   },
   {
+    directory: "swiss-ai",
+    packageName: "@cyberlangke/tokkit-swiss-ai",
+    license: "Apache-2.0",
+    includedInAll: true,
+    requiredFiles: ["COPYRIGHT", "LICENSE"],
+  },
+  {
     directory: "glm",
     packageName: "@cyberlangke/tokkit-glm",
     license: "MIT",

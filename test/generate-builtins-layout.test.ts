@@ -22,6 +22,8 @@ describe("generate:builtins layout", () => {
         expect.objectContaining({ family: "open-calm", packageName: "cyberagent" }),
         expect.objectContaining({ family: "calm2", packageName: "cyberagent" }),
         expect.objectContaining({ family: "calm3", packageName: "cyberagent" }),
+        expect.objectContaining({ family: "apertus", packageName: "swiss-ai" }),
+        expect.objectContaining({ family: "apertus-instruct", packageName: "swiss-ai" }),
         expect.objectContaining({ family: "yi", packageName: "01-ai" }),
         expect.objectContaining({ family: "yi-1.5-9b-chat", packageName: "01-ai" }),
         expect.objectContaining({ family: "yi-coder", packageName: "01-ai" }),
