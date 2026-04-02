@@ -781,6 +781,42 @@ export const FAMILY_SPECS = [
     source: "vendor/tokenizers/inclusionAI__Ring-1T__tokenizer.json.br",
   },
   {
+    family: "pleias-350m",
+    packageName: "pleias",
+    moduleName: "pleias_350m",
+    source: "vendor/tokenizers/PleIAs__Pleias-350m-Preview__tokenizer.json.br",
+  },
+  {
+    family: "pleias-1.2b",
+    packageName: "pleias",
+    moduleName: "pleias_1_2b",
+    source: "vendor/tokenizers/PleIAs__Pleias-1.2b-Preview__tokenizer.json.br",
+  },
+  {
+    family: "pleias-3b",
+    packageName: "pleias",
+    moduleName: "pleias_3b",
+    source: "vendor/tokenizers/PleIAs__Pleias-3b-Preview__tokenizer.json.br",
+  },
+  {
+    family: "pleias-pico",
+    packageName: "pleias",
+    moduleName: "pleias_pico",
+    source: "vendor/tokenizers/PleIAs__Pleias-Pico__tokenizer.json.br",
+  },
+  {
+    family: "baguettotron",
+    packageName: "pleias",
+    moduleName: "baguettotron",
+    source: "vendor/tokenizers/PleIAs__Baguettotron__tokenizer.json.br",
+  },
+  {
+    family: "monad",
+    packageName: "pleias",
+    moduleName: "monad",
+    source: "vendor/tokenizers/PleIAs__Monad__tokenizer.json.br",
+  },
+  {
     family: "zamba-7b-v1",
     packageName: "zyphra",
     moduleName: "zamba_7b_v1",
@@ -872,6 +908,9 @@ export function resolveOutputModulePath(packageName, moduleName) {
  * 输出：把所有压缩快照重新生成为各子包下的 generated 模块。
  */
 export function generateBuiltins() {
+  let writtenCount = 0
+  let skippedCount = 0
+
   for (const spec of FAMILY_SPECS) {
     const sourcePath = resolve(projectRoot, spec.source)
     const rawTokenizer = readTokenizerSnapshot(sourcePath)
@@ -882,7 +921,16 @@ export function generateBuiltins() {
     )
 
     mkdirSync(dirname(modulePath), { recursive: true })
-    writeFileSync(modulePath, renderModule(spec.family, packedAsset))
+    if (writeFileIfChanged(modulePath, renderModule(spec.family, packedAsset))) {
+      writtenCount += 1
+    } else {
+      skippedCount += 1
+    }
+  }
+
+  return {
+    writtenCount,
+    skippedCount,
   }
 }
 
@@ -1071,6 +1119,24 @@ const packedAsset = ${JSON.stringify(packedAsset)}
 
 export default packedAsset
 `
+}
+
+/**
+ * 仅在内容变化时更新目标文件。
+ * 输入：目标文件路径与渲染后的源码文本。
+ * 输出：写入了新内容时返回 true，否则返回 false。
+ */
+export function writeFileIfChanged(targetPath, content) {
+  try {
+    if (readFileSync(targetPath, "utf8") === content) {
+      return false
+    }
+  } catch {
+    // 文件不存在时直接写入。
+  }
+
+  writeFileSync(targetPath, content)
+  return true
 }
 
 /**

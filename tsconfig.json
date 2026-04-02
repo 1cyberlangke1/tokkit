@@ -30,6 +30,7 @@
       "@cyberlangke/tokkit-salesforce": ["packages/salesforce/src/index.ts"],
       "@cyberlangke/tokkit-cerebras": ["packages/cerebras/src/index.ts"],
       "@cyberlangke/tokkit-inclusionai": ["packages/inclusionai/src/index.ts"],
+      "@cyberlangke/tokkit-pleias": ["packages/pleias/src/index.ts"],
       "@cyberlangke/tokkit-janhq": ["packages/janhq/src/index.ts"],
       "@cyberlangke/tokkit-zyphra": ["packages/zyphra/src/index.ts"],
       "@cyberlangke/tokkit-ibm-granite": ["packages/ibm-granite/src/index.ts"],

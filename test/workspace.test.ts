@@ -236,6 +236,13 @@ const EXPECTED_PACKAGES = [
     requiredFiles: ["COPYRIGHT", "LICENSE"],
   },
   {
+    directory: "pleias",
+    packageName: "@cyberlangke/tokkit-pleias",
+    license: "Apache-2.0",
+    includedInAll: true,
+    requiredFiles: ["COPYRIGHT", "LICENSE"],
+  },
+  {
     directory: "janhq",
     packageName: "@cyberlangke/tokkit-janhq",
     license: "Apache-2.0",

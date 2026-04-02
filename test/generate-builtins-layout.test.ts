@@ -4,7 +4,7 @@
  * 输出：验证每个 family 都会写入对应子包，而不是根目录旧路径。
  */
 
-import { readdirSync, readFileSync } from "node:fs"
+import { mkdirSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from "node:fs"
 import { resolve } from "node:path"
 
 import { describe, expect, it } from "vitest"
@@ -186,6 +186,12 @@ describe("generate:builtins layout", () => {
         expect.objectContaining({ family: "ring-mini-2.0", packageName: "inclusionai" }),
         expect.objectContaining({ family: "ring-flash-2.0", packageName: "inclusionai" }),
         expect.objectContaining({ family: "ring-1t", packageName: "inclusionai" }),
+        expect.objectContaining({ family: "pleias-350m", packageName: "pleias" }),
+        expect.objectContaining({ family: "pleias-1.2b", packageName: "pleias" }),
+        expect.objectContaining({ family: "pleias-3b", packageName: "pleias" }),
+        expect.objectContaining({ family: "pleias-pico", packageName: "pleias" }),
+        expect.objectContaining({ family: "baguettotron", packageName: "pleias" }),
+        expect.objectContaining({ family: "monad", packageName: "pleias" }),
         expect.objectContaining({ family: "qwen2", packageName: "qwen" }),
         expect.objectContaining({ family: "qwen2.5", packageName: "qwen" }),
         expect.objectContaining({ family: "qwen3", packageName: "qwen" }),
@@ -256,6 +262,9 @@ describe("generate:builtins layout", () => {
     expect(module.resolveOutputModulePath("inclusionai", "llada2")).toBe(
       "packages/inclusionai/src/generated/llada2.ts"
     )
+    expect(module.resolveOutputModulePath("pleias", "pleias_350m")).toBe(
+      "packages/pleias/src/generated/pleias_350m.ts"
+    )
     expect(module.resolveOutputModulePath("qwen", "qwen3_5_base")).toBe(
       "packages/qwen/src/generated/qwen3_5_base.ts"
     )
@@ -320,5 +329,30 @@ describe("generate:builtins layout", () => {
         `${packageName} 缺少 FAMILY_SPECS 条目: ${missingFamilies.join(", ")}`
       ).toEqual([])
     }
+  })
+
+  it("生成脚本遇到未变化内容时不会重写文件", async () => {
+    // @ts-expect-error 这里直接导入构建脚本模块，测试只关心其运行时导出形状。
+    const module = await import("../scripts/generate-builtins.mjs")
+    const fixtureDir = resolve(process.cwd(), "tmp", "generate-builtins-layout-test")
+    const fixturePath = resolve(fixtureDir, "fixture.ts")
+
+    rmSync(fixtureDir, { recursive: true, force: true })
+    mkdirSync(fixtureDir, { recursive: true })
+    writeFileSync(fixturePath, "same-content\n")
+
+    const before = statSync(fixturePath).mtimeMs
+    const firstWriteChanged = module.writeFileIfChanged(fixturePath, "same-content\n")
+    const afterSameContent = statSync(fixturePath).mtimeMs
+    const secondWriteChanged = module.writeFileIfChanged(fixturePath, "new-content\n")
+    const afterChangedContent = statSync(fixturePath).mtimeMs
+
+    expect(firstWriteChanged).toBe(false)
+    expect(afterSameContent).toBe(before)
+    expect(secondWriteChanged).toBe(true)
+    expect(afterChangedContent).toBeGreaterThanOrEqual(afterSameContent)
+    expect(readFileSync(fixturePath, "utf8")).toBe("new-content\n")
+
+    rmSync(fixtureDir, { recursive: true, force: true })
   })
 })

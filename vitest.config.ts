@@ -63,6 +63,9 @@ export default defineConfig({
       "@cyberlangke/tokkit-inclusionai": fileURLToPath(
         new URL("./packages/inclusionai/src/index.ts", import.meta.url)
       ),
+      "@cyberlangke/tokkit-pleias": fileURLToPath(
+        new URL("./packages/pleias/src/index.ts", import.meta.url)
+      ),
       "@cyberlangke/tokkit-janhq": fileURLToPath(
         new URL("./packages/janhq/src/index.ts", import.meta.url)
       ),

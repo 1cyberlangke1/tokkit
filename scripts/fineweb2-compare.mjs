@@ -574,7 +574,16 @@ async function importWorkspacePackageModule(packageDir) {
 function loadReferenceTokenizer(sourcePath) {
   const compressed = readFileSync(resolve(REPO_ROOT, sourcePath))
   const asset = JSON.parse(brotliDecompressSync(compressed).toString("utf8"))
-  return new PreTrainedTokenizer(asset, {})
+  return new PreTrainedTokenizer(
+    {
+      ...asset,
+      normalizer: asset.normalizer ?? null,
+      pre_tokenizer: asset.pre_tokenizer ?? null,
+      post_processor: asset.post_processor ?? null,
+      decoder: asset.decoder ?? null,
+    },
+    {}
+  )
 }
 
 /**

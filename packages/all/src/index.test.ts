@@ -212,6 +212,30 @@ const BUILTIN_ALIAS_CASE_GROUPS = [
         canonical: "ring-1t",
         aliases: ["inclusionAI/Ring-1T"],
       },
+      {
+        canonical: "pleias-350m",
+        aliases: ["PleIAs/Pleias-350m-Preview"],
+      },
+      {
+        canonical: "pleias-1.2b",
+        aliases: ["PleIAs/Pleias-1.2b-Preview"],
+      },
+      {
+        canonical: "pleias-3b",
+        aliases: ["PleIAs/Pleias-3b-Preview"],
+      },
+      {
+        canonical: "pleias-pico",
+        aliases: ["PleIAs/Pleias-Pico"],
+      },
+      {
+        canonical: "baguettotron",
+        aliases: ["PleIAs/Baguettotron"],
+      },
+      {
+        canonical: "monad",
+        aliases: ["PleIAs/Monad"],
+      },
     ],
   },
   {
@@ -900,6 +924,12 @@ describe("builtin tokenizer families", () => {
           "ring-mini-2.0",
           "ring-flash-2.0",
           "ring-1t",
+          "pleias-350m",
+          "pleias-1.2b",
+          "pleias-3b",
+          "pleias-pico",
+          "baguettotron",
+          "monad",
           "longcat-flash-chat",
           "longcat-flash-lite",
           "longcat-flash-thinking",
@@ -1163,6 +1193,12 @@ describe("builtin tokenizer families", () => {
           "inclusionAI/AReaL-boba-2-32B",
           "inclusionAI/AReaL-boba-2-8B",
           "inclusionAI/AReaL-boba-2-14B",
+          "PleIAs/Pleias-350m-Preview",
+          "PleIAs/Pleias-1.2b-Preview",
+          "PleIAs/Pleias-3b-Preview",
+          "PleIAs/Pleias-Pico",
+          "PleIAs/Baguettotron",
+          "PleIAs/Monad",
           "janhq/Jan-v1-4B",
           "janhq/Jan-v1-edge",
           "janhq/Jan-v1-2509",
@@ -2585,5 +2621,14 @@ async function loadBuiltinReferenceCase(family: string): Promise<PreTrainedToken
   const rawJson = brotliDecompressSync(compressed).toString("utf8")
   const asset = JSON.parse(rawJson) as TokenizerAsset
 
-  return new PreTrainedTokenizer(asset as any, {})
+  return new PreTrainedTokenizer(
+    {
+      ...asset,
+      normalizer: asset.normalizer ?? null,
+      pre_tokenizer: asset.pre_tokenizer ?? null,
+      post_processor: asset.post_processor ?? null,
+      decoder: asset.decoder ?? null,
+    } as any,
+    {}
+  )
 }

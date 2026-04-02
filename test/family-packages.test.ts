@@ -511,6 +511,25 @@ const VENDOR_PACKAGE_CASES = [
     ],
   },
   {
+    relativePath: "packages/pleias/src/index.ts",
+    expectedFamilies: [
+      "pleias-350m",
+      "pleias-1.2b",
+      "pleias-3b",
+      "pleias-pico",
+      "baguettotron",
+      "monad",
+    ],
+    expectedModels: [
+      "PleIAs/Pleias-350m-Preview",
+      "PleIAs/Pleias-1.2b-Preview",
+      "PleIAs/Pleias-3b-Preview",
+      "PleIAs/Pleias-Pico",
+      "PleIAs/Baguettotron",
+      "PleIAs/Monad",
+    ],
+  },
+  {
     relativePath: "packages/janhq/src/index.ts",
     expectedFamilies: ["qwen3"],
     expectedModels: [
@@ -686,6 +705,12 @@ const EXPECTED_ALL_FAMILIES = [
   "ring-mini-2.0",
   "ring-flash-2.0",
   "ring-1t",
+  "pleias-350m",
+  "pleias-1.2b",
+  "pleias-3b",
+  "pleias-pico",
+  "baguettotron",
+  "monad",
   "zamba-7b-v1",
   "zamba2-1.2b",
   "zamba2-2.7b",

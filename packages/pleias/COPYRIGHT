@@ -1,0 +1,11 @@
+Copyright (c) 2026 cyberlangke
+
+This package includes original package code and bundled tokenizer assets.
+
+Bundled tokenizer asset origins:
+- PleIAs/Pleias-350m-Preview tokenizer.json: Apache-2.0
+- PleIAs/Pleias-1.2b-Preview tokenizer.json: Apache-2.0
+- PleIAs/Pleias-3b-Preview tokenizer.json: Apache-2.0
+- PleIAs/Pleias-Pico tokenizer.json: Apache-2.0
+- PleIAs/Baguettotron tokenizer.json: Apache-2.0
+- PleIAs/Monad tokenizer.json: Apache-2.0

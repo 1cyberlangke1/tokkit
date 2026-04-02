@@ -31,6 +31,7 @@
     "@cyberlangke/tokkit-salesforce": "1.11.0",
     "@cyberlangke/tokkit-cerebras": "1.11.0",
     "@cyberlangke/tokkit-inclusionai": "1.11.0",
+    "@cyberlangke/tokkit-pleias": "1.11.0",
     "@cyberlangke/tokkit-janhq": "1.11.0",
     "@cyberlangke/tokkit-baichuan-inc": "1.11.0",
     "@cyberlangke/tokkit-bytedance-seed": "1.11.0",
