@@ -7,6 +7,10 @@ on:
       - "main"
   workflow_dispatch:
 
+concurrency:
+  group: release-packages-${{ github.ref }}
+  cancel-in-progress: false
+
 permissions:
   contents: write
   pull-requests: write
@@ -53,7 +57,7 @@ jobs:
         uses: changesets/action@v1
         with:
           version: npm run version:packages
-          publish: npm run release
+          publish: npm run release:ci
           commit: "构建: 版本发布"
           title: "构建: 版本发布"
         env:

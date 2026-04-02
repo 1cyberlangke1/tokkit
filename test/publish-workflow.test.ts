@@ -32,6 +32,7 @@ describe("publish workflow", () => {
     expect(packageJson.scripts?.changeset).toBe("changeset")
     expect(packageJson.scripts?.["version:packages"]).toBe("changeset version")
     expect(packageJson.scripts?.release).toBe("changeset publish")
+    expect(packageJson.scripts?.["release:ci"]).toBe("node scripts/release-packages.mjs")
   })
 
   it("GitHub Actions 使用 NPM_TOKEN 和 changesets/action", () => {
@@ -45,6 +46,6 @@ describe("publish workflow", () => {
     expect(workflow).toContain("_authToken")
     expect(workflow).toContain("npm whoami")
     expect(workflow).not.toContain("<<'EOF'")
-    expect(workflow).toContain("publish: npm run release")
+    expect(workflow).toContain("publish: npm run release:ci")
   })
 })

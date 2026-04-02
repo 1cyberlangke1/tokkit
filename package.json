@@ -30,7 +30,8 @@
     "clean": "node -e \"const fs = require('node:fs'); const path = require('node:path'); fs.rmSync('coverage', { recursive: true, force: true }); fs.rmSync('dist', { recursive: true, force: true }); if (fs.existsSync('packages')) { for (const entry of fs.readdirSync('packages', { withFileTypes: true })) { if (entry.isDirectory()) { fs.rmSync(path.join('packages', entry.name, 'dist'), { recursive: true, force: true }); } } }\"",
     "changeset": "changeset",
     "version:packages": "changeset version",
-    "release": "changeset publish"
+    "release": "changeset publish",
+    "release:ci": "node scripts/release-packages.mjs"
   },
   "keywords": [],
   "author": "cyberlangke",
