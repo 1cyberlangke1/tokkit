@@ -90,6 +90,7 @@
 - `@cyberlangke/tokkit-internlm`
   - `internlm2.5-1.8b`
   - `internlm2.5-20b`
+  - `internlm3`
 - `@cyberlangke/tokkit-distilbert`
   - `distilgpt2`
 - `@cyberlangke/tokkit-arcee-ai`

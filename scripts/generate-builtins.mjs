@@ -982,6 +982,12 @@ export const FAMILY_SPECS = [
     source: "vendor/tokenizers/internlm__internlm2_5-20b__tokenizer.json.br",
   },
   {
+    family: "internlm3",
+    packageName: "internlm",
+    moduleName: "internlm3",
+    source: "vendor/tokenizers/internlm__internlm3-8b-instruct__tokenizer.json.br",
+  },
+  {
     family: "glm-4.7",
     packageName: "glm",
     moduleName: "glm_4_7",
@@ -1169,12 +1175,15 @@ function packNormalizedAsset(rawTokenizer, longTextEncoding = null) {
 
   const mergeTokenIdPairs = normalizeMergeTokenIdPairs(rawTokenizer.model.merges ?? [], tokenToId)
 
+  const normalizedLongTextEncoding = normalizeLongTextEncoding(
+    longTextEncoding ?? rawTokenizer.longTextEncoding ?? null
+  )
+
   const payload = {
     a: normalizeAddedTokens(rawTokenizer.added_tokens ?? []),
     n: rawTokenizer.normalizer ?? null,
     p: rawTokenizer.pre_tokenizer ?? null,
     d: rawTokenizer.decoder ?? null,
-    lt: normalizeLongTextEncoding(longTextEncoding ?? rawTokenizer.longTextEncoding ?? null),
     v: vocabById,
     mi: mergeTokenIdPairs,
     u: rawTokenizer.model.unk_token ?? null,
@@ -1183,6 +1192,10 @@ function packNormalizedAsset(rawTokenizer, longTextEncoding = null) {
     ew: rawTokenizer.model.end_of_word_suffix ?? "",
     bf: rawTokenizer.model.byte_fallback ?? false,
     im: rawTokenizer.model.ignore_merges ?? false,
+  }
+
+  if (normalizedLongTextEncoding) {
+    payload.lt = normalizedLongTextEncoding
   }
 
   const json = JSON.stringify(payload)

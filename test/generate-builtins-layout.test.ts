@@ -201,6 +201,7 @@ describe("generate:builtins layout", () => {
         expect.objectContaining({ family: "pleias-pico", packageName: "pleias" }),
         expect.objectContaining({ family: "baguettotron", packageName: "pleias" }),
         expect.objectContaining({ family: "monad", packageName: "pleias" }),
+        expect.objectContaining({ family: "internlm3", packageName: "internlm" }),
         expect.objectContaining({ family: "qwen2", packageName: "qwen" }),
         expect.objectContaining({ family: "qwen2.5", packageName: "qwen" }),
         expect.objectContaining({ family: "qwen3", packageName: "qwen" }),
@@ -279,6 +280,9 @@ describe("generate:builtins layout", () => {
     )
     expect(module.resolveOutputModulePath("pleias", "pleias_350m")).toBe(
       "packages/pleias/src/generated/pleias_350m.ts"
+    )
+    expect(module.resolveOutputModulePath("internlm", "internlm3")).toBe(
+      "packages/internlm/src/generated/internlm3.ts"
     )
     expect(module.resolveOutputModulePath("qwen", "qwen3_5_base")).toBe(
       "packages/qwen/src/generated/qwen3_5_base.ts"

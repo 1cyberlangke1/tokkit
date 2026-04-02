@@ -392,10 +392,11 @@ const VENDOR_PACKAGE_CASES = [
   },
   {
     relativePath: "packages/internlm/src/index.ts",
-    expectedFamilies: ["internlm2.5-1.8b", "internlm2.5-20b", "danube"],
+    expectedFamilies: ["internlm2.5-1.8b", "internlm2.5-20b", "internlm3", "danube"],
     expectedModels: [
       "internlm/internlm2_5-1_8b",
       "internlm/internlm2_5-20b",
+      "internlm/internlm3-8b-instruct",
       "internlm/AlchemistCoder-L-7B",
     ],
   },
@@ -796,6 +797,7 @@ const EXPECTED_ALL_FAMILIES = [
   "trinity-large-thinking",
   "internlm2.5-1.8b",
   "internlm2.5-20b",
+  "internlm3",
   "bitnet-b1.58-2b-4t",
   "gpt-neo",
   "cosmo-1b",

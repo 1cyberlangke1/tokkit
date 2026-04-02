@@ -27,6 +27,12 @@ const BUILTIN_FAMILIES = [
     models: ["internlm/internlm2_5-20b"],
     modulePath: "./generated/internlm2_5_20b.js",
   },
+  {
+    family: "internlm3",
+    aliases: ["internlm3_8b_instruct"],
+    models: ["internlm/internlm3-8b-instruct"],
+    modulePath: "./generated/internlm3.js",
+  },
 ] as const
 
 const DANUBE_MODEL_ALIASES = ["internlm/AlchemistCoder-L-7B"] as const

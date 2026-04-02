@@ -5,6 +5,7 @@ Hugging Face model repositories:
 
 - internlm/internlm2_5-1_8b
 - internlm/internlm2_5-20b
+- internlm/internlm3-8b-instruct
 
 This package also registers the official model alias below against an existing
 tokenizer family distributed by another Apache-2.0 package in this monorepo:
