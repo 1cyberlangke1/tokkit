@@ -1,0 +1,21 @@
+Copyright (c) 2026 cyberlangke
+
+This package bundles tokenizer assets derived from official Hugging Face repositories under the cyberagent organization:
+- cyberagent/open-calm-1b tokenizer.json
+- cyberagent/calm2-7b tokenizer.json
+- cyberagent/calm3-22b-chat tokenizer.json
+
+The following supported model names are aliases confirmed to reuse those bundled tokenizer assets and are not shipped as separate snapshots:
+- cyberagent/open-calm-small
+- cyberagent/open-calm-medium
+- cyberagent/open-calm-3b
+- cyberagent/open-calm-large
+- cyberagent/open-calm-7b
+- cyberagent/calm2-7b-chat
+
+This package distributes tokenizer assets under a mixed-license layout:
+- cyberagent/open-calm-1b tokenizer.json: CC-BY-SA-4.0
+- cyberagent/calm2-7b tokenizer.json: Apache-2.0
+- cyberagent/calm3-22b-chat tokenizer.json: Apache-2.0
+
+See LICENSE for the full license text and redistribution notes that apply to this package and its bundled assets.

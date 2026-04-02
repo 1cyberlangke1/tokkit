@@ -36,6 +36,7 @@
       "@cyberlangke/tokkit-arcee-ai": ["packages/arcee-ai/src/index.ts"],
       "@cyberlangke/tokkit-state-spaces": ["packages/state-spaces/src/index.ts"],
       "@cyberlangke/tokkit-snowflake": ["packages/snowflake/src/index.ts"],
+      "@cyberlangke/tokkit-cyberagent": ["packages/cyberagent/src/index.ts"],
       "@cyberlangke/tokkit-ibm-granite": ["packages/ibm-granite/src/index.ts"],
       "@cyberlangke/tokkit-ibm-research": ["packages/ibm-research/src/index.ts"],
       "@cyberlangke/tokkit-h2oai": ["packages/h2oai/src/index.ts"],

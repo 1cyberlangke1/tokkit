@@ -627,6 +627,21 @@ const VENDOR_PACKAGE_CASES = [
     ],
   },
   {
+    relativePath: "packages/cyberagent/src/index.ts",
+    expectedFamilies: ["open-calm", "calm2", "calm3"],
+    expectedModels: [
+      "cyberagent/open-calm-1b",
+      "cyberagent/open-calm-small",
+      "cyberagent/open-calm-medium",
+      "cyberagent/open-calm-3b",
+      "cyberagent/open-calm-large",
+      "cyberagent/open-calm-7b",
+      "cyberagent/calm2-7b",
+      "cyberagent/calm2-7b-chat",
+      "cyberagent/calm3-22b-chat",
+    ],
+  },
+  {
     relativePath: "packages/tinyllama/src/index.ts",
     expectedFamilies: ["danube"],
     expectedModels: [

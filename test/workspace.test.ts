@@ -282,6 +282,13 @@ const EXPECTED_PACKAGES = [
     requiredFiles: ["COPYRIGHT", "LICENSE"],
   },
   {
+    directory: "cyberagent",
+    packageName: "@cyberlangke/tokkit-cyberagent",
+    license: "SEE LICENSE IN LICENSE",
+    includedInAll: false,
+    requiredFiles: ["COPYRIGHT", "LICENSE"],
+  },
+  {
     directory: "glm",
     packageName: "@cyberlangke/tokkit-glm",
     license: "MIT",

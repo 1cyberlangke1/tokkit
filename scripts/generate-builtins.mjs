@@ -859,6 +859,24 @@ export const FAMILY_SPECS = [
     source: "vendor/tokenizers/Snowflake__snowflake-arctic-instruct__tokenizer.json.br",
   },
   {
+    family: "open-calm",
+    packageName: "cyberagent",
+    moduleName: "open_calm",
+    source: "vendor/tokenizers/cyberagent__open-calm-1b__tokenizer.json.br",
+  },
+  {
+    family: "calm2",
+    packageName: "cyberagent",
+    moduleName: "calm2",
+    source: "vendor/tokenizers/cyberagent__calm2-7b__tokenizer.json.br",
+  },
+  {
+    family: "calm3",
+    packageName: "cyberagent",
+    moduleName: "calm3",
+    source: "vendor/tokenizers/cyberagent__calm3-22b-chat__tokenizer.json.br",
+  },
+  {
     family: "zamba-7b-v1",
     packageName: "zyphra",
     moduleName: "zamba_7b_v1",
