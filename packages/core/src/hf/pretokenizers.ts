@@ -12,6 +12,19 @@ const UNICODE_PUNCTUATION_PATTERN = /^\p{P}$/u
 /** JS 原生支持的 Unicode 属性名缓存。 */
 const SUPPORTED_UNICODE_PROPERTY_CACHE = new Map<string, boolean>()
 
+/** Arcee Trinity 里用于 510 长度保护的数字分块 regex。 */
+const DIGIT_CHUNK_510_PATTERN =
+  String.raw`\p{Nd}{1,510}(?=(?>\p{Nd}{510})*(?:\P{Nd}|$))|\G\p{Nd}{510}`
+
+/** Arcee Trinity 里用于千分组前导余数的 regex。 */
+const DIGIT_LEADING_GROUP_PATTERN = String.raw`\A\p{Nd}{1,2}(?=\p{Nd}{3}+\z)`
+
+/** Arcee Trinity 里用于连续三位数字分组的 regex。 */
+const DIGIT_TRIPLE_GROUP_PATTERN = String.raw`\A\p{Nd}{3}|\G\p{Nd}{3}`
+
+/** Split 预分词器里需要手工兼容的特殊 regex 类型。 */
+type SpecialSplitPattern = "digit-chunk-510" | "digit-leading-group" | "digit-triple-group" | null
+
 /** 预分词调用时携带的上下文。 */
 interface PretokenizerContext {
   sectionIndex?: number
@@ -36,6 +49,7 @@ class IdentityPretokenizer implements Pretokenizer {
 /** Hugging Face Split 预分词器。 */
 class SplitPretokenizer implements Pretokenizer {
   private readonly config: Record<string, unknown>
+  private readonly specialPattern: SpecialSplitPattern
   private readonly pattern: RegExp | null
 
   /**
@@ -45,10 +59,11 @@ class SplitPretokenizer implements Pretokenizer {
    */
   constructor(config: Record<string, unknown>) {
     this.config = config
-    this.pattern = createPattern(
-      (config.pattern as Record<string, unknown> | undefined) ?? null,
-      Boolean(config.invert)
-    )
+    const rawPattern = (config.pattern as Record<string, unknown> | undefined) ?? null
+    this.specialPattern = detectSpecialSplitPattern(rawPattern)
+    this.pattern = this.specialPattern
+      ? null
+      : createPattern(rawPattern, Boolean(config.invert))
   }
 
   /**
@@ -56,6 +71,11 @@ class SplitPretokenizer implements Pretokenizer {
    * 输出：按照模式切分后的片段数组。
    */
   preTokenize(text: string): string[] {
+    const specialSections = splitWithSpecialPattern(this.specialPattern, text)
+    if (specialSections) {
+      return specialSections
+    }
+
     if (!this.pattern) {
       return []
     }
@@ -311,6 +331,8 @@ function createPattern(
       .replace(/\\([#&~])/g, "$1")
     regex = expandInlineCaseInsensitiveGroups(regex)
     regex = normalizeUnsupportedPossessiveQuantifiers(regex)
+    regex = normalizeUnsupportedAtomicGroups(regex)
+    regex = normalizeUnsupportedAbsoluteAnchors(regex)
     regex = normalizeUnsupportedUnicodeProperties(regex)
     regex = normalizeUnsupportedCharacterClassSetOperations(regex)
 
@@ -393,6 +415,59 @@ function escapeRegExp(value: string): string {
 }
 
 /**
+ * 识别需要手工兼容的 Split regex。
+ * 输入：HF 的 pattern 配置。
+ * 输出：命中已知特殊语义时返回对应类型，否则返回 null。
+ */
+function detectSpecialSplitPattern(pattern: Record<string, unknown> | null): SpecialSplitPattern {
+  const rawRegex = pattern?.Regex
+  if (typeof rawRegex !== "string") {
+    return null
+  }
+
+  if (rawRegex === DIGIT_CHUNK_510_PATTERN) {
+    return "digit-chunk-510"
+  }
+
+  if (rawRegex === DIGIT_LEADING_GROUP_PATTERN) {
+    return "digit-leading-group"
+  }
+
+  if (rawRegex === DIGIT_TRIPLE_GROUP_PATTERN) {
+    return "digit-triple-group"
+  }
+
+  return null
+}
+
+/**
+ * 对当前已知的特殊 Split regex 做语义等价的手工切分。
+ * 输入：特殊 regex 类型与当前文本片段。
+ * 输出：命中时返回切分结果；不命中返回 null 让普通 regex 路径继续处理。
+ */
+function splitWithSpecialPattern(
+  pattern: SpecialSplitPattern,
+  text: string
+): string[] | null {
+  if (!pattern) {
+    return null
+  }
+
+  switch (pattern) {
+    case "digit-chunk-510":
+      // Rust regex 里的 510 分块只是为了限制 regex 引擎处理超长数字串；
+      // 在 JS 里沿用后续的 1-2 / 3 位分组即可，不需要先做这一步切分。
+      return [text]
+    case "digit-leading-group":
+      return splitDigitLeadingGroup(text)
+    case "digit-triple-group":
+      return splitDigitTriples(text)
+    default:
+      return null
+  }
+}
+
+/**
  * 把 Rust regex 的 possessive quantifier 降级成 JS 可解析的 greedy quantifier。
  * 输入：原始 regex 字符串。
  * 输出：去掉 JS 不支持的 possessive `+` 修饰后的模式字符串。
@@ -458,6 +533,24 @@ function normalizeUnsupportedPossessiveQuantifiers(pattern: string): string {
   }
 
   return result
+}
+
+/**
+ * 把 Rust regex 的 atomic group 降级成 JS 可解析的非捕获分组。
+ * 输入：原始 regex 字符串。
+ * 输出：把 `(?>...)` 改写成 `(?:...)` 的模式字符串。
+ */
+function normalizeUnsupportedAtomicGroups(pattern: string): string {
+  return pattern.replace(/\(\?>/g, "(?:")
+}
+
+/**
+ * 把 Rust regex 的绝对起止锚点改成 JS 可解析的等价形式。
+ * 输入：原始 regex 字符串。
+ * 输出：把 `\A` / `\z` 改写成 `^` / `$` 的模式字符串。
+ */
+function normalizeUnsupportedAbsoluteAnchors(pattern: string): string {
+  return pattern.replace(/\\A/g, "^").replace(/\\z/g, "$")
 }
 
 /**
@@ -823,6 +916,50 @@ function splitByCharPredicate(
 
   pushPredicateSplit(result, current, currentMatches, normalizedBehavior)
   return result
+}
+
+/**
+ * 判断整个文本是否由十进制数字组成。
+ * 输入：任意文本片段。
+ * 输出：全是 `\p{Nd}` 时返回 true，否则返回 false。
+ */
+function isDecimalDigitSequence(text: string): boolean {
+  return /^\p{Nd}+$/u.test(text)
+}
+
+/**
+ * 复现 `\A\p{Nd}{1,2}(?=\p{Nd}{3}+\z)` 的数字前导余数切分语义。
+ * 输入：当前数字片段。
+ * 输出：若长度模 3 为 1 或 2，则拆出前导余数，否则保持原样。
+ */
+function splitDigitLeadingGroup(text: string): string[] {
+  if (!isDecimalDigitSequence(text)) {
+    return [text]
+  }
+
+  const remainder = text.length % 3
+  if (remainder === 0 || text.length <= remainder) {
+    return [text]
+  }
+
+  return [text.slice(0, remainder), text.slice(remainder)]
+}
+
+/**
+ * 复现 `\A\p{Nd}{3}|\G\p{Nd}{3}` 的连续三位数字切分语义。
+ * 输入：当前文本片段。
+ * 输出：数字串按从左到右的 3 位块切分，非数字串保持原样。
+ */
+function splitDigitTriples(text: string): string[] {
+  if (!isDecimalDigitSequence(text) || text.length < 3) {
+    return [text]
+  }
+
+  const parts: string[] = []
+  for (let index = 0; index < text.length; index += 3) {
+    parts.push(text.slice(index, index + 3))
+  }
+  return parts
 }
 
 /**

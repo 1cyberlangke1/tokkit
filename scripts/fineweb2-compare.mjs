@@ -60,6 +60,16 @@ const DEFAULT_REFERENCE_BACKEND = "js"
 /** 默认目标 workspace 子包。 */
 const DEFAULT_PACKAGE_DIR = "all"
 
+/** Arcee Trinity 里用于 510 长度保护的数字分块 regex。 */
+const DIGIT_CHUNK_510_PATTERN =
+  String.raw`\p{Nd}{1,510}(?=(?>\p{Nd}{510})*(?:\P{Nd}|$))|\G\p{Nd}{510}`
+
+/** Arcee Trinity 里用于千分组前导余数的 regex。 */
+const DIGIT_LEADING_GROUP_PATTERN = String.raw`\A\p{Nd}{1,2}(?=\p{Nd}{3}+\z)`
+
+/** Arcee Trinity 里用于连续三位数字分组的 regex。 */
+const DIGIT_TRIPLE_GROUP_PATTERN = String.raw`\A\p{Nd}{3}|\G\p{Nd}{3}`
+
 /** Python fast reference cache helper。 */
 const PYTHON_REFERENCE_CACHE_SCRIPT = resolve(REPO_ROOT, "scripts", "fineweb2-reference-cache.py")
 
@@ -573,7 +583,9 @@ async function importWorkspacePackageModule(packageDir) {
  */
 function loadReferenceTokenizer(sourcePath) {
   const compressed = readFileSync(resolve(REPO_ROOT, sourcePath))
-  const asset = JSON.parse(brotliDecompressSync(compressed).toString("utf8"))
+  const asset = normalizeReferenceAssetForJavaScript(
+    JSON.parse(brotliDecompressSync(compressed).toString("utf8"))
+  )
   return new PreTrainedTokenizer(
     {
       ...asset,
@@ -584,6 +596,61 @@ function loadReferenceTokenizer(sourcePath) {
     },
     {}
   )
+}
+
+/**
+ * 把参考 tokenizer 里的 Rust regex 方言降级成 JS 可解析的等价形式。
+ * 输入：原始 tokenizer 资产。
+ * 输出：可交给 `@huggingface/transformers` JS 参考实现装载的兼容资产。
+ */
+function normalizeReferenceAssetForJavaScript(asset) {
+  return normalizeReferenceValue(asset)
+}
+
+/**
+ * 递归归一化参考资产里的 regex 方言。
+ * 输入：任意 JSON 值。
+ * 输出：替换了特殊 regex 的等价新值。
+ */
+function normalizeReferenceValue(value) {
+  if (Array.isArray(value)) {
+    return value.map((entry) => normalizeReferenceValue(entry))
+  }
+
+  if (!value || typeof value !== "object") {
+    return value
+  }
+
+  const normalizedEntries = Object.entries(value).map(([key, entry]) => {
+    if (key === "Regex" && typeof entry === "string") {
+      return [key, normalizeReferenceRegex(entry)]
+    }
+
+    return [key, normalizeReferenceValue(entry)]
+  })
+
+  return Object.fromEntries(normalizedEntries)
+}
+
+/**
+ * 把 JS 不支持的 Rust regex 改写成当前参考测试可接受的等价形式。
+ * 输入：原始 regex 字符串。
+ * 输出：JS 可解析的 regex 字符串。
+ */
+function normalizeReferenceRegex(pattern) {
+  if (pattern === DIGIT_CHUNK_510_PATTERN) {
+    return "$^"
+  }
+
+  if (pattern === DIGIT_LEADING_GROUP_PATTERN) {
+    return String.raw`^\p{Nd}{1,2}(?=(?:\p{Nd}{3})+$)`
+  }
+
+  if (pattern === DIGIT_TRIPLE_GROUP_PATTERN) {
+    return String.raw`\p{Nd}{3}`
+  }
+
+  return pattern.replace(/\(\?>/g, "(?:").replace(/\\A/g, "^").replace(/\\z/g, "$")
 }
 
 /**

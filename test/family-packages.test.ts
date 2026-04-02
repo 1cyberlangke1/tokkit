@@ -594,6 +594,20 @@ const VENDOR_PACKAGE_CASES = [
     ],
   },
   {
+    relativePath: "packages/arcee-ai/src/index.ts",
+    expectedFamilies: [
+      "trinity-large-truebase",
+      "trinity-large",
+      "trinity-large-thinking",
+    ],
+    expectedModels: [
+      "arcee-ai/Trinity-Large-TrueBase",
+      "arcee-ai/Trinity-Large-Base",
+      "arcee-ai/Trinity-Large-Preview",
+      "arcee-ai/Trinity-Large-Thinking",
+    ],
+  },
+  {
     relativePath: "packages/tinyllama/src/index.ts",
     expectedFamilies: ["danube"],
     expectedModels: [
@@ -718,6 +732,9 @@ const EXPECTED_ALL_FAMILIES = [
   "zamba2-instruct-v2",
   "zr1-1.5b",
   "zaya1",
+  "trinity-large-truebase",
+  "trinity-large",
+  "trinity-large-thinking",
   "internlm2.5-1.8b",
   "internlm2.5-20b",
   "bitnet-b1.58-2b-4t",

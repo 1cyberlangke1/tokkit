@@ -35,6 +35,7 @@
     "@cyberlangke/tokkit-janhq": "1.11.0",
     "@cyberlangke/tokkit-baichuan-inc": "1.11.0",
     "@cyberlangke/tokkit-bytedance-seed": "1.11.0",
+    "@cyberlangke/tokkit-arcee-ai": "1.11.0",
     "@cyberlangke/tokkit-core": "1.11.0",
     "@cyberlangke/tokkit-deepseek": "1.11.0",
     "@cyberlangke/tokkit-distilbert": "1.11.0",

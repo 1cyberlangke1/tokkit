@@ -1,0 +1,9 @@
+Copyright (c) 2026 cyberlangke
+
+This package bundles tokenizer assets derived from official Hugging Face repositories under the arcee-ai organization:
+- arcee-ai/Trinity-Large-TrueBase tokenizer.json
+- arcee-ai/Trinity-Large-Base tokenizer.json
+- arcee-ai/Trinity-Large-Preview tokenizer.json (same tokenizer family as Trinity-Large-Base)
+- arcee-ai/Trinity-Large-Thinking tokenizer.json
+
+See LICENSE for the full license text that applies to this package and its bundled assets.

@@ -92,6 +92,10 @@
   - `internlm2.5-20b`
 - `@cyberlangke/tokkit-distilbert`
   - `distilgpt2`
+- `@cyberlangke/tokkit-arcee-ai`
+  - `trinity-large-truebase`
+  - `trinity-large`
+  - `trinity-large-thinking`
 - `@cyberlangke/tokkit-tinyllama`
   - alias-only package，复用 `danube`
 - `@cyberlangke/tokkit-nanbeige`

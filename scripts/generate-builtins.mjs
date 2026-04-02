@@ -817,6 +817,24 @@ export const FAMILY_SPECS = [
     source: "vendor/tokenizers/PleIAs__Monad__tokenizer.json.br",
   },
   {
+    family: "trinity-large-truebase",
+    packageName: "arcee-ai",
+    moduleName: "trinity_large_truebase",
+    source: "vendor/tokenizers/arcee-ai__Trinity-Large-TrueBase__tokenizer.json.br",
+  },
+  {
+    family: "trinity-large",
+    packageName: "arcee-ai",
+    moduleName: "trinity_large",
+    source: "vendor/tokenizers/arcee-ai__Trinity-Large-Base__tokenizer.json.br",
+  },
+  {
+    family: "trinity-large-thinking",
+    packageName: "arcee-ai",
+    moduleName: "trinity_large_thinking",
+    source: "vendor/tokenizers/arcee-ai__Trinity-Large-Thinking__tokenizer.json.br",
+  },
+  {
     family: "zamba-7b-v1",
     packageName: "zyphra",
     moduleName: "zamba_7b_v1",

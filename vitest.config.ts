@@ -72,6 +72,9 @@ export default defineConfig({
       "@cyberlangke/tokkit-zyphra": fileURLToPath(
         new URL("./packages/zyphra/src/index.ts", import.meta.url)
       ),
+      "@cyberlangke/tokkit-arcee-ai": fileURLToPath(
+        new URL("./packages/arcee-ai/src/index.ts", import.meta.url)
+      ),
       "@cyberlangke/tokkit-ibm-granite": fileURLToPath(
         new URL("./packages/ibm-granite/src/index.ts", import.meta.url)
       ),
