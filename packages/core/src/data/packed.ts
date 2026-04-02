@@ -10,7 +10,11 @@
 
 import { Buffer } from "node:buffer"
 import { brotliDecompressSync } from "node:zlib"
-import type { AddedTokenConfig, NormalizedTokenizerAsset } from "../types.js"
+import type {
+  AddedTokenConfig,
+  LongTextEncodingConfig,
+  NormalizedTokenizerAsset,
+} from "../types.js"
 
 /** packed 后的 normalized asset payload。 */
 interface PackedNormalizedTokenizerPayload {
@@ -18,6 +22,7 @@ interface PackedNormalizedTokenizerPayload {
   n?: Record<string, unknown> | null
   p?: Record<string, unknown> | null
   d?: Record<string, unknown> | null
+  lt?: PackedLongTextEncodingConfig | null
   v: string[]
   mi?: number[]
   u?: string | null
@@ -26,6 +31,13 @@ interface PackedNormalizedTokenizerPayload {
   ew?: string
   bf?: boolean
   im?: boolean
+}
+
+/** packed 后的长文本切分配置。 */
+interface PackedLongTextEncodingConfig {
+  t: "split-whitespaces-or-nonwhitespaces"
+  mc: number
+  ml: number
 }
 
 /**
@@ -43,6 +55,7 @@ export function unpackPackedAsset(packed: string): NormalizedTokenizerAsset {
     normalizer: payload.n ?? null,
     preTokenizer: payload.p ?? null,
     decoder: payload.d ?? null,
+    longTextEncoding: unpackLongTextEncoding(payload.lt),
     model: {
       type: "BPE",
       vocabById: payload.v,
@@ -55,5 +68,24 @@ export function unpackPackedAsset(packed: string): NormalizedTokenizerAsset {
       byteFallback: payload.bf ?? false,
       ignoreMerges: payload.im ?? false,
     },
+  }
+}
+
+/**
+ * 解包长文本切分配置。
+ * 输入：packed payload 里的紧凑配置。
+ * 输出：运行时可消费的长文本切分配置，未配置时返回 null。
+ */
+function unpackLongTextEncoding(
+  config: PackedLongTextEncodingConfig | null | undefined
+): LongTextEncodingConfig | null {
+  if (!config) {
+    return null
+  }
+
+  return {
+    type: config.t,
+    maxEncodeChars: config.mc,
+    maxConsecutiveSliceLen: config.ml,
   }
 }

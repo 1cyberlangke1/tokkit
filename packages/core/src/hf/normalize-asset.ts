@@ -6,6 +6,7 @@
 
 import type {
   AddedTokenConfig,
+  LongTextEncodingConfig,
   NormalizedTokenizerAsset,
   TokenizerAsset,
 } from "../types.js"
@@ -27,6 +28,7 @@ export function normalizeTokenizerAsset(asset: TokenizerAsset): NormalizedTokeni
     normalizer: (asset.normalizer as Record<string, unknown> | null) ?? null,
     preTokenizer: (asset.pre_tokenizer as Record<string, unknown> | null) ?? null,
     decoder: (asset.decoder as Record<string, unknown> | null) ?? null,
+    longTextEncoding: normalizeLongTextEncoding(asset.longTextEncoding ?? null),
     model: {
       type: "BPE",
       vocabById: normalizeVocab(asset.model.vocab),
@@ -56,6 +58,32 @@ function inferBpeModelType(asset: TokenizerAsset): "BPE" | undefined {
   }
 
   return undefined
+}
+
+/**
+ * 归一化长文本切分配置。
+ * 输入：原始长文本编码配置。
+ * 输出：带显式整数上限的切分配置，未配置时返回 null。
+ */
+function normalizeLongTextEncoding(
+  config: TokenizerAsset["longTextEncoding"]
+): LongTextEncodingConfig | null {
+  if (!config) {
+    return null
+  }
+
+  if (config.type !== "split-whitespaces-or-nonwhitespaces") {
+    throw new Error(`Unsupported long text encoding type: ${String(config.type)}`)
+  }
+
+  return {
+    type: config.type,
+    maxEncodeChars: normalizePositiveInteger(config.maxEncodeChars, "longTextEncoding.maxEncodeChars"),
+    maxConsecutiveSliceLen: normalizePositiveInteger(
+      config.maxConsecutiveSliceLen,
+      "longTextEncoding.maxConsecutiveSliceLen"
+    ),
+  }
 }
 
 /**
@@ -135,4 +163,17 @@ function parseStringMergeEntry(merge: string): [string, string] | null {
   }
 
   return [merge.slice(0, separatorIndex), merge.slice(separatorIndex + 1)]
+}
+
+/**
+ * 校验并归一化正整数配置。
+ * 输入：任意数值与字段名。
+ * 输出：合法的正整数。
+ */
+function normalizePositiveInteger(value: number, fieldName: string): number {
+  if (!Number.isInteger(value) || value < 1) {
+    throw new Error(`${fieldName} must be a positive integer`)
+  }
+
+  return value
 }

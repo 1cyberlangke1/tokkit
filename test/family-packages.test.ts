@@ -33,6 +33,21 @@ const VENDOR_PACKAGE_CASES = [
     ],
   },
   {
+    relativePath: "packages/moonshotai/src/index.ts",
+    expectedFamilies: ["kimi-k2", "kimi-k2-thinking", "moonlight", "kimi-dev"],
+    expectedModels: [
+      "moonshotai/Kimi-K2-Base",
+      "moonshotai/Kimi-K2-Instruct",
+      "moonshotai/Kimi-K2-Instruct-0905",
+      "moonshotai/Kimi-K2-Thinking",
+      "moonshotai/Moonlight-16B-A3B",
+      "moonshotai/Moonlight-16B-A3B-Instruct",
+      "moonshotai/Kimi-Linear-48B-A3B-Base",
+      "moonshotai/Kimi-Linear-48B-A3B-Instruct",
+      "moonshotai/Kimi-Dev-72B",
+    ],
+  },
+  {
     relativePath: "packages/01-ai/src/index.ts",
     expectedFamilies: ["yi", "yi-1.5-9b-chat", "yi-coder", "yi-coder-chat"],
     expectedModels: [

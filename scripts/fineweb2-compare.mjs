@@ -70,6 +70,12 @@ const DIGIT_LEADING_GROUP_PATTERN = String.raw`\A\p{Nd}{1,2}(?=\p{Nd}{3}+\z)`
 /** Arcee Trinity 里用于连续三位数字分组的 regex。 */
 const DIGIT_TRIPLE_GROUP_PATTERN = String.raw`\A\p{Nd}{3}|\G\p{Nd}{3}`
 
+/** JS 原生支持的 Unicode 属性名缓存。 */
+const SUPPORTED_UNICODE_PROPERTY_CACHE = new Map()
+
+/** 单个字符是否为空白。 */
+const WHITESPACE_CHARACTER_PATTERN = /^\s$/u
+
 /** Python fast reference cache helper。 */
 const PYTHON_REFERENCE_CACHE_SCRIPT = resolve(REPO_ROOT, "scripts", "fineweb2-reference-cache.py")
 
@@ -599,11 +605,30 @@ function loadReferenceTokenizer(sourcePath) {
 }
 
 /**
+ * 用参考 tokenizer 编码文本，必要时先按上游包装器语义切分超长文本。
+ * 输入：参考 tokenizer、原始文本、encode 选项和可选的长文本切分配置。
+ * 输出：参考 tokenizer 产出的 token id 数组。
+ */
+export function encodeReferenceText(reference, text, options, longTextEncoding = null) {
+  const ids = []
+  const chunks = splitTextForLongTextEncoding(text, longTextEncoding)
+
+  for (const chunk of chunks) {
+    const chunkIds = reference.encode(chunk, options)
+    for (const id of chunkIds) {
+      ids.push(id)
+    }
+  }
+
+  return ids
+}
+
+/**
  * 把参考 tokenizer 里的 Rust regex 方言降级成 JS 可解析的等价形式。
  * 输入：原始 tokenizer 资产。
  * 输出：可交给 `@huggingface/transformers` JS 参考实现装载的兼容资产。
  */
-function normalizeReferenceAssetForJavaScript(asset) {
+export function normalizeReferenceAssetForJavaScript(asset) {
   return normalizeReferenceValue(asset)
 }
 
@@ -650,7 +675,226 @@ function normalizeReferenceRegex(pattern) {
     return String.raw`\p{Nd}{3}`
   }
 
-  return pattern.replace(/\(\?>/g, "(?:").replace(/\\A/g, "^").replace(/\\z/g, "$")
+  return normalizeUnsupportedCharacterClassSetOperations(
+    normalizeUnsupportedUnicodeProperties(
+      pattern.replace(/\(\?>/g, "(?:").replace(/\\A/g, "^").replace(/\\z/g, "$")
+    )
+  )
+}
+
+/**
+ * 把 Rust regex 允许的脚本属性简写归一成 JS 可解析的形式。
+ * 输入：原始 regex 字符串。
+ * 输出：把 `\p{Han}` 这类脚本名改写成 `\p{Script=Han}` 的模式字符串。
+ */
+function normalizeUnsupportedUnicodeProperties(pattern) {
+  return pattern.replace(/\\([pP])\{([^}]+)\}/g, (match, kind, name) => {
+    if (name.includes("=") || isJavaScriptUnicodePropertySupported(name)) {
+      return match
+    }
+
+    const scriptName = `Script=${name}`
+    if (isJavaScriptUnicodePropertySupported(scriptName)) {
+      return `\\${kind}{${scriptName}}`
+    }
+
+    return match
+  })
+}
+
+/**
+ * 判断给定 Unicode 属性名是否可被 JS `RegExp` 直接解析。
+ * 输入：属性名。
+ * 输出：支持时返回 true，否则返回 false。
+ */
+function isJavaScriptUnicodePropertySupported(name) {
+  const cached = SUPPORTED_UNICODE_PROPERTY_CACHE.get(name)
+  if (cached !== undefined) {
+    return cached
+  }
+
+  let supported = false
+  try {
+    new RegExp(`\\p{${name}}`, "u")
+    supported = true
+  } catch {
+    supported = false
+  }
+
+  SUPPORTED_UNICODE_PROPERTY_CACHE.set(name, supported)
+  return supported
+}
+
+/**
+ * 把 Rust regex 的字符类交集降级成 JS 可解析的 lookaround 形式。
+ * 输入：原始 regex 字符串。
+ * 输出：把 `[A&&[^B]]` 改写为 `(?:(?![B])[A])` 的模式字符串。
+ */
+function normalizeUnsupportedCharacterClassSetOperations(pattern) {
+  let result = ""
+
+  for (let index = 0; index < pattern.length; index += 1) {
+    const character = pattern[index]
+
+    if (character === "\\") {
+      if (
+        (pattern[index + 1] === "p" || pattern[index + 1] === "P") &&
+        pattern[index + 2] === "{"
+      ) {
+        const end = pattern.indexOf("}", index + 3)
+        if (end !== -1) {
+          result += pattern.slice(index, end + 1)
+          index = end
+          continue
+        }
+      }
+
+      const end = Math.min(index + 2, pattern.length)
+      result += pattern.slice(index, end)
+      index = end - 1
+      continue
+    }
+
+    if (character === "[") {
+      const end = findCharacterClassEnd(pattern, index)
+      const rawClass = pattern.slice(index, end + 1)
+      result += rewriteCharacterClassSetOperation(rawClass)
+      index = end
+      continue
+    }
+
+    result += character
+  }
+
+  return result
+}
+
+/**
+ * 把单个字符类里的交集表达式改写成 JS lookaround。
+ * 输入：完整字符类文本。
+ * 输出：若存在交集则返回等价 group，否则原样返回。
+ */
+function rewriteCharacterClassSetOperation(rawClass) {
+  const content = rawClass.slice(1, -1)
+  const parts = splitTopLevelCharacterClassExpression(content, "&&")
+  if (parts.length <= 1) {
+    return rawClass
+  }
+
+  const consumer = normalizeCharacterClassOperand(parts[0] ?? "")
+  const lookarounds = parts
+    .slice(1)
+    .map((operand) => createCharacterClassIntersectionLookaround(operand))
+    .join("")
+  return `(?:${lookarounds}${consumer})`
+}
+
+/**
+ * 在字符类内容的顶层按指定运算符切分。
+ * 输入：字符类内容与运算符。
+ * 输出：按顶层运算符切开的片段数组。
+ */
+function splitTopLevelCharacterClassExpression(content, operator) {
+  const parts = []
+  let current = ""
+  let nestedClassDepth = 0
+
+  for (let index = 0; index < content.length; index += 1) {
+    const character = content[index]
+
+    if (character === "\\") {
+      const end = Math.min(index + 2, content.length)
+      current += content.slice(index, end)
+      index = end - 1
+      continue
+    }
+
+    if (character === "[") {
+      nestedClassDepth += 1
+      current += character
+      continue
+    }
+
+    if (character === "]" && nestedClassDepth > 0) {
+      nestedClassDepth -= 1
+      current += character
+      continue
+    }
+
+    if (nestedClassDepth === 0 && content.startsWith(operator, index)) {
+      parts.push(current)
+      current = ""
+      index += operator.length - 1
+      continue
+    }
+
+    current += character
+  }
+
+  parts.push(current)
+  return parts
+}
+
+/**
+ * 规范化交集操作里的字符类操作数。
+ * 输入：字符类操作数字符串。
+ * 输出：始终可直接用于消费单个字符的字符类文本。
+ */
+function normalizeCharacterClassOperand(operand) {
+  const trimmed = operand.trim()
+  if (trimmed.startsWith("[") && trimmed.endsWith("]")) {
+    return trimmed
+  }
+
+  return `[${trimmed}]`
+}
+
+/**
+ * 为交集右侧操作数生成等价 lookaround。
+ * 输入：交集右侧的字符类操作数。
+ * 输出：消费前约束同一字符集合的 lookaround。
+ */
+function createCharacterClassIntersectionLookaround(operand) {
+  const normalized = normalizeCharacterClassOperand(operand)
+  const content = normalized.slice(1, -1)
+
+  if (content.startsWith("^")) {
+    return `(?![${content.slice(1)}])`
+  }
+
+  return `(?=${normalized})`
+}
+
+/**
+ * 找到字符类的结束位置。
+ * 输入：regex 字符串与 `[` 的起始下标。
+ * 输出：对应 `]` 的下标；若不存在则返回原始下标。
+ */
+function findCharacterClassEnd(pattern, start) {
+  let nestedClassDepth = 0
+
+  for (let index = start + 1; index < pattern.length; index += 1) {
+    if (pattern[index] === "\\") {
+      index += 1
+      continue
+    }
+
+    if (pattern[index] === "[") {
+      nestedClassDepth += 1
+      continue
+    }
+
+    if (pattern[index] === "]" && nestedClassDepth > 0) {
+      nestedClassDepth -= 1
+      continue
+    }
+
+    if (pattern[index] === "]") {
+      return index
+    }
+  }
+
+  return start
 }
 
 /**
@@ -694,7 +938,13 @@ async function runSerialComparison(options, familySpecs, tokkit) {
         tokkit.encode(input, spec.family, {
           addSpecialTokens: false,
         }),
-      referenceEncode: (input) => getReference().encode(input, { add_special_tokens: false }),
+      referenceEncode: (input) =>
+        encodeReferenceText(
+          getReference(),
+          input,
+          { add_special_tokens: false },
+          spec.longTextEncoding ?? null
+        ),
       tokkitDecode: options.checkDecode ? (ids) => tokkit.decode(ids, spec.family) : undefined,
       referenceDecode: options.checkDecode ? (ids) => decodeReferenceText(getReference(), ids) : undefined,
       stopOnFirstMismatch: !options.continueOnMismatch,
@@ -1089,6 +1339,16 @@ function prewarmReferenceCache({ options, spec, samples, referenceCache }) {
       String(options.limit),
       "--maxChars",
       String(options.maxChars),
+      ...(spec.longTextEncoding
+        ? [
+            "--longTextEncoding",
+            spec.longTextEncoding.type,
+            "--maxEncodeChars",
+            String(spec.longTextEncoding.maxEncodeChars),
+            "--maxConsecutiveSliceLen",
+            String(spec.longTextEncoding.maxConsecutiveSliceLen),
+          ]
+        : []),
       ...(options.checkDecode ? ["--checkDecode"] : []),
     ],
     {
@@ -1150,6 +1410,99 @@ function fingerprintFileState(filePath) {
  */
 function sanitizeCacheSegment(value) {
   return String(value).replace(/[^A-Za-z0-9._-]+/g, "_")
+}
+
+/**
+ * 按上游包装器语义拆分超长文本。
+ * 输入：原始文本与可选的长文本编码配置。
+ * 输出：可逐段独立编码的文本切片列表。
+ */
+function splitTextForLongTextEncoding(text, config) {
+  if (!config || text.length === 0) {
+    return [text]
+  }
+
+  const windows = splitByCodePointLength(text, config.maxEncodeChars)
+  const chunks = []
+
+  for (const window of windows) {
+    chunks.push(...splitWhitespacesOrNonwhitespaces(window, config.maxConsecutiveSliceLen))
+  }
+
+  return chunks.length > 0 ? chunks : [text]
+}
+
+/**
+ * 按最多 code point 数量切分字符串。
+ * 输入：原始文本和单段最大长度。
+ * 输出：按上限顺序切出的字符串窗口。
+ */
+function splitByCodePointLength(text, maxLength) {
+  const chunks = []
+  let start = 0
+  let codePointCount = 0
+  let index = 0
+
+  for (const character of text) {
+    if (codePointCount >= maxLength) {
+      chunks.push(text.slice(start, index))
+      start = index
+      codePointCount = 0
+    }
+
+    index += character.length
+    codePointCount += 1
+  }
+
+  chunks.push(text.slice(start))
+  return chunks.filter((chunk) => chunk.length > 0)
+}
+
+/**
+ * 按连续空白 / 非空白 run 上限切分字符串。
+ * 输入：单个窗口文本和单类字符最大连续长度。
+ * 输出：符合上游 `_split_whitespaces_or_nonwhitespaces` 语义的切片数组。
+ */
+function splitWhitespacesOrNonwhitespaces(text, maxConsecutiveSliceLen) {
+  if (text.length === 0) {
+    return []
+  }
+
+  const result = []
+  let currentSliceLen = 0
+  let currentSliceIsSpace = false
+  let sliceStart = 0
+  let index = 0
+  let firstCharacter = true
+
+  for (const character of text) {
+    const isNowSpace = WHITESPACE_CHARACTER_PATTERN.test(character)
+
+    if (firstCharacter) {
+      currentSliceLen = 1
+      currentSliceIsSpace = isNowSpace
+      firstCharacter = false
+      index += character.length
+      continue
+    }
+
+    if (currentSliceIsSpace !== isNowSpace) {
+      currentSliceLen = 1
+      currentSliceIsSpace = isNowSpace
+    } else {
+      currentSliceLen += 1
+      if (currentSliceLen > maxConsecutiveSliceLen) {
+        result.push(text.slice(sliceStart, index))
+        sliceStart = index
+        currentSliceLen = 1
+      }
+    }
+
+    index += character.length
+  }
+
+  result.push(text.slice(sliceStart))
+  return result
 }
 
 /**

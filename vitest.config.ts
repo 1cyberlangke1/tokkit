@@ -21,6 +21,9 @@ export default defineConfig({
       "@cyberlangke/tokkit-minimax": fileURLToPath(
         new URL("./packages/minimax/src/index.ts", import.meta.url)
       ),
+      "@cyberlangke/tokkit-moonshotai": fileURLToPath(
+        new URL("./packages/moonshotai/src/index.ts", import.meta.url)
+      ),
       "@cyberlangke/tokkit-tiiuae": fileURLToPath(
         new URL("./packages/tiiuae/src/index.ts", import.meta.url)
       ),

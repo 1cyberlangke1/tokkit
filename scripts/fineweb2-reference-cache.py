@@ -19,6 +19,9 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--start", type=int, default=0)
     parser.add_argument("--limit", type=int, default=20)
     parser.add_argument("--maxChars", type=int, default=16384)
+    parser.add_argument("--longTextEncoding")
+    parser.add_argument("--maxEncodeChars", type=int)
+    parser.add_argument("--maxConsecutiveSliceLen", type=int)
     parser.add_argument("--checkDecode", action="store_true")
     return parser.parse_args()
 
@@ -71,6 +74,59 @@ def hash_text(text: str) -> str:
     return hashlib.sha256(text.encode("utf-8")).hexdigest()
 
 
+def split_text_for_long_text_encoding(
+    text: str,
+    long_text_encoding: str | None,
+    max_encode_chars: int | None,
+    max_consecutive_slice_len: int | None,
+) -> list[str]:
+    if (
+        not long_text_encoding
+        or long_text_encoding != "split-whitespaces-or-nonwhitespaces"
+        or not max_encode_chars
+        or not max_consecutive_slice_len
+        or len(text) == 0
+    ):
+        return [text]
+
+    chunks: list[str] = []
+    for start in range(0, len(text), max_encode_chars):
+        window = text[start : start + max_encode_chars]
+        chunks.extend(
+            split_whitespaces_or_nonwhitespaces(window, max_consecutive_slice_len)
+        )
+
+    return chunks or [text]
+
+
+def split_whitespaces_or_nonwhitespaces(
+    text: str, max_consecutive_slice_len: int
+) -> list[str]:
+    if len(text) == 0:
+        return []
+
+    chunks: list[str] = []
+    current_slice_len = 0
+    current_slice_is_space = text[0].isspace()
+    slice_start = 0
+
+    for index, character in enumerate(text):
+        is_now_space = character.isspace()
+
+        if current_slice_is_space ^ is_now_space:
+            current_slice_len = 1
+            current_slice_is_space = is_now_space
+        else:
+            current_slice_len += 1
+            if current_slice_len > max_consecutive_slice_len:
+                chunks.append(text[slice_start:index])
+                slice_start = index
+                current_slice_len = 1
+
+    chunks.append(text[slice_start:])
+    return chunks
+
+
 def main() -> None:
     args = parse_args()
     source_path = Path(args.source)
@@ -82,15 +138,23 @@ def main() -> None:
     for sample in samples:
         line_number = str(sample["lineNumber"])
         text = sample["text"]
-        encoded = tokenizer.encode(text, add_special_tokens=False)
+        encoded_ids: list[int] = []
+        for chunk in split_text_for_long_text_encoding(
+            text,
+            args.longTextEncoding,
+            args.maxEncodeChars,
+            args.maxConsecutiveSliceLen,
+        ):
+            encoded = tokenizer.encode(chunk, add_special_tokens=False)
+            encoded_ids.extend(encoded.ids)
         record: dict[str, object] = {
-            "encodeLength": len(encoded.ids),
-            "encodeHash": hash_token_ids(encoded.ids),
+            "encodeLength": len(encoded_ids),
+            "encodeHash": hash_token_ids(encoded_ids),
             "decodeHash": None,
         }
 
         if args.checkDecode:
-            decoded = tokenizer.decode(encoded.ids, skip_special_tokens=False)
+            decoded = tokenizer.decode(encoded_ids, skip_special_tokens=False)
             record["decodeHash"] = hash_text(decoded)
 
         records[line_number] = record

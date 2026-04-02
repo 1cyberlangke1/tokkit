@@ -18,6 +18,13 @@ export interface AddedTokenConfig {
   special?: boolean
 }
 
+/** 上游包装器要求的长文本编码切分配置。 */
+export interface LongTextEncodingConfig {
+  type: "split-whitespaces-or-nonwhitespaces"
+  maxEncodeChars: number
+  maxConsecutiveSliceLen: number
+}
+
 /** Hugging Face 风格的 BPE 模型配置。 */
 export interface BpeModelConfig {
   type?: "BPE"
@@ -39,6 +46,7 @@ export interface TokenizerAsset {
   post_processor?: Record<string, unknown> | null
   decoder?: Record<string, unknown> | null
   added_tokens?: AddedTokenConfig[]
+  longTextEncoding?: LongTextEncodingConfig | null
   model: BpeModelConfig
 }
 
@@ -62,6 +70,7 @@ export interface NormalizedTokenizerAsset {
   normalizer: Record<string, unknown> | null
   preTokenizer: Record<string, unknown> | null
   decoder: Record<string, unknown> | null
+  longTextEncoding?: LongTextEncodingConfig | null
   model: NormalizedBpeModelConfig
 }
 

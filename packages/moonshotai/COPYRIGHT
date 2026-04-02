@@ -1,0 +1,17 @@
+Copyright (c) 2026 cyberlangke
+
+This package bundles tokenizer assets derived from official Hugging Face repositories under the moonshotai organization:
+- moonshotai/Kimi-K2-Instruct tokenizer snapshot
+- moonshotai/Kimi-K2-Thinking tokenizer snapshot
+- moonshotai/Moonlight-16B-A3B tokenizer snapshot
+- moonshotai/Kimi-Dev-72B tokenizer snapshot
+
+The following supported model names are aliases confirmed to reuse those bundled tokenizer assets and are not shipped as separate snapshots:
+- moonshotai/Kimi-K2-Base
+- moonshotai/Kimi-K2-Instruct-0905
+- moonshotai/Kimi-Linear-48B-A3B-Base
+- moonshotai/Kimi-Linear-48B-A3B-Instruct
+- moonshotai/Moonlight-16B-A3B-Instruct
+
+See LICENSE and NOTICE for the full license text and attribution notices that
+apply to this package and its bundled assets.

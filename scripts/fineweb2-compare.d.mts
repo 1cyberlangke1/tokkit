@@ -1,13 +1,17 @@
-/**
- * FineWeb2 对拍脚本类型声明。
- * 输入：供 TypeScript 测试文件消费的脚本导出定义。
- * 输出：让 `tsc --noEmit` 能正确理解 `scripts/fineweb2-compare.mjs` 的导出形状。
- */
+export interface LongTextEncodingConfig {
+  type: "split-whitespaces-or-nonwhitespaces"
+  maxEncodeChars: number
+  maxConsecutiveSliceLen: number
+}
 
-/** FineWeb2 对拍 CLI 选项。 */
-export type FinewebCompareOptions = {
+export interface FinewebSample {
+  lineNumber: number
+  id: string | null
+  text: string
+}
+
+export interface FinewebCompareCliOptions {
   filePath: string
-  packageDir: string
   families: string[] | null
   start: number
   limit: number
@@ -17,56 +21,24 @@ export type FinewebCompareOptions = {
   checkDecode: boolean
   jobs: number
   referenceBackend: "js" | "python"
+  packageDir: string
 }
 
-/** 单条 FineWeb2 采样记录。 */
-export type FinewebSample = {
-  lineNumber: number
-  id: string | null
-  text: string
+export interface FinewebMismatch {
+  kind?: string
+  family?: string
+  lineNumber?: number
+  id?: string | null
+  inputLength?: number
+  textPreview?: string
+  firstMismatchIndex?: number
+  actualToken?: number | null
+  expectedToken?: number | null
+  actualLength?: number
+  expectedLength?: number
 }
 
-/** 采样阶段的汇总结果。 */
-export type FinewebSampleCollection = {
-  samples: FinewebSample[]
-  skippedTooLong: number
-  totalLines: number
-}
-
-/** encode 差异报告。 */
-export type EncodeMismatchReport = {
-  kind: "encode"
-  family: string
-  lineNumber: number
-  id: string | null
-  inputLength: number
-  textPreview: string
-  firstMismatchIndex: number
-  actualToken: number | null
-  expectedToken: number | null
-  actualLength: number
-  expectedLength: number
-  actualWindow: number[]
-  expectedWindow: number[]
-}
-
-/** decode 差异报告。 */
-export type DecodeMismatchReport = {
-  kind: "decode"
-  family: string
-  lineNumber: number
-  id: string | null
-  inputLength: number
-  textPreview: string
-  actualDecodedPreview: string
-  expectedDecodedPreview: string
-}
-
-/** 对拍差异联合类型。 */
-export type FinewebMismatchReport = EncodeMismatchReport | DecodeMismatchReport
-
-/** 单个 family 的对拍结果。 */
-export type FinewebFamilyCompareResult = {
+export interface FinewebCompareResult {
   ok: boolean
   family: string
   checkedSamples: number
@@ -75,68 +47,54 @@ export type FinewebFamilyCompareResult = {
   mismatchCount: number
   cacheHits: number
   cacheMisses: number
-  mismatch: FinewebMismatchReport | null
+  mismatch: FinewebMismatch | null
 }
 
-/** FineWeb2 reference 摘要缓存记录。 */
-export type FinewebReferenceCacheRecord = {
-  encodeLength: number
-  encodeHash: string
-  decodeHash: string | null
-}
-
-/** FineWeb2 reference 摘要缓存最小接口。 */
-export type FinewebReferenceCache = {
-  get(lineNumber: number): FinewebReferenceCacheRecord | null
-  set(lineNumber: number, record: FinewebReferenceCacheRecord): void
-}
-
-/** 原始 reference tokenizer 的最小 decode 形状。 */
-export type ReferenceDecoder = {
-  decode(
-    ids: number[],
-    options: {
-      skip_special_tokens: false
-      clean_up_tokenization_spaces: false
-    }
-  ): string
-}
-
-/** 解析 CLI 参数。 */
-export function parseCliArgs(argv: string[]): FinewebCompareOptions
-
-/** 收集受控 FineWeb2 样本。 */
+export function parseCliArgs(argv: string[]): FinewebCompareCliOptions
 export function collectFinewebSamples(
   filePath: string,
-  options?: Partial<Pick<FinewebCompareOptions, "start" | "limit" | "maxChars">>
-): Promise<FinewebSampleCollection>
-
-/** 对拍单个 family。 */
-export function compareFamilyAgainstSamples(input: {
+  options?: {
+    start?: number
+    limit?: number
+    maxChars?: number
+  }
+): Promise<{
+  samples: FinewebSample[]
+  skippedTooLong: number
+  totalLines: number
+}>
+export function compareFamilyAgainstSamples(options: {
   family: string
   samples: FinewebSample[]
   tokkitEncode: (input: string) => Promise<number[]> | number[]
-  referenceEncode: (input: string) => number[]
+  referenceEncode: (input: string) => Promise<number[]> | number[]
   tokkitDecode?: (ids: number[]) => Promise<string> | string
-  referenceDecode?: (ids: number[]) => string
+  referenceDecode?: (ids: number[]) => Promise<string> | string
   stopOnFirstMismatch?: boolean
-  referenceCache?: FinewebReferenceCache
-}): Promise<FinewebFamilyCompareResult>
-
-/** 调用关闭空格清理后的 reference decode。 */
-export function decodeReferenceText(reference: ReferenceDecoder, ids: number[]): string
-
-/** 基于当前支持的 family 与可选过滤项解析对拍清单。 */
+  referenceCache?: {
+    get(lineNumber: number): { encodeLength: number; encodeHash: string; decodeHash: string | null } | null
+    set(
+      lineNumber: number,
+      record: { encodeLength: number; encodeHash: string; decodeHash: string | null }
+    ): void
+  }
+}): Promise<FinewebCompareResult>
+export function decodeReferenceText(
+  reference: { decode(ids: number[], options: Record<string, unknown>): string },
+  ids: number[]
+): string
+export function encodeReferenceText(
+  reference: { encode(text: string, options: Record<string, unknown>): number[] },
+  text: string,
+  options: Record<string, unknown>,
+  longTextEncoding?: LongTextEncodingConfig | null
+): number[]
+export function normalizeReferenceAssetForJavaScript(
+  asset: Record<string, unknown>
+): Record<string, unknown>
 export function resolveFamilySpecs(
   supportedFamilies: Set<string>,
-  selectedFamilies?: Iterable<string> | null,
+  selectedFamilies?: string[] | null,
   packageDir?: string
-): Array<{
-  family: string
-  packageName: string
-  moduleName: string
-  source: string
-}>
-
-/** 执行脚本主流程。 */
-export function main(argv?: string[]): Promise<unknown>
+): Array<Record<string, unknown>>
+export function main(argv?: string[]): Promise<Record<string, unknown>>

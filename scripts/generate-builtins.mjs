@@ -43,6 +43,45 @@ export const FAMILY_SPECS = [
     source: "vendor/tokenizers/MiniMaxAI__MiniMax-Text-01-hf__tokenizer.json.br",
   },
   {
+    family: "kimi-k2",
+    packageName: "moonshotai",
+    moduleName: "kimi_k2",
+    source: "vendor/tokenizers/moonshotai__Kimi-K2-Instruct__tokenizer.json.br",
+    longTextEncoding: {
+      type: "split-whitespaces-or-nonwhitespaces",
+      maxEncodeChars: 400000,
+      maxConsecutiveSliceLen: 25000,
+    },
+  },
+  {
+    family: "kimi-k2-thinking",
+    packageName: "moonshotai",
+    moduleName: "kimi_k2_thinking",
+    source: "vendor/tokenizers/moonshotai__Kimi-K2-Thinking__tokenizer.json.br",
+    longTextEncoding: {
+      type: "split-whitespaces-or-nonwhitespaces",
+      maxEncodeChars: 400000,
+      maxConsecutiveSliceLen: 25000,
+    },
+  },
+  {
+    family: "moonlight",
+    packageName: "moonshotai",
+    moduleName: "moonlight",
+    source: "vendor/tokenizers/moonshotai__Moonlight-16B-A3B__tokenizer.json.br",
+    longTextEncoding: {
+      type: "split-whitespaces-or-nonwhitespaces",
+      maxEncodeChars: 400000,
+      maxConsecutiveSliceLen: 25000,
+    },
+  },
+  {
+    family: "kimi-dev",
+    packageName: "moonshotai",
+    moduleName: "kimi_dev",
+    source: "vendor/tokenizers/moonshotai__Kimi-Dev-72B__tokenizer.json.br",
+  },
+  {
     family: "yi",
     packageName: "01-ai",
     moduleName: "yi",
@@ -987,7 +1026,7 @@ export function generateBuiltins(options = {}) {
   for (const spec of selectedSpecs) {
     const sourcePath = resolve(projectRoot, spec.source)
     const rawTokenizer = readTokenizerSnapshot(sourcePath)
-    const packedAsset = packNormalizedAsset(rawTokenizer)
+    const packedAsset = packNormalizedAsset(rawTokenizer, spec.longTextEncoding ?? null)
     const modulePath = resolve(
       projectRoot,
       resolveOutputModulePath(spec.packageName, spec.moduleName)
@@ -1111,7 +1150,7 @@ function readTokenizerSnapshot(sourcePath) {
  * 输入：原始 tokenizer.json 对象。
  * 输出：运行时可解包的 brotli + base64 字符串。
  */
-function packNormalizedAsset(rawTokenizer) {
+function packNormalizedAsset(rawTokenizer, longTextEncoding = null) {
   const modelType = inferBpeModelType(rawTokenizer)
 
   if (modelType !== "BPE") {
@@ -1135,6 +1174,7 @@ function packNormalizedAsset(rawTokenizer) {
     n: rawTokenizer.normalizer ?? null,
     p: rawTokenizer.pre_tokenizer ?? null,
     d: rawTokenizer.decoder ?? null,
+    lt: normalizeLongTextEncoding(longTextEncoding ?? rawTokenizer.longTextEncoding ?? null),
     v: vocabById,
     mi: mergeTokenIdPairs,
     u: rawTokenizer.model.unk_token ?? null,
@@ -1153,6 +1193,23 @@ function packNormalizedAsset(rawTokenizer) {
   })
 
   return Buffer.from(compressed).toString("base64")
+}
+
+/**
+ * 规范化长文本切分配置。
+ * 输入：family spec 或原始 tokenizer 上的切分配置。
+ * 输出：packed payload 需要的紧凑对象，未配置时返回 null。
+ */
+function normalizeLongTextEncoding(longTextEncoding) {
+  if (!longTextEncoding) {
+    return null
+  }
+
+  return {
+    t: longTextEncoding.type,
+    mc: longTextEncoding.maxEncodeChars,
+    ml: longTextEncoding.maxConsecutiveSliceLen,
+  }
 }
 
 /**

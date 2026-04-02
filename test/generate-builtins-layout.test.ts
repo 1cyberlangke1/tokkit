@@ -19,6 +19,10 @@ describe("generate:builtins layout", () => {
         expect.objectContaining({ family: "minimax-m1", packageName: "minimax" }),
         expect.objectContaining({ family: "minimax-m2", packageName: "minimax" }),
         expect.objectContaining({ family: "minimax-text-01", packageName: "minimax" }),
+        expect.objectContaining({ family: "kimi-k2", packageName: "moonshotai" }),
+        expect.objectContaining({ family: "kimi-k2-thinking", packageName: "moonshotai" }),
+        expect.objectContaining({ family: "moonlight", packageName: "moonshotai" }),
+        expect.objectContaining({ family: "kimi-dev", packageName: "moonshotai" }),
         expect.objectContaining({ family: "open-calm", packageName: "cyberagent" }),
         expect.objectContaining({ family: "calm2", packageName: "cyberagent" }),
         expect.objectContaining({ family: "calm3", packageName: "cyberagent" }),
@@ -218,6 +222,12 @@ describe("generate:builtins layout", () => {
     )
     expect(module.resolveOutputModulePath("minimax", "minimax_m2")).toBe(
       "packages/minimax/src/generated/minimax_m2.ts"
+    )
+    expect(module.resolveOutputModulePath("moonshotai", "kimi_k2")).toBe(
+      "packages/moonshotai/src/generated/kimi_k2.ts"
+    )
+    expect(module.resolveOutputModulePath("moonshotai", "moonlight")).toBe(
+      "packages/moonshotai/src/generated/moonlight.ts"
     )
     expect(module.resolveOutputModulePath("tiiuae", "falcon_rw_1b")).toBe(
       "packages/tiiuae/src/generated/falcon_rw_1b.ts"

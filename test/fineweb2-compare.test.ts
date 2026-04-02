@@ -4,15 +4,19 @@
  * 输出：验证参数解析、样本收集和 mismatch 报告行为。
  */
 
-import { mkdtempSync, rmSync, writeFileSync } from "node:fs"
+import { mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs"
 import { tmpdir } from "node:os"
 import { resolve } from "node:path"
+import { brotliDecompressSync } from "node:zlib"
 import { afterEach, describe, expect, it } from "vitest"
+import { PreTrainedTokenizer } from "@huggingface/transformers"
 
 import {
   collectFinewebSamples,
   compareFamilyAgainstSamples,
   decodeReferenceText,
+  encodeReferenceText,
+  normalizeReferenceAssetForJavaScript,
   parseCliArgs,
   resolveFamilySpecs,
 } from "../scripts/fineweb2-compare.mjs"
@@ -182,6 +186,67 @@ describe("fineweb2 compare helpers", () => {
     ])
   })
 
+  it("官方 reference encode 会按长文本切分配置拆成多个子串", () => {
+    const calls: unknown[] = []
+    const reference = {
+      encode(input: string, options: Record<string, unknown>) {
+        calls.push({
+          input,
+          options,
+        })
+        return input.split("").map((character) => character.charCodeAt(0))
+      },
+    }
+
+    const encoded = encodeReferenceText(
+      reference as never,
+      "re",
+      { add_special_tokens: false },
+      {
+        type: "split-whitespaces-or-nonwhitespaces",
+        maxEncodeChars: 1,
+        maxConsecutiveSliceLen: 32,
+      }
+    )
+
+    expect(encoded).toEqual([114, 101])
+    expect(calls).toEqual([
+      {
+        input: "r",
+        options: {
+          add_special_tokens: false,
+        },
+      },
+      {
+        input: "e",
+        options: {
+          add_special_tokens: false,
+        },
+      },
+    ])
+  })
+
+  it("官方 reference encode 合并超大子数组时不会因展开运算符炸栈", () => {
+    const reference = {
+      encode() {
+        return new Array<number>(200000).fill(1)
+      },
+    }
+
+    expect(() =>
+      encodeReferenceText(
+        reference as never,
+        "re",
+        { add_special_tokens: false },
+        {
+          type: "split-whitespaces-or-nonwhitespaces",
+          maxEncodeChars: 1,
+          maxConsecutiveSliceLen: 32,
+        }
+      )
+    ).not.toThrow()
+  })
+
   it("允许继续扫描后续样本并累计 mismatch 数量", async () => {
     const result = await compareFamilyAgainstSamples({
       family: "toy-family",
@@ -272,5 +337,27 @@ describe("fineweb2 compare helpers", () => {
     expect(second.cacheHits).toBe(1)
     expect(second.cacheMisses).toBe(0)
     expect(referenceCalls).toBe(1)
+  })
+
+  it("会把 Moonshot 的脚本属性与字符类交集 regex 归一化成 JS 可加载的参考资产", () => {
+    const compressed = readFileSync(
+      resolve(process.cwd(), "vendor/tokenizers/moonshotai__Kimi-K2-Instruct__tokenizer.json.br")
+    )
+    const asset = normalizeReferenceAssetForJavaScript(
+      JSON.parse(brotliDecompressSync(compressed).toString("utf8"))
+    )
+
+    expect(() => {
+      new PreTrainedTokenizer(
+        {
+          ...asset,
+          normalizer: asset.normalizer ?? null,
+          pre_tokenizer: asset.pre_tokenizer ?? null,
+          post_processor: asset.post_processor ?? null,
+          decoder: asset.decoder ?? null,
+        },
+        {}
+      )
+    }).not.toThrow()
   })
 })

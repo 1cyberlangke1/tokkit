@@ -19,6 +19,11 @@ describe("packed tokenizer assets", () => {
     expect(asset.normalizer).toBeNull()
     expect(asset.preTokenizer).toBeNull()
     expect(asset.decoder).toBeNull()
+    expect(asset.longTextEncoding).toEqual({
+      type: "split-whitespaces-or-nonwhitespaces",
+      maxEncodeChars: 400000,
+      maxConsecutiveSliceLen: 25000,
+    })
     expect(asset.model.vocabById).toEqual(["a", "b", "ab"])
     expect(asset.model.mergeTokenIdPairs).toEqual([0, 1])
   })
@@ -43,6 +48,11 @@ function createPackedFixture(): string {
     n: null,
     p: null,
     d: null,
+    lt: {
+      t: "split-whitespaces-or-nonwhitespaces",
+      mc: 400000,
+      ml: 25000,
+    },
     v: ["a", "b", "ab"],
     mi: [0, 1],
     u: null,

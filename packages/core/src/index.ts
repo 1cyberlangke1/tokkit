@@ -16,6 +16,10 @@ import {
 } from "./registry/store.js"
 import { Tokenizer } from "./core/tokenizer.js"
 import { unpackPackedAsset } from "./data/packed.js"
+import {
+  convertTikTokenToTokenizerAsset,
+  DEFAULT_TIKTOKEN_PATTERN,
+} from "./hf/convert-tiktoken.js"
 import type { DecodeOptions, EncodeOptions, TokenizerFamilyDefinition } from "./types.js"
 
 export type {
@@ -23,6 +27,7 @@ export type {
   BpeModelConfig,
   DecodeOptions,
   EncodeOptions,
+  LongTextEncodingConfig,
   NormalizedBpeModelConfig,
   NormalizedTokenizerAsset,
   TokenizerAsset,
@@ -30,7 +35,7 @@ export type {
   TokenizerFamilyDefinition,
 } from "./types.js"
 
-export { Tokenizer, unpackPackedAsset }
+export { Tokenizer, unpackPackedAsset, convertTikTokenToTokenizerAsset, DEFAULT_TIKTOKEN_PATTERN }
 
 /**
  * 根据 family 或别名获取 Tokenizer。

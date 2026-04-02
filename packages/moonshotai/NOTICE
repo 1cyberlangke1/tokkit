@@ -1,0 +1,13 @@
+Qwen is licensed under the Qwen LICENSE AGREEMENT, Copyright (c) Alibaba Cloud. All Rights Reserved.
+
+This NOTICE is included because moonshotai/Kimi-Dev-72B states it is subject to
+the Qwen LICENSE AGREEMENT.
+
+The upstream moonshotai/Kimi-K2-* repositories also publish THIRD_PARTY_NOTICES.md
+referencing copied DeepSeek-V3 modeling code under MIT. This package
+redistributes tokenizer assets only, but the upstream attribution is reproduced
+here for completeness:
+
+DeepSeek-V3
+Copyright (c) 2023 DeepSeek
+Source repository: https://huggingface.co/deepseek-ai/DeepSeek-V3

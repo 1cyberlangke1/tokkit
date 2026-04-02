@@ -50,6 +50,13 @@ const EXPECTED_PACKAGES = [
     requiredFiles: ["COPYRIGHT", "LICENSE", "NOTICE"],
   },
   {
+    directory: "moonshotai",
+    packageName: "@cyberlangke/tokkit-moonshotai",
+    license: "SEE LICENSE IN LICENSE",
+    includedInAll: false,
+    requiredFiles: ["COPYRIGHT", "LICENSE", "NOTICE"],
+  },
+  {
     directory: "tiiuae",
     packageName: "@cyberlangke/tokkit-tiiuae",
     license: "Apache-2.0",
