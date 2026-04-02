@@ -42,6 +42,7 @@
     "@cyberlangke/tokkit-core": "1.11.0",
     "@cyberlangke/tokkit-deepseek": "1.11.0",
     "@cyberlangke/tokkit-distilbert": "1.11.0",
+    "@cyberlangke/tokkit-dream-org": "1.11.0",
     "@cyberlangke/tokkit-eleutherai": "1.11.0",
     "@cyberlangke/tokkit-glm": "1.11.0",
     "@cyberlangke/tokkit-huggingface-tb": "1.11.0",

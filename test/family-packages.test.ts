@@ -48,6 +48,17 @@ const VENDOR_PACKAGE_CASES = [
     ],
   },
   {
+    relativePath: "packages/dream-org/src/index.ts",
+    expectedFamilies: ["dream-v0", "dreamon-v0"],
+    expectedModels: [
+      "Dream-org/Dream-v0-Base-7B",
+      "Dream-org/Dream-v0-Instruct-7B",
+      "Dream-org/Dream-Coder-v0-Base-7B",
+      "Dream-org/Dream-Coder-v0-Instruct-7B",
+      "Dream-org/DreamOn-v0-7B",
+    ],
+  },
+  {
     relativePath: "packages/01-ai/src/index.ts",
     expectedFamilies: ["yi", "yi-1.5-9b-chat", "yi-coder", "yi-coder-chat"],
     expectedModels: [
@@ -753,6 +764,8 @@ const EXPECTED_ALL_FAMILIES = [
   "yi-1.5-9b-chat",
   "yi-coder",
   "yi-coder-chat",
+  "dream-v0",
+  "dreamon-v0",
   "devstral-small-2",
   "devstral-small-2505",
   "deepseek-r1",

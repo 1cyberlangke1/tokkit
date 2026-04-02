@@ -1,0 +1,10 @@
+Copyright (c) 2026 cyberlangke
+
+This package bundles tokenizer assets derived from official Hugging Face repositories under the Dream-org organization:
+- Dream-org/Dream-v0-Base-7B vocab.json, merges.txt, added_tokens.json, tokenizer_config.json, special_tokens_map.json
+- Dream-org/Dream-v0-Instruct-7B tokenizer_config.json (same tokenizer family as Dream-v0-Base-7B)
+- Dream-org/Dream-Coder-v0-Base-7B tokenizer_config.json (same tokenizer family as Dream-v0-Base-7B)
+- Dream-org/Dream-Coder-v0-Instruct-7B tokenizer_config.json (same tokenizer family as Dream-v0-Base-7B)
+- Dream-org/DreamOn-v0-7B vocab.json, merges.txt, added_tokens.json, tokenizer_config.json, special_tokens_map.json
+
+See LICENSE for the full license text that applies to this package and its bundled assets.

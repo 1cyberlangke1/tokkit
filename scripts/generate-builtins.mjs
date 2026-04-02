@@ -82,6 +82,18 @@ export const FAMILY_SPECS = [
     source: "vendor/tokenizers/moonshotai__Kimi-Dev-72B__tokenizer.json.br",
   },
   {
+    family: "dream-v0",
+    packageName: "dream-org",
+    moduleName: "dream_v0",
+    source: "vendor/tokenizers/Dream-org__Dream-v0-Base-7B__tokenizer.json.br",
+  },
+  {
+    family: "dreamon-v0",
+    packageName: "dream-org",
+    moduleName: "dreamon_v0",
+    source: "vendor/tokenizers/Dream-org__DreamOn-v0-7B__tokenizer.json.br",
+  },
+  {
     family: "yi",
     packageName: "01-ai",
     moduleName: "yi",

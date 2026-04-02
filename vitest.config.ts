@@ -24,6 +24,9 @@ export default defineConfig({
       "@cyberlangke/tokkit-moonshotai": fileURLToPath(
         new URL("./packages/moonshotai/src/index.ts", import.meta.url)
       ),
+      "@cyberlangke/tokkit-dream-org": fileURLToPath(
+        new URL("./packages/dream-org/src/index.ts", import.meta.url)
+      ),
       "@cyberlangke/tokkit-tiiuae": fileURLToPath(
         new URL("./packages/tiiuae/src/index.ts", import.meta.url)
       ),
