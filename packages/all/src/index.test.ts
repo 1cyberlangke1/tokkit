@@ -258,6 +258,18 @@ const BUILTIN_ALIAS_CASE_GROUPS = [
         canonical: "trinity-large-thinking",
         aliases: ["arcee-ai/Trinity-Large-Thinking"],
       },
+      {
+        canonical: "mamba-130m",
+        aliases: ["state-spaces/mamba-130m-hf", "state-spaces/mamba-370m-hf"],
+      },
+      {
+        canonical: "mamba-790m",
+        aliases: [
+          "state-spaces/mamba-790m-hf",
+          "state-spaces/mamba-1.4b-hf",
+          "state-spaces/mamba-2.8b-hf",
+        ],
+      },
     ],
   },
   {
@@ -955,6 +967,8 @@ describe("builtin tokenizer families", () => {
           "trinity-large-truebase",
           "trinity-large",
           "trinity-large-thinking",
+          "mamba-130m",
+          "mamba-790m",
           "longcat-flash-chat",
           "longcat-flash-lite",
           "longcat-flash-thinking",

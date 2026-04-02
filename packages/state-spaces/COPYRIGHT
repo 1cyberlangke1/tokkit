@@ -1,0 +1,10 @@
+Copyright (c) 2026 cyberlangke
+
+This package bundles tokenizer assets derived from official Hugging Face repositories under the state-spaces organization:
+- state-spaces/mamba-130m-hf tokenizer.json
+- state-spaces/mamba-370m-hf tokenizer.json (same tokenizer family as mamba-130m-hf)
+- state-spaces/mamba-790m-hf tokenizer.json
+- state-spaces/mamba-1.4b-hf tokenizer.json (same tokenizer family as mamba-790m-hf)
+- state-spaces/mamba-2.8b-hf tokenizer.json (same tokenizer family as mamba-790m-hf)
+
+See LICENSE for the full license text that applies to this package and its bundled assets.

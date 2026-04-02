@@ -608,6 +608,17 @@ const VENDOR_PACKAGE_CASES = [
     ],
   },
   {
+    relativePath: "packages/state-spaces/src/index.ts",
+    expectedFamilies: ["mamba-130m", "mamba-790m"],
+    expectedModels: [
+      "state-spaces/mamba-130m-hf",
+      "state-spaces/mamba-370m-hf",
+      "state-spaces/mamba-790m-hf",
+      "state-spaces/mamba-1.4b-hf",
+      "state-spaces/mamba-2.8b-hf",
+    ],
+  },
+  {
     relativePath: "packages/tinyllama/src/index.ts",
     expectedFamilies: ["danube"],
     expectedModels: [
@@ -770,6 +781,8 @@ const EXPECTED_ALL_FAMILIES = [
   "leanstral-2603",
   "molm",
   "powerlm",
+  "mamba-130m",
+  "mamba-790m",
   "longcat-flash-chat",
   "longcat-flash-lite",
   "longcat-flash-thinking",

@@ -96,6 +96,9 @@
   - `trinity-large-truebase`
   - `trinity-large`
   - `trinity-large-thinking`
+- `@cyberlangke/tokkit-state-spaces`
+  - `mamba-130m`
+  - `mamba-790m`
 - `@cyberlangke/tokkit-tinyllama`
   - alias-only package，复用 `danube`
 - `@cyberlangke/tokkit-nanbeige`

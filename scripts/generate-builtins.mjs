@@ -835,6 +835,18 @@ export const FAMILY_SPECS = [
     source: "vendor/tokenizers/arcee-ai__Trinity-Large-Thinking__tokenizer.json.br",
   },
   {
+    family: "mamba-130m",
+    packageName: "state-spaces",
+    moduleName: "mamba_130m",
+    source: "vendor/tokenizers/state-spaces__mamba-130m-hf__tokenizer.json.br",
+  },
+  {
+    family: "mamba-790m",
+    packageName: "state-spaces",
+    moduleName: "mamba_790m",
+    source: "vendor/tokenizers/state-spaces__mamba-790m-hf__tokenizer.json.br",
+  },
+  {
     family: "zamba-7b-v1",
     packageName: "zyphra",
     moduleName: "zamba_7b_v1",
