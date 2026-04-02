@@ -47,5 +47,6 @@ describe("publish workflow", () => {
     expect(workflow).toContain("npm whoami")
     expect(workflow).not.toContain("<<'EOF'")
     expect(workflow).toContain("publish: npm run release:ci")
+    expect(workflow).toContain("FORCE_JAVASCRIPT_ACTIONS_TO_NODE24")
   })
 })
