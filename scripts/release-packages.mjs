@@ -239,19 +239,18 @@ export function sortPackagesForPublish(packages) {
 }
 
 export async function resolveChangedWorkspaceDirs({
+  baseSha = process.env.RELEASE_BASE_SHA ?? null,
+  headSha = process.env.RELEASE_HEAD_SHA ?? process.env.GITHUB_SHA ?? null,
   eventPath = process.env.GITHUB_EVENT_PATH,
   runGit = runCommand,
 } = {}) {
-  let baseSha = null
-  let headSha = process.env.GITHUB_SHA ?? null
-
-  if (eventPath && existsSync(eventPath)) {
+  if ((!baseSha || !headSha) && eventPath && existsSync(eventPath)) {
     try {
       const event = JSON.parse(readFileSync(eventPath, "utf8"))
-      if (typeof event.before === "string" && event.before && !/^0+$/.test(event.before)) {
+      if (!baseSha && typeof event.before === "string" && event.before && !/^0+$/.test(event.before)) {
         baseSha = event.before
       }
-      if (typeof event.after === "string" && event.after) {
+      if (!headSha && typeof event.after === "string" && event.after) {
         headSha = event.after
       }
     } catch {

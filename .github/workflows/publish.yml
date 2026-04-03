@@ -6,6 +6,11 @@ on:
     branches:
       - "main"
   workflow_dispatch:
+    inputs:
+      base_sha:
+        description: Optional base commit SHA used to compute the publish diff window
+        required: false
+        type: string
 
 concurrency:
   group: release-packages-${{ github.ref }}
@@ -65,3 +70,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          RELEASE_BASE_SHA: ${{ github.event.inputs.base_sha }}

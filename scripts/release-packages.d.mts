@@ -52,6 +52,8 @@ export function loadWorkspacePackages(rootDir?: string): WorkspacePackage[]
 export function sortPackagesForPublish(packages: WorkspacePackage[]): WorkspacePackage[]
 
 export function resolveChangedWorkspaceDirs(options?: {
+  baseSha?: string | null
+  headSha?: string | null
   eventPath?: string
   runGit?: RunCommand
 }): Promise<string[]>

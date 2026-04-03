@@ -6,6 +6,7 @@ import {
   isRateLimitedPublishError,
   mapChangedFilesToWorkspaceDirs,
   publishWorkspacePackage,
+  resolveChangedWorkspaceDirs,
   sortPackagesForPublish,
 } from "../scripts/release-packages.mjs"
 
@@ -55,6 +56,29 @@ describe("release-packages", () => {
         "test/workspace.test.ts",
       ]),
     ).toEqual(["all", "baidu"])
+  })
+
+  it("允许显式指定 diff 范围来解析变更 workspace", async () => {
+    const runGit = vi.fn().mockResolvedValue({
+      code: 0,
+      output: ["README.md", "packages/baidu/src/index.ts", "packages/all/src/index.ts"].join("\n"),
+    })
+
+    await expect(
+      resolveChangedWorkspaceDirs({
+        baseSha: "base-sha",
+        headSha: "head-sha",
+        eventPath: "tmp/missing-event.json",
+        runGit,
+      }),
+    ).resolves.toEqual(["all", "baidu"])
+
+    expect(runGit).toHaveBeenCalledTimes(1)
+    expect(runGit).toHaveBeenCalledWith(
+      expect.stringMatching(/git(?:\.exe)?$/),
+      ["diff", "--name-only", "base-sha..head-sha"],
+      { quiet: true },
+    )
   })
 
   it("按内部依赖顺序发布 workspace 包", () => {
