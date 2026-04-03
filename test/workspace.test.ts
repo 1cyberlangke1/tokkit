@@ -133,6 +133,13 @@ const EXPECTED_PACKAGES = [
     requiredFiles: ["COPYRIGHT", "LICENSE"],
   },
   {
+    directory: "aidc-ai",
+    packageName: "@cyberlangke/tokkit-aidc-ai",
+    license: "Apache-2.0",
+    includedInAll: true,
+    requiredFiles: ["COPYRIGHT", "LICENSE"],
+  },
+  {
     directory: "tiiuae",
     packageName: "@cyberlangke/tokkit-tiiuae",
     license: "Apache-2.0",
@@ -542,6 +549,17 @@ describe("workspace layout", () => {
 
     expect(packageJson.scripts?.build).toBe(
       "npm run build --workspace @cyberlangke/tokkit-core && npm run build --workspace @cyberlangke/tokkit-microsoft && tsup"
+    )
+  })
+
+  it("aidc-ai 包构建前会先生成依赖子包的类型产物", () => {
+    const packageJsonPath = resolve(REPO_ROOT, "packages", "aidc-ai", "package.json")
+    const packageJson = JSON.parse(readFileSync(packageJsonPath, "utf8")) as {
+      scripts?: Record<string, string>
+    }
+
+    expect(packageJson.scripts?.build).toBe(
+      "npm run build --workspace @cyberlangke/tokkit-core && npm run build --workspace @cyberlangke/tokkit-qwen && tsup"
     )
   })
 

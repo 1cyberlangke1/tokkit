@@ -66,7 +66,7 @@ const BUILTIN_ALIAS_CASE_GROUPS = [
       },
       {
         canonical: "qwen2",
-        aliases: ["Qwen/Qwen2-7B", "Qwen/Qwen2-7B-Instruct"],
+        aliases: ["Qwen/Qwen2-7B", "Qwen/Qwen2-7B-Instruct", "AIDC-AI/Marco-LLM-ES"],
       },
       {
         canonical: "qwen2.5",
@@ -80,6 +80,13 @@ const BUILTIN_ALIAS_CASE_GROUPS = [
           "abeja/ABEJA-Qwen2.5-7b-Japanese-v0.1",
           "abeja/ABEJA-QwQ32b-Reasoning-Japanese-v1.0",
           "inclusionAI/GroveMoE-Base",
+          "AIDC-AI/Marco-Nano-Instruct",
+          "AIDC-AI/Marco-Mini-Global-Base",
+          "AIDC-AI/Marco-Mini-Base",
+          "AIDC-AI/Marco-Nano-Base",
+          "AIDC-AI/Marco-LLM-SEA",
+          "AIDC-AI/Marco-LLM-AR-V4",
+          "AIDC-AI/Marco-LLM-AR-V2",
         ],
       },
       {
@@ -242,6 +249,10 @@ const BUILTIN_ALIAS_CASE_GROUPS = [
       {
         canonical: "salamandra-instruct",
         aliases: ["BSC-LT/salamandra-2b-instruct", "BSC-LT/salamandra-7b-instruct"],
+      },
+      {
+        canonical: "marco-o1",
+        aliases: ["marco_o1", "AIDC-AI/Marco-o1"],
       },
       {
         canonical: "codegen",
@@ -1167,6 +1178,7 @@ describe("builtin tokenizer families", () => {
           "mimo-v2-flash",
           "salamandra",
           "salamandra-instruct",
+          "marco-o1",
           "mathstral-7b",
           "mamba-codestral-7b",
           "decicoder-1b",
@@ -1312,6 +1324,15 @@ describe("builtin tokenizer families", () => {
           "BSC-LT/salamandra-7b-instruct",
           "BSC-LT/ALIA-40b",
           "BSC-LT/ALIA-40b-instruct-2601",
+          "AIDC-AI/Marco-Nano-Instruct",
+          "AIDC-AI/Marco-Mini-Global-Base",
+          "AIDC-AI/Marco-Mini-Base",
+          "AIDC-AI/Marco-Nano-Base",
+          "AIDC-AI/Marco-LLM-SEA",
+          "AIDC-AI/Marco-LLM-AR-V4",
+          "AIDC-AI/Marco-LLM-AR-V2",
+          "AIDC-AI/Marco-LLM-ES",
+          "AIDC-AI/Marco-o1",
           "microsoft/NextCoder-7B",
           "microsoft/NextCoder-14B",
           "microsoft/NextCoder-32B",

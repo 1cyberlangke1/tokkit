@@ -1,0 +1,17 @@
+Copyright (c) 2026 cyberlangke
+
+This package bundles tokenizer assets derived from official Hugging Face repositories under the AIDC-AI organization:
+- AIDC-AI/Marco-o1 tokenizer.json
+
+This package also registers the following official AIDC-AI models after verifying
+that their tokenizer.json files are identical to already-supported qwen families:
+- AIDC-AI/Marco-Nano-Instruct
+- AIDC-AI/Marco-Mini-Global-Base
+- AIDC-AI/Marco-Mini-Base
+- AIDC-AI/Marco-Nano-Base
+- AIDC-AI/Marco-LLM-SEA
+- AIDC-AI/Marco-LLM-AR-V4
+- AIDC-AI/Marco-LLM-AR-V2
+- AIDC-AI/Marco-LLM-ES
+
+See LICENSE for the full license text that applies to this package and its bundled assets.

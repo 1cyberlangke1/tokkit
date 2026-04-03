@@ -304,6 +304,12 @@ export const FAMILY_SPECS = [
     source: "vendor/tokenizers/BSC-LT__salamandra-7b-instruct__tokenizer.json.br",
   },
   {
+    family: "marco-o1",
+    packageName: "aidc-ai",
+    moduleName: "marco_o1",
+    source: "vendor/tokenizers/AIDC-AI__Marco-o1__tokenizer.json.br",
+  },
+  {
     family: "nextcoder",
     packageName: "microsoft",
     moduleName: "nextcoder",

@@ -190,6 +190,23 @@ const VENDOR_PACKAGE_CASES = [
     ],
   },
   {
+    relativePath: "packages/aidc-ai/src/index.ts",
+    expectedFamilies: ["marco-o1", "qwen2", "qwen2.5"],
+    expectedModels: [
+      "Qwen/Qwen2-7B-Instruct",
+      "Qwen/Qwen2.5-32B-Instruct",
+      "AIDC-AI/Marco-Nano-Instruct",
+      "AIDC-AI/Marco-Mini-Global-Base",
+      "AIDC-AI/Marco-Mini-Base",
+      "AIDC-AI/Marco-Nano-Base",
+      "AIDC-AI/Marco-LLM-SEA",
+      "AIDC-AI/Marco-LLM-AR-V4",
+      "AIDC-AI/Marco-LLM-AR-V2",
+      "AIDC-AI/Marco-LLM-ES",
+      "AIDC-AI/Marco-o1",
+    ],
+  },
+  {
     relativePath: "packages/01-ai/src/index.ts",
     expectedFamilies: ["yi", "yi-1.5-9b-chat", "yi-coder", "yi-coder-chat"],
     expectedModels: [
@@ -1012,6 +1029,7 @@ const EXPECTED_ALL_FAMILIES = [
   "decicoder-1b",
   "salamandra",
   "salamandra-instruct",
+  "marco-o1",
   "mathstral-7b",
   "mamba-codestral-7b",
   "magistral-small-2507",

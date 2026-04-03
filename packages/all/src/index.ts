@@ -17,6 +17,7 @@ import { registerBuiltins as registerPrimeIntellectBuiltins } from "@cyberlangke
 import { registerBuiltins as registerLightOnAIBuiltins } from "@cyberlangke/tokkit-lightonai"
 import { registerBuiltins as registerDeciBuiltins } from "@cyberlangke/tokkit-deci"
 import { registerBuiltins as registerBSCLTBuiltins } from "@cyberlangke/tokkit-bsc-lt"
+import { registerBuiltins as registerAIDCAIBuiltins } from "@cyberlangke/tokkit-aidc-ai"
 import { registerBuiltins as register01AIBuiltins } from "@cyberlangke/tokkit-01-ai"
 import { registerBuiltins as registerABEJABuiltins } from "@cyberlangke/tokkit-abeja"
 import { registerBuiltins as registerTiiuaeBuiltins } from "@cyberlangke/tokkit-tiiuae"
@@ -76,6 +77,7 @@ export function registerBuiltins(): void {
   registerLightOnAIBuiltins()
   registerDeciBuiltins()
   registerBSCLTBuiltins()
+  registerAIDCAIBuiltins()
   register01AIBuiltins()
   registerABEJABuiltins()
   registerTiiuaeBuiltins()
