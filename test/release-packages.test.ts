@@ -92,7 +92,7 @@ describe("release-packages", () => {
 🦋  error packages failed to publish:
 🦋  @cyberlangke/tokkit-swiss-ai@1.11.0
 `
-    const sleepCalls = []
+    const sleepCalls: number[] = []
     const runNpm = vi
       .fn()
       .mockResolvedValueOnce({ code: 1, output: limitedOutput })
@@ -109,7 +109,7 @@ describe("release-packages", () => {
         runNpm,
         rateLimitAttempts: 3,
         rateLimitDelayMs: 1234,
-        sleep: async (ms) => {
+        sleep: async (ms: number) => {
           sleepCalls.push(ms)
         },
       },
