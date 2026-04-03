@@ -286,6 +286,12 @@ export const FAMILY_SPECS = [
     source: "vendor/tokenizers/lightonai__alfred-40b-1023__tokenizer.json.br",
   },
   {
+    family: "decicoder-1b",
+    packageName: "deci",
+    moduleName: "decicoder_1b",
+    source: "vendor/tokenizers/Deci__DeciCoder-1b__tokenizer.json.br",
+  },
+  {
     family: "nextcoder",
     packageName: "microsoft",
     moduleName: "nextcoder",

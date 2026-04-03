@@ -168,6 +168,16 @@ const VENDOR_PACKAGE_CASES = [
     ],
   },
   {
+    relativePath: "packages/deci/src/index.ts",
+    expectedFamilies: ["decicoder-1b", "mistral-7b-v0.1"],
+    expectedModels: [
+      "mistralai/Mistral-7B-v0.1",
+      "Deci/DeciCoder-1b",
+      "Deci/DeciLM-7B",
+      "Deci/DeciLM-7B-instruct",
+    ],
+  },
+  {
     relativePath: "packages/01-ai/src/index.ts",
     expectedFamilies: ["yi", "yi-1.5-9b-chat", "yi-coder", "yi-coder-chat"],
     expectedModels: [
@@ -987,6 +997,7 @@ const EXPECTED_ALL_FAMILIES = [
   "mimo",
   "mimo-7b-rl-0530",
   "mimo-v2-flash",
+  "decicoder-1b",
   "mathstral-7b",
   "mamba-codestral-7b",
   "magistral-small-2507",

@@ -1,0 +1,10 @@
+Copyright (c) 2026 cyberlangke
+
+This package bundles tokenizer assets derived from official Hugging Face repositories under the Deci organization:
+- Deci/DeciCoder-1b tokenizer.json
+
+This package also registers the following official Deci models as aliases of the existing `mistral-7b-v0.1` family provided by `@cyberlangke/tokkit-mistral`:
+- Deci/DeciLM-7B
+- Deci/DeciLM-7B-instruct
+
+See LICENSE for the full license text that applies to this package and its bundled assets.

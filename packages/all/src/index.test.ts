@@ -163,6 +163,8 @@ const BUILTIN_ALIAS_CASE_GROUPS = [
         aliases: [
           "stabilityai/japanese-stablelm-base-gamma-7b",
           "stabilityai/japanese-stablelm-instruct-gamma-7b",
+          "Deci/DeciLM-7B",
+          "Deci/DeciLM-7B-instruct",
         ],
       },
       {
@@ -223,6 +225,10 @@ const BUILTIN_ALIAS_CASE_GROUPS = [
       {
         canonical: "alfred-40b-1023",
         aliases: ["lightonai/alfred-40b-1023"],
+      },
+      {
+        canonical: "decicoder-1b",
+        aliases: ["Deci/DeciCoder-1b"],
       },
       {
         canonical: "codegen",
@@ -1148,6 +1154,7 @@ describe("builtin tokenizer families", () => {
           "mimo-v2-flash",
           "mathstral-7b",
           "mamba-codestral-7b",
+          "decicoder-1b",
           "magistral-small-2507",
           "ministral-3",
           "mistral-7b-v0.1",
@@ -1281,6 +1288,9 @@ describe("builtin tokenizer families", () => {
           "lightonai/pagnol-medium",
           "lightonai/pagnol-large",
           "lightonai/pagnol-xl",
+          "Deci/DeciCoder-1b",
+          "Deci/DeciLM-7B",
+          "Deci/DeciLM-7B-instruct",
           "microsoft/NextCoder-7B",
           "microsoft/NextCoder-14B",
           "microsoft/NextCoder-32B",

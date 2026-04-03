@@ -119,6 +119,13 @@ const EXPECTED_PACKAGES = [
     requiredFiles: ["COPYRIGHT", "LICENSE"],
   },
   {
+    directory: "deci",
+    packageName: "@cyberlangke/tokkit-deci",
+    license: "Apache-2.0",
+    includedInAll: true,
+    requiredFiles: ["COPYRIGHT", "LICENSE"],
+  },
+  {
     directory: "tiiuae",
     packageName: "@cyberlangke/tokkit-tiiuae",
     license: "Apache-2.0",
@@ -539,6 +546,17 @@ describe("workspace layout", () => {
 
     expect(packageJson.scripts?.build).toBe(
       "npm run build --workspace @cyberlangke/tokkit-core && npm run build --workspace @cyberlangke/tokkit-tiiuae && tsup"
+    )
+  })
+
+  it("deci 包构建前会先生成依赖子包的类型产物", () => {
+    const packageJsonPath = resolve(REPO_ROOT, "packages", "deci", "package.json")
+    const packageJson = JSON.parse(readFileSync(packageJsonPath, "utf8")) as {
+      scripts?: Record<string, string>
+    }
+
+    expect(packageJson.scripts?.build).toBe(
+      "npm run build --workspace @cyberlangke/tokkit-core && npm run build --workspace @cyberlangke/tokkit-mistral && tsup"
     )
   })
 

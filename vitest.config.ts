@@ -45,6 +45,9 @@ export default defineConfig({
       "@cyberlangke/tokkit-lightonai": fileURLToPath(
         new URL("./packages/lightonai/src/index.ts", import.meta.url)
       ),
+      "@cyberlangke/tokkit-deci": fileURLToPath(
+        new URL("./packages/deci/src/index.ts", import.meta.url)
+      ),
       "@cyberlangke/tokkit-sarvamai": fileURLToPath(
         new URL("./packages/sarvamai/src/index.ts", import.meta.url)
       ),

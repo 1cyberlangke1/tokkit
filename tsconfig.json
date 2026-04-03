@@ -26,6 +26,7 @@
       "@cyberlangke/tokkit-stabilityai": ["packages/stabilityai/src/index.ts"],
       "@cyberlangke/tokkit-primeintellect": ["packages/primeintellect/src/index.ts"],
       "@cyberlangke/tokkit-lightonai": ["packages/lightonai/src/index.ts"],
+      "@cyberlangke/tokkit-deci": ["packages/deci/src/index.ts"],
       "@cyberlangke/tokkit-tiiuae": ["packages/tiiuae/src/index.ts"],
       "@cyberlangke/tokkit-eleutherai": ["packages/eleutherai/src/index.ts"],
       "@cyberlangke/tokkit-meituan-longcat": ["packages/meituan-longcat/src/index.ts"],
