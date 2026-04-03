@@ -1,0 +1,13 @@
+Copyright (c) 2026 cyberlangke
+
+This package bundles tokenizer assets derived from official Hugging Face repositories under the LLM360 organization:
+- LLM360/Amber tokenizer.json (same tokenizer family as Snowflake/snowflake-arctic-base)
+- LLM360/AmberChat tokenizer.json (same tokenizer family as Snowflake/snowflake-arctic-base)
+- LLM360/Crystal tokenizer.json
+- LLM360/CrystalChat tokenizer.json (same tokenizer family as LLM360/Crystal)
+- LLM360/K2 tokenizer.json
+- LLM360/K2-Chat tokenizer.json
+- LLM360/K2-Think tokenizer.json (same tokenizer family as XiaomiMiMo/MiMo-7B-RL-0530)
+- LLM360/K2-Think-V2 tokenizer.json
+
+See LICENSE for the full license text that applies to this package and its bundled assets.

@@ -21,6 +21,7 @@
       "@cyberlangke/tokkit-utter-project": ["packages/utter-project/src/index.ts"],
       "@cyberlangke/tokkit-mosaicml": ["packages/mosaicml/src/index.ts"],
       "@cyberlangke/tokkit-ai21labs": ["packages/ai21labs/src/index.ts"],
+      "@cyberlangke/tokkit-llm360": ["packages/llm360/src/index.ts"],
       "@cyberlangke/tokkit-sarvamai": ["packages/sarvamai/src/index.ts"],
       "@cyberlangke/tokkit-stabilityai": ["packages/stabilityai/src/index.ts"],
       "@cyberlangke/tokkit-tiiuae": ["packages/tiiuae/src/index.ts"],

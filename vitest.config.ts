@@ -36,6 +36,9 @@ export default defineConfig({
       "@cyberlangke/tokkit-ai21labs": fileURLToPath(
         new URL("./packages/ai21labs/src/index.ts", import.meta.url)
       ),
+      "@cyberlangke/tokkit-llm360": fileURLToPath(
+        new URL("./packages/llm360/src/index.ts", import.meta.url)
+      ),
       "@cyberlangke/tokkit-sarvamai": fileURLToPath(
         new URL("./packages/sarvamai/src/index.ts", import.meta.url)
       ),

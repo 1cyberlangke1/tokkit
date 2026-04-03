@@ -123,6 +123,29 @@ const VENDOR_PACKAGE_CASES = [
     ],
   },
   {
+    relativePath: "packages/llm360/src/index.ts",
+    expectedFamilies: [
+      "crystal",
+      "k2",
+      "k2-chat",
+      "k2-think-v2",
+      "mimo-7b-rl-0530",
+      "snowflake-arctic-base",
+    ],
+    expectedModels: [
+      "Snowflake/snowflake-arctic-base",
+      "XiaomiMiMo/MiMo-7B-RL-0530",
+      "LLM360/Amber",
+      "LLM360/AmberChat",
+      "LLM360/Crystal",
+      "LLM360/CrystalChat",
+      "LLM360/K2",
+      "LLM360/K2-Chat",
+      "LLM360/K2-Think",
+      "LLM360/K2-Think-V2",
+    ],
+  },
+  {
     relativePath: "packages/01-ai/src/index.ts",
     expectedFamilies: ["yi", "yi-1.5-9b-chat", "yi-coder", "yi-coder-chat"],
     expectedModels: [
@@ -826,6 +849,10 @@ const VENDOR_PACKAGE_CASES = [
 const EXPECTED_ALL_FAMILIES = [
   "jamba-v0.1",
   "jamba2",
+  "crystal",
+  "k2",
+  "k2-chat",
+  "k2-think-v2",
   "sarvam-30b",
   "sarvam-m",
   "yi",

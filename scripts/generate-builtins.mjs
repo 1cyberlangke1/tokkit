@@ -142,6 +142,30 @@ export const FAMILY_SPECS = [
     source: "vendor/tokenizers/sarvamai__sarvam-m__tokenizer.json.br",
   },
   {
+    family: "crystal",
+    packageName: "llm360",
+    moduleName: "crystal",
+    source: "vendor/tokenizers/LLM360__Crystal__tokenizer.json.br",
+  },
+  {
+    family: "k2",
+    packageName: "llm360",
+    moduleName: "k2",
+    source: "vendor/tokenizers/LLM360__K2__tokenizer.json.br",
+  },
+  {
+    family: "k2-chat",
+    packageName: "llm360",
+    moduleName: "k2_chat",
+    source: "vendor/tokenizers/LLM360__K2-Chat__tokenizer.json.br",
+  },
+  {
+    family: "k2-think-v2",
+    packageName: "llm360",
+    moduleName: "k2_think_v2",
+    source: "vendor/tokenizers/LLM360__K2-Think-V2__tokenizer.json.br",
+  },
+  {
     family: "yi",
     packageName: "01-ai",
     moduleName: "yi",

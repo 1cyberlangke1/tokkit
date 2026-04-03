@@ -27,6 +27,7 @@
     "@cyberlangke/tokkit-allenai": "1.11.0",
     "@cyberlangke/tokkit-ai21labs": "1.11.0",
     "@cyberlangke/tokkit-ai-sage": "1.11.0",
+    "@cyberlangke/tokkit-llm360": "1.11.0",
     "@cyberlangke/tokkit-sarvamai": "1.11.0",
     "@cyberlangke/tokkit-stabilityai": "1.11.0",
     "@cyberlangke/tokkit-essentialai": "1.11.0",

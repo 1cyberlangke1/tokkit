@@ -181,6 +181,30 @@ const BUILTIN_ALIAS_CASE_GROUPS = [
         aliases: ["sarvamai/sarvam-m"],
       },
       {
+        canonical: "snowflake-arctic-base",
+        aliases: ["LLM360/Amber", "LLM360/AmberChat"],
+      },
+      {
+        canonical: "crystal",
+        aliases: ["LLM360/Crystal", "LLM360/CrystalChat"],
+      },
+      {
+        canonical: "k2",
+        aliases: ["LLM360/K2"],
+      },
+      {
+        canonical: "k2-chat",
+        aliases: ["LLM360/K2-Chat"],
+      },
+      {
+        canonical: "mimo-7b-rl-0530",
+        aliases: ["LLM360/K2-Think"],
+      },
+      {
+        canonical: "k2-think-v2",
+        aliases: ["LLM360/K2-Think-V2"],
+      },
+      {
         canonical: "codegen",
         aliases: [
           "Salesforce/codegen-350M-mono",
@@ -1020,6 +1044,10 @@ describe("builtin tokenizer families", () => {
           "internlm3",
           "jamba-v0.1",
           "jamba2",
+          "crystal",
+          "k2",
+          "k2-chat",
+          "k2-think-v2",
           "sarvam-30b",
           "sarvam-m",
           "bitnet-b1.58-2b-4t",
@@ -1207,6 +1235,14 @@ describe("builtin tokenizer families", () => {
           "sarvamai/sarvam-30b",
           "sarvamai/sarvam-105b",
           "sarvamai/sarvam-m",
+          "LLM360/Amber",
+          "LLM360/AmberChat",
+          "LLM360/Crystal",
+          "LLM360/CrystalChat",
+          "LLM360/K2",
+          "LLM360/K2-Chat",
+          "LLM360/K2-Think",
+          "LLM360/K2-Think-V2",
           "stabilityai/japanese-stablelm-3b-4e1t-base",
           "stabilityai/japanese-stablelm-3b-4e1t-instruct",
           "stabilityai/japanese-stablelm-base-gamma-7b",

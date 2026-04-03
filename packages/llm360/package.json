@@ -1,0 +1,43 @@
+{
+  "name": "@cyberlangke/tokkit-llm360",
+  "version": "1.11.0",
+  "description": "LLM360 tokenizer families for tokkit.",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist",
+    "COPYRIGHT",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "npm run build --workspace @cyberlangke/tokkit-core && npm run build --workspace @cyberlangke/tokkit-snowflake && npm run build --workspace @cyberlangke/tokkit-xiaomi-mimo && tsup",
+    "dev": "tsup --watch"
+  },
+  "dependencies": {
+    "@cyberlangke/tokkit-core": "1.11.0",
+    "@cyberlangke/tokkit-snowflake": "1.11.0",
+    "@cyberlangke/tokkit-xiaomi-mimo": "1.11.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/1cyberlangke1/tokkit.git"
+  },
+  "homepage": "https://github.com/1cyberlangke1/tokkit#readme",
+  "bugs": {
+    "url": "https://github.com/1cyberlangke1/tokkit/issues"
+  },
+  "author": "cyberlangke",
+  "license": "Apache-2.0"
+}

@@ -10,6 +10,7 @@ import { registerBuiltins as registerDreamOrgBuiltins } from "@cyberlangke/tokki
 import { registerBuiltins as registerUtterProjectBuiltins } from "@cyberlangke/tokkit-utter-project"
 import { registerBuiltins as registerMosaicMLBuiltins } from "@cyberlangke/tokkit-mosaicml"
 import { registerBuiltins as registerAI21LabsBuiltins } from "@cyberlangke/tokkit-ai21labs"
+import { registerBuiltins as registerLLM360Builtins } from "@cyberlangke/tokkit-llm360"
 import { registerBuiltins as registerSarvamAIBuiltins } from "@cyberlangke/tokkit-sarvamai"
 import { registerBuiltins as registerStabilityAIBuiltins } from "@cyberlangke/tokkit-stabilityai"
 import { registerBuiltins as register01AIBuiltins } from "@cyberlangke/tokkit-01-ai"
@@ -64,6 +65,7 @@ export function registerBuiltins(): void {
   registerUtterProjectBuiltins()
   registerMosaicMLBuiltins()
   registerAI21LabsBuiltins()
+  registerLLM360Builtins()
   registerSarvamAIBuiltins()
   registerStabilityAIBuiltins()
   register01AIBuiltins()
