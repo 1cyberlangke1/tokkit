@@ -178,6 +178,18 @@ const VENDOR_PACKAGE_CASES = [
     ],
   },
   {
+    relativePath: "packages/bsc-lt/src/index.ts",
+    expectedFamilies: ["salamandra", "salamandra-instruct"],
+    expectedModels: [
+      "BSC-LT/salamandra-2b",
+      "BSC-LT/salamandra-2b-instruct",
+      "BSC-LT/salamandra-7b",
+      "BSC-LT/salamandra-7b-instruct",
+      "BSC-LT/ALIA-40b",
+      "BSC-LT/ALIA-40b-instruct-2601",
+    ],
+  },
+  {
     relativePath: "packages/01-ai/src/index.ts",
     expectedFamilies: ["yi", "yi-1.5-9b-chat", "yi-coder", "yi-coder-chat"],
     expectedModels: [
@@ -998,6 +1010,8 @@ const EXPECTED_ALL_FAMILIES = [
   "mimo-7b-rl-0530",
   "mimo-v2-flash",
   "decicoder-1b",
+  "salamandra",
+  "salamandra-instruct",
   "mathstral-7b",
   "mamba-codestral-7b",
   "magistral-small-2507",

@@ -292,6 +292,18 @@ export const FAMILY_SPECS = [
     source: "vendor/tokenizers/Deci__DeciCoder-1b__tokenizer.json.br",
   },
   {
+    family: "salamandra",
+    packageName: "bsc-lt",
+    moduleName: "salamandra",
+    source: "vendor/tokenizers/BSC-LT__salamandra-7b__tokenizer.json.br",
+  },
+  {
+    family: "salamandra-instruct",
+    packageName: "bsc-lt",
+    moduleName: "salamandra_instruct",
+    source: "vendor/tokenizers/BSC-LT__salamandra-7b-instruct__tokenizer.json.br",
+  },
+  {
     family: "nextcoder",
     packageName: "microsoft",
     moduleName: "nextcoder",

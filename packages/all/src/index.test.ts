@@ -231,6 +231,19 @@ const BUILTIN_ALIAS_CASE_GROUPS = [
         aliases: ["Deci/DeciCoder-1b"],
       },
       {
+        canonical: "salamandra",
+        aliases: [
+          "BSC-LT/salamandra-2b",
+          "BSC-LT/salamandra-7b",
+          "BSC-LT/ALIA-40b",
+          "BSC-LT/ALIA-40b-instruct-2601",
+        ],
+      },
+      {
+        canonical: "salamandra-instruct",
+        aliases: ["BSC-LT/salamandra-2b-instruct", "BSC-LT/salamandra-7b-instruct"],
+      },
+      {
         canonical: "codegen",
         aliases: [
           "Salesforce/codegen-350M-mono",
@@ -1152,6 +1165,8 @@ describe("builtin tokenizer families", () => {
           "mimo",
           "mimo-7b-rl-0530",
           "mimo-v2-flash",
+          "salamandra",
+          "salamandra-instruct",
           "mathstral-7b",
           "mamba-codestral-7b",
           "decicoder-1b",
@@ -1291,6 +1306,12 @@ describe("builtin tokenizer families", () => {
           "Deci/DeciCoder-1b",
           "Deci/DeciLM-7B",
           "Deci/DeciLM-7B-instruct",
+          "BSC-LT/salamandra-2b",
+          "BSC-LT/salamandra-2b-instruct",
+          "BSC-LT/salamandra-7b",
+          "BSC-LT/salamandra-7b-instruct",
+          "BSC-LT/ALIA-40b",
+          "BSC-LT/ALIA-40b-instruct-2601",
           "microsoft/NextCoder-7B",
           "microsoft/NextCoder-14B",
           "microsoft/NextCoder-32B",

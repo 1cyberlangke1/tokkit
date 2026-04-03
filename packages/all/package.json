@@ -33,6 +33,7 @@
     "@cyberlangke/tokkit-primeintellect": "1.11.0",
     "@cyberlangke/tokkit-lightonai": "1.11.0",
     "@cyberlangke/tokkit-deci": "1.11.0",
+    "@cyberlangke/tokkit-bsc-lt": "1.11.0",
     "@cyberlangke/tokkit-essentialai": "1.11.0",
     "@cyberlangke/tokkit-servicenow-ai": "1.11.0",
     "@cyberlangke/tokkit-salesforce": "1.11.0",
