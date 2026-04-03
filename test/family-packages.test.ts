@@ -89,6 +89,16 @@ const VENDOR_PACKAGE_CASES = [
     ],
   },
   {
+    relativePath: "packages/ai21labs/src/index.ts",
+    expectedFamilies: ["jamba-v0.1", "jamba2"],
+    expectedModels: [
+      "ai21labs/AI21-Jamba2-Mini",
+      "ai21labs/AI21-Jamba2-3B",
+      "ai21labs/AI21-Jamba-Reasoning-3B",
+      "ai21labs/Jamba-v0.1",
+    ],
+  },
+  {
     relativePath: "packages/01-ai/src/index.ts",
     expectedFamilies: ["yi", "yi-1.5-9b-chat", "yi-coder", "yi-coder-chat"],
     expectedModels: [
@@ -790,6 +800,8 @@ const VENDOR_PACKAGE_CASES = [
 
 /** 全家桶包当前应聚合的 family。 */
 const EXPECTED_ALL_FAMILIES = [
+  "jamba-v0.1",
+  "jamba2",
   "yi",
   "yi-1.5-9b-chat",
   "yi-coder",

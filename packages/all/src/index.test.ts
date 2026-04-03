@@ -140,6 +140,18 @@ const BUILTIN_ALIAS_CASE_GROUPS = [
         aliases: ["ServiceNow-AI/Apriel-5B-Base", "ServiceNow-AI/Apriel-5B-Instruct"],
       },
       {
+        canonical: "jamba2",
+        aliases: [
+          "ai21labs/AI21-Jamba2-Mini",
+          "ai21labs/AI21-Jamba2-3B",
+          "ai21labs/AI21-Jamba-Reasoning-3B",
+        ],
+      },
+      {
+        canonical: "jamba-v0.1",
+        aliases: ["jamba_v0_1", "ai21labs/Jamba-v0.1"],
+      },
+      {
         canonical: "codegen",
         aliases: [
           "Salesforce/codegen-350M-mono",
@@ -977,6 +989,8 @@ describe("builtin tokenizer families", () => {
           "internlm2.5-1.8b",
           "internlm2.5-20b",
           "internlm3",
+          "jamba-v0.1",
+          "jamba2",
           "bitnet-b1.58-2b-4t",
           "nextcoder",
           "danube",
@@ -1155,6 +1169,10 @@ describe("builtin tokenizer families", () => {
           "XiaomiMiMo/MiMo-7B-SFT",
           "XiaomiMiMo/MiMo-V2-Flash",
           "XiaomiMiMo/MiMo-V2-Flash-Base",
+          "ai21labs/AI21-Jamba2-Mini",
+          "ai21labs/AI21-Jamba2-3B",
+          "ai21labs/AI21-Jamba-Reasoning-3B",
+          "ai21labs/Jamba-v0.1",
           "microsoft/bitnet-b1.58-2B-4T",
           "microsoft/NextCoder-7B",
           "microsoft/NextCoder-14B",

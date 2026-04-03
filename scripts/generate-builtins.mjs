@@ -118,6 +118,18 @@ export const FAMILY_SPECS = [
     source: "vendor/tokenizers/utter-project__EuroLLM-9B-Instruct-2512__tokenizer.json.br",
   },
   {
+    family: "jamba2",
+    packageName: "ai21labs",
+    moduleName: "jamba2",
+    source: "vendor/tokenizers/ai21labs__AI21-Jamba2-Mini__tokenizer.json.br",
+  },
+  {
+    family: "jamba-v0.1",
+    packageName: "ai21labs",
+    moduleName: "jamba_v0_1",
+    source: "vendor/tokenizers/ai21labs__Jamba-v0.1__tokenizer.json.br",
+  },
+  {
     family: "yi",
     packageName: "01-ai",
     moduleName: "yi",

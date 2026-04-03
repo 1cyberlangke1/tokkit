@@ -1,0 +1,9 @@
+Copyright (c) 2026 cyberlangke
+
+This package bundles tokenizer assets derived from official Hugging Face repositories under the ai21labs organization:
+- ai21labs/AI21-Jamba2-Mini tokenizer.json
+- ai21labs/AI21-Jamba2-3B tokenizer.json (same tokenizer family as AI21-Jamba2-Mini)
+- ai21labs/AI21-Jamba-Reasoning-3B tokenizer.json (same tokenizer family as AI21-Jamba2-Mini)
+- ai21labs/Jamba-v0.1 tokenizer.json
+
+See LICENSE for the full license text that applies to this package and its bundled assets.

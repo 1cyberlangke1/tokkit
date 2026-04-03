@@ -33,6 +33,9 @@ export default defineConfig({
       "@cyberlangke/tokkit-mosaicml": fileURLToPath(
         new URL("./packages/mosaicml/src/index.ts", import.meta.url)
       ),
+      "@cyberlangke/tokkit-ai21labs": fileURLToPath(
+        new URL("./packages/ai21labs/src/index.ts", import.meta.url)
+      ),
       "@cyberlangke/tokkit-tiiuae": fileURLToPath(
         new URL("./packages/tiiuae/src/index.ts", import.meta.url)
       ),

@@ -77,6 +77,13 @@ const EXPECTED_PACKAGES = [
     includedInAll: true,
   },
   {
+    directory: "ai21labs",
+    packageName: "@cyberlangke/tokkit-ai21labs",
+    license: "Apache-2.0",
+    includedInAll: true,
+    requiredFiles: ["COPYRIGHT", "LICENSE"],
+  },
+  {
     directory: "tiiuae",
     packageName: "@cyberlangke/tokkit-tiiuae",
     license: "Apache-2.0",

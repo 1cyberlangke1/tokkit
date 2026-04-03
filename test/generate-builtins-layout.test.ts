@@ -35,6 +35,8 @@ describe("generate:builtins layout", () => {
           family: "eurollm-2512-instruct",
           packageName: "utter-project",
         }),
+        expect.objectContaining({ family: "jamba2", packageName: "ai21labs" }),
+        expect.objectContaining({ family: "jamba-v0.1", packageName: "ai21labs" }),
         expect.objectContaining({ family: "open-calm", packageName: "cyberagent" }),
         expect.objectContaining({ family: "calm2", packageName: "cyberagent" }),
         expect.objectContaining({ family: "calm3", packageName: "cyberagent" }),
@@ -247,6 +249,9 @@ describe("generate:builtins layout", () => {
     )
     expect(module.resolveOutputModulePath("utter-project", "eurollm_2512")).toBe(
       "packages/utter-project/src/generated/eurollm_2512.ts"
+    )
+    expect(module.resolveOutputModulePath("ai21labs", "jamba_v0_1")).toBe(
+      "packages/ai21labs/src/generated/jamba_v0_1.ts"
     )
     expect(module.resolveOutputModulePath("tiiuae", "falcon_rw_1b")).toBe(
       "packages/tiiuae/src/generated/falcon_rw_1b.ts"
