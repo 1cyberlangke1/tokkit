@@ -173,6 +173,14 @@ const BUILTIN_ALIAS_CASE_GROUPS = [
         ],
       },
       {
+        canonical: "sarvam-30b",
+        aliases: ["sarvamai/sarvam-30b", "sarvamai/sarvam-105b"],
+      },
+      {
+        canonical: "sarvam-m",
+        aliases: ["sarvamai/sarvam-m"],
+      },
+      {
         canonical: "codegen",
         aliases: [
           "Salesforce/codegen-350M-mono",
@@ -1012,6 +1020,8 @@ describe("builtin tokenizer families", () => {
           "internlm3",
           "jamba-v0.1",
           "jamba2",
+          "sarvam-30b",
+          "sarvam-m",
           "bitnet-b1.58-2b-4t",
           "nextcoder",
           "danube",
@@ -1194,6 +1204,9 @@ describe("builtin tokenizer families", () => {
           "ai21labs/AI21-Jamba2-3B",
           "ai21labs/AI21-Jamba-Reasoning-3B",
           "ai21labs/Jamba-v0.1",
+          "sarvamai/sarvam-30b",
+          "sarvamai/sarvam-105b",
+          "sarvamai/sarvam-m",
           "stabilityai/japanese-stablelm-3b-4e1t-base",
           "stabilityai/japanese-stablelm-3b-4e1t-instruct",
           "stabilityai/japanese-stablelm-base-gamma-7b",

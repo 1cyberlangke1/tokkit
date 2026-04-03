@@ -130,6 +130,18 @@ export const FAMILY_SPECS = [
     source: "vendor/tokenizers/ai21labs__Jamba-v0.1__tokenizer.json.br",
   },
   {
+    family: "sarvam-30b",
+    packageName: "sarvamai",
+    moduleName: "sarvam_30b",
+    source: "vendor/tokenizers/sarvamai__sarvam-30b__tokenizer.json.br",
+  },
+  {
+    family: "sarvam-m",
+    packageName: "sarvamai",
+    moduleName: "sarvam_m",
+    source: "vendor/tokenizers/sarvamai__sarvam-m__tokenizer.json.br",
+  },
+  {
     family: "yi",
     packageName: "01-ai",
     moduleName: "yi",

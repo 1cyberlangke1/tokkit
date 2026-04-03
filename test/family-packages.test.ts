@@ -114,6 +114,15 @@ const VENDOR_PACKAGE_CASES = [
     ],
   },
   {
+    relativePath: "packages/sarvamai/src/index.ts",
+    expectedFamilies: ["sarvam-30b", "sarvam-m"],
+    expectedModels: [
+      "sarvamai/sarvam-30b",
+      "sarvamai/sarvam-105b",
+      "sarvamai/sarvam-m",
+    ],
+  },
+  {
     relativePath: "packages/01-ai/src/index.ts",
     expectedFamilies: ["yi", "yi-1.5-9b-chat", "yi-coder", "yi-coder-chat"],
     expectedModels: [
@@ -817,6 +826,8 @@ const VENDOR_PACKAGE_CASES = [
 const EXPECTED_ALL_FAMILIES = [
   "jamba-v0.1",
   "jamba2",
+  "sarvam-30b",
+  "sarvam-m",
   "yi",
   "yi-1.5-9b-chat",
   "yi-coder",

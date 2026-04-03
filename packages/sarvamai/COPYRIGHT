@@ -1,0 +1,8 @@
+Copyright (c) 2026 cyberlangke
+
+This package bundles tokenizer assets derived from official Hugging Face repositories under the sarvamai organization:
+- sarvamai/sarvam-30b tokenizer.json
+- sarvamai/sarvam-105b tokenizer.json (same tokenizer family as sarvam-30b)
+- sarvamai/sarvam-m tokenizer.json
+
+See LICENSE for the full license text that applies to this package and its bundled assets.
