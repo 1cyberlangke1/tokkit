@@ -268,6 +268,24 @@ export const FAMILY_SPECS = [
     source: "vendor/tokenizers/microsoft__bitnet-b1.58-2B-4T__tokenizer.json.br",
   },
   {
+    family: "pagnol",
+    packageName: "lightonai",
+    moduleName: "pagnol",
+    source: "vendor/tokenizers/lightonai__pagnol-small__tokenizer.json.br",
+  },
+  {
+    family: "pagnol-xl",
+    packageName: "lightonai",
+    moduleName: "pagnol_xl",
+    source: "vendor/tokenizers/lightonai__pagnol-xl__tokenizer.json.br",
+  },
+  {
+    family: "alfred-40b-1023",
+    packageName: "lightonai",
+    moduleName: "alfred_40b_1023",
+    source: "vendor/tokenizers/lightonai__alfred-40b-1023__tokenizer.json.br",
+  },
+  {
     family: "nextcoder",
     packageName: "microsoft",
     moduleName: "nextcoder",

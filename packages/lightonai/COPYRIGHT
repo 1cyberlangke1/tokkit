@@ -1,0 +1,10 @@
+Copyright (c) 2026 cyberlangke
+
+This package bundles tokenizer assets derived from official Hugging Face repositories under the lightonai organization:
+- lightonai/pagnol-small tokenizer.json (MIT)
+- lightonai/pagnol-xl tokenizer.json (MIT)
+- lightonai/alfred-40b-1023 tokenizer.json (Apache-2.0)
+
+The `lightonai/alfred-40b-0723` model alias in this package reuses the existing `tiiuae/falcon-7b` tokenizer family and does not bundle an extra tokenizer asset here.
+
+See LICENSE for the full license text that applies to this package and its bundled assets.

@@ -155,6 +155,19 @@ const VENDOR_PACKAGE_CASES = [
     ],
   },
   {
+    relativePath: "packages/lightonai/src/index.ts",
+    expectedFamilies: ["falcon-7b", "pagnol", "pagnol-xl", "alfred-40b-1023"],
+    expectedModels: [
+      "tiiuae/falcon-7b",
+      "lightonai/alfred-40b-0723",
+      "lightonai/alfred-40b-1023",
+      "lightonai/pagnol-small",
+      "lightonai/pagnol-medium",
+      "lightonai/pagnol-large",
+      "lightonai/pagnol-xl",
+    ],
+  },
+  {
     relativePath: "packages/01-ai/src/index.ts",
     expectedFamilies: ["yi", "yi-1.5-9b-chat", "yi-coder", "yi-coder-chat"],
     expectedModels: [
@@ -920,6 +933,9 @@ const EXPECTED_ALL_FAMILIES = [
   "internlm2.5-20b",
   "internlm3",
   "bitnet-b1.58-2b-4t",
+  "pagnol",
+  "pagnol-xl",
+  "alfred-40b-1023",
   "gpt-neo",
   "cosmo-1b",
   "danube",

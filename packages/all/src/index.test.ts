@@ -209,6 +209,22 @@ const BUILTIN_ALIAS_CASE_GROUPS = [
         aliases: ["PrimeIntellect/INTELLECT-1", "PrimeIntellect/INTELLECT-1-Instruct"],
       },
       {
+        canonical: "falcon-7b",
+        aliases: ["lightonai/alfred-40b-0723"],
+      },
+      {
+        canonical: "pagnol",
+        aliases: ["lightonai/pagnol-small", "lightonai/pagnol-medium", "lightonai/pagnol-large"],
+      },
+      {
+        canonical: "pagnol-xl",
+        aliases: ["lightonai/pagnol-xl"],
+      },
+      {
+        canonical: "alfred-40b-1023",
+        aliases: ["lightonai/alfred-40b-1023"],
+      },
+      {
         canonical: "codegen",
         aliases: [
           "Salesforce/codegen-350M-mono",
@@ -1055,6 +1071,9 @@ describe("builtin tokenizer families", () => {
           "sarvam-30b",
           "sarvam-m",
           "bitnet-b1.58-2b-4t",
+          "pagnol",
+          "pagnol-xl",
+          "alfred-40b-1023",
           "nextcoder",
           "danube",
           "danube2",
@@ -1254,6 +1273,14 @@ describe("builtin tokenizer families", () => {
           "stabilityai/stablecode-completion-alpha-3b",
           "stabilityai/stablecode-completion-alpha-3b-4k",
           "microsoft/bitnet-b1.58-2B-4T",
+          "PrimeIntellect/INTELLECT-1",
+          "PrimeIntellect/INTELLECT-1-Instruct",
+          "lightonai/alfred-40b-0723",
+          "lightonai/alfred-40b-1023",
+          "lightonai/pagnol-small",
+          "lightonai/pagnol-medium",
+          "lightonai/pagnol-large",
+          "lightonai/pagnol-xl",
           "microsoft/NextCoder-7B",
           "microsoft/NextCoder-14B",
           "microsoft/NextCoder-32B",

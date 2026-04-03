@@ -112,6 +112,13 @@ const EXPECTED_PACKAGES = [
     requiredFiles: ["COPYRIGHT", "LICENSE"],
   },
   {
+    directory: "lightonai",
+    packageName: "@cyberlangke/tokkit-lightonai",
+    license: "SEE LICENSE IN LICENSE",
+    includedInAll: true,
+    requiredFiles: ["COPYRIGHT", "LICENSE"],
+  },
+  {
     directory: "tiiuae",
     packageName: "@cyberlangke/tokkit-tiiuae",
     license: "Apache-2.0",
@@ -522,5 +529,31 @@ describe("workspace layout", () => {
     expect(packageJson.scripts?.build).toBe(
       "npm run build --workspace @cyberlangke/tokkit-core && npm run build --workspace @cyberlangke/tokkit-microsoft && tsup"
     )
+  })
+
+  it("lightonai 包构建前会先生成依赖子包的类型产物", () => {
+    const packageJsonPath = resolve(REPO_ROOT, "packages", "lightonai", "package.json")
+    const packageJson = JSON.parse(readFileSync(packageJsonPath, "utf8")) as {
+      scripts?: Record<string, string>
+    }
+
+    expect(packageJson.scripts?.build).toBe(
+      "npm run build --workspace @cyberlangke/tokkit-core && npm run build --workspace @cyberlangke/tokkit-tiiuae && tsup"
+    )
+  })
+
+  it("含 generated 资产的子包会把 generated 入口纳入 tsup 构建", () => {
+    for (const { directory } of EXPECTED_PACKAGES) {
+      const generatedDirPath = resolve(REPO_ROOT, "packages", directory, "src", "generated")
+      const tsupConfigPath = resolve(REPO_ROOT, "packages", directory, "tsup.config.ts")
+
+      if (!existsSync(generatedDirPath) || !existsSync(tsupConfigPath)) {
+        continue
+      }
+
+      const tsupConfig = readFileSync(tsupConfigPath, "utf8")
+
+      expect(tsupConfig, `packages/${directory}/tsup.config.ts`).toContain("src/generated/")
+    }
   })
 })

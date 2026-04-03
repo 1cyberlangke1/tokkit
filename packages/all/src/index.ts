@@ -14,6 +14,7 @@ import { registerBuiltins as registerLLM360Builtins } from "@cyberlangke/tokkit-
 import { registerBuiltins as registerSarvamAIBuiltins } from "@cyberlangke/tokkit-sarvamai"
 import { registerBuiltins as registerStabilityAIBuiltins } from "@cyberlangke/tokkit-stabilityai"
 import { registerBuiltins as registerPrimeIntellectBuiltins } from "@cyberlangke/tokkit-primeintellect"
+import { registerBuiltins as registerLightOnAIBuiltins } from "@cyberlangke/tokkit-lightonai"
 import { registerBuiltins as register01AIBuiltins } from "@cyberlangke/tokkit-01-ai"
 import { registerBuiltins as registerABEJABuiltins } from "@cyberlangke/tokkit-abeja"
 import { registerBuiltins as registerTiiuaeBuiltins } from "@cyberlangke/tokkit-tiiuae"
@@ -70,6 +71,7 @@ export function registerBuiltins(): void {
   registerSarvamAIBuiltins()
   registerStabilityAIBuiltins()
   registerPrimeIntellectBuiltins()
+  registerLightOnAIBuiltins()
   register01AIBuiltins()
   registerABEJABuiltins()
   registerTiiuaeBuiltins()
