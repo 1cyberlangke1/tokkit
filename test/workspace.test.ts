@@ -71,6 +71,12 @@ const EXPECTED_PACKAGES = [
     requiredFiles: ["COPYRIGHT", "LICENSE"],
   },
   {
+    directory: "mosaicml",
+    packageName: "@cyberlangke/tokkit-mosaicml",
+    license: "Apache-2.0",
+    includedInAll: true,
+  },
+  {
     directory: "tiiuae",
     packageName: "@cyberlangke/tokkit-tiiuae",
     license: "Apache-2.0",

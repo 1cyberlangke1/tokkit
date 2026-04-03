@@ -1,0 +1,7 @@
+Copyright (c) 2026 cyberlangke
+
+This package does not bundle MosaicML tokenizer assets.
+It registers official MosaicML model aliases after verifying that their
+tokenizer behavior matches the already-supported pythia family.
+
+See LICENSE for the license text that applies to this package.

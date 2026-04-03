@@ -30,6 +30,9 @@ export default defineConfig({
       "@cyberlangke/tokkit-utter-project": fileURLToPath(
         new URL("./packages/utter-project/src/index.ts", import.meta.url)
       ),
+      "@cyberlangke/tokkit-mosaicml": fileURLToPath(
+        new URL("./packages/mosaicml/src/index.ts", import.meta.url)
+      ),
       "@cyberlangke/tokkit-tiiuae": fileURLToPath(
         new URL("./packages/tiiuae/src/index.ts", import.meta.url)
       ),

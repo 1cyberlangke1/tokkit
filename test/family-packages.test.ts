@@ -78,6 +78,17 @@ const VENDOR_PACKAGE_CASES = [
     ],
   },
   {
+    relativePath: "packages/mosaicml/src/index.ts",
+    expectedFamilies: ["pythia"],
+    expectedModels: [
+      "EleutherAI/gpt-neox-20b",
+      "mosaicml/mpt-7b",
+      "mosaicml/mpt-7b-8k",
+      "mosaicml/mpt-7b-storywriter",
+      "mosaicml/mpt-30b",
+    ],
+  },
+  {
     relativePath: "packages/01-ai/src/index.ts",
     expectedFamilies: ["yi", "yi-1.5-9b-chat", "yi-coder", "yi-coder-chat"],
     expectedModels: [
