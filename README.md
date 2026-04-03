@@ -133,6 +133,9 @@
   - `marco-o1`
 - `@cyberlangke/tokkit-datajuicer`
   - `dj-refine-1b`
+- `@cyberlangke/tokkit-baidu`
+  - `ernie-4.5`
+  - `ernie-4.5-thinking`
 - `@cyberlangke/tokkit-qwen`
   - `qwen2`
   - `qwen2.5`

@@ -36,6 +36,7 @@
     "@cyberlangke/tokkit-bsc-lt": "1.11.0",
     "@cyberlangke/tokkit-aidc-ai": "1.11.0",
     "@cyberlangke/tokkit-datajuicer": "1.11.0",
+    "@cyberlangke/tokkit-baidu": "1.11.0",
     "@cyberlangke/tokkit-essentialai": "1.11.0",
     "@cyberlangke/tokkit-servicenow-ai": "1.11.0",
     "@cyberlangke/tokkit-salesforce": "1.11.0",

@@ -57,6 +57,9 @@ export default defineConfig({
       "@cyberlangke/tokkit-datajuicer": fileURLToPath(
         new URL("./packages/datajuicer/src/index.ts", import.meta.url)
       ),
+      "@cyberlangke/tokkit-baidu": fileURLToPath(
+        new URL("./packages/baidu/src/index.ts", import.meta.url)
+      ),
       "@cyberlangke/tokkit-sarvamai": fileURLToPath(
         new URL("./packages/sarvamai/src/index.ts", import.meta.url)
       ),

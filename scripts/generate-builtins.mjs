@@ -316,6 +316,18 @@ export const FAMILY_SPECS = [
     source: "vendor/tokenizers/datajuicer__LLaMA-1B-dj-refine-150B__tokenizer.json.br",
   },
   {
+    family: "ernie-4.5",
+    packageName: "baidu",
+    moduleName: "ernie_4_5",
+    source: "vendor/tokenizers/baidu__ERNIE-4.5-21B-A3B-PT__tokenizer.json.br",
+  },
+  {
+    family: "ernie-4.5-thinking",
+    packageName: "baidu",
+    moduleName: "ernie_4_5_thinking",
+    source: "vendor/tokenizers/baidu__ERNIE-4.5-21B-A3B-Thinking__tokenizer.json.br",
+  },
+  {
     family: "nextcoder",
     packageName: "microsoft",
     moduleName: "nextcoder",

@@ -217,6 +217,19 @@ const VENDOR_PACKAGE_CASES = [
     ],
   },
   {
+    relativePath: "packages/baidu/src/index.ts",
+    expectedFamilies: ["ernie-4.5", "ernie-4.5-thinking"],
+    expectedModels: [
+      "baidu/ERNIE-4.5-0.3B-PT",
+      "baidu/ERNIE-4.5-0.3B-Base-PT",
+      "baidu/ERNIE-4.5-21B-A3B-PT",
+      "baidu/ERNIE-4.5-21B-A3B-Base-PT",
+      "baidu/ERNIE-4.5-21B-A3B-Thinking",
+      "baidu/ERNIE-4.5-300B-A47B-PT",
+      "baidu/ERNIE-4.5-300B-A47B-Base-PT",
+    ],
+  },
+  {
     relativePath: "packages/01-ai/src/index.ts",
     expectedFamilies: ["yi", "yi-1.5-9b-chat", "yi-coder", "yi-coder-chat"],
     expectedModels: [
@@ -1041,6 +1054,8 @@ const EXPECTED_ALL_FAMILIES = [
   "salamandra-instruct",
   "marco-o1",
   "dj-refine-1b",
+  "ernie-4.5",
+  "ernie-4.5-thinking",
   "mathstral-7b",
   "mamba-codestral-7b",
   "magistral-small-2507",

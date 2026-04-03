@@ -265,6 +265,22 @@ const BUILTIN_ALIAS_CASE_GROUPS = [
         ],
       },
       {
+        canonical: "ernie-4.5",
+        aliases: [
+          "ernie_4_5",
+          "baidu/ERNIE-4.5-0.3B-PT",
+          "baidu/ERNIE-4.5-0.3B-Base-PT",
+          "baidu/ERNIE-4.5-21B-A3B-PT",
+          "baidu/ERNIE-4.5-21B-A3B-Base-PT",
+          "baidu/ERNIE-4.5-300B-A47B-PT",
+          "baidu/ERNIE-4.5-300B-A47B-Base-PT",
+        ],
+      },
+      {
+        canonical: "ernie-4.5-thinking",
+        aliases: ["ernie_4_5_thinking", "baidu/ERNIE-4.5-21B-A3B-Thinking"],
+      },
+      {
         canonical: "codegen",
         aliases: [
           "Salesforce/codegen-350M-mono",
@@ -1082,6 +1098,8 @@ describe("builtin tokenizer families", () => {
           "dj-refine-1b",
           "dream-v0",
           "dreamon-v0",
+          "ernie-4.5",
+          "ernie-4.5-thinking",
           "eurollm-1.7b",
           "eurollm-1.7b-instruct",
           "eurollm-2512",

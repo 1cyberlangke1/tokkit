@@ -1,0 +1,18 @@
+Copyright (c) 2026 cyberlangke
+
+This package bundles tokenizer assets derived from official Hugging Face repositories under the baidu organization:
+- baidu/ERNIE-4.5-21B-A3B-PT tokenizer.json
+- baidu/ERNIE-4.5-21B-A3B-Thinking tokenizer.json
+
+The bundled `ernie-4.5` family covers the following official baidu models:
+- baidu/ERNIE-4.5-0.3B-PT
+- baidu/ERNIE-4.5-0.3B-Base-PT
+- baidu/ERNIE-4.5-21B-A3B-PT
+- baidu/ERNIE-4.5-21B-A3B-Base-PT
+- baidu/ERNIE-4.5-300B-A47B-PT
+- baidu/ERNIE-4.5-300B-A47B-Base-PT
+
+The bundled `ernie-4.5-thinking` family covers the following official baidu model:
+- baidu/ERNIE-4.5-21B-A3B-Thinking
+
+See LICENSE for the full license text that applies to this package and its bundled assets.
