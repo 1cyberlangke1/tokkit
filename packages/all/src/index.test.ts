@@ -152,6 +152,27 @@ const BUILTIN_ALIAS_CASE_GROUPS = [
         aliases: ["jamba_v0_1", "ai21labs/Jamba-v0.1"],
       },
       {
+        canonical: "mamba-790m",
+        aliases: [
+          "stabilityai/japanese-stablelm-3b-4e1t-base",
+          "stabilityai/japanese-stablelm-3b-4e1t-instruct",
+        ],
+      },
+      {
+        canonical: "mistral-7b-v0.1",
+        aliases: [
+          "stabilityai/japanese-stablelm-base-gamma-7b",
+          "stabilityai/japanese-stablelm-instruct-gamma-7b",
+        ],
+      },
+      {
+        canonical: "granite-code-base",
+        aliases: [
+          "stabilityai/stablecode-completion-alpha-3b",
+          "stabilityai/stablecode-completion-alpha-3b-4k",
+        ],
+      },
+      {
         canonical: "codegen",
         aliases: [
           "Salesforce/codegen-350M-mono",
@@ -1173,6 +1194,12 @@ describe("builtin tokenizer families", () => {
           "ai21labs/AI21-Jamba2-3B",
           "ai21labs/AI21-Jamba-Reasoning-3B",
           "ai21labs/Jamba-v0.1",
+          "stabilityai/japanese-stablelm-3b-4e1t-base",
+          "stabilityai/japanese-stablelm-3b-4e1t-instruct",
+          "stabilityai/japanese-stablelm-base-gamma-7b",
+          "stabilityai/japanese-stablelm-instruct-gamma-7b",
+          "stabilityai/stablecode-completion-alpha-3b",
+          "stabilityai/stablecode-completion-alpha-3b-4k",
           "microsoft/bitnet-b1.58-2B-4T",
           "microsoft/NextCoder-7B",
           "microsoft/NextCoder-14B",

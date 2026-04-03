@@ -1,0 +1,7 @@
+Copyright (c) 2026 cyberlangke
+
+This package does not bundle Stability AI tokenizer assets.
+It registers official Stability AI model aliases after verifying that their
+tokenizer behavior matches already-supported families in this repository.
+
+See LICENSE for the license text that applies to this package.

@@ -99,6 +99,21 @@ const VENDOR_PACKAGE_CASES = [
     ],
   },
   {
+    relativePath: "packages/stabilityai/src/index.ts",
+    expectedFamilies: ["granite-code-base", "mamba-790m", "mistral-7b-v0.1"],
+    expectedModels: [
+      "ibm-granite/granite-3b-code-base-2k",
+      "state-spaces/mamba-790m-hf",
+      "mistralai/Mistral-7B-v0.1",
+      "stabilityai/japanese-stablelm-3b-4e1t-base",
+      "stabilityai/japanese-stablelm-3b-4e1t-instruct",
+      "stabilityai/japanese-stablelm-base-gamma-7b",
+      "stabilityai/japanese-stablelm-instruct-gamma-7b",
+      "stabilityai/stablecode-completion-alpha-3b",
+      "stabilityai/stablecode-completion-alpha-3b-4k",
+    ],
+  },
+  {
     relativePath: "packages/01-ai/src/index.ts",
     expectedFamilies: ["yi", "yi-1.5-9b-chat", "yi-coder", "yi-coder-chat"],
     expectedModels: [
