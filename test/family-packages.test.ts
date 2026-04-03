@@ -59,6 +59,25 @@ const VENDOR_PACKAGE_CASES = [
     ],
   },
   {
+    relativePath: "packages/utter-project/src/index.ts",
+    expectedFamilies: [
+      "eurollm-1.7b",
+      "eurollm-1.7b-instruct",
+      "eurollm-2512",
+      "eurollm-2512-instruct",
+    ],
+    expectedModels: [
+      "utter-project/EuroLLM-1.7B",
+      "utter-project/EuroLLM-1.7B-Instruct",
+      "utter-project/EuroLLM-9B-2512",
+      "utter-project/EuroLLM-9B-Instruct-2512",
+      "utter-project/EuroLLM-22B-2512",
+      "utter-project/EuroLLM-22B-Instruct-2512",
+      "utter-project/EuroMoE-2.6B-A0.6B-2512",
+      "utter-project/EuroMoE-2.6B-A0.6B-Instruct-2512",
+    ],
+  },
+  {
     relativePath: "packages/01-ai/src/index.ts",
     expectedFamilies: ["yi", "yi-1.5-9b-chat", "yi-coder", "yi-coder-chat"],
     expectedModels: [
@@ -766,6 +785,10 @@ const EXPECTED_ALL_FAMILIES = [
   "yi-coder-chat",
   "dream-v0",
   "dreamon-v0",
+  "eurollm-1.7b",
+  "eurollm-1.7b-instruct",
+  "eurollm-2512",
+  "eurollm-2512-instruct",
   "devstral-small-2",
   "devstral-small-2505",
   "deepseek-r1",

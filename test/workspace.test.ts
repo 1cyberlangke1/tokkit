@@ -64,6 +64,13 @@ const EXPECTED_PACKAGES = [
     requiredFiles: ["COPYRIGHT", "LICENSE"],
   },
   {
+    directory: "utter-project",
+    packageName: "@cyberlangke/tokkit-utter-project",
+    license: "Apache-2.0",
+    includedInAll: true,
+    requiredFiles: ["COPYRIGHT", "LICENSE"],
+  },
+  {
     directory: "tiiuae",
     packageName: "@cyberlangke/tokkit-tiiuae",
     license: "Apache-2.0",

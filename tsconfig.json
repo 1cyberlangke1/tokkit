@@ -18,6 +18,7 @@
       "@cyberlangke/tokkit-minimax": ["packages/minimax/src/index.ts"],
       "@cyberlangke/tokkit-moonshotai": ["packages/moonshotai/src/index.ts"],
       "@cyberlangke/tokkit-dream-org": ["packages/dream-org/src/index.ts"],
+      "@cyberlangke/tokkit-utter-project": ["packages/utter-project/src/index.ts"],
       "@cyberlangke/tokkit-tiiuae": ["packages/tiiuae/src/index.ts"],
       "@cyberlangke/tokkit-eleutherai": ["packages/eleutherai/src/index.ts"],
       "@cyberlangke/tokkit-meituan-longcat": ["packages/meituan-longcat/src/index.ts"],

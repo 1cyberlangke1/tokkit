@@ -27,6 +27,9 @@ export default defineConfig({
       "@cyberlangke/tokkit-dream-org": fileURLToPath(
         new URL("./packages/dream-org/src/index.ts", import.meta.url)
       ),
+      "@cyberlangke/tokkit-utter-project": fileURLToPath(
+        new URL("./packages/utter-project/src/index.ts", import.meta.url)
+      ),
       "@cyberlangke/tokkit-tiiuae": fileURLToPath(
         new URL("./packages/tiiuae/src/index.ts", import.meta.url)
       ),

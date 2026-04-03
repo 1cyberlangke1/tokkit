@@ -1,0 +1,13 @@
+Copyright (c) 2026 cyberlangke
+
+This package bundles tokenizer assets derived from official Hugging Face repositories under the utter-project organization:
+- utter-project/EuroLLM-1.7B tokenizer.json
+- utter-project/EuroLLM-1.7B-Instruct tokenizer.json
+- utter-project/EuroLLM-9B-2512 tokenizer.json
+- utter-project/EuroLLM-22B-2512 tokenizer.json (same tokenizer family as EuroLLM-9B-2512)
+- utter-project/EuroMoE-2.6B-A0.6B-2512 tokenizer.json (same tokenizer family as EuroLLM-9B-2512)
+- utter-project/EuroLLM-9B-Instruct-2512 tokenizer.json
+- utter-project/EuroLLM-22B-Instruct-2512 tokenizer.json (same tokenizer family as EuroLLM-9B-Instruct-2512)
+- utter-project/EuroMoE-2.6B-A0.6B-Instruct-2512 tokenizer.json (shared under the current tokkit behavior boundary)
+
+See LICENSE for the full license text that applies to this package and its bundled assets.

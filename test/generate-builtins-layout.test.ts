@@ -25,6 +25,16 @@ describe("generate:builtins layout", () => {
         expect.objectContaining({ family: "kimi-dev", packageName: "moonshotai" }),
         expect.objectContaining({ family: "dream-v0", packageName: "dream-org" }),
         expect.objectContaining({ family: "dreamon-v0", packageName: "dream-org" }),
+        expect.objectContaining({ family: "eurollm-1.7b", packageName: "utter-project" }),
+        expect.objectContaining({
+          family: "eurollm-1.7b-instruct",
+          packageName: "utter-project",
+        }),
+        expect.objectContaining({ family: "eurollm-2512", packageName: "utter-project" }),
+        expect.objectContaining({
+          family: "eurollm-2512-instruct",
+          packageName: "utter-project",
+        }),
         expect.objectContaining({ family: "open-calm", packageName: "cyberagent" }),
         expect.objectContaining({ family: "calm2", packageName: "cyberagent" }),
         expect.objectContaining({ family: "calm3", packageName: "cyberagent" }),
@@ -234,6 +244,9 @@ describe("generate:builtins layout", () => {
     )
     expect(module.resolveOutputModulePath("dream-org", "dream_v0")).toBe(
       "packages/dream-org/src/generated/dream_v0.ts"
+    )
+    expect(module.resolveOutputModulePath("utter-project", "eurollm_2512")).toBe(
+      "packages/utter-project/src/generated/eurollm_2512.ts"
     )
     expect(module.resolveOutputModulePath("tiiuae", "falcon_rw_1b")).toBe(
       "packages/tiiuae/src/generated/falcon_rw_1b.ts"

@@ -94,6 +94,30 @@ export const FAMILY_SPECS = [
     source: "vendor/tokenizers/Dream-org__DreamOn-v0-7B__tokenizer.json.br",
   },
   {
+    family: "eurollm-1.7b",
+    packageName: "utter-project",
+    moduleName: "eurollm_1_7b",
+    source: "vendor/tokenizers/utter-project__EuroLLM-1.7B__tokenizer.json.br",
+  },
+  {
+    family: "eurollm-1.7b-instruct",
+    packageName: "utter-project",
+    moduleName: "eurollm_1_7b_instruct",
+    source: "vendor/tokenizers/utter-project__EuroLLM-1.7B-Instruct__tokenizer.json.br",
+  },
+  {
+    family: "eurollm-2512",
+    packageName: "utter-project",
+    moduleName: "eurollm_2512",
+    source: "vendor/tokenizers/utter-project__EuroLLM-9B-2512__tokenizer.json.br",
+  },
+  {
+    family: "eurollm-2512-instruct",
+    packageName: "utter-project",
+    moduleName: "eurollm_2512_instruct",
+    source: "vendor/tokenizers/utter-project__EuroLLM-9B-Instruct-2512__tokenizer.json.br",
+  },
+  {
     family: "yi",
     packageName: "01-ai",
     moduleName: "yi",
