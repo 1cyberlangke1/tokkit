@@ -1,0 +1,7 @@
+Copyright (c) 2026 cyberlangke
+
+This package does not bundle PrimeIntellect tokenizer assets.
+It registers official PrimeIntellect model aliases after verifying that their
+tokenizer behavior matches the already-supported bitnet-b1.58-2b-4t family.
+
+See LICENSE for the license text that applies to this package.

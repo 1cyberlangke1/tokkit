@@ -205,6 +205,10 @@ const BUILTIN_ALIAS_CASE_GROUPS = [
         aliases: ["LLM360/K2-Think-V2"],
       },
       {
+        canonical: "bitnet-b1.58-2b-4t",
+        aliases: ["PrimeIntellect/INTELLECT-1", "PrimeIntellect/INTELLECT-1-Instruct"],
+      },
+      {
         canonical: "codegen",
         aliases: [
           "Salesforce/codegen-350M-mono",

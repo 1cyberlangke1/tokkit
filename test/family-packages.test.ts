@@ -146,6 +146,15 @@ const VENDOR_PACKAGE_CASES = [
     ],
   },
   {
+    relativePath: "packages/primeintellect/src/index.ts",
+    expectedFamilies: ["bitnet-b1.58-2b-4t"],
+    expectedModels: [
+      "microsoft/bitnet-b1.58-2B-4T",
+      "PrimeIntellect/INTELLECT-1",
+      "PrimeIntellect/INTELLECT-1-Instruct",
+    ],
+  },
+  {
     relativePath: "packages/01-ai/src/index.ts",
     expectedFamilies: ["yi", "yi-1.5-9b-chat", "yi-coder", "yi-coder-chat"],
     expectedModels: [
