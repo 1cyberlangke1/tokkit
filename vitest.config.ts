@@ -54,6 +54,9 @@ export default defineConfig({
       "@cyberlangke/tokkit-aidc-ai": fileURLToPath(
         new URL("./packages/aidc-ai/src/index.ts", import.meta.url)
       ),
+      "@cyberlangke/tokkit-datajuicer": fileURLToPath(
+        new URL("./packages/datajuicer/src/index.ts", import.meta.url)
+      ),
       "@cyberlangke/tokkit-sarvamai": fileURLToPath(
         new URL("./packages/sarvamai/src/index.ts", import.meta.url)
       ),

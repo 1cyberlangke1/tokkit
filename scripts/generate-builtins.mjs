@@ -310,6 +310,12 @@ export const FAMILY_SPECS = [
     source: "vendor/tokenizers/AIDC-AI__Marco-o1__tokenizer.json.br",
   },
   {
+    family: "dj-refine-1b",
+    packageName: "datajuicer",
+    moduleName: "dj_refine_1b",
+    source: "vendor/tokenizers/datajuicer__LLaMA-1B-dj-refine-150B__tokenizer.json.br",
+  },
+  {
     family: "nextcoder",
     packageName: "microsoft",
     moduleName: "nextcoder",

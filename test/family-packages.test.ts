@@ -207,6 +207,16 @@ const VENDOR_PACKAGE_CASES = [
     ],
   },
   {
+    relativePath: "packages/datajuicer/src/index.ts",
+    expectedFamilies: ["dj-refine-1b"],
+    expectedModels: [
+      "datajuicer/LLaMA-1B-dj-refine-50B",
+      "datajuicer/LLaMA-1B-dj-refine-100B",
+      "datajuicer/LLaMA-1B-dj-refine-150B",
+      "datajuicer/LLaMA-1B-dj-refine-150B-instruct-4.7B",
+    ],
+  },
+  {
     relativePath: "packages/01-ai/src/index.ts",
     expectedFamilies: ["yi", "yi-1.5-9b-chat", "yi-coder", "yi-coder-chat"],
     expectedModels: [
@@ -1030,6 +1040,7 @@ const EXPECTED_ALL_FAMILIES = [
   "salamandra",
   "salamandra-instruct",
   "marco-o1",
+  "dj-refine-1b",
   "mathstral-7b",
   "mamba-codestral-7b",
   "magistral-small-2507",

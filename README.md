@@ -129,6 +129,10 @@
   - `minicpm-sala`
   - `minicpm3`
   - `minicpm4`
+- `@cyberlangke/tokkit-aidc-ai`
+  - `marco-o1`
+- `@cyberlangke/tokkit-datajuicer`
+  - `dj-refine-1b`
 - `@cyberlangke/tokkit-qwen`
   - `qwen2`
   - `qwen2.5`

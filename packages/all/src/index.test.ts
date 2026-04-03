@@ -255,6 +255,16 @@ const BUILTIN_ALIAS_CASE_GROUPS = [
         aliases: ["marco_o1", "AIDC-AI/Marco-o1"],
       },
       {
+        canonical: "dj-refine-1b",
+        aliases: [
+          "dj_refine_1b",
+          "datajuicer/LLaMA-1B-dj-refine-50B",
+          "datajuicer/LLaMA-1B-dj-refine-100B",
+          "datajuicer/LLaMA-1B-dj-refine-150B",
+          "datajuicer/LLaMA-1B-dj-refine-150B-instruct-4.7B",
+        ],
+      },
+      {
         canonical: "codegen",
         aliases: [
           "Salesforce/codegen-350M-mono",
@@ -1069,6 +1079,7 @@ describe("builtin tokenizer families", () => {
           "deepseek-v3.1",
           "deepseek-v3.2",
           "distilgpt2",
+          "dj-refine-1b",
           "dream-v0",
           "dreamon-v0",
           "eurollm-1.7b",

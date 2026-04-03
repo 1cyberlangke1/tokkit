@@ -140,6 +140,13 @@ const EXPECTED_PACKAGES = [
     requiredFiles: ["COPYRIGHT", "LICENSE"],
   },
   {
+    directory: "datajuicer",
+    packageName: "@cyberlangke/tokkit-datajuicer",
+    license: "Apache-2.0",
+    includedInAll: true,
+    requiredFiles: ["COPYRIGHT", "LICENSE"],
+  },
+  {
     directory: "tiiuae",
     packageName: "@cyberlangke/tokkit-tiiuae",
     license: "Apache-2.0",
@@ -560,6 +567,17 @@ describe("workspace layout", () => {
 
     expect(packageJson.scripts?.build).toBe(
       "npm run build --workspace @cyberlangke/tokkit-core && npm run build --workspace @cyberlangke/tokkit-qwen && tsup"
+    )
+  })
+
+  it("datajuicer 包构建前只需要先生成 core 的类型产物", () => {
+    const packageJsonPath = resolve(REPO_ROOT, "packages", "datajuicer", "package.json")
+    const packageJson = JSON.parse(readFileSync(packageJsonPath, "utf8")) as {
+      scripts?: Record<string, string>
+    }
+
+    expect(packageJson.scripts?.build).toBe(
+      "npm run build --workspace @cyberlangke/tokkit-core && tsup"
     )
   })
 

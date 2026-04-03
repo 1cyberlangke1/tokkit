@@ -1,0 +1,12 @@
+Copyright (c) 2026 cyberlangke
+
+This package bundles tokenizer assets derived from official Hugging Face repositories under the datajuicer organization:
+- datajuicer/LLaMA-1B-dj-refine-150B tokenizer.json
+
+The bundled `dj-refine-1b` family covers the following official datajuicer models:
+- datajuicer/LLaMA-1B-dj-refine-50B
+- datajuicer/LLaMA-1B-dj-refine-100B
+- datajuicer/LLaMA-1B-dj-refine-150B
+- datajuicer/LLaMA-1B-dj-refine-150B-instruct-4.7B
+
+See LICENSE for the full license text that applies to this package and its bundled assets.

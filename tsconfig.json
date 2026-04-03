@@ -29,6 +29,7 @@
       "@cyberlangke/tokkit-deci": ["packages/deci/src/index.ts"],
       "@cyberlangke/tokkit-bsc-lt": ["packages/bsc-lt/src/index.ts"],
       "@cyberlangke/tokkit-aidc-ai": ["packages/aidc-ai/src/index.ts"],
+      "@cyberlangke/tokkit-datajuicer": ["packages/datajuicer/src/index.ts"],
       "@cyberlangke/tokkit-tiiuae": ["packages/tiiuae/src/index.ts"],
       "@cyberlangke/tokkit-eleutherai": ["packages/eleutherai/src/index.ts"],
       "@cyberlangke/tokkit-meituan-longcat": ["packages/meituan-longcat/src/index.ts"],
